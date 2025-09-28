@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>한호빈의 유레카 약술형 논술 | 10개월 합격 로드맵</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #1a1a2e;
+            --bg-light: #16213e;
+            --primary: #0f3460;
+            --secondary: #e94560;
+            --text-light: #dcdde1;
+            --text-dark: #c0c0c0;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            margin: 0;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            background: linear-gradient(rgba(26, 26, 46, 0.85), rgba(26, 26, 46, 0.85)), url('https://placehold.co/1200x600/0f3460/dcdde1?text=H.H.B+EUREKA') no-repeat center center/cover;
+            padding: 80px 20px;
+            text-align: center;
+            color: white;
+        }
+        .hero h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            margin: 0;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        .hero h1 span { color: var(--secondary); }
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 15px auto 0;
+            font-weight: 700;
+        }
+
+        /* --- Course Info Section --- */
+        .course-info {
+            background-color: var(--primary);
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .info-card {
+            background-color: var(--bg-light);
+            padding: 25px;
+            border-radius: 10px;
+            border-top: 4px solid var(--secondary);
+            text-align: center;
+        }
+        .info-card h3 {
+            font-size: 1.2rem;
+            margin: 0 0 15px;
+            color: white;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .info-card .grand-open-text {
+            margin: 0;
+        }
+        .open-date {
+            display: block;
+            font-size: 4rem;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 4px;
+        }
+        .open-time {
+            display: block;
+            font-size: 1.1rem;
+            color: var(--text-light);
+        }
+        .schedule-item {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .schedule-item:first-of-type { margin-top: 0; }
+        .schedule-item h4 {
+            font-size: 1.1rem;
+            color: white;
+            margin: 0 0 5px;
+            font-weight: 700;
+        }
+        .schedule-item .time {
+            color: var(--secondary);
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .schedule-item p {
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            margin: 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        .schedule-item p::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+        }
+        
+        /* --- Main Container --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* --- Timeline (Mobile First) --- */
+        .timeline {
+            position: relative;
+            padding: 30px 0;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background-color: var(--primary);
+            border-radius: 2px;
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 55px;
+            margin-bottom: 50px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .timeline-item:last-child { margin-bottom: 0; }
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .timeline-dot {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 20px;
+            transform: translateX(-50%);
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background-color: var(--secondary);
+            border: 4px solid var(--bg-dark);
+            z-index: 1;
+        }
+        .timeline-content {
+            background-color: var(--bg-light);
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 4px solid var(--secondary);
+        }
+        .timeline-content .stage-badge {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        .timeline-content h2 {
+            margin: 0 0 5px;
+            font-size: 1.5rem;
+            color: white;
+            font-weight: 900;
+        }
+        .timeline-content h3 {
+            margin: 0 0 15px;
+            font-size: 1rem;
+            color: var(--secondary);
+            font-weight: 700;
+        }
+        .timeline-content p {
+            margin: 10px 0 0;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+        }
+        .methods {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid var(--primary);
+        }
+        .methods h4 {
+            margin: 0 0 10px;
+            font-size: 1rem;
+            color: var(--text-light);
+            font-weight: 700;
+        }
+        .methods ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin: 0;
+        }
+        .methods li {
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            padding-left: 20px;
+            position: relative;
+            margin-bottom: 8px;
+        }
+        .methods li::before {
+            content: '✓';
+            color: var(--secondary);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        /* --- CTA Section --- */
+        .cta {
+            text-align: center;
+            padding: 60px 20px;
+            background-color: var(--bg-light);
+        }
+        .cta h2 { font-size: 2rem; margin-bottom: 15px; color: white; }
+        .cta p { font-size: 1.1rem; margin-bottom: 30px; }
+        .cta-btn {
+            background-color: var(--secondary);
+            color: white;
+            padding: 15px 35px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 50px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .cta-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(233, 69, 96, 0.3);
+        }
+        
+        /* --- Desktop Layout (Tablet and above) --- */
+        @media screen and (min-width: 768px) {
+             .course-info {
+                flex-direction: row;
+                align-items: stretch;
+            }
+            .info-card {
+                flex: 1;
+            }
+        }
+
+        @media screen and (min-width: 900px) {
+            .hero h1 { font-size: 3.5rem; }
+            .hero p { font-size: 1.3rem; }
+            .timeline::before { left: 50%; }
+            .timeline-item { width: 50%; padding-left: 0; margin-bottom: 0; }
+            .timeline-item:nth-child(odd) { left: 0; padding-right: 60px; text-align: right; margin-bottom: 50px; }
+            .timeline-item:nth-child(even) { left: 50%; padding-left: 60px; text-align: left; }
+            .timeline-dot { top: 25px; }
+            .timeline-item:nth-child(odd) .timeline-dot { right: -9px; left: auto; transform: translateX(0); }
+            .timeline-item:nth-child(even) .timeline-dot { left: -9px; transform: translateX(0); }
+            .timeline-content { border-left: none; border-top: 5px solid var(--secondary); }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <h1>한호빈T의 EUREKA<span>.</span> 약술형 논술</h1>
+        <p>기초가 부족해도 괜찮습니다. 10개월의 여정으로 합격을 만듭니다.</p>
+    </header>
+
+    <section class="course-info">
+        <div class="info-card">
+            <h3>🚀 GRAND OPEN</h3>
+            <div class="grand-open-text">
+                <span class="open-date">1월 4일</span>
+                <span class="open-time">일요일 오후 2시</span>
+            </div>
+        </div>
+        <div class="info-card">
+            <h3>🗓️ 주간 수업 계획</h3>
+            <div class="schedule-item">
+                <h4>정규 수업 (일)</h4>
+                <span class="time">오후 2:00 ~ 5:00</span>
+                <p>커리큘럼에 맞춘 체계적인 강의식 수업</p>
+            </div>
+             <div class="schedule-item">
+                <h4>클리닉 수업 (수)</h4>
+                 <span class="time">오후 5:00 ~ 8:00</span>
+                <p>TEST 및 1:1 개별 맞춤 첨삭</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="timeline">
+            <!-- Stage 1 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="stage-badge">1단계 : 4개월 (1월~4월)</span>
+                    <h2>기초 개념 완성</h2>
+                    <h3>"나도 수학을 '설명'할 수 있다!"</h3>
+                    <p><strong>지도 목표:</strong> 수학의 기초 체력을 기르고, 풀이 과정을 논리적으로 설명하는 습관을 형성합니다. 고1 과정부터 약술형 논술 빈출 핵심 개념까지 꼼꼼하게 다집니다.</p>
+                    <div class="methods">
+                        <h4>주요 수업 방식</h4>
+                        <ul>
+                            <li><strong>개념 노트 작성:</strong> 배운 개념을 자신만의 언어로 재정리하며 완벽히 체화합니다.</li>
+                            <li><strong>풀이 과정 말하기:</strong> 쉬운 문제부터 풀이 과정을 직접 설명하며 논리적 사고력을 기릅니다.</li>
+                            <li><strong>서술형 답안 템플릿:</strong> 명확한 답안의 '틀'을 익혀 서술형에 대한 막연한 두려움을 없앱니다.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Stage 2 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="stage-badge">2단계 : 4개월 (5월~8월)</span>
+                    <h2>연계 교재 분석</h2>
+                    <h3>"출제자의 의도를 파악하다!"</h3>
+                    <p><strong>지도 목표:</strong> EBS 연계 교재를 분석하여 실제 출제 가능성이 높은 문제들을 약술형 논술 형식에 맞게 변형하고 훈련합니다.</p>
+                    <div class="methods">
+                        <h4>주요 수업 방식</h4>
+                        <ul>
+                            <li><strong>조건 분석 훈련:</strong> 문제의 조건과 질문을 분석하여 출제자의 의도를 파악하는 연습을 합니다.</li>
+                            <li><strong>객관식 → 서술형 전환:</strong> 객관식 문제를 서술형 답안으로 재구성하는 훈련을 합니다.</li>
+                            <li><strong>시간 배분 연습:</strong> 한 문제당 7~10분 내외로 시간을 정해두고 답안을 완성하는 연습을 시작합니다.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Stage 3 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="stage-badge">3단계 : 2개월 (9월~11월)</span>
+                    <h2>파이널 실전 대비</h2>
+                    <h3>"나만의 합격 답안을 완성하다!"</h3>
+                    <p><strong>지도 목표:</strong> 실제 시험과 동일한 환경에서 반복적인 모의고사를 통해 실전 감각을 완성하고, 개인별 약점을 보완하여 합격 안정권을 만듭니다.</p>
+                    <div class="methods">
+                        <h4>주요 수업 방식</h4>
+                        <ul>
+                            <li><strong>1:1 대면 첨삭:</strong> 학생의 답안을 직접 보며 잘한 점과 개선할 점을 구체적으로 지도합니다.</li>
+                            <li><strong>빈출 실수 노트 작성:</strong> 자주 틀리는 계산, 기호, 논리 오류를 정리하고 반복 학습합니다.</li>
+                            <li><strong>최종 멘탈 관리:</strong> 자신감을 심어주는 격려와 함께 실전 팁을 최종적으로 점검합니다.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="cta">
+        <h2>이제, 당신이 합격의 주인공입니다.</h2>
+        <p>'한호빈의 유레카 수학'과 함께라면 수학이 더 이상 두려움의 대상이 아닙니다.<br>지금 바로 합격으로의 여정을 시작하세요!</p>
+        <a href="https://open.kakao.com/o/s9qHTzTh" target="_blank" class="cta-btn">상담 신청하기</a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            timelineItems.forEach(item => { observer.observe(item); });
+        });
+    </script>
+
+</body>
+</html>
+
