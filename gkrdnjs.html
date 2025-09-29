@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>한호빈 강사 | 강의 시간표 안내</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* 기본 폰트 및 다크 테마 설정 */
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #121212;
+            color: #E0E0E0;
+        }
+        /* 그라디언트 텍스트 효과 */
+        .gradient-text {
+            background: linear-gradient(to right, #6EE7B7, #3B82F6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        /* 학원 카드 스타일 */
+        .academy-card {
+            background-color: #1E1E1E;
+            border: 1px solid #333;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .academy-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+        }
+        /* 버튼 스타일 */
+        .cta-button {
+            transition: all 0.3s ease;
+        }
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto max-w-4xl px-4 py-12 md:py-20">
+
+        <!-- 페이지 헤더 -->
+        <header class="text-center mb-16">
+            <h1 class="text-4xl md:text-6xl font-black mb-4">
+                <span class="gradient-text">강의 시간표 안내</span>
+            </h1>
+            <p class="text-lg text-gray-400">
+                한호빈 선생님의 열정적인 강의를 만날 수 있는 곳입니다.<br class="hidden sm:block">
+                아래 학원명을 클릭하여 상세 시간표를 확인하세요.
+            </p>
+        </header>
+
+        <main>
+            <!-- 학원 리스트 섹션 -->
+            <section>
+                <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-8">
+                    
+                    <!-- 대치명인 검단 -->
+                    <div class="academy-card rounded-lg p-8 flex flex-col sm:flex-row justify-between items-center">
+                        <div>
+                            <h2 class="text-2xl md:text-3xl font-bold text-emerald-400">대치명인학원</h2>
+                            <p class="text-lg text-gray-300">검단 캠퍼스</p>
+                        </div>
+                        <a href="#" class="cta-button mt-4 sm:mt-0 w-full sm:w-auto bg-blue-600 text-white font-bold py-3 px-8 rounded-lg text-lg text-center">
+                            시간표 확인하기
+                        </a>
+                    </div>
+                    
+                    <!-- 세빛학원 송파 -->
+                    <div class="academy-card rounded-lg p-8 flex flex-col sm:flex-row justify-between items-center">
+                        <div>
+                            <h2 class="text-2xl md:text-3xl font-bold text-emerald-400">세빛학원</h2>
+                            <p class="text-lg text-gray-300">송파 캠퍼스</p>
+                        </div>
+                        <a href="#" class="cta-button mt-4 sm:mt-0 w-full sm:w-auto bg-blue-600 text-white font-bold py-3 px-8 rounded-lg text-lg text-center">
+                            시간표 확인하기
+                        </a>
+                    </div>
+                    
+                    <!-- 투스카이 청라 -->
+                    <div class="academy-card rounded-lg p-8 flex flex-col sm:flex-row justify-between items-center">
+                        <div>
+                            <h2 class="text-2xl md:text-3xl font-bold text-emerald-400">투스카이학원</h2>
+                            <p class="text-lg text-gray-300">청라 캠퍼스</p>
+                        </div>
+                        <a href="#" class="cta-button mt-4 sm:mt-0 w-full sm:w-auto bg-blue-600 text-white font-bold py-3 px-8 rounded-lg text-lg text-center">
+                            시간표 확인하기
+                        </a>
+                    </div>
+
+                </div>
+            </section>
+        </main>
+
+        <!-- 돌아가기 버튼 -->
+        <footer class="mt-20 text-center">
+            <a href="instructor_profile.html" class="cta-button inline-block bg-gray-700 text-white font-bold py-3 px-8 rounded-lg text-lg">
+                소개 페이지로 돌아가기
+            </a>
+        </footer>
+
+    </div>
+</body>
+</html>
