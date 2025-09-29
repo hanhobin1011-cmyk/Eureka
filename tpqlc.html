@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>한호빈 강사 | 세빛학원 강의 안내</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #121212;
+            color: #E0E0E0;
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #6EE7B7, #3B82F6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .content-card {
+            background-color: #1E1E1E;
+            border: 1px solid #333;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+        }
+        .cta-button {
+            transition: all 0.3s ease;
+        }
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+        }
+        /* 리스트 아이템 스타일 */
+        .styled-list li {
+            position: relative;
+            padding-left: 28px;
+            margin-bottom: 12px;
+        }
+        .styled-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 1px;
+            color: #6EE7B7; /* emerald-400 */
+            font-weight: 900;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto max-w-4xl px-4 py-12 md:py-20">
+
+        <!-- 페이지 헤더 -->
+        <header class="text-center mb-16">
+            <h1 class="text-4xl md:text-6xl font-black mb-4">
+                <span class="gradient-text">세빛학원 강의 안내</span>
+            </h1>
+            <p class="text-lg text-gray-400">
+                한호빈T 약술형 논술 추석 특강 및 10월 강의
+            </p>
+        </header>
+
+        <main class="space-y-10">
+
+            <!-- 추석 특강 안내 -->
+            <section class="content-card p-8 rounded-lg shadow-xl">
+                <h2 class="text-2xl font-bold mb-6 border-b-2 border-emerald-500 pb-3">추석 특강 안내</h2>
+                <div class="text-center bg-gray-800 p-4 rounded-lg mb-6">
+                    <p class="text-lg font-bold text-gray-200">10/7(화), 10/8(수), 10/9(목), 10/11(토)</p>
+                    <p class="text-xl font-black text-emerald-400">오후 2:00 ~ 6:00</p>
+                </div>
+                <p class="text-center text-lg font-semibold text-gray-300">
+                    직접 기출분석을 기반으로 제작한<br>
+                    <span class="text-2xl font-bold gradient-text">을지대, 상명대, 가천대</span><br>
+                    실전 모의고사 해설 강의
+                </p>
+            </section>
+
+            <!-- 수업 세부 일정 및 내용 -->
+            <section class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div class="content-card p-8 rounded-lg shadow-xl">
+                    <h3 class="text-xl font-bold mb-4 text-emerald-400">수업 세부일정</h3>
+                    <ul class="space-y-3 text-gray-300 styled-list">
+                        <li><span class="font-bold text-white">10/7(화)</span> - 을지대 실전 모의고사 1회</li>
+                        <li><span class="font-bold text-white">10/8(수)</span> - 상명대 실전 모의고사 1회</li>
+                        <li><span class="font-bold text-white">10/9(목)</span> - 가천대 실전 모의고사 1회</li>
+                        <li><span class="font-bold text-white">10/11(토)</span> - 을지대 실전 모의고사 2회</li>
+                    </ul>
+                </div>
+                <div class="content-card p-8 rounded-lg shadow-xl">
+                    <h3 class="text-xl font-bold mb-4 text-emerald-400">수업 세부내용</h3>
+                    <ul class="space-y-3 text-gray-300 styled-list">
+                        <li><span class="font-bold text-white">2:00~3:00</span> 실전 모의고사 1회</li>
+                        <li><span class="font-bold text-white">3:10~4:30</span> 실전 모의고사 해설 강의</li>
+                        <li><span class="font-bold text-white">4:40~6:00</span> 연계 워크북 학습</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 강의가 특별한 이유 -->
+            <section class="content-card p-8 rounded-lg shadow-xl">
+                <h2 class="text-2xl font-bold mb-6 border-b-2 border-blue-500 pb-3">호빈T의 약술형 논술 강의가 특별한 이유</h2>
+                <ol class="space-y-4 styled-list text-lg">
+                    <li>교과 과정에 맞춘 <span class="font-bold text-blue-400">서술형 기반 풀이</span></li>
+                    <li>EBS 연계와 기출 분석을 혼합한 <span class="font-bold text-blue-400">실전에 가장 가까운 모의고사</span></li>
+                    <li>모의고사 연계 워크북으로 <span class="font-bold text-blue-400">학습 효과 극대화</span></li>
+                    <li>학생 개별 답안 분석을 통한 <span class="font-bold text-blue-400">1:1 맞춤 피드백</span> 제공</li>
+                </ol>
+            </section>
+            
+            <!-- 10월 수업 일정 -->
+            <section class="content-card p-8 rounded-lg shadow-xl">
+                <h2 class="text-2xl font-bold mb-4 text-emerald-400">특강 이후 10월 수업 일정</h2>
+                <ul class="space-y-3 text-gray-300 styled-list text-lg">
+                    <li><span class="font-bold text-white">10/18(토) 오후 2:00~6:00</span> - 수원대 실전 모의고사 1회</li>
+                    <li><span class="font-bold text-white">10/25(토) 오후 2:00~6:00</span> - 상명대 실전 모의고사 2회</li>
+                </ul>
+            </section>
+            
+        </main>
+
+        <!-- 네비게이션 버튼 -->
+        <footer class="mt-20 flex flex-col sm:flex-row justify-center items-center gap-6">
+            <a href="2025shstnfdlfwjd.html" class="cta-button w-full sm:w-auto text-center bg-emerald-600 text-white font-bold py-3 px-8 rounded-lg text-lg">
+                논술 시험 일정 바로가기
+            </a>
+            <a href="thro.html" class="cta-button w-full sm:w-auto text-center bg-gray-700 text-white font-bold py-3 px-8 rounded-lg text-lg">
+                강사 소개로 돌아가기
+            </a>
+        </footer>
+
+    </div>
+</body>
+</html>
