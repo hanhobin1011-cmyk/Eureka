@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>강주연 학생 중간고사 분석 리포트</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        .report-card h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e3a8a; /* Deep blue */
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #dbeafe; /* Light blue */
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        .report-card h3 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: #1e40af; /* Slightly lighter blue */
+            margin-bottom: 1rem;
+        }
+        .feedback-item {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            background-color: #f8fafc; /* very light gray */
+            border-left: 5px solid #3b82f6; /* Blue accent */
+        }
+        .feedback-item:last-child {
+            margin-bottom: 0;
+        }
+        .feedback-item strong {
+            color: #1e40af;
+        }
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 700;
+            margin-right: 0.5rem;
+        }
+        .tag-gray {
+            background-color: #e5e7eb;
+            color: #4b5563;
+        }
+        .tag-red {
+            background-color: #fee2e2;
+            color: #b91c1c;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-4 sm:p-8">
+    <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden report-card">
+        <!-- Header Section -->
+        <header class="bg-blue-800 text-white p-8 text-center">
+            <h1 class="text-3xl font-bold mb-2">강주연 학생 Feedback Report</h1>
+            <p class="text-lg text-blue-200">2025학년도 백석고등학교 1학년 2학기 중간고사</p>
+        </header>
+
+        <main class="p-6 sm:p-10">
+            <!-- Overall Assessment -->
+            <section class="mb-10">
+                <h2>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-3 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+                    총평 및 학습 방향 제언
+                </h2>
+                <div class="bg-blue-50 p-6 rounded-lg text-gray-800 space-y-4">
+                    <p>주연 학생은 이번 시험을 통해 <strong>기본 개념에 대한 이해가 탄탄하다는 강점</strong>을 보여주었습니다. 이는 앞으로 더 어려운 문제들을 해결해 나갈 수 있는 훌륭한 밑거름이 될 것입니다.</p>
+                    <p>이제 이 강점을 바탕으로, 아쉽게 놓쳤던 문제들을 보완하고 심화 문제 해결 능력을 한 단계 끌어올릴 시점입니다. <strong>계산 실수를 줄이고, 복잡한 문제에 대한 접근법을 익히는 것</strong>이 이번 시험 이후 우리의 핵심 목표가 될 것입니다.</p>
+                    <p>앞으로 주연 학생만을 위한 맞춤 학습을 통해 <strong>첫째, 유사 유형 반복 학습으로 실수를 줄여 아는 문제는 확실히 맞추는 훈련</strong>을 하고, <strong>둘째, 다양한 심화 문제를 단계별로 접하며 풀이 과정을 스스로 설계하고 완성하는 연습</strong>을 진행할 것입니다. 이를 통해 고난도 모의고사 기출문제까지 자신감 있게 도전할 수 있는 실력을 완성해 나가겠습니다.</p>
+                </div>
+            </section>
+
+            <!-- Test Result Analysis -->
+            <section class="mb-10">
+                <h2>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-3 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z" />
+                        <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z" />
+                    </svg>
+                    시험 결과 분석
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center bg-gray-50 p-6 rounded-lg">
+                    <!-- Overall Score Donut Chart -->
+                    <div class="flex flex-col items-center justify-center">
+                        <h3 class="text-lg font-bold text-gray-700 mb-4">총 문항 정답률</h3>
+                        <div class="relative w-48 h-48">
+                            <svg class="w-full h-full" viewBox="0 0 120 120">
+                                <!-- Background circle -->
+                                <circle cx="60" cy="60" r="50" fill="none" stroke="#e6e6e6" stroke-width="12" />
+                                <!-- Progress circle -->
+                                <circle cx="60" cy="60" r="50" fill="none" stroke="#3b82f6" stroke-width="12"
+                                        stroke-linecap="round"
+                                        transform="rotate(-90 60 60)"
+                                        stroke-dasharray="314.159"
+                                        stroke-dashoffset="99.96" /> <!-- 314.159 * (1 - 15/22) -->
+                            </svg>
+                            <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                <span class="text-3xl font-bold text-blue-800">15/22</span>
+                                <span class="text-md font-semibold text-gray-600">(68%)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Unit-wise Performance Bars -->
+                    <div class="w-full">
+                        <h3 class="text-lg font-bold text-gray-700 mb-4">단원별 정답률</h3>
+                        <div class="space-y-4">
+                            <!-- 집합 -->
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-base font-medium text-gray-700">집합</span>
+                                    <span class="text-sm font-medium text-gray-700">5/6 (83%)</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                    <div class="bg-green-500 h-2.5 rounded-full" style="width: 83%"></div>
+                                </div>
+                            </div>
+                            <!-- 평면좌표 -->
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-base font-medium text-gray-700">평면좌표</span>
+                                    <span class="text-sm font-medium text-gray-700">2/3 (67%)</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                    <div class="bg-yellow-400 h-2.5 rounded-full" style="width: 67%"></div>
+                                </div>
+                            </div>
+                            <!-- 직선의 방정식 -->
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-base font-medium text-gray-700">직선의 방정식</span>
+                                    <span class="text-sm font-medium text-gray-700">3/4 (75%)</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                    <div class="bg-green-500 h-2.5 rounded-full" style="width: 75%"></div>
+                                </div>
+                            </div>
+                            <!-- 원의 방정식 -->
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-base font-medium text-gray-700">원의 방정식</span>
+                                    <span class="text-sm font-medium text-gray-700">3/5 (60%)</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                    <div class="bg-orange-500 h-2.5 rounded-full" style="width: 60%"></div>
+                                </div>
+                            </div>
+                            <!-- 도형의 이동 -->
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-base font-medium text-gray-700">도형의 이동</span>
+                                    <span class="text-sm font-medium text-gray-700">2/4 (50%)</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                    <div class="bg-red-500 h-2.5 rounded-full" style="width: 50%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Difficulty Analysis -->
+            <section class="mb-10">
+                <h2>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-3 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                    난이도별 정답률 분석
+                </h2>
+                <div class="bg-gray-50 p-6 rounded-lg space-y-4">
+                    <!-- 난이도 하 -->
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span class="text-base font-medium text-gray-700">난이도 '하' (기본 개념)</span>
+                            <span class="text-sm font-medium text-gray-700">7/7 (100%)</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div class="bg-green-500 h-2.5 rounded-full" style="width: 100%"></div>
+                        </div>
+                    </div>
+                     <!-- 난이도 중하 -->
+                     <div>
+                        <div class="flex justify-between mb-1">
+                            <span class="text-base font-medium text-gray-700">난이도 '중하' (교과서 응용)</span>
+                            <span class="text-sm font-medium text-gray-700">6/7 (86%)</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div class="bg-green-500 h-2.5 rounded-full" style="width: 86%"></div>
+                        </div>
+                    </div>
+                    <!-- 난이도 중 -->
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span class="text-base font-medium text-gray-700">난이도 '중' (유형 응용)</span>
+                            <span class="text-sm font-medium text-gray-700">2/6 (33%)</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div class="bg-orange-500 h-2.5 rounded-full" style="width: 33%"></div>
+                        </div>
+                    </div>
+                    <!-- 난이도 중상 -->
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span class="text-base font-medium text-gray-700">난이도 '중상' (모의고사 연계)</span>
+                            <span class="text-sm font-medium text-gray-700">0/1 (0%)</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div class="bg-red-500 h-2.5 rounded-full" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <!-- 난이도 상 -->
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span class="text-base font-medium text-gray-700">난이도 '상' (모의고사 심화)</span>
+                            <span class="text-sm font-medium text-gray-700">0/1 (0%)</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div class="bg-red-500 h-2.5 rounded-full" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Detailed Feedback -->
+            <section>
+                <h2>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-3 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" /></svg>
+                    문항별 상세 피드백
+                </h2>
+
+                <!-- Item 1 -->
+                <div class="feedback-item">
+                    <h3><strong>[객관식 10번]</strong> 도형의 이동 - 선분의 길이의 합의 최솟값</h3>
+                    <p class="mb-3"><span class="tag tag-gray">분석</span> 교과서 기본 유형이지만, <strong>기울기의 부호를 잘못 쓰는 결정적인 계산 실수</strong>로 오답이 발생했습니다.</p>
+                    <p class="mb-3"><span class="tag tag-gray">코멘트</span> 개념을 알고도 실수로 틀리는 것이 가장 아쉬운 부분입니다. 대칭이동 문제에서는 좌표와 부호를 꼼꼼히 확인하는 습관이 중요합니다.</p>
+                    <p><span class="tag tag-gray">솔루션</span> 교과서 및 유사 유형 문제를 다시 풀며, 풀이 과정의 모든 단계를 검토하는 연습을 통해 실수를 줄여나갑시다.</p>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="feedback-item">
+                    <h3><strong>[객관식 12번]</strong> 도형의 이동 - 원의 대칭이동</h3>
+                    <p class="mb-3"><span class="tag tag-gray">분석</span> 교과서 외 유형으로, 문제의 조건에 맞춰 어떻게 접근해야 할지 시작조차 하지 못했습니다.</p>
+                    <p class="mb-3"><span class="tag tag-gray">코멘트</span> 원의 이동은 결국 '중심'의 이동입니다. 원을 통째로 생각하기보다 중심의 좌표가 어떻게 변하는지 먼저 파악하는 것이 핵심입니다.</p>
+                    <p><span class="tag tag-gray">솔루션</span> 다양한 문제집의 원의 대칭이동 관련 심화 유형을 접하며 문제 해결의 아이디어를 확장할 필요가 있습니다.</p>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="feedback-item">
+                    <h3><strong>[객관식 13번]</strong> 집합의 연산 - 자연수 배수의 집합</h3>
+                    <p class="mb-3"><span class="tag tag-gray">분석</span> 조건을 해석하지 못해, 단순히 숫자를 대입하는 방식으로 접근하다가 시간만 낭비하고 해결하지 못했습니다.</p>
+                    <p class="mb-3"><span class="tag tag-gray">코멘트</span> 배수 집합 문제는 벤다이어그램이나 연산 법칙을 활용하여 조건을 간결하게 만드는 과정이 필수적입니다.</p>
+                    <p><span class="tag tag-gray">솔루션</span> 배수 집합의 핵심 성질(ex: A₂ ∩ A₃ = A₆)을 완벽히 암기하고, 이를 활용하여 조건을 해석하는 연습을 집중적으로 해야 합니다.</p>
+                </div>
+
+                <!-- Item 4 (High Difficulty) -->
+                <div class="feedback-item border-l-red-500">
+                    <h3><strong>[객관식 15번]</strong> 평면좌표 - 삼각형의 무게중심 <span class="tag tag-red">고난도</span></h3>
+                    <p class="mb-3"><span class="tag tag-gray">분석</span> <strong>23년 9월 모의고사 기출문제</strong>로, 최상위권 변별을 위한 최고난도 문항이었습니다. 문제 접근 자체에 어려움을 겪었습니다.</p>
+                    <p class="mb-3"><span class="tag tag-gray">코멘트</span> 무게중심의 정의와 성질을 복합적으로 활용해야 하는 문제입니다. 당장 풀지 못했더라도 실망할 필요는 없습니다.</p>
+                    <p><span class="tag tag-gray">솔루션</span> 이런 고난도 문항은 해설을 참고하여 풀이의 흐름을 익히고, '따라 푸는' 연습부터 시작하는 것이 좋습니다. 꾸준히 모의고사 킬러 문항을 접하며 내성을 길러야 합니다.</p>
+                </div>
+
+                <!-- Item 5 (Updated) -->
+                <div class="feedback-item border-l-orange-500">
+                    <h3><strong>[서답형 5번]</strong> 원의 방정식 - x축에 수직인 접선 <span class="tag tag-red">실수</span></h3>
+                    <p class="mb-3"><span class="tag tag-gray">분석</span> 교과서 변형 문제로 난이도가 높지 않았고, 특히 시험 전날 오전에 강조했던 개념임에도 불구하고 오답이 발생했습니다.</p>
+                    <p class="mb-3"><span class="tag tag-gray">코멘트</span> 원 밖의 한 점에서 접선의 방정식을 구하는 공식으로 기울기를 구했을 때, 값이 하나만 나오는 경우가 있습니다. 바로 이럴 때, <strong>'혹시 x축에 수직인 접선이 하나 더 있지 않을까?' 하고 반드시 확인하는 습관</strong>을 들여야 합니다. 이번 문제는 바로 그 숨겨진 수직 접선을 찾지 못해 발생한 아쉬운 오답입니다.</p>
+                    <p><span class="tag tag-gray">솔루션</span> 시험은 끝났으니 이제 이 경험을 다음 학습을 위한 발판으로 삼으면 됩니다. 앞으로 원의 방정식을 복습할 때, 오늘 틀렸던 이 '수직 접선' 유형을 가장 먼저 떠올리며 시작해본다면 같은 실수는 절대 반복하지 않을 거예요.</p>
+                </div>
+
+                <!-- Item 6 -->
+                <div class="feedback-item">
+                    <h3><strong>[서술형 6번]</strong> 직선의 방정식 - 도형의 넓이</h3>
+                    <p class="mb-3"><span class="tag tag-gray">분석</span> 문제 해결을 위해 교점을 구하는 과정이 복잡해 보이자, 시도하다가 중도에 포기했습니다.</p>
+                    <p class="mb-3"><span class="tag tag-gray">코멘트</span> 서술형 문제에서는 계산 과정의 끈기가 점수를 좌우합니다. 복잡해 보여도 풀이 과정에 확신을 갖고 끝까지 밀어붙이는 힘이 필요합니다.</p>
+                    <p><span class="tag tag-gray">솔루션</span> 일부러 계산 과정이 복잡한 문제들을 선별하여, 포기하지 않고 끝까지 답을 내는 연습을 통해 수학적 체력과 자신감을 길러야 합니다.</p>
+                </div>
+
+                <!-- Item 7 (High Difficulty) -->
+                <div class="feedback-item border-l-red-500">
+                    <h3><strong>[서술형 7번]</strong> 원의 방정식 - 접선의 방정식 <span class="tag tag-red">고난도</span></h3>
+                    <p class="mb-3"><span class="tag tag-gray">분석</span> <strong>20년 11월 모의고사 기출문제</strong>로, 변별력을 가르는 고난도 문항이었습니다. 풀이를 시도했으나 올바른 접근법을 찾지 못했습니다.</p>
+                    <p class="mb-3"><span class="tag tag-gray">코멘트</span> 원 밖의 한 점에서 그은 접선의 방정식을 구하고, 이를 활용하는 복합적인 문제입니다.</p>
+                    <p><span class="tag tag-gray">솔루션</span> 모의고사 고난도 문항에 대한 분석과 반복 학습이 필요합니다. 특히 원과 접선 파트는 심화 문제 출제 1순위이므로, 다양한 유형에 대한 적응력을 높여야 합니다.</p>
+                </div>
+
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="text-center p-6 bg-gray-50 text-gray-500 text-sm">
+            <p>&copy; 2025 학생 성장 지원팀. All Rights Reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
+
