@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team. 한호빈 수학 | 개별학습 커리큘럼</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN 추가 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #121212;
+            color: #E0E0E0;
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #6EE7B7, #3B82F6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .content-card {
+            background-color: #1E1E1E;
+            border: 1px solid #333;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+        }
+        .cta-button {
+            transition: all 0.3s ease;
+        }
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+        }
+        .styled-list li {
+            position: relative;
+            padding-left: 28px;
+            margin-bottom: 12px;
+        }
+        .styled-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 1px;
+            color: #6EE7B7;
+            font-weight: 900;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto max-w-4xl px-4 py-12 md:py-20">
+
+        <!-- 페이지 헤더 -->
+        <header class="text-center mb-16">
+            <h1 class="text-4xl md:text-6xl font-black mb-4">
+                <span class="gradient-text">Team. 한호빈 수학</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-400 font-bold">
+                개별학습 커리큘럼 (도약 학습반)
+            </p>
+        </header>
+
+        <main class="space-y-12">
+
+            <!-- 프로그램 취지 -->
+            <section class="content-card p-8 rounded-lg shadow-xl">
+                <h2 class="text-2xl font-bold mb-6 border-b-2 border-emerald-500 pb-3">프로그램 취지: 도약 학습반</h2>
+                <p class="text-lg text-gray-300 mb-4">
+                    현재 현행 수학을 따라가기 어려운 학생들을 위한 <span class="font-bold text-emerald-400">도약 학습반</span>입니다.
+                    장기적인 커리큘럼과 일주일 단위의 추적, 관찰을 통한 <span class="font-bold text-white">끈질긴 관리</span>로
+                    판서수업을 따라갈 수 있는 학습 기반을 제공합니다.
+                </p>
+                <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                    <p class="text-center text-lg font-bold text-white">
+                        중하위권 학생들은 '배우는 시간'과 '익히는 시간' 중
+                        <br><span class="text-2xl gradient-text">'익히는 시간'의 비율이 높게 필요합니다.</span>
+                    </p>
+                    <p class="text-center text-gray-300 mt-2">
+                        학습 관리를 통해 학생들이 스스로 공부할 수 있는 방법과 습관을 잡아주기 위한 프로그램입니다.
+                    </p>
+                </div>
+            </section>
+
+            <!-- 1. 입반 진단 -->
+            <section class="content-card p-8 rounded-lg shadow-xl">
+                <h2 class="text-2xl font-bold mb-6 border-b-2 border-blue-500 pb-3">1. 입반 진단: 문제의 근원 파악</h2>
+                <p class="text-lg text-gray-300 mb-6">
+                    단순히 쉬운 수업을 듣는 것으로는 해결이 되지 않습니다.
+                    학생이 <span class="font-bold text-white">부족한 부분이 어디인지 정확히 파악</span>하고, 이를 개선할 방안을 제공하기 위한 학습 진단을 시행합니다.
+                </p>
+                <p class="text-gray-400 mb-6"><span class="font-bold text-gray-200">▪️ 시험 범위:</span> 현행 전까지의 모든 과정에서 기본기를 테스트 (초등부터 고등까지 기본 점검)</p>
+                
+                <h3 class="text-xl font-bold mb-4 text-center text-blue-400">김OO 학생 진단 예시 (기초 이해도)</h3>
+                <div class="bg-gray-800 p-4 rounded-lg">
+                    <canvas id="diagChart"></canvas>
+                </div>
+            </section>
+
+            <!-- 2. 개별학습 운영 방안 -->
+            <section>
+                <h2 class="text-2xl font-bold mb-8 text-center border-b-2 border-emerald-500 pb-3">2. 한호빈 팀의 개별학습 운영 방안</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                    <div class="content-card p-8 rounded-lg">
+                        <h3 class="text-xl font-bold text-center mb-6 text-emerald-400">한호빈T (학습 설계 및 코칭)</h3>
+                        <ul class="styled-list text-gray-300">
+                            <li>매주 월요일 <span class="font-bold text-white">학습 상담 + 학습 코칭</span></li>
+                            <li>매주 성취를 보고 학생별 <span class="font-bold text-white">학습 목표와 학습량 조절</span></li>
+                            <li>매일 숙제 관리를 통한 <span class="font-bold text-white">학습 습관 개선</span></li>
+                        </ul>
+                    </div>
+                    <div class="content-card p-8 rounded-lg">
+                        <h3 class="text-xl font-bold text-center mb-6 text-blue-400">관리 선생님 (밀착 관리 및 피드백)</h3>
+                        <ul class="styled-list text-gray-300">
+                            <li>월, 수, 금 <span class="font-bold text-white">2.5시간 밀착 학습</span></li>
+                            <li><span class="font-bold text-white">정량제 운영</span> (시간이 아닌 할당량 처리)</li>
+                            <li>학습 시 막히는 부분 <span class="font-bold text-white">즉각적인 도움</span> 제공</li>
+                            <li>매 수업 태도와 학습 습관 <span class="font-bold text-white">평가 및 기록</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="content-card p-8 rounded-lg shadow-xl">
+                    <h3 class="text-xl font-bold text-center mb-6 gradient-text">토, 일 (주간 TEST 및 클리닉)</h3>
+                    <ul class="styled-list text-gray-300">
+                        <li>주간 학습량이 채워지지 않은 경우, 주말 클리닉을 활용하여 <span class="font-bold text-white">100% 마무리</span>합니다.</li>
+                        <li>매주 학습 범위 성취평가를 진행하여 <span class="font-bold text-white">다음 과정 설계를 위한 자료</span>로 활용합니다.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 3. 시간표 -->
+            <section class="content-card p-8 rounded-lg shadow-xl">
+                <h2 class="text-2xl font-bold mb-6 border-b-2 border-emerald-500 pb-3">3. 시간표</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-center">
+                    <div>
+                        <h3 class="text-xl font-bold text-emerald-400 mb-4">정규 학습 (월수금)</h3>
+                        <div class="space-y-2 text-lg">
+                            <p><span class="font-bold text-white">A반:</span> 6:00 ~ 8:30</p>
+                            <p><span class="font-bold text-white">B반:</span> 8:30 ~ 11:00</p>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-blue-400 mb-4">주말 클리닉 (토/일 중 선택)</h3>
+                        <div class="space-y-2 text-lg">
+                            <p>1:00 ~ 4:00</p>
+                            <p>4:00 ~ 7:00</p>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-center text-gray-500 mt-6 text-sm">* 시간표는 개강기간에 맞춰 수정될 수 있습니다.</p>
+            </section>
+
+            <!-- 4. 성과 -->
+            <section>
+                <h2 class="text-2xl font-bold mb-8 text-center border-b-2 border-blue-500 pb-3">4. 압도적인 성과</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- 박O우 학생 -->
+                    <div class="content-card p-8 rounded-lg shadow-xl flex flex-col">
+                        <h3 class="text-xl font-bold text-center mb-4 text-emerald-400">마전고 박O우 학생</h3>
+                        <img src="https://hanhobin1011-cmyk.github.io/Eureka/ghdqh2.jpg" alt="박O우 학생 성적" class="rounded-lg mb-6 border-2 border-gray-700">
+                        <ul class="styled-list text-gray-300 mb-4">
+                            <li><span class="font-bold text-white">1학기 중간:</span> 5등급 (224등 이하)</li>
+                            <li><span class="font-bold text-white">1학기 기말:</span> 4등급 (164등 이하)</li>
+                            <li><span class="font-bold text-white">2학기 중간:</span> <span class="font-bold text-xl text-emerald-400">3등급 (109/248)</span></li>
+                        </ul>
+                        <p class="mt-auto bg-emerald-900 text-emerald-100 p-3 text-center rounded-lg font-bold">
+                            * 100등 이상 성적 상승<br>(개별학습만으로 이룬 성과)
+                        </p>
+                    </div>
+                    <!-- 김O건 학생 -->
+                    <div class="content-card p-8 rounded-lg shadow-xl flex flex-col">
+                        <h3 class="text-xl font-bold text-center mb-4 text-blue-400">아라고 김O건 학생</h3>
+                        <img src="https://hanhobin1011-cmyk.github.io/Eureka/ghdqh1.png" alt="김O건 학생 성적" class="rounded-lg mb-6 border-2 border-gray-700">
+                        <ul class="styled-list text-gray-300 mb-4">
+                            <li><span class="font-bold text-white">1학기 중간:</span> 4등급 (345/427)</li>
+                            <li><span class="font-bold text-white">1학기 기말:</span> 4등급 (311/428)</li>
+                            <li><span class="font-bold text-white">2학기 중간:</span> <span class="font-bold text-xl text-blue-400">3등급 (154/421)</span></li>
+                        </ul>
+                        <p class="mt-auto bg-blue-900 text-blue-100 p-3 text-center rounded-lg font-bold">
+                            * 약 200등 성적 상승<br>(1학기 중간고사 이후 판서 수업 전환)
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- 네비게이션 버튼 -->
+        <footer class="mt-20 flex justify-center items-center gap-6">
+            <a href="thro.html" class="cta-button w-full sm:w-auto text-center bg-gray-700 text-white font-bold py-3 px-8 rounded-lg text-lg">
+                강사 소개로 돌아가기
+            </a>
+        </footer>
+
+    </div>
+
+    <!-- Chart.js 스크립트 -->
+    <script>
+        // Chart.js 다크모드 기본 설정
+        Chart.defaults.color = '#E0E0E0';
+        Chart.defaults.borderColor = '#444';
+
+        const ctx = document.getElementById('diagChart').getContext('2d');
+        const diagChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['수', '대수', '기하', '조합'],
+                datasets: [{
+                    label: '기초 이해도 (10점 만점)',
+                    data: [7, 3, 4, 1],
+                    backgroundColor: [
+                        'rgba(110, 231, 183, 0.7)', // emerald-300
+                        'rgba(96, 165, 250, 0.7)',  // blue-400
+                        'rgba(110, 231, 183, 0.7)', 
+                        'rgba(96, 165, 250, 0.7)'
+                    ],
+                    borderColor: [
+                        '#6EE7B7',
+                        '#60A5FA',
+                        '#6EE7B7',
+                        '#60A5FA'
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 10,
+                        grid: {
+                            color: '#444'
+                        },
+                        ticks: {
+                            color: '#E0E0E0'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            color: '#E0E0E0',
+                            font: {
+                                weight: 'bold',
+                                size: 14
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        backgroundColor: '#121212',
+                        titleColor: '#FFFFFF',
+                        bodyColor: '#E0E0E0',
+                        borderColor: '#333',
+                        borderWidth: 1
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
