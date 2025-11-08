@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>선택과목 현황 분석기 (Dark Mode)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- PapaParse (CSV Parser) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+    <style>
+        /* Inter 폰트 적용 및 다크 모드 기본 설정 */
+        html {
+            color-scheme: dark;
+        }
+        body {
+            font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            background-color: #111827; /* bg-gray-900 */
+            color: #d1d5db; /* text-gray-300 */
+        }
+        /* 드래그 앤 드롭 영역 하이라이트 */
+        .drag-over {
+            border-color: #3b82f6; /* border-blue-500 */
+            background-color: #1f2937; /* bg-gray-800 */
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+        }
+        /* Chart.js 툴팁 커스텀 */
+        .chartjs-tooltip {
+            background-color: #374151; /* bg-gray-700 */
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body class="min-h-screen p-4 md:p-8 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto">
+        
+        <!-- 1. 업로드 영역 -->
+        <div id="uploadArea" class="bg-gray-800 p-6 md:p-10 rounded-xl shadow-2xl border border-gray-700 transition-all duration-300">
+            <h1 class="text-2xl md:text-3xl font-bold text-white mb-4 text-center">선택과목 현황 분석기</h1>
+            <p class="text-gray-400 mb-8 text-center">분석할 CSV 파일을 업로드해 주세요.</p>
+            
+            <div id="dropZone" class="border-2 border-dashed border-gray-600 rounded-lg p-10 md:p-16 text-center cursor-pointer transition-all duration-300 hover:border-blue-500 hover:bg-gray-900/50">
+                <input type="file" id="csvFileInput" class="hidden" accept=".csv">
+                <label for="csvFileInput" class="cursor-pointer">
+                    <svg class="mx-auto h-12 w-12 text-gray-500" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                        <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8a4 4 0 01-4 4H28m0-20l-8 8-8-8m8 8V4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                    <p class="mt-2 text-lg text-gray-400">
+                        <span class="font-medium text-blue-400 hover:text-blue-300">파일 선택</span> 또는 드래그 앤 드롭
+                    </p>
+                    <p class="text-sm text-gray-500 mt-1">CSV 파일만 업로드 가능</p>
+                </label>
+            </div>
+            <p id="fileName" class="text-sm text-gray-500 text-center mt-4 h-5"></p>
+        </div>
+
+        <!-- 2. 차트 영역 (초기에는 숨김) -->
+        <div id="chartsArea" class="hidden mt-8">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-6 px-2">
+                <h2 class="text-2xl md:text-3xl font-bold text-white mb-4 md:mb-0">분석 결과</h2>
+                <button id="resetButton" class="w-full md:w-auto bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-5 rounded-lg transition-colors shadow-lg">
+                    새 파일로 다시 분석
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- 1학기 차트 -->
+                <div class="bg-gray-800 p-4 md:p-6 rounded-xl shadow-2xl border border-gray-700">
+                    <h3 class="text-xl font-semibold text-center mb-4 text-white">1학기 선택과목</h3>
+                    <div class="w-full h-80 md:h-96 mx-auto">
+                        <canvas id="semester1Chart"></canvas>
+                    </div>
+                </div>
+
+                <!-- 2학기 차트 -->
+                <div class="bg-gray-800 p-4 md:p-6 rounded-xl shadow-2xl border border-gray-700">
+                    <h3 class="text-xl font-semibold text-center mb-4 text-white">2학기 선택과목</h3>
+                    <div class="w-full h-80 md:h-96 mx-auto">
+                        <canvas id="semester2Chart"></canvas>
+                    </div>
+                </div>
+
+                <!-- 종합 차트 -->
+                <div class="bg-gray-800 p-4 md:p-6 rounded-xl shadow-2xl border border-gray-700">
+                    <h3 class="text-xl font-semibold text-center mb-4 text-white">종합 선택과목</h3>
+                    <div class="w-full h-80 md:h-96 mx-auto">
+                        <canvas id="semesterCombinedChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const uploadArea = document.getElementById('uploadArea');
+        const chartsArea = document.getElementById('chartsArea');
+        const csvFileInput = document.getElementById('csvFileInput');
+        const dropZone = document.getElementById('dropZone');
+        const fileNameDisplay = document.getElementById('fileName');
+        const resetButton = document.getElementById('resetButton');
+
+        let chartInstances = {}; // Store chart instances
+
+        // New, vibrant color palette for dark mode
+        const chartColors = [
+            '#8B5CF6', // Violet
+            '#EC4899', // Pink
+            '#10B981', // Emerald
+            '#3B82F6', // Blue
+            '#F59E0B', // Amber
+            '#6EE7B7', // Teal-light
+            '#F472B6', // Rose
+            '#06B6D4', // Cyan
+            '#EF4444', // Red
+            '#A78BFA', // Violet-light
+            '#FCD34D', // Amber-light
+            '#34D399'  // Emerald-light
+        ];
+
+        // Drag and drop event listeners
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, preventDefaults, false);
+            document.body.addEventListener(eventName, preventDefaults, false);
+        });
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropZone.addEventListener(eventName, () => dropZone.classList.add('drag-over'), false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, () => dropZone.classList.remove('drag-over'), false);
+        });
+
+        dropZone.addEventListener('drop', handleDrop, false);
+        csvFileInput.addEventListener('change', handleFileSelect, false);
+        resetButton.addEventListener('click', resetPage, false);
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            if (files.length > 0) {
+                csvFileInput.files = files;
+                handleFile(files[0]);
+            }
+        }
+
+        function handleFileSelect(e) {
+            const files = e.target.files;
+            if (files.length > 0) {
+                handleFile(files[0]);
+            }
+        }
+
+        function handleFile(file) {
+            if (file && (file.type === 'text/csv' || file.name.endsWith('.csv'))) {
+                fileNameDisplay.textContent = `파일: ${file.name}`;
+                parseCSV(file);
+            } else {
+                fileNameDisplay.textContent = 'CSV 파일만 업로드할 수 있습니다.';
+            }
+        }
+
+        function parseCSV(file) {
+            Papa.parse(file, {
+                header: true,
+                skipEmptyLines: true,
+                encoding: "UTF-8",
+                complete: function(results) {
+                    processData(results.data);
+                    // Switch UI
+                    uploadArea.classList.add('hidden');
+                    chartsArea.classList.remove('hidden');
+                },
+                error: function(err, file) {
+                    console.error("CSV Parsing Error:", err, file);
+                    fileNameDisplay.textContent = '파일 파싱 중 오류가 발생했습니다.';
+                }
+            });
+        }
+
+        function processData(data) {
+            const sem1Counts = {};
+            const sem2Counts = {};
+            const combinedCounts = {};
+            
+            // Find headers that include '1학기' or '2학기'
+            const headers = Object.keys(data[0] || {});
+            const sem1Header = headers.find(h => h.includes('1학기 선택과목'));
+            const sem2Header = headers.find(h => h.includes('2학기 선택과목'));
+
+            if (!sem1Header) {
+                alert("CSV에서 '1학기 선택과목' 열을 찾을 수 없습니다.");
+                resetPage();
+                return;
+            }
+            if (!sem2Header) {
+                alert("CSV에서 '2학기 선택과목' 열을 찾을 수 없습니다.");
+                resetPage();
+                return;
+            }
+
+            data.forEach(row => {
+                const sem1Subject = row[sem1Header]?.trim();
+                const sem2Subject = row[sem2Header]?.trim();
+
+                if (sem1Subject) {
+                    sem1Counts[sem1Subject] = (sem1Counts[sem1Subject] || 0) + 1;
+                    combinedCounts[sem1Subject] = (combinedCounts[sem1Subject] || 0) + 1;
+                }
+                
+                if (sem2Subject) {
+                    sem2Counts[sem2Subject] = (sem2Counts[sem2Subject] || 0) + 1;
+                    combinedCounts[sem2Subject] = (combinedCounts[sem2Subject] || 0) + 1;
+                }
+            });
+
+            // Destroy existing charts before creating new ones
+            destroyCharts();
+
+            // Calculate stats
+            const sem1Stats = calculateStats(sem1Counts);
+            const sem2Stats = calculateStats(sem2Counts);
+            const combinedStats = calculateStats(combinedCounts);
+
+            // Create new charts
+            chartInstances.sem1 = createDoughnutChart('semester1Chart', sem1Stats);
+            chartInstances.sem2 = createDoughnutChart('semester2Chart', sem2Stats);
+            chartInstances.combined = createDoughnutChart('semesterCombinedChart', combinedStats);
+        }
+
+        function calculateStats(counts) {
+            const labels = Object.keys(counts);
+            const data = Object.values(counts);
+            const total = data.reduce((a, b) => a + b, 0);
+            const percentages = data.map(count => ((count / total) * 100).toFixed(1));
+            return { labels, data, percentages };
+        }
+
+        function createDoughnutChart(canvasId, stats) {
+            const ctx = document.getElementById(canvasId).getContext('2d');
+            return new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: stats.labels,
+                    datasets: [{
+                        label: '학생 수',
+                        data: stats.data,
+                        backgroundColor: chartColors,
+                        borderColor: '#1f2937', // bg-gray-800
+                        borderWidth: 3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 20,
+                                boxWidth: 12,
+                                font: {
+                                    size: 13,
+                                },
+                                color: '#d1d5db' // text-gray-300
+                            }
+                        },
+                        tooltip: {
+                            enabled: true,
+                            backgroundColor: '#374151', // bg-gray-700
+                            titleColor: '#ffffff',
+                            bodyColor: '#e5e7eb',
+                            titleFont: {
+                                weight: 'bold',
+                                size: 14,
+                            },
+                            bodyFont: {
+                                size: 13
+                            },
+                            padding: 12,
+                            cornerRadius: 8,
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const count = context.raw;
+                                    const percentage = stats.percentages[context.dataIndex];
+                                    return ` ${label}: ${count}명 (${percentage}%)`;
+                                }
+                            }
+                        },
+                        title: {
+                            display: false
+                        }
+                    },
+                    cutout: '45%' // Slightly larger cutout
+                }
+            });
+        }
+
+        function destroyCharts() {
+            Object.values(chartInstances).forEach(chart => {
+                if (chart) chart.destroy();
+            });
+            chartInstances = {};
+        }
+
+        function resetPage() {
+            destroyCharts();
+            csvFileInput.value = null; // Reset file input
+            fileNameDisplay.textContent = '';
+            chartsArea.classList.add('hidden');
+            uploadArea.classList.remove('hidden');
+        }
+
+    </script>
+</body>
+</html>
