@@ -3,204 +3,333 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>수학강사 한호빈 | 공식 소개 페이지</title>
+    <title>수학강사 한호빈 | 우독학원</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans KR"', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        /* 기본 폰트 및 다크 테마 설정 */
         body {
-            font-family: 'Noto Sans KR', sans-serif;
             background-color: #121212;
             color: #E0E0E0;
+            word-break: keep-all;
         }
-        /* 그라디언트 텍스트 효과 */
         .gradient-text {
-            background: linear-gradient(to right, #6EE7B7, #3B82F6);
+            background: linear-gradient(to right, #34d399, #3b82f6);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        /* 카드 스타일 */
-        .testimonial-card {
-            background-color: #1E1E1E;
-            border: 1px solid #333;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .testimonial-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
-        }
-        /* 버튼 스타일 */
-        .cta-button {
+        .card-hover {
             transition: all 0.3s ease;
         }
-        .cta-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
-        }
-        .cert-img {
-            transition: transform 0.3s ease;
-        }
-        .cert-img:hover {
-            transform: scale(1.05);
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.3);
+            border-color: rgba(59, 130, 246, 0.5);
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased selection:bg-blue-500 selection:text-white">
 
     <div class="container mx-auto max-w-4xl px-4 py-12 md:py-20">
 
-        <!-- 프로필 헤더 섹션 (디자인 변경) -->
-        <header class="mb-20">
+        <!-- 1. 프로필 헤더 섹션 -->
+        <header class="mb-20 animate-fade-in-up">
             <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12">
-                <!-- 프로필 사진 (크기 확대) -->
-                <div class="flex-shrink-0">
-                    <img src="https://hanhobin1011-cmyk.github.io/Eureka/profile.jpg" alt="한호빈 강사 프로필 사진" class="w-40 h-40 md:w-56 md:h-56 rounded-full object-cover object-top border-4 border-gray-700 shadow-xl">
+                <!-- 프로필 사진 -->
+                <div class="relative group shrink-0">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-emerald-400 to-blue-600 rounded-full opacity-75 group-hover:opacity-100 blur transition duration-300"></div>
+                    <img src="https://hanhobin1011-cmyk.github.io/Eureka/profile.jpg" alt="한호빈 강사 프로필" class="relative w-48 h-48 md:w-60 md:h-60 rounded-full object-cover object-top border-4 border-[#121212] shadow-2xl">
                 </div>
+                
                 <!-- 이름 및 강의 철학 -->
-                <div class="text-center md:text-left">
-                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-black mb-4">
-                        <span class="gradient-text">수학강사 한호빈</span>
+                <div class="text-center md:text-left flex-1">
+                    <div class="inline-block bg-[#1E1E1E] border border-[#333] px-3 py-1 rounded-full text-xs font-bold text-blue-400 mb-3">
+                        퇴원율 0%의 신화
+                    </div>
+                    <h1 class="text-4xl md:text-5xl font-black mb-4 tracking-tight">
+                        수학강사 <span class="gradient-text">한호빈</span>
                     </h1>
-                    <p class="text-lg md:text-xl text-gray-400 italic">
-                        "문제를 풀었을 때의 '짜릿한 성취감'을 통해, 수학을 '어려운 과목'이 아닌 '도전하고 싶은 과목'으로 만들겠습니다."
+                    <p class="text-lg text-gray-300 font-medium leading-relaxed italic border-l-4 border-emerald-500 pl-4 bg-white/5 py-2 rounded-r-lg">
+                        "문제를 풀었을 때의 <span class="text-white font-bold">'짜릿한 성취감'</span>을 통해,<br class="md:hidden"> 수학을 '어려운 과목'이 아닌<br class="hidden md:block"> <span class="text-white font-bold">'도전하고 싶은 과목'</span>으로 만들겠습니다."
                     </p>
                 </div>
             </div>
         </header>
 
         <main>
-            <!-- 강사 약력 섹션 -->
-            <section class="mb-16">
-                <h2 class="text-2xl md:text-3xl font-bold text-center mb-8 border-b-2 border-gray-700 pb-2">강사 약력</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-center">
-                    <div>
-                        <h3 class="text-xl font-bold text-emerald-400 mb-4">現</h3>
-                        <ul class="space-y-2 text-gray-300">
-                            <li>우독학원 검단</li>
-                            <li>세빛학원 송파</li>
-                            <li>비상교육 중고등 수학 문항 검수위원</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-bold text-gray-500 mb-4">前</h3>
-                        <ul class="space-y-2 text-gray-300">
-                            <li>미래탐구</li>
-                            <li>대치명인</li>
-                            <li>베스티안</li>
-                        </ul>
+            <!-- 2. 강사 약력 섹션 -->
+            <section class="mb-20">
+                <div class="bg-[#1E1E1E] p-8 rounded-3xl border border-[#333] shadow-lg">
+                    <h2 class="text-2xl font-bold text-white mb-8 flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-500"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
+                        History
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+                        <div>
+                            <h3 class="text-xl font-bold text-emerald-400 mb-4 border-b border-emerald-500/30 pb-2 inline-block">現 (Current)</h3>
+                            <ul class="space-y-3 text-gray-300">
+                                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>우독학원 검단 수학과 대표강사</li>
+                                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>세빛학원 송파 출강</li>
+                                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>비상교육 중고등 수학문항 검수위원</li>
+                                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>2026 이투스 검토위원</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-500 mb-4 border-b border-gray-600 pb-2 inline-block">前 (Past)</h3>
+                            <ul class="space-y-3 text-gray-400">
+                                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-gray-600 rounded-full"></span>대치명인학원</li>
+                                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-gray-600 rounded-full"></span>미래탐구</li>
+                                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-gray-600 rounded-full"></span>베스티안학원</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <!-- 합격 후기 섹션 -->
-            <section class="mb-16">
-                <h2 class="text-2xl md:text-3xl font-bold text-center mb-8 border-b-2 border-gray-700 pb-2">합격으로 증명된 결과</h2>
-                <div class="space-y-8">
-                    <!-- 연세대 주OO -->
-                    <div class="testimonial-card rounded-lg p-6">
-                        <div class="flex flex-col md:flex-row items-start gap-6">
-                            <div class="flex-grow">
-                                <p class="text-sm text-blue-400 font-bold">25학년도 연세대 합격 | 주OO</p>
-                                <blockquote class="text-lg font-bold my-3">
-                                    "수학을 보는 시각이 완전히 달라졌습니다. 4등급이던 제가 수능 때 당당하게 2등급을 맞을 수 있었습니다."
-                                </blockquote>
-                                <p class="text-gray-400 text-sm">
-                                    유형 암기에 가까운 피상적인 공부를 했던 저에게 쉬운 문제부터 어려운 문제까지 결국 본질은 모두 같다는 걸 알려주셨습니다. 정체된 등급대에서 점프하기 위한 깨달음을 얻을 수 있었습니다.
-                                </p>
-                            </div>
-                            <a href="https://hanhobin1011-cmyk.github.io/Eureka/dudgus.jpg" target="_blank" class="flex-shrink-0 w-full md:w-32">
-                                <img src="https://hanhobin1011-cmyk.github.io/Eureka/dudgus.jpg" alt="연세대 합격증" class="rounded-lg shadow-lg w-full h-auto object-cover cert-img">
-                            </a>
+            <!-- 3. 수업 시스템 & 철학 (New Design) -->
+            <section class="mb-24">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl font-bold text-white mb-2">한호빈 수학의 <span class="text-blue-500">독보적 시스템</span></h2>
+                    <p class="text-gray-500 text-sm">성적을 올릴 수밖에 없는 완벽한 프로세스</p>
+                </div>
+
+                <!-- 3-Step -->
+                <div class="bg-[#1E1E1E] rounded-2xl border border-[#333] shadow-xl overflow-hidden mb-8">
+                    <div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#333]">
+                        <div class="p-6 text-center hover:bg-white/5 transition-colors">
+                            <span class="text-blue-500 font-black text-sm tracking-widest block mb-2">01. 수업</span>
+                            <h3 class="text-lg font-bold text-white mb-2">핵심 개념과 실전 스킬</h3>
+                            <p class="text-gray-400 text-sm">개념의 본질을 꿰뚫고<br>문제풀이의 최적 경로를 제시합니다.</p>
+                        </div>
+                        <div class="p-6 text-center hover:bg-white/5 transition-colors">
+                            <span class="text-blue-500 font-black text-sm tracking-widest block mb-2">02. 클리닉</span>
+                            <h3 class="text-lg font-bold text-white mb-2">완전 학습의 완성</h3>
+                            <p class="text-gray-400 text-sm">틀린 문제를 내 것으로 만들 때까지,<br>집요하게 관리합니다.</p>
+                        </div>
+                        <div class="p-6 text-center hover:bg-white/5 transition-colors">
+                            <span class="text-blue-500 font-black text-sm tracking-widest block mb-2">03. 관리</span>
+                            <h3 class="text-lg font-bold text-white mb-2">독보적인 케어</h3>
+                            <p class="text-gray-400 text-sm">숙제 관리부터 멘탈 케어까지,<br>1:1 맞춤형 솔루션 제공</p>
                         </div>
                     </div>
-                    <!-- 홍익대 박OO -->
-                    <div class="testimonial-card rounded-lg p-6">
-                        <div class="flex flex-col md:flex-row items-start gap-6">
-                            <div class="flex-grow">
-                                <p class="text-sm text-blue-400 font-bold">25학년도 홍익대 신소재공학과 합격 | 박OO</p>
-                                <blockquote class="text-lg font-bold my-3">
-                                    "선생님을 본 후로 '현명한 사람이 돼야겠다'라는 다짐도 했어요. 제게 수학, 그 외의 것도 가르쳐 주셔서 감사합니다!"
+                </div>
+            </section>
+
+            <!-- 4. 합격으로 증명된 결과 (대학 합격증) -->
+            <section class="mb-20">
+                <h2 class="text-2xl md:text-3xl font-bold text-center mb-10 pb-2 border-b border-[#333]">
+                    <span class="gradient-text">합격</span>으로 증명된 결과
+                </h2>
+                
+                <div class="space-y-6">
+                    <!-- 연세대 -->
+                    <div class="bg-[#1E1E1E] rounded-2xl border border-[#333] p-6 card-hover group">
+                        <div class="flex flex-col md:flex-row gap-6">
+                            <div class="flex-grow order-2 md:order-1">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="bg-blue-900/50 text-blue-300 text-xs font-bold px-2 py-1 rounded">25학년도 합격</span>
+                                    <span class="text-white font-bold text-lg">연세대학교 | 주OO</span>
+                                </div>
+                                <blockquote class="text-gray-200 text-lg font-medium mb-4 leading-relaxed">
+                                    "수학을 보는 시각이 완전히 달라졌습니다.<br>
+                                    <span class="text-emerald-400 font-bold">4등급이던 제가 수능 때 당당하게 2등급을 맞을 수 있었습니다."</span>
                                 </blockquote>
-                                <p class="text-gray-400 text-sm">
+                                <p class="text-gray-400 text-sm leading-relaxed">
+                                    유형 암기에 가까운 피상적인 공부를 했던 저에게, 쉬운 문제부터 어려운 문제까지 결국 본질은 모두 같다는 걸 알려주셨습니다. 정체된 등급대에서 점프하기 위한 깨달음을 얻을 수 있었습니다.
+                                </p>
+                            </div>
+                            <div class="md:w-32 shrink-0 order-1 md:order-2">
+                                <img src="https://hanhobin1011-cmyk.github.io/Eureka/dudgus.jpg" alt="연세대 합격증" class="w-full rounded-lg shadow-md group-hover:scale-105 transition-transform duration-300">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 홍익대 -->
+                    <div class="bg-[#1E1E1E] rounded-2xl border border-[#333] p-6 card-hover group">
+                        <div class="flex flex-col md:flex-row gap-6">
+                            <div class="flex-grow order-2 md:order-1">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="bg-blue-900/50 text-blue-300 text-xs font-bold px-2 py-1 rounded">25학년도 합격</span>
+                                    <span class="text-white font-bold text-lg">홍익대학교 신소재공학과 | 박OO</span>
+                                </div>
+                                <blockquote class="text-gray-200 text-lg font-medium mb-4 leading-relaxed">
+                                    "선생님을 본 후로 '현명한 사람이 돼야겠다'라는 다짐도 했어요.<br>제게 수학, 그 외의 것도 가르쳐 주셔서 감사합니다!"
+                                </blockquote>
+                                <p class="text-gray-400 text-sm leading-relaxed">
                                     제가 2학년 첫날 자기소개서에 존경하는 사람을 쓰는 칸에 '수학학원선생님'이라고 썼었습니다. 선생님은 제게 수학뿐만 아니라 많은 것을 가르쳐 주셨습니다.
                                 </p>
                             </div>
-                             <a href="https://hanhobin1011-cmyk.github.io/Eureka/tmdwn.jpg" target="_blank" class="flex-shrink-0 w-full md:w-32">
-                                <img src="https://hanhobin1011-cmyk.github.io/Eureka/tmdwn.jpg" alt="홍익대 합격증" class="rounded-lg shadow-lg w-full h-auto object-cover cert-img">
-                            </a>
+                            <div class="md:w-32 shrink-0 order-1 md:order-2">
+                                <img src="https://hanhobin1011-cmyk.github.io/Eureka/tmdwn.jpg" alt="홍익대 합격증" class="w-full rounded-lg shadow-md group-hover:scale-105 transition-transform duration-300">
+                            </div>
                         </div>
                     </div>
-                     <!-- 수원대 박OO -->
-                    <div class="testimonial-card rounded-lg p-6">
-                        <div class="flex flex-col md:flex-row items-start gap-6">
-                           <div class="flex-grow">
-                                <p class="text-sm text-blue-400 font-bold">25학년도 수원대 간호학과 합격 | 박OO</p>
-                                <blockquote class="text-lg font-bold my-3">
-                                    "실력뿐만 아니라 마음가짐과 가치관을 올바르게 키워나갈 수 있어서 정말 감사드려요. 제 인생에 정말 많은 좋은 영향력을 주셨습니다."
+
+                    <!-- 수원대 -->
+                    <div class="bg-[#1E1E1E] rounded-2xl border border-[#333] p-6 card-hover group">
+                        <div class="flex flex-col md:flex-row gap-6">
+                            <div class="flex-grow order-2 md:order-1">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="bg-blue-900/50 text-blue-300 text-xs font-bold px-2 py-1 rounded">25학년도 합격</span>
+                                    <span class="text-white font-bold text-lg">수원대학교 간호학과 | 박OO</span>
+                                </div>
+                                <blockquote class="text-gray-200 text-lg font-medium mb-4 leading-relaxed">
+                                    "실력뿐만 아니라 마음가짐과 가치관을 올바르게 키워나갈 수 있어서 정말 감사드려요."
                                 </blockquote>
-                                <p class="text-gray-400 text-sm">
+                                <p class="text-gray-400 text-sm leading-relaxed">
                                    본수업 외에도 따로 신경 써주시고 한 명 한 명 첨삭해주시면서 필요한 부분을 상세히 설명해주셨습니다. 덕분에 부족한 부분을 메꾸어 나가면서 실력이 많이 상승할 수 있었습니다.
                                 </p>
                             </div>
-                            <a href="https://hanhobin1011-cmyk.github.io/Eureka/tldn.jpg" target="_blank" class="flex-shrink-0 w-full md:w-32">
-                                <img src="https://hanhobin1011-cmyk.github.io/Eureka/tldn.jpg" alt="수원대 합격증" class="rounded-lg shadow-lg w-full h-auto object-cover cert-img">
-                            </a>
+                            <div class="md:w-32 shrink-0 order-1 md:order-2">
+                                <img src="https://hanhobin1011-cmyk.github.io/Eureka/tldn.jpg" alt="수원대 합격증" class="w-full rounded-lg shadow-md group-hover:scale-105 transition-transform duration-300">
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- 수강생 후기 섹션 -->
-            <section>
-                <h2 class="text-2xl md:text-3xl font-bold text-center mb-8 border-b-2 border-gray-700 pb-2">성장으로 증명된 과정</h2>
-                <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-6">
-                    <!-- 고O고 임OO -->
-                    <div class="testimonial-card rounded-lg p-6">
-                        <p class="text-sm text-emerald-400 font-bold">고O고 | 임OO</p>
-                        <blockquote class="text-lg font-bold my-3">
-                            "문제를 보면 겁부터 나던 제가, 점수가 확 오르는게 보이고 풀 수 있는 문제가 점점 많아지니까 신났던거 같아요. 학생의 멘탈까지 관리해주시는 호빈T!"
-                        </blockquote>
-                        <p class="text-gray-400 text-sm">
-                           수학이 너무 재미없고 아는 게 없어 겁부터 났습니다. 포기하려던 저에게 할 수 있다고 희망을 담아 응원해주셔서 정말 열심히, 꾸준하게 할 수 있었던 것 같아요. 모든 게 쌤 덕분이에요.
-                        </p>
+            <!-- 5. 성적으로 증명된 결과 (성적 상승) -->
+            <section class="mb-20">
+                <h2 class="text-2xl md:text-3xl font-bold text-center mb-10 pb-2 border-b border-[#333]">
+                    <span class="gradient-text">성적</span>으로 증명된 결과
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Case 1: 진OO (강조) -->
+                    <div class="bg-[#1A1A1A] p-6 rounded-2xl border border-red-500/50 shadow-[0_0_15px_rgba(239,68,68,0.1)] relative overflow-hidden group">
+                        <div class="absolute top-0 right-0 bg-red-600 text-white text-[10px] font-black px-3 py-1 rounded-bl-xl uppercase tracking-widest">Legendary</div>
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <span class="font-bold text-white text-lg">진OO</span> <span class="text-gray-500 text-sm ml-1">(백석고)</span>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <div class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-orange-400">4등급 → 1등급</div>
+                            <div class="text-red-400 font-bold text-sm mt-1">전교 24등 달성</div>
+                        </div>
+                        <p class="text-gray-300 text-sm italic">"학원을 옮기자마자 성적이 바로 올랐습니다. 선생님의 수업 방식이 저와 너무 잘 맞았습니다."</p>
                     </div>
-                    <!-- 경O고 정OO -->
-                    <div class="testimonial-card rounded-lg p-6">
-                        <p class="text-sm text-emerald-400 font-bold">경O고 | 정OO</p>
-                        <blockquote class="text-lg font-bold my-3">
-                            "한 문제에 대한 하나의 풀이가 아닌 다양한 풀이방법을 알려주시고, 항상 가장 효율적이고 좋은 방법으로 저희를 가르쳐주셔서 너무 좋았습니다."
-                        </blockquote>
-                        <p class="text-gray-400 text-sm">
-                            계속 질문해도 잘 알려주시고, 상황이나 여건을 이해해주시며 끝까지 챙겨주시려는 모습이 눈에 다 보여서 너무 감사했습니다. 지난 2년간 너무 감사했습니다.
-                        </p>
+
+                    <!-- Case 2: 박OO -->
+                    <div class="bg-[#1E1E1E] p-6 rounded-2xl border border-[#333] card-hover">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <span class="font-bold text-white text-lg">박OO</span> <span class="text-gray-500 text-sm ml-1">(마전고)</span>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <div class="text-2xl font-bold text-white">5등급 → 3등급</div>
+                            <div class="text-emerald-400 font-bold text-sm mt-1">2개 등급 수직 상승!</div>
+                        </div>
+                        <p class="text-gray-300 text-sm">"내신 전에도 개념 문제를, 내신 때는 교과서를 반복해서 돌려주신 덕분에 성적이 올랐습니다."</p>
+                    </div>
+
+                    <!-- Case 3: 김OO -->
+                    <div class="bg-[#1E1E1E] p-6 rounded-2xl border border-[#333] card-hover">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <span class="font-bold text-white text-lg">김OO</span> <span class="text-gray-500 text-sm ml-1">(아라고)</span>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <div class="text-2xl font-bold text-white">전교 311등 → 154등</div>
+                            <div class="text-emerald-400 font-bold text-sm mt-1">157등 대폭 상승</div>
+                        </div>
+                        <p class="text-gray-300 text-sm">"클리닉 수업 때 전에 틀렸던 문제를 다시 풀게 해주신 점이 정말 좋았습니다."</p>
+                    </div>
+
+                    <!-- Case 4: 1등급 유지 (장OO) -->
+                    <div class="bg-[#1E1E1E] p-6 rounded-2xl border border-[#333] card-hover">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <span class="font-bold text-white text-lg">장OO</span> <span class="text-gray-500 text-sm ml-1">(검단고)</span>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-yellow-500"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                        <div class="mb-4">
+                            <div class="text-2xl font-bold text-white">전교 1등 → 1등급 유지</div>
+                            <div class="text-blue-400 font-bold text-sm mt-1">최상위권 수성</div>
+                        </div>
+                        <p class="text-gray-300 text-sm">"개념을 제대로 이해했는지 확신이 없었는데, 선생님 설명 덕분에 확신을 가지고 풀게 되었습니다."</p>
+                    </div>
+
+                    <!-- Case 5: 1등급 유지 (김OO) -->
+                    <div class="bg-[#1E1E1E] p-6 rounded-2xl border border-[#333] card-hover">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <span class="font-bold text-white text-lg">김OO</span> <span class="text-gray-500 text-sm ml-1">(백석고)</span>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-yellow-500"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                        <div class="mb-4">
+                            <div class="text-2xl font-bold text-white">전교 5등 → 1등급 유지</div>
+                            <div class="text-blue-400 font-bold text-sm mt-1">흔들리지 않는 실력</div>
+                        </div>
+                        <p class="text-gray-300 text-sm">"쌤이 가져온 문제의 질이 좋아 반 친구들이 감탄할 정도입니다. 아침 직전 보강으로 최종 점검한 것이 큰 도움이 됐습니다."</p>
+                    </div>
+
+                    <!-- Case 6: 1등급 유지 (백OO) -->
+                    <div class="bg-[#1E1E1E] p-6 rounded-2xl border border-[#333] card-hover">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <span class="font-bold text-white text-lg">백OO</span> <span class="text-gray-500 text-sm ml-1">(백석고)</span>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-yellow-500"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                        <div class="mb-4">
+                            <div class="text-2xl font-bold text-white">전교 24등 → 1등급 유지</div>
+                            <div class="text-blue-400 font-bold text-sm mt-1">완벽한 개념 적용</div>
+                        </div>
+                        <p class="text-gray-300 text-sm">"이해가 잘 되도록 설명해 주시고 문제에 적용해 볼 수 있도록 한 점, 부족한 부분을 집중적으로 할 수 있었던 점이 좋았습니다."</p>
                     </div>
                 </div>
             </section>
         </main>
 
         <!-- CTA 버튼 섹션 -->
-        <footer class="mt-20 text-center">
-            <h3 class="text-xl font-bold mb-6">한호빈 선생님과 함께 수학의 새로운 길을 열어보세요.</h3>
+        <footer class="mt-20 text-center border-t border-[#333] pt-12">
+            <h3 class="text-xl md:text-2xl font-bold mb-8 text-white">
+                한호빈 선생님과 함께<br>수학의 새로운 길을 열어보세요.
+            </h3>
             <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-                <a href="https://hanhobin1011-cmyk.github.io/Eureka/gkrdnjs.html" class="cta-button w-full sm:w-auto bg-blue-600 text-white font-bold py-3 px-8 rounded-lg text-lg">
-                    강의 안내
+                <a href="https://hanhobin1011-cmyk.github.io/Eureka/tlrksvy.html" class="cta-button w-full sm:w-auto bg-gradient-to-r from-blue-600 to-blue-500 text-white font-bold py-3.5 px-8 rounded-xl text-lg shadow-lg hover:shadow-blue-500/20 transform hover:-translate-y-1 transition-all">
+                    강의 시간표 확인
                 </a>
-                <a href="https://www.instagram.com/h.hobin/" class="cta-button w-full sm:w-auto bg-gray-700 text-white font-bold py-3 px-8 rounded-lg text-lg">
-                    한호빈T 인스타그램
+                <a href="https://www.instagram.com/h.hobin/" target="_blank" class="cta-button w-full sm:w-auto bg-[#2A2A2A] border border-[#444] hover:bg-[#333] text-white font-bold py-3.5 px-8 rounded-xl text-lg flex items-center justify-center gap-2 transform hover:-translate-y-1 transition-all">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-pink-500"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    인스타그램
                 </a>
-                <a href="https://open.kakao.com/o/s9qHTzTh" class="cta-button w-full sm:w-auto bg-emerald-500 text-white font-bold py-3 px-8 rounded-lg text-lg">
-                    상담 신청
+                <a href="https://open.kakao.com/o/s9qHTzTh" target="_blank" class="cta-button w-full sm:w-auto bg-gradient-to-r from-emerald-500 to-emerald-400 text-white font-bold py-3.5 px-8 rounded-xl text-lg shadow-lg hover:shadow-emerald-500/20 transform hover:-translate-y-1 transition-all">
+                    상담 신청 (Kakao)
                 </a>
+            </div>
+            <div class="text-gray-500 text-sm mt-10 space-y-1">
+                <p>우독학원 검단 | 문의: 032-719-4054</p>
+                <p>세빛학원 송파 | 문의: 02-425-1278</p>
             </div>
         </footer>
 
     </div>
 </body>
 </html>
-
-
-
-
-
