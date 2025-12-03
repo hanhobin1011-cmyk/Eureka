@@ -73,12 +73,18 @@
                 예비 고2 (현 고1) 학부모님 필독
             </div>
             <!-- 메인 카피 수정 -->
-            <h2 class="text-3xl md:text-6xl font-black mb-6 leading-tight tracking-tight break-keep">
+            <h2 class="text-3xl md:text-6xl font-black mb-2 leading-tight tracking-tight break-keep">
                 퇴원율 0%의 신화<br />
                 <span class="gradient-text">
                     우월하고 독보적인 수학
                 </span>
             </h2>
+            
+            <!-- 추가된 설명 문구 -->
+            <p class="text-[10px] md:text-xs text-gray-500 mb-6 md:mb-8 font-medium">
+                * 1주일 이상 등록생 기준
+            </p>
+
             <!-- 설명 문구 수정 -->
             <p class="text-gray-400 text-base md:text-xl mb-8 md:mb-10 max-w-3xl mx-auto leading-relaxed break-keep">
                 1년 이상 퇴원율 0%로 증명된 한호빈 선생님의 <span class="text-gray-200 font-bold">우월한 강의</span>와 <span class="text-gray-200 font-bold">독보적인 관리</span>가<br class="hidden md:block"/>
@@ -107,22 +113,24 @@
                     </div>
                 </div>
                 
-                <div class="flex-1 text-center md:text-left">
+                <!-- 수정: 텍스트 좌측 정렬 (flex-1 text-left) -->
+                <div class="flex-1 text-left">
                     <h3 class="text-2xl md:text-3xl font-black mb-3 md:mb-4 text-white">수학 강사 한호빈</h3>
                     <div class="space-y-2 md:space-y-3 text-gray-300 text-sm md:text-base">
-                        <div class="flex items-center justify-center md:justify-start gap-2 md:gap-3">
+                        <!-- 수정: 항목 좌측 정렬 (justify-start) -->
+                        <div class="flex items-center justify-start gap-2 md:gap-3">
                             <span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 text-xs font-bold border border-emerald-500/20 whitespace-nowrap">現</span>
                             <span class="font-medium">우독학원 검단 / 세빛학원 송파</span>
                         </div>
-                        <div class="flex items-center justify-center md:justify-start gap-2 md:gap-3">
+                        <div class="flex items-center justify-start gap-2 md:gap-3">
                             <span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 text-xs font-bold border border-emerald-500/20 whitespace-nowrap">現</span>
                             <span class="font-medium">비상교육 중고등 수학문항 검수위원</span>
                         </div>
-                        <div class="flex items-center justify-center md:justify-start gap-2 md:gap-3">
+                        <div class="flex items-center justify-start gap-2 md:gap-3">
                             <span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 text-xs font-bold border border-emerald-500/20 whitespace-nowrap">現</span>
                             <span class="font-medium">2026 이투스 검토위원</span>
                         </div>
-                        <div class="flex items-center justify-center md:justify-start gap-2 md:gap-3 text-gray-500 pt-1 md:pt-2">
+                        <div class="flex items-center justify-start gap-2 md:gap-3 text-gray-500 pt-1 md:pt-2">
                             <span class="px-2 py-0.5 rounded bg-gray-700/30 text-gray-500 text-xs font-bold border border-gray-700/30 whitespace-nowrap">前</span>
                             <span class="text-sm">대치명인 / 미래탐구</span>
                         </div>
@@ -277,33 +285,36 @@
             한호빈 수학의 <span class="text-blue-400">3-Step 시스템</span>
         </h2>
         
-        <!-- 3-Step Combined Card (아이콘 제거 및 통합) -->
+        <!-- 3-Step Combined Card (간소화 버전) -->
         <div class="bg-[#1E1E1E] rounded-3xl border border-[#333] shadow-2xl overflow-hidden">
             <div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#333]">
                 <!-- Step 1 -->
-                <div class="p-8 md:p-10 text-center hover:bg-white/5 transition-colors duration-300">
-                    <span class="text-blue-500 font-black text-sm tracking-widest block mb-2 md:mb-3">STEP 1</span>
-                    <h3 class="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4">수업으로 배우고</h3>
-                    <p class="text-gray-400 text-sm break-keep leading-relaxed">
-                        핵심 개념 이해와<br>실전 문제 풀이 스킬 전수
+                <div class="p-6 text-center">
+                    <h3 class="text-lg md:text-xl font-bold text-white mb-2">
+                        <span class="text-blue-500 mr-2">01.</span>수업으로 배우고
+                    </h3>
+                    <p class="text-gray-400 text-sm break-keep">
+                        핵심 개념 이해와 실전 풀이 스킬
                     </p>
                 </div>
                 
                 <!-- Step 2 -->
-                <div class="p-8 md:p-10 text-center hover:bg-white/5 transition-colors duration-300">
-                    <span class="text-blue-500 font-black text-sm tracking-widest block mb-2 md:mb-3">STEP 2</span>
-                    <h3 class="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4">클리닉으로 익히고</h3>
-                    <p class="text-gray-400 text-sm break-keep leading-relaxed">
-                        틀린 문제를 다시 풀며<br>내 것으로 만드는 과정
+                <div class="p-6 text-center">
+                    <h3 class="text-lg md:text-xl font-bold text-white mb-2">
+                        <span class="text-blue-500 mr-2">02.</span>클리닉으로 익히고
+                    </h3>
+                    <p class="text-gray-400 text-sm break-keep">
+                        틀린 문제를 다시 풀며 내 것으로
                     </p>
                 </div>
 
                 <!-- Step 3 -->
-                <div class="p-8 md:p-10 text-center hover:bg-white/5 transition-colors duration-300">
-                    <span class="text-blue-500 font-black text-sm tracking-widest block mb-2 md:mb-3">STEP 3</span>
-                    <h3 class="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4">테스트로 점검</h3>
-                    <p class="text-gray-400 text-sm break-keep leading-relaxed">
-                        주말 테스트를 통한<br>실전 감각 및 약점 체크
+                <div class="p-6 text-center">
+                    <h3 class="text-lg md:text-xl font-bold text-white mb-2">
+                        <span class="text-blue-500 mr-2">03.</span>테스트로 점검
+                    </h3>
+                    <p class="text-gray-400 text-sm break-keep">
+                        실전 감각 및 약점 완벽 체크
                     </p>
                 </div>
             </div>
