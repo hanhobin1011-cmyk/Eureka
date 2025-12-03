@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>한호빈 수학 & 우독학원 | 수업 소개</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans KR"', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #121212;
+            color: #E0E0E0;
+            word-break: keep-all;
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #34d399, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .pulse-border {
+            animation: borderPulse 2s infinite;
+        }
+        @keyframes borderPulse {
+            0% { border-color: rgba(239, 68, 68, 0.5); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+            70% { border-color: rgba(239, 68, 68, 1); box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+            100% { border-color: rgba(239, 68, 68, 0.5); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-blue-500 selection:text-white">
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-[#121212]/90 backdrop-blur-md border-b border-[#333]">
+        <div class="max-w-4xl mx-auto px-4 py-3 md:py-4 flex justify-between items-center">
+            <h1 class="text-lg md:text-xl font-bold gradient-text truncate mr-2">
+                한호빈 수학 & 우독학원
+            </h1>
+            <button onclick="window.open('https://blog.naver.com/woodokacademy_gd', '_blank')" 
+                class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-1.5 md:px-5 md:py-2 rounded-full text-xs md:text-sm font-bold transition-all transform hover:scale-105 shadow-lg shadow-blue-900/20 whitespace-nowrap">
+                수업 문의
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section (General Intro) -->
+    <header class="relative pt-16 pb-16 md:pt-24 md:pb-24 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="inline-block bg-[#1E1E1E] border border-[#333] px-3 py-1 md:px-4 md:py-1.5 rounded-full text-xs md:text-sm font-medium text-emerald-400 mb-4 md:mb-6 animate-fade-in-up">
+                예비 고2 (현 고1) 대상
+            </div>
+            
+            <h2 class="text-3xl md:text-6xl font-black mb-2 leading-tight tracking-tight break-keep">
+                퇴원율 0%의 신화<br />
+                <span class="gradient-text">
+                    우월하고 독보적인 수학
+                </span>
+            </h2>
+            
+            <p class="text-[10px] md:text-xs text-gray-500 mb-6 md:mb-8 font-medium">
+                * 1주일 이상 등록생 기준
+            </p>
+
+            <p class="text-gray-400 text-base md:text-xl mb-10 md:mb-12 max-w-3xl mx-auto leading-relaxed break-keep">
+                1년 이상 퇴원율 0%로 증명된 한호빈 선생님의 <span class="text-gray-200 font-bold">우월한 강의</span>와 <span class="text-gray-200 font-bold">독보적인 관리</span>로<br class="hidden md:block"/>
+                여러분의 수학 성적 판도를 바꿉니다.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <button onclick="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'})"
+                    class="bg-[#1E1E1E] border border-[#333] hover:border-emerald-500/50 text-white px-8 py-3 rounded-xl font-bold transition-all hover:scale-105 shadow-lg">
+                    수강 문의하기
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Instructor Profile -->
+    <section class="py-12 md:py-20 px-4 max-w-4xl mx-auto">
+        <div class="bg-[#1E1E1E] p-6 md:p-10 rounded-3xl border border-[#333] shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+            <div class="flex flex-col md:flex-row items-center gap-6 md:gap-10">
+                <div class="relative group shrink-0">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-emerald-400 to-blue-600 rounded-full opacity-75 group-hover:opacity-100 blur transition duration-300"></div>
+                    <div class="relative w-32 h-32 md:w-40 md:h-40 bg-[#2A2A2A] rounded-full flex items-center justify-center border-4 border-[#121212] overflow-hidden shadow-xl">
+                        <img src="https://hanhobin1011-cmyk.github.io/Eureka/profile.jpg" alt="한호빈 강사" class="w-full h-full object-cover object-top">
+                    </div>
+                </div>
+                
+                <div class="flex-1 text-left">
+                    <h3 class="text-2xl md:text-3xl font-black mb-3 md:mb-4 text-white">수학 강사 한호빈</h3>
+                    <div class="space-y-2 md:space-y-3 text-gray-300 text-sm md:text-base">
+                        <div class="flex items-center justify-start gap-2 md:gap-3">
+                            <span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 text-xs font-bold border border-emerald-500/20 whitespace-nowrap">現</span>
+                            <span class="font-medium">우독학원 검단 / 세빛학원 송파</span>
+                        </div>
+                        <div class="flex items-center justify-start gap-2 md:gap-3">
+                            <span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 text-xs font-bold border border-emerald-500/20 whitespace-nowrap">現</span>
+                            <span class="font-medium">비상교육 중고등 수학문항 검수위원</span>
+                        </div>
+                        <div class="flex items-center justify-start gap-2 md:gap-3">
+                            <span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 text-xs font-bold border border-emerald-500/20 whitespace-nowrap">現</span>
+                            <span class="font-medium">2026 이투스 검토위원</span>
+                        </div>
+                        <div class="flex items-center justify-start gap-2 md:gap-3 text-gray-500 pt-1 md:pt-2">
+                            <span class="px-2 py-0.5 rounded bg-gray-700/30 text-gray-500 text-xs font-bold border border-gray-700/30 whitespace-nowrap">前</span>
+                            <span class="text-sm">대치명인 / 미래탐구</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Stories -->
+    <section class="py-12 md:py-20 px-4">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-10 md:mb-16">
+                <h2 class="text-2xl md:text-4xl font-bold mb-3 md:mb-4">
+                    학부모와 학생이 증명한 <span class="text-emerald-400">결과</span>
+                </h2>
+                <p class="text-gray-500 text-sm md:text-base">성적 향상부터 최상위권 유지까지, 실제 수강 후기입니다.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Rising Grades -->
+                <div class="space-y-6">
+                    <h3 class="text-lg md:text-xl font-bold flex items-center gap-2 text-red-400 mb-4 md:mb-6 pl-2 border-l-4 border-red-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+                        드라마틱한 성적 향상
+                    </h3>
+                    
+                    <!-- Card 1: 진OO (독보적 강조) -->
+                    <div class="p-6 md:p-7 rounded-2xl border-2 border-red-500 bg-[#1A1A1A] shadow-[0_0_20px_rgba(239,68,68,0.15)] relative overflow-hidden transition-transform duration-300 hover:-translate-y-2">
+                        <div class="absolute top-0 right-0 bg-red-600 text-white text-[10px] font-black px-3 py-1 rounded-bl-xl uppercase tracking-widest">
+                            Legendary
+                        </div>
+                        <div class="flex justify-between items-start mb-3 md:mb-4">
+                            <div>
+                                <span class="font-bold text-white text-lg md:text-xl">진OO</span>
+                                <span class="text-gray-400 text-xs md:text-sm ml-2">(백석고)</span>
+                            </div>
+                        </div>
+                        <div class="mb-4 md:mb-5">
+                            <div class="text-gray-400 text-xs font-medium mb-1">한 학기 만에 이룬 기적</div>
+                            <div class="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-orange-400">
+                                4등급 → 1등급
+                            </div>
+                            <div class="text-red-400 font-bold text-sm mt-1">전교 24등 달성</div>
+                        </div>
+                        <p class="text-gray-200 leading-relaxed text-sm bg-red-900/10 p-3 md:p-4 rounded-xl border border-red-900/30 italic break-keep">
+                            "1학기 기말 끝나고 바로 명인으로 학원을 옮겼는데 바로 성적이 올랐다. 수업 방식이나 질문에 답해주시는 게 나와 잘 맞는 것 같다."
+                        </p>
+                    </div>
+
+                    <!-- Card 2: 김OO -->
+                    <div class="p-6 md:p-7 rounded-2xl border bg-[#1E1E1E] border-[#333] hover:border-gray-500 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl">
+                        <div class="flex justify-between items-start mb-3 md:mb-4">
+                            <div>
+                                <span class="font-bold text-white text-lg">김OO</span>
+                                <span class="text-gray-500 text-xs md:text-sm ml-2">(아라고)</span>
+                            </div>
+                        </div>
+                        <div class="inline-block bg-[#2A2A2A] text-emerald-400 text-xs px-3 py-1.5 rounded-lg mb-3 md:mb-4 font-bold border border-[#333]">
+                            전교 311등 → 154등 (157등 상승!)
+                        </div>
+                        <p class="text-gray-300 leading-relaxed text-sm break-keep">
+                            "클리닉 수업 때 전에 틀렸던 문제를 풀어서 좋았다."
+                        </p>
+                    </div>
+
+                    <!-- Card 3: 박OO -->
+                    <div class="p-6 md:p-7 rounded-2xl border bg-[#1E1E1E] border-[#333] hover:border-gray-500 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl">
+                        <div class="flex justify-between items-start mb-3 md:mb-4">
+                            <div>
+                                <span class="font-bold text-white text-lg">박OO</span>
+                                <span class="text-gray-500 text-xs md:text-sm ml-2">(마전고)</span>
+                            </div>
+                        </div>
+                        <div class="inline-block bg-[#2A2A2A] text-emerald-400 text-xs px-3 py-1.5 rounded-lg mb-3 md:mb-4 font-bold border border-[#333]">
+                            5등급 → 3등급 (2개 등급 수직 상승!)
+                        </div>
+                        <p class="text-gray-300 leading-relaxed text-sm break-keep">
+                            "내신 전에도 개념 문제를 풀었고, 내신 때 교과서를 돌려서 상승된 것 같다."
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Maintaining Top Tier -->
+                <div class="space-y-6">
+                    <h3 class="text-lg md:text-xl font-bold flex items-center gap-2 text-blue-400 mb-4 md:mb-6 pl-2 border-l-4 border-blue-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        흔들리지 않는 1등급 유지
+                    </h3>
+                    
+                    <!-- Card 4 (Highlight) -->
+                    <div class="p-6 md:p-7 rounded-2xl border bg-[#1A1A1A] border-blue-500/50 shadow-blue-900/10 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl">
+                        <div class="flex justify-between items-start mb-3 md:mb-4">
+                            <div>
+                                <span class="font-bold text-white text-lg">장OO</span>
+                                <span class="text-gray-500 text-xs md:text-sm ml-2">(검단고)</span>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-yellow-500"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                        <div class="inline-block bg-[#2A2A2A] text-emerald-400 text-xs px-3 py-1.5 rounded-lg mb-3 md:mb-4 font-bold border border-[#333]">
+                            1등급 유지
+                        </div>
+                        <p class="text-gray-300 leading-relaxed text-sm break-keep">
+                            "전에 개념을 제대로 이해했는지 확신이 없었는데 선생님이 자세히 설명해 주셔서 이제는 확신을 가지고 문제를 풀 수 있게 됐다."
+                        </p>
+                    </div>
+
+                    <!-- Card 5 -->
+                    <div class="p-6 md:p-7 rounded-2xl border bg-[#1E1E1E] border-[#333] hover:border-gray-500 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl">
+                        <div class="flex justify-between items-start mb-3 md:mb-4">
+                            <div>
+                                <span class="font-bold text-white text-lg">김OO</span>
+                                <span class="text-gray-500 text-xs md:text-sm ml-2">(백석고)</span>
+                            </div>
+                        </div>
+                        <div class="inline-block bg-[#2A2A2A] text-emerald-400 text-xs px-3 py-1.5 rounded-lg mb-3 md:mb-4 font-bold border border-[#333]">
+                            1등급 유지
+                        </div>
+                        <p class="text-gray-300 leading-relaxed text-sm break-keep">
+                            "쌤이 가져온 문제의 질이 좋다. 우리 반 애들이 문제를 보고 감탄한다. 아침 직전 보강으로 최종 점검을 한 것이 좋았다."
+                        </p>
+                    </div>
+
+                    <!-- Card 6 -->
+                    <div class="p-6 md:p-7 rounded-2xl border bg-[#1E1E1E] border-[#333] hover:border-gray-500 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl">
+                        <div class="flex justify-between items-start mb-3 md:mb-4">
+                            <div>
+                                <span class="font-bold text-white text-lg">백OO</span>
+                                <span class="text-gray-500 text-xs md:text-sm ml-2">(백석고)</span>
+                            </div>
+                        </div>
+                        <div class="inline-block bg-[#2A2A2A] text-emerald-400 text-xs px-3 py-1.5 rounded-lg mb-3 md:mb-4 font-bold border border-[#333]">
+                            1등급 유지
+                        </div>
+                        <p class="text-gray-300 leading-relaxed text-sm break-keep">
+                            "이해가 잘 되도록 설명해 주시고 문제에 적용해 볼 수 있도록 한 점, 부족한 부분을 집중적으로 할 수 있었던 점이 좋았다."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- System & Philosophy -->
+    <section class="py-12 md:py-20 px-4 max-w-4xl mx-auto border-t border-[#333]">
+        <h2 class="text-2xl md:text-3xl font-bold text-center mb-10 md:mb-16">
+            한호빈 수학의 <span class="text-blue-400">3-Step 시스템</span>
+        </h2>
+        
+        <!-- 3-Step Combined Card (간소화 버전) -->
+        <div class="bg-[#1E1E1E] rounded-3xl border border-[#333] shadow-2xl overflow-hidden">
+            <div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#333]">
+                <!-- Step 1 -->
+                <div class="p-6 text-center">
+                    <h3 class="text-lg md:text-xl font-bold text-white mb-2">
+                        <span class="text-blue-500 mr-2">01.</span>수업으로 배우고
+                    </h3>
+                    <p class="text-gray-400 text-sm break-keep">
+                        핵심 개념 이해와 실전 풀이 스킬
+                    </p>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="p-6 text-center">
+                    <h3 class="text-lg md:text-xl font-bold text-white mb-2">
+                        <span class="text-blue-500 mr-2">02.</span>클리닉으로 익히고
+                    </h3>
+                    <p class="text-gray-400 text-sm break-keep">
+                        틀린 문제를 다시 풀며 내 것으로
+                    </p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="p-6 text-center">
+                    <h3 class="text-lg md:text-xl font-bold text-white mb-2">
+                        <span class="text-blue-500 mr-2">03.</span>테스트로 점검
+                    </h3>
+                    <p class="text-gray-400 text-sm break-keep">
+                        실전 감각 및 약점 완벽 체크
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-16 md:mt-20 bg-gradient-to-br from-[#1E1E1E] to-[#252525] rounded-3xl p-6 md:p-10 border border-[#333] shadow-2xl relative overflow-hidden group">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
+            
+            <h3 class="text-xl md:text-2xl font-bold mb-8 md:mb-10 text-center text-blue-400 relative z-10">압도적인 관리 시스템</h3>
+            
+            <ul class="space-y-4 md:space-y-6 max-w-2xl mx-auto relative z-10">
+                <!-- Homework Management -->
+                <li class="p-5 md:p-6 rounded-2xl bg-white/5 hover:bg-white/10 transition-colors border border-white/10">
+                    <div class="flex items-start gap-4 md:gap-5">
+                        <div class="bg-blue-600/20 p-2.5 md:p-3 rounded-full text-blue-400 shrink-0 mt-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        </div>
+                        <div>
+                            <h4 class="text-lg md:text-xl font-bold text-white mb-1">차원이 다른 숙제 관리</h4>
+                            <p class="text-blue-400 font-bold text-xs md:text-sm mb-2 md:mb-3">"숙제하지 않은 자 잠들지도 말라."</p>
+                            <p class="text-gray-300 text-xs md:text-sm leading-relaxed break-keep">
+                                매일 숙제 완료가 안되면 새벽이라도 공부시킵니다. 타협 없는 관리로 올바른 학습 습관을 만듭니다.
+                            </p>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- Record Management -->
+                <li class="p-5 md:p-6 rounded-2xl bg-white/5 hover:bg-white/10 transition-colors border border-white/10">
+                    <div class="flex items-start gap-4 md:gap-5 mb-4 md:mb-5">
+                        <div class="bg-emerald-600/20 p-2.5 md:p-3 rounded-full text-emerald-400 shrink-0 mt-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                        </div>
+                        <div>
+                            <h4 class="text-lg md:text-xl font-bold text-white mb-1">학생별 특장점 파악을 위한 기록 관리</h4>
+                            <p class="text-emerald-400 font-bold text-xs md:text-sm mb-2 md:mb-3">"모두 다른 솔루션이 필요합니다."</p>
+                            <p class="text-gray-300 text-xs md:text-sm leading-relaxed break-keep">
+                                수업 태도 / 클리닉 태도 / 테스트 결과 / 숙제 관리 기록을 통해 학생별 특장점을 정밀하게 파악하고, 학생에게 딱 맞는 1:1 맞춤 솔루션을 제공합니다.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="rounded-xl overflow-hidden border border-white/10 shadow-lg">
+                        <img src="https://raw.githubusercontent.com/hanhobin1011-cmyk/Eureka/main/ppt5.jpg" alt="학생 관리 기록 예시" class="w-full h-auto object-cover">
+                    </div>
+                </li>
+
+                <!-- Achievement Tracking -->
+                <li class="p-5 md:p-6 rounded-2xl bg-white/5 hover:bg-white/10 transition-colors border border-white/10">
+                    <div class="flex items-start gap-4 md:gap-5">
+                        <div class="bg-purple-600/20 p-2.5 md:p-3 rounded-full text-purple-400 shrink-0 mt-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+                        </div>
+                        <div>
+                            <h4 class="text-lg md:text-xl font-bold text-white mb-1">빈틈없는 학생별 성취도 추적</h4>
+                            <p class="text-gray-300 text-xs md:text-sm leading-relaxed mt-1 md:mt-2 break-keep">
+                                단순 점수 기록이 아닌, 학생의 성취도를 지속적으로 추적하여 약점을 완벽하게 보완합니다.
+                            </p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Schedule -->
+    <section class="py-12 md:py-20 px-4 bg-[#1A1A1A]">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-10 md:mb-12">수업 시간표 안내</h2>
+
+            <!-- Winter School Schedule -->
+            <div class="mb-12 md:mb-16">
+                <div class="inline-block bg-gradient-to-r from-blue-600 to-emerald-500 text-white px-3 py-1 md:px-4 md:py-1 rounded-full text-xs md:text-sm font-bold mb-3 md:mb-4">
+                    WINTER SCHOOL
+                </div>
+                <h3 class="text-2xl md:text-4xl font-black mb-2 text-white">예비 고2 윈터스쿨</h3>
+                <p class="text-lg md:text-xl font-bold text-blue-400 mb-6 md:mb-8">1월 5일 (월) 대개강</p>
+
+                <div class="grid md:grid-cols-3 gap-6">
+                    <!-- Weekdays -->
+                    <div class="md:col-span-2 bg-[#1E1E1E] border-2 border-blue-500/50 rounded-2xl overflow-hidden shadow-lg shadow-blue-900/10">
+                        <div class="bg-blue-900/30 p-4 border-b border-blue-500/30 flex justify-between items-center">
+                            <h4 class="text-base md:text-lg font-bold text-blue-100 flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+                                월 / 화 / 수 / 목
+                            </h4>
+                            <span class="text-xs md:text-sm text-blue-300 bg-blue-900/50 px-2 py-1 rounded">주 4회 집중학습</span>
+                        </div>
+                        <div class="p-5 md:p-6 space-y-3 md:space-y-4">
+                            <div class="flex flex-col sm:flex-row justify-between sm:items-center p-3 bg-white/5 rounded-lg border border-white/5">
+                                <span class="font-bold text-gray-400 mb-1 sm:mb-0 text-sm md:text-base">오전 정규 수업</span>
+                                <span class="text-lg md:text-xl font-bold text-white">09:30 ~ 12:30</span>
+                            </div>
+                            <div class="flex flex-col sm:flex-row justify-between sm:items-center p-3 bg-white/5 rounded-lg border border-white/5">
+                                <span class="font-bold text-gray-400 mb-1 sm:mb-0 text-sm md:text-base">오후 정규 클리닉</span>
+                                <span class="text-lg md:text-xl font-bold text-white">13:30 ~ 16:30</span>
+                            </div>
+                            <div class="mt-4 pt-4 border-t border-white/10">
+                                <p class="text-emerald-400 font-bold mb-1 text-sm md:text-base">🎯 학습 목표: 대수, 미적분 완전 정복</p>
+                                <p class="text-gray-400 text-xs md:text-sm break-keep">개념부터 유형까지 2026년을 책임질 수학 공부를 완성합니다.<br class="hidden md:block"> 오늘 배운 내용을 익히는 것까지 책임지는 독보적인 수학 프로그램</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Weekend -->
+                    <div class="bg-[#1E1E1E] border border-[#333] rounded-2xl overflow-hidden">
+                        <div class="bg-[#2A2A2A] p-4 border-b border-[#333]">
+                            <h4 class="text-base md:text-lg font-bold text-white flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                토 / 일 (주말 TEST)
+                            </h4>
+                        </div>
+                        <div class="p-5 md:p-6">
+                            <p class="text-gray-400 text-xs md:text-sm mb-4">주 1회 선택 필수</p>
+                            <div class="space-y-2 mb-6">
+                                <div class="bg-black/20 p-2 rounded text-center text-white font-bold text-sm md:text-base">오후 1:00 ~ 4:00</div>
+                                <div class="text-center text-gray-500 text-xs">또는</div>
+                                <div class="bg-black/20 p-2 rounded text-center text-white font-bold text-sm md:text-base">오후 4:00 ~ 7:00</div>
+                            </div>
+                            <p class="text-gray-400 text-xs md:text-sm leading-relaxed border-t border-[#333] pt-4 break-keep">
+                                매주 학습 성취를 관리하며<br>부족한 부분을 찾아 메웁니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Note -->
+                <div class="mt-6 bg-[#1E1E1E] p-4 rounded-xl border border-dashed border-gray-700 text-center">
+                    <p class="text-gray-300 text-sm md:text-base break-keep">
+                        <span class="text-blue-400 font-bold">기하, 인공지능수학, 경제수학</span> 등 선택과목에 대한 프로그램 준비도 완벽합니다.
+                        <br class="md:hidden">
+                        <span class="text-xs md:text-sm text-gray-500 block mt-1">(자세한 내용은 설명회에서 공개)</span>
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Regular Semester Schedule -->
+            <div class="border-t border-[#333] pt-12">
+                <h3 class="text-lg md:text-xl font-bold text-gray-400 mb-6 text-center">학기 중 정규 수업 시간표</h3>
+                <div class="grid md:grid-cols-2 gap-6 md:gap-8 mb-8 md:mb-10">
+                    <!-- Class A -->
+                    <div class="bg-[#1E1E1E] border border-[#333] rounded-2xl overflow-hidden hover:border-emerald-500/50 transition-colors duration-300">
+                        <div class="bg-[#252525] p-4 md:p-5 text-center border-b border-[#333]">
+                            <h3 class="text-lg md:text-xl font-bold text-emerald-400">수직반 (최상위 도전)</h3>
+                            <p class="text-gray-500 text-xs md:text-sm mt-1">화 / 목 등원</p>
+                        </div>
+                        <div class="p-6 space-y-4">
+                            <div class="flex justify-between items-center border-b border-[#333] pb-3">
+                                <span class="font-bold text-gray-400 text-sm md:text-base">수업</span>
+                                <span class="text-lg md:text-xl font-bold text-white">18:00 ~ 20:00</span>
+                            </div>
+                            <div class="flex justify-between items-center pb-2">
+                                <span class="font-bold text-gray-400 text-sm md:text-base">클리닉</span>
+                                <span class="text-lg md:text-xl font-bold text-white">20:00 ~ 22:00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Class B -->
+                    <div class="bg-[#1E1E1E] border border-[#333] rounded-2xl overflow-hidden hover:border-blue-500/50 transition-colors duration-300">
+                        <div class="bg-[#252525] p-4 md:p-5 text-center border-b border-[#333]">
+                            <h3 class="text-lg md:text-xl font-bold text-blue-400">상승반 (내신 1등급 도전)</h3>
+                            <p class="text-gray-500 text-xs md:text-sm mt-1">화 / 목 등원</p>
+                        </div>
+                        <div class="p-6 space-y-4">
+                            <div class="flex justify-between items-center border-b border-[#333] pb-3">
+                                <span class="font-bold text-gray-400 text-sm md:text-base">클리닉</span>
+                                <span class="text-lg md:text-xl font-bold text-white">18:00 ~ 20:00</span>
+                            </div>
+                            <div class="flex justify-between items-center pb-2">
+                                <span class="font-bold text-gray-400 text-sm md:text-base">수업</span>
+                                <span class="text-lg md:text-xl font-bold text-white">20:00 ~ 22:00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-[#252525] border border-yellow-600/30 rounded-2xl p-5 md:p-6 text-center shadow-lg relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-yellow-600/50"></div>
+                    <h4 class="text-base md:text-lg font-bold text-yellow-500 mb-2 flex items-center justify-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        주말 테스트 (주 1회 필수)
+                    </h4>
+                    <p class="text-gray-300 text-sm md:text-base">
+                        토요일 또는 일요일 선택: <span class="font-bold text-white">1:00 ~ 4:00</span> 또는 <span class="font-bold text-white">4:00 ~ 7:00</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Consultation Info (Replaces Event Info) -->
+    <section class="py-16 md:py-24 px-4 bg-gradient-to-t from-black to-[#121212]">
+        <div class="max-w-2xl mx-auto text-center">
+            <h2 class="text-2xl md:text-3xl font-bold mb-8 md:mb-10 text-transparent bg-clip-text bg-gradient-to-r from-gray-100 to-gray-500">
+                수업 및 입학 상담
+            </h2>
+            
+            <div class="bg-[#1E1E1E] rounded-3xl shadow-2xl p-6 md:p-8 border border-[#333] text-center transform hover:scale-[1.01] transition-transform duration-300">
+                <p class="text-gray-300 mb-6 text-base md:text-lg break-keep">
+                    수업과 관련된 자세한 상담은 <span class="text-blue-400 font-bold">학원 전화</span> 또는 <span class="text-blue-400 font-bold">블로그</span>를 통해 확인하실 수 있습니다.
+                </p>
+                
+                <div class="mb-8">
+                    <a href="https://blog.naver.com/woodokacademy_gd" target="_blank" 
+                       class="inline-block text-white text-base md:text-lg font-bold py-3 px-8 rounded-xl bg-gradient-to-r from-blue-600 to-emerald-500 hover:from-blue-500 hover:to-emerald-400 shadow-lg transition-all transform hover:-translate-y-1 w-full md:w-auto text-center">
+                        블로그 바로가기
+                    </a>
+                </div>
+                
+                <div class="p-6 bg-[#2A2A2A] rounded-xl border border-[#333] inline-block w-full md:w-auto">
+                    <p class="text-gray-400 text-sm mb-3">📞 상담 및 문의 전화</p>
+                    <p class="text-xl md:text-2xl font-black text-white mb-1">032-719-4054</p>
+                    <p class="text-xl md:text-2xl font-black text-white">010-6445-4054</p>
+                </div>
+                
+                <p class="text-center text-gray-500 text-xs mt-6">
+                    * 방문 상담은 사전 예약 후 진행됩니다.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-gray-500 py-10 md:py-12 text-center border-t border-[#222]">
+        <div class="max-w-4xl mx-auto px-4">
+            <p class="text-base md:text-lg font-bold text-gray-300 mb-2">한호빈 수학 & 우독학원</p>
+            <p class="mb-6 text-xs md:text-sm break-keep">예비 고2 윈터스쿨 | 문의: 032-719-4054 / 010-6445-4054</p>
+            <p class="text-[10px] md:text-xs opacity-50">Copyright © 2024. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
