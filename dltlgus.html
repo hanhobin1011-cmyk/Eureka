@@ -3,282 +3,276 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>이시현 학생 중간고사 분석 리포트</title>
+    <title>이시현 학생 기말고사 분석 리포트</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans KR"', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'pulse-border': 'borderPulse 2s infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        borderPulse: {
+                            '0%': { borderColor: 'rgba(52, 211, 153, 0.5)' },
+                            '50%': { borderColor: 'rgba(59, 130, 246, 0.8)' },
+                            '100%': { borderColor: 'rgba(52, 211, 153, 0.5)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
         body {
-            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #121212;
+            color: #E0E0E0;
+            word-break: keep-all;
         }
-        .report-card h2 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #1e3a8a; /* Deep blue */
-            padding-bottom: 0.75rem;
-            border-bottom: 2px solid #dbeafe; /* Light blue */
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
+        .mobile-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #121212;
+            min-height: 100vh;
+            border-left: 1px solid #222;
+            border-right: 1px solid #222;
         }
-        .report-card h3 {
-            font-size: 1.125rem;
-            font-weight: 700;
-            color: #1e40af; /* Slightly lighter blue */
+        .gradient-text {
+            background: linear-gradient(to right, #34d399, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .card {
+            background-color: #1E1E1E;
+            border: 1px solid #333;
+            border-radius: 1rem;
+            padding: 1.25rem;
             margin-bottom: 1rem;
-        }
-        .feedback-item {
-            margin-bottom: 2rem;
-            padding: 1.5rem;
-            border-radius: 0.5rem;
-            background-color: #f8fafc; /* very light gray */
-            border-left: 5px solid #3b82f6; /* Blue accent */
-        }
-        .feedback-item:last-child {
-            margin-bottom: 0;
-        }
-        .feedback-item strong {
-            color: #1e40af;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
         }
         .tag {
             display: inline-block;
-            padding: 0.25rem 0.75rem;
+            padding: 0.25rem 0.6rem;
             border-radius: 9999px;
-            font-size: 0.875rem;
+            font-size: 0.75rem;
             font-weight: 700;
-            margin-right: 0.5rem;
-        }
-        .tag-red {
-            background-color: #fee2e2;
-            color: #b91c1c;
-        }
-        .tag-orange {
-            background-color: #ffedd5;
-            color: #9a3412;
-        }
-        .tag-analysis {
-            background-color: #dbeafe; /* Tailwind blue-100 */
-            color: #1e40af; /* Tailwind blue-800 */
-        }
-        .tag-comment {
-            background-color: #d1fae5; /* Tailwind green-100 */
-            color: #065f46; /* Tailwind green-800 */
-        }
-        .tag-solution {
-            background-color: #e0e7ff; /* Tailwind indigo-100 */
-            color: #3730a3; /* Tailwind indigo-800 */
+            margin-bottom: 0.5rem;
         }
     </style>
 </head>
-<body class="bg-gray-100 p-4 sm:p-8">
-    <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden report-card">
-        <!-- Header Section -->
-        <header class="bg-blue-800 text-white p-8 text-center">
-            <h1 class="text-3xl font-bold mb-2">한호빈 수학 Feedback Report: 이시현</h1>
-            <p class="text-lg text-blue-200">2025학년도 백석고등학교 1학년 2학기 중간고사</p>
+<body class="antialiased selection:bg-blue-500 selection:text-white">
+    <div class="mobile-container">
+        <!-- Header -->
+        <header class="pt-10 pb-8 px-6 text-center animate-fade-in-up">
+            <div class="inline-block bg-[#1E1E1E] border border-[#333] px-3 py-1 rounded-full text-xs font-medium text-emerald-400 mb-3">
+                2025 백석고 1학년 2학기 기말고사
+            </div>
+            <h1 class="text-2xl font-black mb-1 text-white">
+                한호빈 수학<br>
+                <span class="gradient-text">Feedback Report</span>
+            </h1>
+            
+            <div class="mt-6 bg-[#1E1E1E] border border-[#333] rounded-2xl p-6 shadow-2xl relative overflow-hidden group">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-blue-600/10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
+                <p class="text-gray-400 text-sm font-medium">이시현 학생 가채점 결과</p>
+                <p class="text-5xl font-black mt-2 text-white tracking-tight">70.1<span class="text-2xl text-gray-500 ml-1">점</span></p>
+            </div>
         </header>
 
-        <main class="p-6 sm:p-10">
-            <!-- Overall Assessment -->
-            <section class="mb-10">
-                <h2>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-3 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
-                    총평 및 학습 방향 제언
+        <main class="px-5 pb-12 space-y-10">
+            <!-- Exam Statistics (Donut Chart) -->
+            <section class="animate-fade-in-up" style="animation-delay: 0.1s;">
+                <h2 class="text-lg font-bold text-white mb-4 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/><path stroke-linecap="round" stroke-linejoin="round" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"/></svg>
+                    이번 시험 난이도 분포
                 </h2>
-                <div class="bg-blue-50 p-6 rounded-lg text-gray-800 space-y-4">
-                    <p>이번 시험에서 시현 학생은 지난 시험보다 눈에 띄게 향상된, 매우 훌륭한 결과를 보여주었습니다. <strong>단순 실수가 줄었고, 풀이 과정의 정확도가 크게 높아진 점</strong>은 이번 시험을 준비하며 시현 학생이 얼마나 열심히 노력했는지를 증명하는 결과입니다.</p>
-                    <p>아쉽게 틀린 문항들은 대부분 심화 유형이거나 최상위권 변별을 위한 고난도 문항들이었습니다. 이는 시현 학생이 이제 <strong>기본기와 교과서 응용 단계를 완벽히 정복하고, 더 높은 곳으로 도약할 준비가 되었음</strong>을 의미하는 긍정적인 신호입니다.</p>
-                    <p>지금의 성장세를 발판 삼아, 앞으로는 심화 유형에 대한 접근법을 체계적으로 훈련하고 고난도 문항에 대한 자신감을 키워나가는 데 집중하겠습니다. 시현 학생의 노력이 최고의 결과로 이어질 수 있도록 최선을 다해 돕겠습니다.</p>
-                </div>
-            </section>
-
-            <!-- Test Result Analysis -->
-            <section class="mb-10">
-                <h2>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-3 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z" />
-                        <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z" />
-                    </svg>
-                    시험 결과 분석
-                </h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center bg-gray-50 p-6 rounded-lg">
-                    <!-- Overall Score Donut Chart -->
-                    <div class="flex flex-col items-center justify-center">
-                        <h3 class="text-lg font-bold text-gray-700 mb-4">총 문항 정답률</h3>
-                        <div class="relative w-48 h-48">
-                            <svg class="w-full h-full" viewBox="0 0 120 120">
-                                <!-- Background circle -->
-                                <circle cx="60" cy="60" r="50" fill="none" stroke="#e6e6e6" stroke-width="12" />
-                                <!-- Progress circle -->
-                                <circle cx="60" cy="60" r="50" fill="none" stroke="#3b82f6" stroke-width="12"
-                                        stroke-linecap="round"
-                                        transform="rotate(-90 60 60)"
-                                        stroke-dasharray="314.159"
-                                        stroke-dashoffset="57.12" /> <!-- 314.159 * (1 - 18/22) -->
-                            </svg>
-                            <div class="absolute inset-0 flex flex-col items-center justify-center">
-                                <span class="text-3xl font-bold text-blue-800">18/22</span>
-                                <span class="text-md font-semibold text-gray-600">(82%)</span>
-                            </div>
+                <div class="bg-[#1E1E1E] rounded-2xl p-6 border border-[#333] shadow-lg flex flex-col items-center relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 to-blue-500"></div>
+                    
+                    <!-- SVG Donut Chart -->
+                    <div class="relative w-48 h-48 mb-6">
+                        <svg viewBox="0 0 100 100" class="w-full h-full transform -rotate-90">
+                            <!-- Low (Green: #34d399) 36% -->
+                            <circle cx="50" cy="50" r="40" fill="transparent" stroke="#34d399" stroke-width="12" stroke-dasharray="251.2" stroke-dashoffset="160.7" class="opacity-80" />
+                            <!-- Med-Low (Blue: #3b82f6) 27% -->
+                            <circle cx="50" cy="50" r="40" fill="transparent" stroke="#3b82f6" stroke-width="12" stroke-dasharray="251.2" stroke-dashoffset="183.3" transform="rotate(129.6 50 50)" class="opacity-80" />
+                            <!-- Med (Yellow: #fbbf24) 23% -->
+                            <circle cx="50" cy="50" r="40" fill="transparent" stroke="#fbbf24" stroke-width="12" stroke-dasharray="251.2" stroke-dashoffset="193.4" transform="rotate(226.8 50 50)" class="opacity-80" />
+                            <!-- High (Red: #ef4444) 14% -->
+                            <circle cx="50" cy="50" r="40" fill="transparent" stroke="#ef4444" stroke-width="12" stroke-dasharray="251.2" stroke-dashoffset="216" transform="rotate(309.6 50 50)" />
+                        </svg>
+                        <div class="absolute inset-0 flex flex-col justify-center items-center">
+                            <span class="text-xs text-gray-400">변별력 문항</span>
+                            <span class="text-2xl font-black text-white">14%</span>
+                            <span class="text-[10px] text-gray-500">(3문항)</span>
                         </div>
                     </div>
-
-                    <!-- Unit-wise Performance Bars -->
-                    <div class="w-full">
-                        <h3 class="text-lg font-bold text-gray-700 mb-4">단원별 정답률</h3>
-                        <div class="space-y-4">
-                            <!-- 집합 -->
-                            <div>
-                                <div class="flex justify-between mb-1">
-                                    <span class="text-base font-medium text-gray-700">집합</span>
-                                    <span class="text-sm font-medium text-gray-700">6/6 (100%)</span>
-                                </div>
-                                <div class="w-full bg-gray-200 rounded-full h-2.5">
-                                    <div class="bg-green-500 h-2.5 rounded-full" style="width: 100%"></div>
-                                </div>
-                            </div>
-                            <!-- 평면좌표 -->
-                            <div>
-                                <div class="flex justify-between mb-1">
-                                    <span class="text-base font-medium text-gray-700">평면좌표</span>
-                                    <span class="text-sm font-medium text-gray-700">2/3 (67%)</span>
-                                </div>
-                                <div class="w-full bg-gray-200 rounded-full h-2.5">
-                                    <div class="bg-yellow-400 h-2.5 rounded-full" style="width: 67%"></div>
-                                </div>
-                            </div>
-                            <!-- 직선의 방정식 -->
-                            <div>
-                                <div class="flex justify-between mb-1">
-                                    <span class="text-base font-medium text-gray-700">직선의 방정식</span>
-                                    <span class="text-sm font-medium text-gray-700">3/4 (75%)</span>
-                                </div>
-                                <div class="w-full bg-gray-200 rounded-full h-2.5">
-                                    <div class="bg-yellow-400 h-2.5 rounded-full" style="width: 75%"></div>
-                                </div>
-                            </div>
-                            <!-- 원의 방정식 -->
-                            <div>
-                                <div class="flex justify-between mb-1">
-                                    <span class="text-base font-medium text-gray-700">원의 방정식</span>
-                                    <span class="text-sm font-medium text-gray-700">4/5 (80%)</span>
-                                </div>
-                                <div class="w-full bg-gray-200 rounded-full h-2.5">
-                                    <div class="bg-green-500 h-2.5 rounded-full" style="width: 80%"></div>
-                                </div>
-                            </div>
-                            <!-- 도형의 이동 -->
-                            <div>
-                                <div class="flex justify-between mb-1">
-                                    <span class="text-base font-medium text-gray-700">도형의 이동</span>
-                                    <span class="text-sm font-medium text-gray-700">3/4 (75%)</span>
-                                </div>
-                                <div class="w-full bg-gray-200 rounded-full h-2.5">
-                                    <div class="bg-yellow-400 h-2.5 rounded-full" style="width: 75%"></div>
-                                </div>
-                            </div>
+                    
+                    <!-- Legend -->
+                    <div class="grid grid-cols-2 gap-x-8 gap-y-3 text-sm w-full px-2">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center"><span class="w-2.5 h-2.5 rounded-full bg-[#34d399] mr-2 shadow-[0_0_8px_rgba(52,211,153,0.5)]"></span><span class="text-gray-300">하</span></div>
+                            <span class="font-bold text-white">8문항</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center"><span class="w-2.5 h-2.5 rounded-full bg-[#3b82f6] mr-2 shadow-[0_0_8px_rgba(59,130,246,0.5)]"></span><span class="text-gray-300">중하</span></div>
+                            <span class="font-bold text-white">6문항</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center"><span class="w-2.5 h-2.5 rounded-full bg-[#fbbf24] mr-2 shadow-[0_0_8px_rgba(251,191,36,0.5)]"></span><span class="text-gray-300">중</span></div>
+                            <span class="font-bold text-white">5문항</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center"><span class="w-2.5 h-2.5 rounded-full bg-[#ef4444] mr-2 shadow-[0_0_8px_rgba(239,68,68,0.5)]"></span><span class="text-gray-300">상</span></div>
+                            <span class="font-bold text-white">3문항</span>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Difficulty Analysis -->
-            <section class="mb-10">
-                <h2>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-3 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                    </svg>
-                    난이도별 정답률 분석
+            <!-- Unit Distribution (Bar Chart) -->
+            <section class="animate-fade-in-up" style="animation-delay: 0.2s;">
+                <h2 class="text-lg font-bold text-white mb-4 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                    단원별 출제 분포
                 </h2>
-                <div class="bg-gray-50 p-6 rounded-lg space-y-4">
-                    <!-- 난이도 하 -->
+                <div class="bg-[#1E1E1E] rounded-2xl p-6 border border-[#333] shadow-lg space-y-5">
+                    <!-- Item 1 -->
                     <div>
-                        <div class="flex justify-between mb-1">
-                            <span class="text-base font-medium text-gray-700">난이도 '하' (기본 개념)</span>
-                            <span class="text-sm font-medium text-gray-700">7/7 (100%)</span>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-sm font-medium text-gray-300">함수 (8문항)</span>
+                            <span class="text-sm font-bold text-blue-400">36%</span>
                         </div>
-                        <div class="w-full bg-gray-200 rounded-full h-2.5">
-                            <div class="bg-green-500 h-2.5 rounded-full" style="width: 100%"></div>
+                        <div class="w-full bg-[#333] rounded-full h-2">
+                            <div class="bg-blue-500 h-2 rounded-full shadow-[0_0_10px_rgba(59,130,246,0.3)]" style="width: 36%"></div>
                         </div>
                     </div>
-                     <!-- 난이도 중하 -->
-                     <div>
-                        <div class="flex justify-between mb-1">
-                            <span class="text-base font-medium text-gray-700">난이도 '중하' (교과서 응용)</span>
-                            <span class="text-sm font-medium text-gray-700">6/7 (86%)</span>
+                    <!-- Item 2 -->
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-sm font-medium text-gray-300">유리·무리함수 (7문항)</span>
+                            <span class="text-sm font-bold text-emerald-400">32%</span>
                         </div>
-                        <div class="w-full bg-gray-200 rounded-full h-2.5">
-                            <div class="bg-green-500 h-2.5 rounded-full" style="width: 86%"></div>
+                        <div class="w-full bg-[#333] rounded-full h-2">
+                            <div class="bg-emerald-500 h-2 rounded-full shadow-[0_0_10px_rgba(16,185,129,0.3)]" style="width: 32%"></div>
                         </div>
                     </div>
-                    <!-- 난이도 중 -->
+                    <!-- Item 3 -->
                     <div>
-                        <div class="flex justify-between mb-1">
-                            <span class="text-base font-medium text-gray-700">난이도 '중' (유형 응용)</span>
-                            <span class="text-sm font-medium text-gray-700">5/6 (83%)</span>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-sm font-medium text-gray-300">명제 (7문항)</span>
+                            <span class="text-sm font-bold text-purple-400">32%</span>
                         </div>
-                        <div class="w-full bg-gray-200 rounded-full h-2.5">
-                            <div class="bg-green-500 h-2.5 rounded-full" style="width: 83%"></div>
-                        </div>
-                    </div>
-                    <!-- 난이도 중상 -->
-                    <div>
-                        <div class="flex justify-between mb-1">
-                            <span class="text-base font-medium text-gray-700">난이도 '중상' (모의고사 연계)</span>
-                            <span class="text-sm font-medium text-gray-700">0/1 (0%)</span>
-                        </div>
-                        <div class="w-full bg-gray-200 rounded-full h-2.5">
-                            <div class="bg-red-500 h-2.5 rounded-full" style="width: 0%"></div>
-                        </div>
-                    </div>
-                    <!-- 난이도 상 -->
-                    <div>
-                        <div class="flex justify-between mb-1">
-                            <span class="text-base font-medium text-gray-700">난이도 '상' (모의고사 심화)</span>
-                            <span class="text-sm font-medium text-gray-700">0/1 (0%)</span>
-                        </div>
-                        <div class="w-full bg-gray-200 rounded-full h-2.5">
-                            <div class="bg-red-500 h-2.5 rounded-full" style="width: 0%"></div>
+                        <div class="w-full bg-[#333] rounded-full h-2">
+                            <div class="bg-purple-500 h-2 rounded-full shadow-[0_0_10px_rgba(168,85,247,0.3)]" style="width: 32%"></div>
                         </div>
                     </div>
                 </div>
             </section>
 
             <!-- Detailed Feedback -->
-            <section>
-                <h2>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-3 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" /></svg>
-                    문항별 상세 피드백
+            <section class="animate-fade-in-up" style="animation-delay: 0.3s;">
+                <h2 class="text-lg font-bold text-white mb-4 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                    오답 문항 정밀 분석
                 </h2>
 
-                <div class="feedback-item border-l-orange-500">
-                    <h3><strong>[객관식 8번]</strong> 직선의 방정식 - 직선이 지나는 사분면 <span class="tag tag-orange">실수</span></h3>
-                    <p class="mb-3"><span class="tag tag-analysis">분석</span> 직선의 개형을 파악하는 과정에서 부호를 잘못 판단하여 정답을 놓쳤습니다.</p>
-                    <p class="mb-3"><span class="tag tag-comment">코멘트</span> 개념은 정확히 알고 있었지만 작은 부호 실수가 다른 결과로 이어져 아쉽습니다. 하지만 이런 실수는 조금만 더 꼼꼼히 확인하는 습관을 들이면 충분히 잡을 수 있습니다.</p>
-                    <p><span class="tag tag-solution">솔루션</span> 앞으로 그래프 개형을 그리는 문제를 풀 때, 기울기와 y절편의 부호를 명시적으로 쓰고 시작하는 연습을 통해 실수를 원천적으로 방지하겠습니다.</p>
-                </div>
+                <div class="space-y-4">
+                    <!-- Graph Interpretation Issues -->
+                    <div class="card border-l-4 border-l-orange-500 hover:border-orange-400 transition-colors">
+                        <div class="flex justify-between items-start">
+                            <h3 class="font-bold text-white text-lg">11, 12, 14번. 그래프 해석</h3>
+                            <span class="text-[10px] bg-orange-500/20 text-orange-400 px-2 py-1 rounded border border-orange-500/30">시도 부족</span>
+                        </div>
+                        <p class="text-sm text-gray-400 mt-2 leading-relaxed">
+                            그래프를 그려서 구간을 나누거나 개형을 추론해야 하는 문제들입니다. <span class="text-orange-200 font-medium">직접 그래프를 그리는 시도</span>조차 하지 못한 점이 가장 아쉽습니다.
+                        </p>
+                    </div>
 
-                <div class="feedback-item">
-                    <h3><strong>[객관식 12번]</strong> 도형의 이동 - 원의 대칭이동</h3>
-                    <p class="mb-3"><span class="tag tag-analysis">분석</span> 이전에 학습했던 심화 유형이지만, 시험 상황에서 배운 내용을 떠올려 적용하는 데 어려움을 겪었습니다.</p>
-                    <p class="mb-3"><span class="tag tag-comment">코멘트</span> '아는 문제인데 틀렸다'는 느낌이 들어 더 아쉬울 것 같습니다. 개념을 아는 것과 시험에서 능숙하게 꺼내 쓰는 것은 다른 차원의 훈련이 필요합니다.</p>
-                    <p><span class="tag tag-solution">솔루션</span> 앞으로는 심화 유형을 학습할 때, 한 번 풀고 넘어가는 것이 아니라 유사 변형 문제를 반복적으로 풀며 문제 해결 패턴을 완전히 몸에 익히는 훈련을 병행하겠습니다.</p>
-                </div>
-                
-                <div class="feedback-item border-l-red-500">
-                    <h3><strong>[객관식 15번 & 서술형 7번]</strong> 고난도 문항 <span class="tag tag-red">고난도/도전</span></h3>
-                    <p class="mb-3"><span class="tag tag-analysis">분석</span> 두 문항 모두 최상위권 변별을 위한 모의고사 기출 유형으로, 문제 해결을 위한 핵심 아이디어를 떠올리지 못해 접근에 어려움을 겪었습니다.</p>
-                    <p class="mb-3"><span class="tag tag-comment">코멘트</span> 시도해 봤다는 것 자체에 큰 의미가 있습니다. 이제는 이런 고난도 문제를 마주하고 해결하기 위해 고민할 실력이 되었다는 뜻입니다. 이 문항들이 시현 학생의 다음 성장 목표가 될 것입니다.</p>
-                    <p><span class="tag tag-solution">솔루션</span> 기말고사 대비부터는 고난도 모의고사 기출문제를 체계적으로 분석하고, 문제의 숨은 조건과 해결 전략을 찾아내는 훈련을 시작하여 심화 문제 해결 능력을 본격적으로 강화하겠습니다.</p>
-                </div>
+                    <!-- Composite/Inverse Function Issues -->
+                    <div class="card border-l-4 border-l-red-500 hover:border-red-400 transition-colors">
+                        <div class="flex justify-between items-start">
+                            <h3 class="font-bold text-white text-lg">서답형 4, 서술형 7번</h3>
+                            <span class="text-[10px] bg-red-500/20 text-red-400 px-2 py-1 rounded border border-red-500/30">개념 부족</span>
+                        </div>
+                        <p class="text-sm text-gray-400 mt-2 leading-relaxed">
+                            두 문제 모두 <span class="text-red-200 font-medium">합성함수</span>에 대한 개념 이해 부족이 원인입니다. 역함수는 알지만 합성과 섞였을 때 해결하지 못하고 있습니다.
+                        </p>
+                    </div>
 
+                    <!-- Item 15 -->
+                    <div class="card border-l-4 border-l-yellow-500 hover:border-yellow-400 transition-colors">
+                        <div class="flex justify-between items-start">
+                            <h3 class="font-bold text-white text-lg">15번. 무리함수 그래프</h3>
+                            <span class="text-[10px] bg-yellow-500/20 text-yellow-400 px-2 py-1 rounded border border-yellow-500/30">운</span>
+                        </div>
+                        <p class="text-sm text-gray-400 mt-2 leading-relaxed">
+                            정답은 맞혔으나 풀이 과정이 불분명합니다. <span class="text-yellow-200 font-medium">찍어서 맞은 것</span>으로 보이며, 반드시 다시 풀어봐야 할 문제입니다.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Total Review -->
+            <section class="animate-fade-in-up" style="animation-delay: 0.4s;">
+                <h2 class="text-lg font-bold text-white mb-4 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    총평 및 겨울방학 솔루션
+                </h2>
+                <div class="bg-gradient-to-br from-[#1E1E1E] to-[#252525] border border-blue-500/30 rounded-3xl p-6 shadow-[0_0_20px_rgba(59,130,246,0.1)] relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-40 h-40 bg-blue-500/10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
+                    
+                    <p class="mb-4 text-gray-300 text-sm leading-relaxed relative z-10">
+                        현재 시현이는 <span class="text-white font-bold underline decoration-blue-500 decoration-2 underline-offset-4">합성함수에 대한 개념 이해</span>가 부족하고, 그래프 해석이 필요한 <span class="text-emerald-400 font-bold">'중' 난이도 문제</span>에서 오답이 많습니다.
+                    </p>
+                    
+                    <div class="mt-6 bg-[#121212] rounded-xl p-5 border border-[#333]">
+                        <h3 class="text-blue-400 font-bold mb-3 flex items-center text-sm">
+                            <span class="mr-2">❄️</span> 한호빈 선생님의 처방
+                        </h3>
+                        <ul class="space-y-2 text-sm text-gray-400">
+                            <li class="flex items-start">
+                                <span class="text-blue-500 mr-2 mt-0.5">✓</span>
+                                <span>최고난도 도전보다는 <strong>'중' 난이도 유형을 완벽하게 이해</strong>하는 훈련 우선</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-blue-500 mr-2 mt-0.5">✓</span>
+                                <span>손으로 직접 <strong>그래프를 그리고 구간을 나누는 연습</strong> 필수</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-blue-500 mr-2 mt-0.5">✓</span>
+                                <span><strong>합성함수 단원</strong> 집중 클리닉을 통해 개념 구멍 메우기</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-blue-500 mr-2 mt-0.5">✓</span>
+                                <span>단순 풀이를 넘어 <strong>틀린 이유를 스스로 분석하는 능력</strong>을 기르는 오답 관리</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <p class="mt-6 text-center font-bold text-white text-sm leading-relaxed">
+                        기본기가 흔들리면 고난도는 무의미합니다.<br>
+                        이번 겨울, <span class="gradient-text font-black">'오답 학습능력'</span>을<br>확실히 성장시키겠습니다.
+                    </p>
+                </div>
             </section>
         </main>
 
         <!-- Footer -->
-        <footer class="text-center p-6 bg-gray-50 text-gray-500 text-sm">
-            <p>&copy; 2025 학생 성장 지원팀. All Rights Reserved.</p>
+        <footer class="text-center p-8 text-gray-600 text-xs border-t border-[#222] bg-[#0f0f0f]">
+            <p class="font-bold text-gray-500 mb-1">한호빈 수학</p>
+            <p>학생의 빛나는 성장을 응원합니다.</p>
         </footer>
     </div>
 </body>
