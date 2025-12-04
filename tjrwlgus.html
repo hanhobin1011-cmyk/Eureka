@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>석지현 학생 기말고사 분석 리포트</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans KR"', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'pulse-border': 'borderPulse 2s infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        borderPulse: {
+                            '0%': { borderColor: 'rgba(52, 211, 153, 0.5)' },
+                            '50%': { borderColor: 'rgba(59, 130, 246, 0.8)' },
+                            '100%': { borderColor: 'rgba(52, 211, 153, 0.5)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #121212;
+            color: #E0E0E0;
+            word-break: keep-all;
+        }
+        .mobile-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #121212;
+            min-height: 100vh;
+            border-left: 1px solid #222;
+            border-right: 1px solid #222;
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #34d399, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .card {
+            background-color: #1E1E1E;
+            border: 1px solid #333;
+            border-radius: 1rem;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+        }
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.6rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-blue-500 selection:text-white">
+    <div class="mobile-container">
+        <!-- Header -->
+        <header class="pt-10 pb-8 px-6 text-center animate-fade-in-up">
+            <div class="inline-block bg-[#1E1E1E] border border-[#333] px-3 py-1 rounded-full text-xs font-medium text-emerald-400 mb-3">
+                2025 백석고 1학년 2학기 기말고사
+            </div>
+            <h1 class="text-2xl font-black mb-1 text-white">
+                한호빈 수학<br>
+                <span class="gradient-text">Feedback Report</span>
+            </h1>
+            
+            <div class="mt-6 bg-[#1E1E1E] border border-[#333] rounded-2xl p-6 shadow-2xl relative overflow-hidden group">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-blue-600/10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
+                <p class="text-gray-400 text-sm font-medium">석지현 학생 가채점 결과</p>
+                <p class="text-5xl font-black mt-2 text-white tracking-tight">84.2<span class="text-2xl text-gray-500 ml-1">점</span></p>
+            </div>
+        </header>
+
+        <main class="px-5 pb-12 space-y-10">
+            <!-- Exam Statistics (Donut Chart) -->
+            <section class="animate-fade-in-up" style="animation-delay: 0.1s;">
+                <h2 class="text-lg font-bold text-white mb-4 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/><path stroke-linecap="round" stroke-linejoin="round" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"/></svg>
+                    이번 시험 난이도 분포
+                </h2>
+                <div class="bg-[#1E1E1E] rounded-2xl p-6 border border-[#333] shadow-lg flex flex-col items-center relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 to-blue-500"></div>
+                    
+                    <!-- SVG Donut Chart -->
+                    <div class="relative w-48 h-48 mb-6">
+                        <svg viewBox="0 0 100 100" class="w-full h-full transform -rotate-90">
+                            <!-- Low (Green: #34d399) 36% -->
+                            <circle cx="50" cy="50" r="40" fill="transparent" stroke="#34d399" stroke-width="12" stroke-dasharray="251.2" stroke-dashoffset="160.7" class="opacity-80" />
+                            <!-- Med-Low (Blue: #3b82f6) 27% -->
+                            <circle cx="50" cy="50" r="40" fill="transparent" stroke="#3b82f6" stroke-width="12" stroke-dasharray="251.2" stroke-dashoffset="183.3" transform="rotate(129.6 50 50)" class="opacity-80" />
+                            <!-- Med (Yellow: #fbbf24) 23% -->
+                            <circle cx="50" cy="50" r="40" fill="transparent" stroke="#fbbf24" stroke-width="12" stroke-dasharray="251.2" stroke-dashoffset="193.4" transform="rotate(226.8 50 50)" class="opacity-80" />
+                            <!-- High (Red: #ef4444) 14% -->
+                            <circle cx="50" cy="50" r="40" fill="transparent" stroke="#ef4444" stroke-width="12" stroke-dasharray="251.2" stroke-dashoffset="216" transform="rotate(309.6 50 50)" />
+                        </svg>
+                        <div class="absolute inset-0 flex flex-col justify-center items-center">
+                            <span class="text-xs text-gray-400">변별력 문항</span>
+                            <span class="text-2xl font-black text-white">14%</span>
+                            <span class="text-[10px] text-gray-500">(3문항)</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Legend -->
+                    <div class="grid grid-cols-2 gap-x-8 gap-y-3 text-sm w-full px-2">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center"><span class="w-2.5 h-2.5 rounded-full bg-[#34d399] mr-2 shadow-[0_0_8px_rgba(52,211,153,0.5)]"></span><span class="text-gray-300">하</span></div>
+                            <span class="font-bold text-white">8문항</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center"><span class="w-2.5 h-2.5 rounded-full bg-[#3b82f6] mr-2 shadow-[0_0_8px_rgba(59,130,246,0.5)]"></span><span class="text-gray-300">중하</span></div>
+                            <span class="font-bold text-white">6문항</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center"><span class="w-2.5 h-2.5 rounded-full bg-[#fbbf24] mr-2 shadow-[0_0_8px_rgba(251,191,36,0.5)]"></span><span class="text-gray-300">중</span></div>
+                            <span class="font-bold text-white">5문항</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center"><span class="w-2.5 h-2.5 rounded-full bg-[#ef4444] mr-2 shadow-[0_0_8px_rgba(239,68,68,0.5)]"></span><span class="text-gray-300">상</span></div>
+                            <span class="font-bold text-white">3문항</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Unit Distribution (Bar Chart) -->
+            <section class="animate-fade-in-up" style="animation-delay: 0.2s;">
+                <h2 class="text-lg font-bold text-white mb-4 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                    단원별 출제 분포
+                </h2>
+                <div class="bg-[#1E1E1E] rounded-2xl p-6 border border-[#333] shadow-lg space-y-5">
+                    <!-- Item 1 -->
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-sm font-medium text-gray-300">함수 (8문항)</span>
+                            <span class="text-sm font-bold text-blue-400">36%</span>
+                        </div>
+                        <div class="w-full bg-[#333] rounded-full h-2">
+                            <div class="bg-blue-500 h-2 rounded-full shadow-[0_0_10px_rgba(59,130,246,0.3)]" style="width: 36%"></div>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-sm font-medium text-gray-300">유리·무리함수 (7문항)</span>
+                            <span class="text-sm font-bold text-emerald-400">32%</span>
+                        </div>
+                        <div class="w-full bg-[#333] rounded-full h-2">
+                            <div class="bg-emerald-500 h-2 rounded-full shadow-[0_0_10px_rgba(16,185,129,0.3)]" style="width: 32%"></div>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-sm font-medium text-gray-300">명제 (7문항)</span>
+                            <span class="text-sm font-bold text-purple-400">32%</span>
+                        </div>
+                        <div class="w-full bg-[#333] rounded-full h-2">
+                            <div class="bg-purple-500 h-2 rounded-full shadow-[0_0_10px_rgba(168,85,247,0.3)]" style="width: 32%"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Detailed Feedback -->
+            <section class="animate-fade-in-up" style="animation-delay: 0.3s;">
+                <h2 class="text-lg font-bold text-white mb-4 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                    오답 문항 정밀 분석
+                </h2>
+
+                <div class="space-y-4">
+                    <!-- Graph Issues -->
+                    <div class="card border-l-4 border-l-orange-500 hover:border-orange-400 transition-colors">
+                        <div class="flex justify-between items-start">
+                            <h3 class="font-bold text-white text-lg">14, 15번. 그래프 활용</h3>
+                            <span class="text-[10px] bg-orange-500/20 text-orange-400 px-2 py-1 rounded border border-orange-500/30">실마리 탐색 실패</span>
+                        </div>
+                        <p class="text-sm text-gray-400 mt-2 leading-relaxed">
+                            두 문항 모두 적극적으로 시도했으나, 결정적인 <span class="text-orange-200 font-medium">풀이의 실마리(Key Point)</span>를 찾지 못했습니다. 이는 고난도 유형에 대한 경험 부족에서 오는 현상입니다.
+                        </p>
+                    </div>
+
+                    <!-- Time Management Issues -->
+                    <div class="card border-l-4 border-l-red-500 hover:border-red-400 transition-colors">
+                        <div class="flex justify-between items-start">
+                            <h3 class="font-bold text-white text-lg">서술형 7번. 합성함수</h3>
+                            <span class="text-[10px] bg-red-500/20 text-red-400 px-2 py-1 rounded border border-red-500/30">시간 부족</span>
+                        </div>
+                        <p class="text-sm text-gray-400 mt-2 leading-relaxed">
+                            충분히 해결 가능한 문제였으나, <span class="text-red-200 font-medium">시간 부족</span>으로 인해 끝까지 완성하지 못했습니다. 앞선 문제들에서 시간을 조금 더 단축했더라면 맞출 수 있었을 문제입니다.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Total Review -->
+            <section class="animate-fade-in-up" style="animation-delay: 0.4s;">
+                <h2 class="text-lg font-bold text-white mb-4 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    총평 및 겨울방학 솔루션
+                </h2>
+                <div class="bg-gradient-to-br from-[#1E1E1E] to-[#252525] border border-blue-500/30 rounded-3xl p-6 shadow-[0_0_20px_rgba(59,130,246,0.1)] relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-40 h-40 bg-blue-500/10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
+                    
+                    <p class="mb-4 text-gray-300 text-sm leading-relaxed relative z-10">
+                        지현 학생은 <span class="text-emerald-400 font-bold">1등급이 확실시되는 훌륭한 성과</span>를 거두었습니다. 평소보다 어려웠던 이번 시험에서 킬러 문항을 제외한 모든 문제를 맞춰낸 것은 탄탄한 기본 실력을 증명합니다.
+                    </p>
+                    
+                    <div class="mt-6 bg-[#121212] rounded-xl p-5 border border-[#333]">
+                        <h3 class="text-blue-400 font-bold mb-3 flex items-center text-sm">
+                            <span class="mr-2">❄️</span> 한호빈 선생님의 처방
+                        </h3>
+                        <ul class="space-y-2 text-sm text-gray-400">
+                            <li class="flex items-start">
+                                <span class="text-blue-500 mr-2 mt-0.5">✓</span>
+                                <span>킬러 문항 정복을 위한 <strong>고난도 사고력 문제</strong> 집중 훈련</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-blue-500 mr-2 mt-0.5">✓</span>
+                                <span>실전 모의고사를 통한 <strong>타임 어택(시간 관리)</strong> 연습 강화</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-blue-500 mr-2 mt-0.5">✓</span>
+                                <span>풀이의 실마리를 빠르게 찾아내는 <strong>직관력과 응용력</strong> 배양</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <p class="mt-6 text-center font-bold text-white text-sm leading-relaxed">
+                        이제 목표는 <span class="text-emerald-400">'내신 1등급의 안정화'</span>와<br>
+                        <span class="gradient-text font-black">'모의고사 1등급까지 도약하기'</span>입니다.<br>
+                        지현이가 더 높은 차원으로 비상하도록 이끌겠습니다.
+                    </p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="text-center p-8 text-gray-600 text-xs border-t border-[#222] bg-[#0f0f0f]">
+            <p class="font-bold text-gray-500 mb-1">한호빈 수학</p>
+            <p>학생의 빛나는 성장을 응원합니다.</p>
+        </footer>
+    </div>
+</body>
+</html>
