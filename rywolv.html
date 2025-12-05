@@ -10,10 +10,26 @@
             --bg-body: #0f172a;       /* Very Dark Slate */
             --bg-card: #1e293b;       /* Dark Slate */
             --text-main: #f1f5f9;     /* White/Grey */
-            --text-muted: #64748b;    /* Muted Slate */
+            --text-muted: #94a3b8;    /* Lighter Slate */
             --accent-gradient: linear-gradient(90deg, #3b82f6, #8b5cf6); /* Blue to Purple */
             --grid-line: #334155;
             --highlight: #60a5fa;
+            
+            /* Tag Colors */
+            --tag-type-bg: rgba(59, 130, 246, 0.15);
+            --tag-type-text: #93c5fd;
+            --tag-feat-bg: rgba(16, 185, 129, 0.15);
+            --tag-feat-text: #6ee7b7;
+            --tag-vol-bg: rgba(148, 163, 184, 0.15);
+            --tag-vol-text: #cbd5e1;
+            --tag-hard-bg: rgba(236, 72, 153, 0.15);
+            --tag-hard-text: #f9a8d4;
+
+            /* Filter Button Colors */
+            --btn-bg: #334155;
+            --btn-text: #cbd5e1;
+            --btn-active-bg: #3b82f6;
+            --btn-active-text: #ffffff;
         }
 
         * {
@@ -36,7 +52,7 @@
 
         .container {
             width: 100%;
-            max-width: 500px; /* Mobile Optimal Width */
+            max-width: 500px;
             background-color: var(--bg-card);
             border-radius: 20px;
             padding: 24px;
@@ -47,7 +63,7 @@
         /* Header Section */
         header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         h1 {
@@ -65,12 +81,48 @@
             color: var(--text-muted);
         }
 
+        /* Filter Section */
+        .filter-container {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 12px;
+            margin-bottom: 12px;
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        .filter-container::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+        }
+
+        .filter-btn {
+            background-color: var(--btn-bg);
+            color: var(--btn-text);
+            border: none;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+
+        .filter-btn.active {
+            background-color: var(--btn-active-bg);
+            color: var(--btn-active-text);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+        }
+
+        .filter-btn:hover:not(.active) {
+            background-color: #475569;
+        }
+
         /* Chart Layout */
         .chart-wrapper {
             position: relative;
         }
 
-        /* Top Labels (1, 2, 3...) */
         .grid-header {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
@@ -81,13 +133,12 @@
             color: var(--text-muted);
         }
 
-        /* Chart Body */
         .chart-body {
             position: relative;
-            padding-top: 10px; /* Space for aesthetic */
+            padding-top: 10px;
+            min-height: 200px; /* Keep layout stable when empty */
         }
 
-        /* Vertical Grid Lines */
         .grid-lines {
             position: absolute;
             top: 0;
@@ -110,9 +161,22 @@
         .book-item {
             position: relative;
             z-index: 1;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 1;
+            transform: translateY(0);
+            max-height: 200px; /* Arbitrary large height for transition */
         }
-        .book-item:last-child { margin-bottom: 0; }
+        
+        /* Hidden State for Filtering */
+        .book-item.hidden {
+            opacity: 0;
+            transform: translateY(10px);
+            margin-bottom: 0;
+            max-height: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
 
         .book-meta {
             display: flex;
@@ -123,8 +187,8 @@
         }
 
         .book-title {
-            font-size: 0.95rem;
-            font-weight: 600;
+            font-size: 1rem;
+            font-weight: 700;
             color: var(--text-main);
         }
 
@@ -137,31 +201,48 @@
             border-radius: 4px;
         }
 
-        /* Bar Track & Fill */
+        .book-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 8px;
+            padding: 0 2px;
+        }
+
+        .tag {
+            font-size: 0.65rem;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-weight: 500;
+            letter-spacing: -0.2px;
+        }
+
+        .tag.type { background: var(--tag-type-bg); color: var(--tag-type-text); }
+        .tag.feat { background: var(--tag-feat-bg); color: var(--tag-feat-text); }
+        .tag.vol { background: var(--tag-vol-bg); color: var(--tag-vol-text); }
+        .tag.hard { background: var(--tag-hard-bg); color: var(--tag-hard-text); }
+
         .bar-track {
-            height: 10px;
+            height: 8px;
             background: rgba(255, 255, 255, 0.05);
-            border-radius: 5px;
+            border-radius: 4px;
             overflow: hidden;
             display: grid;
-            grid-template-columns: repeat(6, 1fr); /* 6 equal sections */
+            grid-template-columns: repeat(6, 1fr);
         }
 
         .bar-fill {
             background: var(--accent-gradient);
-            border-radius: 5px;
+            border-radius: 4px;
             height: 100%;
             position: relative;
-            box-shadow: 0 0 12px rgba(139, 92, 246, 0.4);
-            
-            /* Animation */
+            box-shadow: 0 0 12px rgba(139, 92, 246, 0.3);
             width: 0%; 
             animation: growBar 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
             opacity: 0;
         }
 
-        /* Grid Positioning (Start / End+1) */
-        /* Columns correspond to Difficulty 1 to 6 */
+        /* Grid Positioning */
         .range-1-3 { grid-column: 1 / 4; animation-delay: 0.1s; }
         .range-2-3 { grid-column: 2 / 4; animation-delay: 0.2s; }
         .range-2-4 { grid-column: 2 / 5; animation-delay: 0.3s; }
@@ -174,7 +255,6 @@
             100% { width: 100%; opacity: 1; }
         }
 
-        /* Bottom Legend */
         .legend {
             margin-top: 30px;
             padding-top: 20px;
@@ -201,108 +281,136 @@
             color: var(--text-muted);
         }
 
+        /* Empty state message */
+        .no-result {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            display: none;
+        }
+        .no-result.show { display: block; }
+
     </style>
 </head>
 <body>
 
     <div class="container">
         <header>
-            <h1>수학 교재 난이도</h1>
+            <h1>수학 교재 난이도 & 특징</h1>
             <p class="subtitle">고등 과정 주요 교재 분석</p>
         </header>
 
+        <!-- Filter Buttons -->
+        <div class="filter-container">
+            <button class="filter-btn active" onclick="filterBooks('all')">전체</button>
+            <button class="filter-btn" onclick="filterBooks('심화')">심화 유형서</button>
+            <button class="filter-btn" onclick="filterBooks('대표')">대표 유형서</button>
+            <button class="filter-btn" onclick="filterBooks('많음')">문제 수 많음</button>
+            <button class="filter-btn" onclick="filterBooks('적음')">문제 수 적음</button>
+        </div>
+
         <div class="chart-wrapper">
-            <!-- Header Grid Numbers -->
             <div class="grid-header">
                 <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span>
             </div>
 
             <div class="chart-body">
-                <!-- Background Dashed Lines -->
                 <div class="grid-lines">
-                    <div class="line"></div>
-                    <div class="line"></div>
-                    <div class="line"></div>
-                    <div class="line"></div>
-                    <div class="line"></div>
-                    <div class="line"></div>
+                    <div class="line"></div><div class="line"></div><div class="line"></div>
+                    <div class="line"></div><div class="line"></div><div class="line"></div>
                 </div>
 
-                <!-- Book: 라이트 쎈 1~3 -->
-                <div class="book-item">
+                <!-- Books with data-category attributes for filtering -->
+                
+                <div class="book-item" data-category="기초 보통">
                     <div class="book-meta">
                         <span class="book-title">라이트 쎈</span>
                         <span class="book-level">Lv 1~3</span>
                     </div>
-                    <div class="bar-track">
-                        <div class="bar-fill range-1-3"></div>
+                    <div class="book-tags">
+                        <span class="tag type">기초 유형서</span>
+                        <span class="tag vol">문제 수 보통</span>
                     </div>
+                    <div class="bar-track"><div class="bar-fill range-1-3"></div></div>
                 </div>
 
-                <!-- Book: 쎈B 2~3 -->
-                <div class="book-item">
+                <div class="book-item" data-category="유형 보통">
                     <div class="book-meta">
                         <span class="book-title">쎈B</span>
                         <span class="book-level">Lv 2~3</span>
                     </div>
-                    <div class="bar-track">
-                        <div class="bar-fill range-2-3"></div>
+                    <div class="book-tags">
+                        <span class="tag type">유형서 (B단계)</span>
+                        <span class="tag vol">문제 수 보통</span>
                     </div>
+                    <div class="bar-track"><div class="bar-fill range-2-3"></div></div>
                 </div>
 
-                <!-- Book: RPM 2~3 -->
-                <div class="book-item">
+                <div class="book-item" data-category="대표 보통">
                     <div class="book-meta">
                         <span class="book-title">RPM</span>
                         <span class="book-level">Lv 2~3</span>
                     </div>
-                    <div class="bar-track">
-                        <div class="bar-fill range-2-3"></div>
+                    <div class="book-tags">
+                        <span class="tag type">대표 유형서</span>
+                        <span class="tag vol">문제 수 보통</span>
                     </div>
+                    <div class="bar-track"><div class="bar-fill range-2-3"></div></div>
                 </div>
 
-                <!-- Book: 쎈 2~4 -->
-                <div class="book-item">
+                <div class="book-item" data-category="대표 평균">
                     <div class="book-meta">
                         <span class="book-title">쎈</span>
                         <span class="book-level">Lv 2~4</span>
                     </div>
-                    <div class="bar-track">
-                        <div class="bar-fill range-2-4"></div>
+                    <div class="book-tags">
+                        <span class="tag type">대표 유형서</span>
+                        <span class="tag vol">문제 수 평균</span>
                     </div>
+                    <div class="bar-track"><div class="bar-fill range-2-4"></div></div>
                 </div>
                 
-                 <!-- Book: 일품 3~4 -->
-                 <div class="book-item">
+                 <div class="book-item" data-category="심화 적음">
                     <div class="book-meta">
                         <span class="book-title">일품</span>
                         <span class="book-level">Lv 3~4</span>
                     </div>
-                    <div class="bar-track">
-                        <div class="bar-fill range-3-4"></div>
+                    <div class="book-tags">
+                        <span class="tag hard">심화 유형서</span>
+                        <span class="tag feat">함정 유형 추천</span>
+                        <span class="tag vol">문제 수 적음</span>
                     </div>
+                    <div class="bar-track"><div class="bar-fill range-3-4"></div></div>
                 </div>
 
-                <!-- Book: 마플시너지 2~5 -->
-                <div class="book-item">
+                <div class="book-item" data-category="대표 많음">
                     <div class="book-meta">
                         <span class="book-title">마플시너지</span>
                         <span class="book-level">Lv 2~5</span>
                     </div>
-                    <div class="bar-track">
-                        <div class="bar-fill range-2-5"></div>
+                    <div class="book-tags">
+                        <span class="tag type">대표 유형서</span>
+                        <span class="tag vol">문제 수 많음</span>
                     </div>
+                    <div class="bar-track"><div class="bar-fill range-2-5"></div></div>
                 </div>
 
-                <!-- Book: 고쟁이 3~5 -->
-                <div class="book-item">
+                <div class="book-item" data-category="심화 적음">
                     <div class="book-meta">
                         <span class="book-title">고쟁이</span>
                         <span class="book-level">Lv 3~5</span>
                     </div>
-                    <div class="bar-track">
-                        <div class="bar-fill range-3-5"></div>
+                    <div class="book-tags">
+                        <span class="tag hard">심화 유형서</span>
+                        <span class="tag feat">깔끔한 고난도</span>
+                        <span class="tag vol">문제 수 적음</span>
                     </div>
+                    <div class="bar-track"><div class="bar-fill range-3-5"></div></div>
+                </div>
+                
+                <div class="no-result" id="noResult">
+                    해당 조건에 맞는 교재가 없습니다.
                 </div>
 
             </div>
@@ -317,5 +425,68 @@
             <div class="legend-item"><span class="legend-num">6</span><span class="legend-desc">최상</span></div>
         </div>
     </div>
+
+    <script>
+        function filterBooks(category) {
+            const books = document.querySelectorAll('.book-item');
+            const buttons = document.querySelectorAll('.filter-btn');
+            const noResult = document.getElementById('noResult');
+            let visibleCount = 0;
+
+            // Button Active State
+            buttons.forEach(btn => {
+                if(btn.innerText.includes(category) || (category === 'all' && btn.innerText === '전체')) {
+                    btn.classList.add('active');
+                } else if (category === '심화' && btn.innerText.includes('심화')) {
+                     btn.classList.add('active');
+                } else if (category === '대표' && btn.innerText.includes('대표')) {
+                     btn.classList.add('active');
+                } else if (category === '많음' && btn.innerText.includes('많음')) {
+                     btn.classList.add('active');
+                } else if (category === '적음' && btn.innerText.includes('적음')) {
+                     btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            // Filter Logic
+            books.forEach(book => {
+                const bookCats = book.getAttribute('data-category');
+                // Check if book matches category or if category is 'all'
+                if (category === 'all' || bookCats.includes(category)) {
+                    book.classList.remove('hidden');
+                    visibleCount++;
+                    
+                    // Re-trigger animation
+                    const bar = book.querySelector('.bar-fill');
+                    bar.style.animation = 'none';
+                    book.offsetHeight; /* trigger reflow */
+                    bar.style.animation = 'growBar 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards';
+                    
+                } else {
+                    book.classList.add('hidden');
+                }
+            });
+
+            // Show no result message if needed
+            if(visibleCount === 0) {
+                noResult.classList.add('show');
+            } else {
+                noResult.classList.remove('show');
+            }
+        }
+        
+        // Fix for active class logic specifically for the onclick handlers
+        // Rewriting logic to be simpler based on event target
+        const btnContainer = document.querySelector('.filter-container');
+        btnContainer.addEventListener('click', function(e) {
+            if(e.target.classList.contains('filter-btn')) {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+            }
+        });
+
+    </script>
 </body>
 </html>
