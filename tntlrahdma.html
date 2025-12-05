@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="ko" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>고등수학(하) 기말고사 핵심정리</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            900: '#0f172a', // Slate 900
+                            800: '#1e293b', // Slate 800
+                            700: '#334155', // Slate 700
+                        },
+                        accent: {
+                            400: '#2dd4bf', // Teal 400
+                            500: '#14b8a6', // Teal 500
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Noto Sans KR', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- MathJax for rendering equations -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    </script>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
+        }
+        .math-display {
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding: 0.5rem 0;
+        }
+        /* Hide scrollbar for clean look */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-dark-900/90 backdrop-blur-md border-b border-dark-700 shadow-lg">
+        <div class="max-w-3xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div>
+                <h1 class="text-xl font-bold text-accent-400">
+                    <i class="fa-solid fa-square-root-variable mr-2"></i>수학 개념노트
+                </h1>
+                <p class="text-xs text-slate-400">해원고 & 한호빈 수학 (기말 범위)</p>
+            </div>
+            <button id="searchBtn" class="text-slate-300 hover:text-white transition">
+                <i class="fa-solid fa-magnifying-glass text-lg"></i>
+            </button>
+        </div>
+        <!-- Search Bar (Hidden by default) -->
+        <div id="searchContainer" class="hidden bg-dark-800 p-4 border-b border-dark-700">
+            <input type="text" id="searchInput" placeholder="개념 검색 (예: 명제, 역함수...)" 
+                class="w-full bg-dark-900 text-white border border-dark-700 rounded-lg px-4 py-2 focus:outline-none focus:border-accent-500 transition">
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-3xl mx-auto w-full px-4 py-6 space-y-6">
+        
+        <!-- Welcome Card -->
+        <div class="bg-gradient-to-r from-slate-800 to-slate-900 rounded-2xl p-6 border border-dark-700 shadow-xl">
+            <h2 class="text-lg font-semibold text-white mb-2">👋 시험 대박 기원!</h2>
+            <p class="text-slate-400 text-sm leading-relaxed">
+                2학기 기말고사 범위인 <strong>명제부터 무리함수</strong>까지의 핵심 유형과 개념을 정리했습니다.<br>
+                탭을 눌러 상세 내용을 확인하세요.
+            </p>
+        </div>
+
+        <!-- Navigation / Filter -->
+        <div class="flex space-x-2 overflow-x-auto no-scrollbar pb-2" id="categoryNav">
+            <!-- Dynamically populated -->
+        </div>
+
+        <!-- Content Area -->
+        <div id="contentArea" class="space-y-4">
+            <!-- Content will be injected here via JS -->
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark-900 border-t border-dark-700 py-6 mt-auto">
+        <div class="max-w-3xl mx-auto px-4 text-center text-slate-500 text-xs">
+            <p>Based on Uploaded Material (해원고 & 한호빈 수학)</p>
+            <p class="mt-1">Developed for Students</p>
+        </div>
+    </footer>
+
+    <!-- Data & Logic -->
+    <script>
+        // Data Structure based on the PDF content
+        const studyData = [
+            {
+                id: "logic",
+                category: "명제",
+                icon: "fa-check-double",
+                items: [
+                    {
+                        title: "명제와 조건의 기초",
+                        content: `
+                            <ul class="list-disc list-inside space-y-2 text-slate-300 text-sm">
+                                <li><strong>명제:</strong> 참, 거짓을 명확히 판별할 수 있는 문장이나 식.</li>
+                                <li><strong>진리집합:</strong> 조건 $p$를 참이 되게 하는 모든 원소의 집합 ($P$).</li>
+                                <li><strong>조건의 부정:</strong> '~p' ($p$가 아니다). <br> $P^c$ (여집합)에 해당.</li>
+                                <li><strong>'또는' / '그리고'의 부정:</strong> 드모르간 법칙 활용. <br> $p \\text{ or } q$ 의 부정 $\\rightarrow \\sim p \\text{ and } \\sim q$</li>
+                            </ul>
+                        `
+                    },
+                    {
+                        title: "명제 $p \\to q$ 의 참/거짓",
+                        content: `
+                            <div class="bg-dark-900 p-3 rounded-lg mb-2 border border-dark-700">
+                                <span class="text-accent-400 font-bold">핵심:</span> $P \\subset Q$ 이면 참이다.
+                            </div>
+                            <p class="text-sm text-slate-300 mb-2">
+                                $P \\not\\subset Q$ 이면 거짓이다. (반례가 존재함)
+                            </p>
+                            <p class="text-sm text-slate-300">
+                                <strong>반례:</strong> $p$ 이지만 $q$ 가 아닌 원소. <br>
+                                집합으로는 $P - Q = P \\cap Q^c$ 의 원소.
+                            </p>
+                        `
+                    },
+                    {
+                        title: "역과 대우 & 삼단논법",
+                        content: `
+                            <table class="w-full text-sm text-left text-slate-300 mb-3">
+                                <tr class="border-b border-dark-700"><th class="py-2">명제</th><td class="py-2 text-right">$p \\to q$</td></tr>
+                                <tr class="border-b border-dark-700"><th class="py-2">역</th><td class="py-2 text-right">$q \\to p$</td></tr>
+                                <tr><th class="py-2 text-accent-400">대우</th><td class="py-2 text-right text-accent-400">$\\sim q \\to \\sim p$</td></tr>
+                            </table>
+                            <ul class="list-disc list-inside space-y-2 text-slate-300 text-sm">
+                                <li>명제와 그 <strong>대우</strong>의 참/거짓은 일치한다.</li>
+                                <li><strong>삼단논법:</strong> $p \\to q$가 참이고 $q \\to r$이 참이면, $p \\to r$도 참이다.</li>
+                            </ul>
+                        `
+                    },
+                    {
+                        title: "필요조건과 충분조건",
+                        content: `
+                            <div class="space-y-3 text-sm text-slate-300">
+                                <div class="flex items-center justify-between bg-dark-900 p-3 rounded border border-dark-700">
+                                    <span>$p \\Rightarrow q$ ($P \\subset Q$)</span>
+                                    <span class="text-accent-400 font-bold">p는 충분조건</span>
+                                </div>
+                                <div class="flex items-center justify-between bg-dark-900 p-3 rounded border border-dark-700">
+                                    <span>$q \\Rightarrow p$ ($Q \\subset P$)</span>
+                                    <span class="text-yellow-400 font-bold">p는 필요조건</span>
+                                </div>
+                                <div class="flex items-center justify-between bg-dark-900 p-3 rounded border border-dark-700">
+                                    <span>$p \\Leftrightarrow q$ ($P = Q$)</span>
+                                    <span class="text-green-400 font-bold">필요충분조건</span>
+                                </div>
+                                <p class="text-xs text-slate-400 mt-2 text-center">💡 팁: 화살표를 주면(주어) 충분, 받으면(피흘림) 필요</p>
+                            </div>
+                        `
+                    }
+                ]
+            },
+            {
+                id: "inequality",
+                category: "절대부등식",
+                icon: "fa-scale-balanced",
+                items: [
+                    {
+                        title: "산술평균과 기하평균",
+                        content: `
+                            <div class="bg-dark-900 p-4 rounded-lg border border-dark-700 text-center mb-3">
+                                <p class="text-slate-200 mb-2">$a > 0, b > 0$ 일 때,</p>
+                                <p class="text-xl text-accent-400 font-bold">$\\frac{a+b}{2} \\ge \\sqrt{ab}$</p>
+                                <p class="text-slate-400 text-xs mt-2">(단, 등호는 $a=b$ 일 때 성립)</p>
+                            </div>
+                            <ul class="list-disc list-inside space-y-1 text-slate-300 text-sm">
+                                <li>합이 일정하면 곱의 최댓값을 구할 때 사용</li>
+                                <li>곱이 일정하면 합의 최솟값을 구할 때 사용</li>
+                                <li>역수 꼴의 합의 최소 구할 때 자주 사용</li>
+                            </ul>
+                        `
+                    },
+                    {
+                        title: "코시-슈바르츠 부등식",
+                        content: `
+                            <div class="bg-dark-900 p-4 rounded-lg border border-dark-700 text-center">
+                                <p class="text-slate-200 text-sm mb-2">$a, b, x, y$ 가 실수일 때,</p>
+                                <p class="text-lg text-yellow-400 font-bold">$(a^2+b^2)(x^2+y^2) \\ge (ax+by)^2$</p>
+                                <p class="text-slate-400 text-xs mt-2">(단, 등호는 $a:b = x:y$ 일 때 성립)</p>
+                            </div>
+                        `
+                    }
+                ]
+            },
+            {
+                id: "function",
+                category: "함수",
+                icon: "fa-wave-square",
+                items: [
+                    {
+                        title: "함수의 뜻과 종류",
+                        content: `
+                            <ul class="list-disc list-inside space-y-2 text-slate-300 text-sm">
+                                <li><strong>함수:</strong> $X$의 각 원소에 $Y$의 원소가 오직 하나씩 대응.</li>
+                                <li><strong>일대일함수:</strong> $x_1 \\neq x_2 \\Rightarrow f(x_1) \\neq f(x_2)$</li>
+                                <li><strong>일대일대응:</strong> 일대일함수 + (공역 = 치역). <br> <span class="text-accent-400 text-xs">* 역함수 존재 조건임!</span></li>
+                                <li><strong>항등함수:</strong> $f(x) = x$</li>
+                                <li><strong>상수함수:</strong> $f(x) = c$ (하나로 몰빵)</li>
+                            </ul>
+                        `
+                    },
+                    {
+                        title: "합성함수와 역함수",
+                        content: `
+                            <div class="space-y-3 text-sm text-slate-300">
+                                <div>
+                                    <strong class="text-white">합성함수 성질:</strong>
+                                    <ul class="pl-4 mt-1 space-y-1 text-xs text-slate-400">
+                                        <li>교환법칙 성립 안 함 ($f \\circ g \\neq g \\circ f$)</li>
+                                        <li>결합법칙 성립 ($ (f \\circ g) \\circ h = f \\circ (g \\circ h) $)</li>
+                                    </ul>
+                                </div>
+                                <div class="border-t border-dark-700 pt-2">
+                                    <strong class="text-white">역함수 ($f^{-1}$) 성질:</strong>
+                                    <ul class="pl-4 mt-1 space-y-1">
+                                        <li>$y=f(x) \\Leftrightarrow x=f^{-1}(y)$</li>
+                                        <li>그래프는 $y=x$ 에 대하여 대칭</li>
+                                        <li>$(g \\circ f)^{-1} = f^{-1} \\circ g^{-1}$ (순서 바뀜 주의!)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        `
+                    }
+                ]
+            },
+            {
+                id: "rational",
+                category: "유리함수",
+                icon: "fa-chart-line",
+                items: [
+                    {
+                        title: "유리함수의 그래프 $y=\\frac{k}{x-p}+q$",
+                        content: `
+                            <div class="bg-dark-900 p-3 rounded-lg border border-dark-700 mb-3">
+                                <ul class="space-y-2 text-sm text-slate-300">
+                                    <li><span class="text-accent-400 font-bold">점근선:</span> $x=p, y=q$</li>
+                                    <li><span class="text-accent-400 font-bold">대칭점:</span> $(p, q)$</li>
+                                    <li><span class="text-accent-400 font-bold">대칭축:</span> 점 $(p,q)$를 지나고 기울기가 $\\pm 1$인 직선</li>
+                                </ul>
+                            </div>
+                            <p class="text-sm text-slate-300">
+                                $k > 0$ 이면 1, 3사분면 방향 <br>
+                                $k < 0$ 이면 2, 4사분면 방향
+                            </p>
+                        `
+                    },
+                    {
+                        title: "유리함수의 역함수 공식",
+                        content: `
+                            <p class="text-sm text-slate-300 mb-2">함수 $f(x) = \\frac{ax+b}{cx+d}$ 의 역함수는?</p>
+                            <div class="bg-dark-800 p-2 rounded text-center border border-dark-700">
+                                <span class="text-lg font-bold text-yellow-400">$f^{-1}(x) = \\frac{dx-b}{-cx+a}$</span>
+                            </div>
+                            <p class="text-xs text-slate-400 mt-2 text-center">
+                                $a$와 $d$의 위치를 바꾸고 부호도 바꾼다!
+                            </p>
+                        `
+                    }
+                ]
+            },
+            {
+                id: "irrational",
+                category: "무리함수",
+                icon: "fa-square-root-variable",
+                items: [
+                    {
+                        title: "무리함수의 그래프 개형",
+                        content: `
+                            <p class="text-sm text-slate-300 mb-3">
+                                $y = \\pm \\sqrt{ax}$ 꼴의 방향성 결정
+                            </p>
+                            <div class="grid grid-cols-2 gap-2 text-xs text-center">
+                                <div class="bg-dark-900 p-2 rounded border border-dark-700">
+                                    <strong class="text-accent-400">1사분면 방향</strong><br>
+                                    $y = \\sqrt{x}$ (+, +)
+                                </div>
+                                <div class="bg-dark-900 p-2 rounded border border-dark-700">
+                                    <strong class="text-accent-400">2사분면 방향</strong><br>
+                                    $y = \\sqrt{-x}$ (-, +)
+                                </div>
+                                <div class="bg-dark-900 p-2 rounded border border-dark-700">
+                                    <strong class="text-accent-400">3사분면 방향</strong><br>
+                                    $y = -\\sqrt{-x}$ (-, -)
+                                </div>
+                                <div class="bg-dark-900 p-2 rounded border border-dark-700">
+                                    <strong class="text-accent-400">4사분면 방향</strong><br>
+                                    $y = -\\sqrt{x}$ (+, -)
+                                </div>
+                            </div>
+                        `
+                    },
+                    {
+                        title: "무리함수 핵심 포인트",
+                        content: `
+                            <ul class="list-disc list-inside space-y-2 text-slate-300 text-sm">
+                                <li><strong>시작점:</strong> 근호 안이 0이 되는 $x$값과 뒤에 붙은 상수가 시작점 $(p, q)$가 됨.</li>
+                                <li><strong>정의역:</strong> 근호 안의 식 $\\ge 0$</li>
+                                <li><strong>역함수:</strong> 2차함수의 반쪽 ($x$범위 제한 필수)</li>
+                                <li><strong>직선과의 위치관계:</strong> 판별식 $D=0$(접할 때)과 시작점을 지날 때를 기준으로 판단.</li>
+                            </ul>
+                        `
+                    }
+                ]
+            }
+        ];
+
+        const contentArea = document.getElementById('contentArea');
+        const categoryNav = document.getElementById('categoryNav');
+        const searchInput = document.getElementById('searchInput');
+        const searchBtn = document.getElementById('searchBtn');
+        const searchContainer = document.getElementById('searchContainer');
+
+        // Initial Render
+        function renderCategories() {
+            let navHtml = '<button onclick="filterContent(\'all\')" class="whitespace-nowrap px-4 py-2 rounded-full bg-accent-500 text-white font-medium text-sm transition shadow-lg shadow-accent-500/20 ring-2 ring-accent-500 ring-offset-2 ring-offset-dark-900" id="btn-all">전체보기</button>';
+            
+            studyData.forEach(cat => {
+                navHtml += `<button onclick="filterContent('${cat.id}')" class="whitespace-nowrap px-4 py-2 rounded-full bg-dark-800 text-slate-400 border border-dark-700 hover:bg-dark-700 font-medium text-sm transition" id="btn-${cat.id}">${cat.category}</button>`;
+            });
+            categoryNav.innerHTML = navHtml;
+        }
+
+        function renderContent(filterId = 'all', searchTerm = '') {
+            contentArea.innerHTML = '';
+            
+            let filteredData = studyData;
+            
+            if (filterId !== 'all') {
+                filteredData = studyData.filter(cat => cat.id === filterId);
+            }
+
+            // Search Logic
+            if (searchTerm) {
+                const term = searchTerm.toLowerCase();
+                // Create a temporary filtered structure
+                const searchResults = [];
+                studyData.forEach(cat => {
+                    const matchingItems = cat.items.filter(item => 
+                        item.title.toLowerCase().includes(term) || 
+                        item.content.toLowerCase().includes(term)
+                    );
+                    if (matchingItems.length > 0) {
+                        searchResults.push({ ...cat, items: matchingItems });
+                    }
+                });
+                filteredData = searchResults;
+            }
+
+            if (filteredData.length === 0) {
+                contentArea.innerHTML = `
+                    <div class="text-center py-10 text-slate-500">
+                        <i class="fa-solid fa-ghost text-4xl mb-3"></i>
+                        <p>검색 결과가 없습니다.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            filteredData.forEach(cat => {
+                // Section Header
+                const sectionHtml = `
+                    <div class="mb-6 fade-in">
+                        <h3 class="flex items-center text-accent-400 font-bold text-lg mb-3 px-1 border-l-4 border-accent-500 pl-3">
+                            <i class="fa-solid ${cat.icon} mr-2"></i> ${cat.category}
+                        </h3>
+                        <div class="space-y-3">
+                            ${cat.items.map((item, index) => `
+                                <div class="bg-dark-800 rounded-xl overflow-hidden border border-dark-700 shadow-sm transition hover:border-slate-600">
+                                    <button class="w-full px-5 py-4 flex justify-between items-center text-left focus:outline-none" onclick="toggleAccordion(this)">
+                                        <span class="font-medium text-slate-100">${item.title}</span>
+                                        <i class="fa-solid fa-chevron-down text-slate-500 text-sm transition-transform duration-300"></i>
+                                    </button>
+                                    <div class="hidden bg-dark-800/50 border-t border-dark-700 px-5 py-4 text-slate-300 text-sm leading-relaxed">
+                                        ${item.content}
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+                contentArea.innerHTML += sectionHtml;
+            });
+
+            // Re-render MathJax
+            if (window.MathJax) {
+                window.MathJax.typesetPromise();
+            }
+        }
+
+        // Toggle Accordion Logic
+        function toggleAccordion(btn) {
+            const content = btn.nextElementSibling;
+            const icon = btn.querySelector('.fa-chevron-down');
+            
+            // Toggle current
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.classList.add('rotate-180');
+                content.classList.add('animate-slide-down');
+            } else {
+                content.classList.add('hidden');
+                icon.classList.remove('rotate-180');
+            }
+        }
+
+        // Filter Logic
+        function filterContent(id) {
+            // Reset buttons styles
+            const buttons = categoryNav.querySelectorAll('button');
+            buttons.forEach(btn => {
+                btn.className = "whitespace-nowrap px-4 py-2 rounded-full bg-dark-800 text-slate-400 border border-dark-700 hover:bg-dark-700 font-medium text-sm transition";
+            });
+
+            // Active button style
+            const activeBtn = document.getElementById(`btn-${id}`);
+            if (activeBtn) {
+                activeBtn.className = "whitespace-nowrap px-4 py-2 rounded-full bg-accent-500 text-white font-medium text-sm transition shadow-lg shadow-accent-500/20 ring-2 ring-accent-500 ring-offset-2 ring-offset-dark-900";
+            }
+
+            renderContent(id, searchInput.value);
+        }
+
+        // Search Toggle
+        searchBtn.addEventListener('click', () => {
+            searchContainer.classList.toggle('hidden');
+            if (!searchContainer.classList.contains('hidden')) {
+                searchInput.focus();
+            }
+        });
+
+        // Search Input Logic
+        searchInput.addEventListener('input', (e) => {
+            // Find currently active filter (simple approach: reset to all when searching)
+            filterContent('all');
+            renderContent('all', e.target.value);
+        });
+
+        // Initialize
+        renderCategories();
+        renderContent();
+
+    </script>
+
+    <!-- Custom Animations -->
+    <style>
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</body>
+</html>
