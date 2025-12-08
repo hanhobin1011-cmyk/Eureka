@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025 인천청라고 1학년 2학기 기말고사 분석 리포트</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans KR"', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    },
+                    colors: {
+                        dark: {
+                            bg: '#121212',
+                            card: '#1E1E1E',
+                            border: '#333333'
+                        }
+                    },
+                    screens: {
+                        'xs': '375px', 
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #121212;
+            color: #E0E0E0;
+            word-break: keep-all;
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #34d399, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.3);
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+        .bar-animate {
+            animation: growBar 1s ease-out forwards;
+            transform-origin: bottom;
+            transform: scaleY(0);
+        }
+        @keyframes growBar {
+            to { transform: scaleY(1); }
+        }
+        /* Custom scrollbar for tables */
+        .custom-scrollbar::-webkit-scrollbar {
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #2a2a2a;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #4b5563;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #6b7280;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-blue-500 selection:text-white">
+
+    <div class="container mx-auto max-w-4xl px-4 py-8 md:py-20">
+
+        <!-- 1. 헤더 섹션 -->
+        <header class="mb-12 md:mb-16 animate-fade-in-up text-center">
+            <div class="inline-block bg-[#1E1E1E] border border-[#333] px-3 py-1 md:px-4 md:py-1.5 rounded-full text-xs md:text-sm font-bold text-blue-400 mb-4 shadow-lg">
+                2025년 고1 2학기 기말고사
+            </div>
+            <h1 class="text-3xl md:text-5xl font-black mb-4 tracking-tight text-white leading-tight">
+                인천 청라고 <span class="gradient-text block md:inline">내신 분석</span>
+            </h1>
+            <p class="text-sm md:text-lg text-gray-400 font-medium leading-relaxed px-2">
+                분석: 한호빈 수학 연구소
+            </p>
+        </header>
+
+        <main>
+            <!-- 2. 기본 정보 및 총평 -->
+            <section class="mb-12 md:mb-16 grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+                <!-- 기본 정보 -->
+                <div class="md:col-span-1 bg-[#1E1E1E] p-6 rounded-3xl border border-[#333] shadow-lg h-full flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-lg font-bold text-emerald-400 mb-4 flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            시험 개요
+                        </h3>
+                        <ul class="space-y-4 text-sm text-gray-300">
+                            <li class="flex justify-between border-b border-[#333] pb-2">
+                                <span class="text-gray-500">시험일자</span>
+                                <span class="font-bold text-white">2025.12.03</span>
+                            </li>
+                            <li class="flex justify-between border-b border-[#333] pb-2">
+                                <span class="text-gray-500">시험범위</span>
+                                <span class="font-bold text-white">명제 ~ 무리함수</span>
+                            </li>
+                            <li class="flex justify-between border-b border-[#333] pb-2">
+                                <span class="text-gray-500">문항구성</span>
+                                <span class="font-bold text-white">객 16 / 서 6</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="pt-4 mt-2">
+                        <span class="block text-gray-500 mb-1 text-sm">난이도</span>
+                        <div class="w-full bg-[#333] rounded-full h-2.5">
+                            <div class="bg-red-500 h-2.5 rounded-full" style="width: 85%"></div>
+                        </div>
+                        <span class="text-xs text-red-400 font-bold mt-1 block text-right">상 (High)</span>
+                    </div>
+                </div>
+
+                <!-- 총평 -->
+                <div class="md:col-span-2 bg-[#1E1E1E] p-6 rounded-3xl border border-[#333] shadow-lg relative overflow-hidden h-full flex flex-col justify-between">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 pointer-events-none">
+                        <svg class="w-24 h-24 md:w-32 md:h-32 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"></path></svg>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-blue-400 mb-4 flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                            핵심 총평
+                        </h3>
+                        <p class="text-gray-300 leading-relaxed mb-4 text-sm md:text-base">
+                            이번 시험은 <span class="text-white font-bold">그래프의 기하학적 해석</span>과 <span class="text-white font-bold">논리적 추론</span> 능력을 극한까지 요구했습니다. 
+                            단순 계산 문제는 지양되었으며, 특히 후반부(객관식 15, 16번 / 서답형 6번) 킬러 문항들의 난이도가 매우 높아 상위권 변별력이 확실했습니다.
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3 mt-4">
+                        <div class="bg-[#2A2A2A] p-3 rounded-xl border border-[#444]">
+                            <span class="block text-xs text-gray-500 mb-1">변별력</span>
+                            <span class="text-emerald-400 font-bold text-sm md:text-base">최상 (5등급제 대응)</span>
+                        </div>
+                        <div class="bg-[#2A2A2A] p-3 rounded-xl border border-[#444]">
+                            <span class="block text-xs text-gray-500 mb-1">핵심 역량</span>
+                            <span class="text-blue-400 font-bold text-sm md:text-base">추론 및 해석 능력</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. 시각화 자료 -->
+            <section class="mb-12 md:mb-16">
+                <h2 class="text-2xl font-bold text-white mb-6 md:mb-8 border-l-4 border-blue-500 pl-4">시험 분석 데이터</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- 단원별 정답률 Chart -->
+                    <div class="bg-[#1E1E1E] p-5 md:p-6 rounded-2xl border border-[#333]">
+                        <h4 class="text-gray-400 text-sm font-bold mb-6 text-center">단원별 예상 정답률</h4>
+                        <div class="flex justify-around items-end h-52 md:h-60 space-x-2 md:space-x-4 px-2 pb-2 border-b border-[#333]">
+                            <div class="flex-1 max-w-[50px] flex flex-col items-center group relative h-full justify-end">
+                                <span class="absolute -top-6 text-xs text-blue-400 font-bold mb-1 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">85%</span>
+                                <div class="w-full bg-blue-600/80 rounded-t-lg hover:bg-blue-500 transition-all bar-animate relative" style="height: 85%;"></div>
+                                <span class="text-[10px] md:text-xs text-gray-500 mt-3 text-center whitespace-nowrap">집합/명제</span>
+                            </div>
+                            <div class="flex-1 max-w-[50px] flex flex-col items-center group relative h-full justify-end">
+                                <span class="absolute -top-6 text-xs text-emerald-400 font-bold mb-1 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">76%</span>
+                                <div class="w-full bg-emerald-600/80 rounded-t-lg hover:bg-emerald-500 transition-all bar-animate relative" style="height: 76%;"></div>
+                                <span class="text-[10px] md:text-xs text-gray-500 mt-3 text-center">함수</span>
+                            </div>
+                            <div class="flex-1 max-w-[50px] flex flex-col items-center group relative h-full justify-end">
+                                <span class="absolute -top-6 text-xs text-orange-400 font-bold mb-1 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">62%</span>
+                                <div class="w-full bg-orange-600/80 rounded-t-lg hover:bg-orange-500 transition-all bar-animate relative" style="height: 62%;"></div>
+                                <span class="text-[10px] md:text-xs text-gray-500 mt-3 text-center whitespace-nowrap">유리/무리</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 난이도 분포 Chart -->
+                    <div class="bg-[#1E1E1E] p-5 md:p-6 rounded-2xl border border-[#333]">
+                        <h4 class="text-gray-400 text-sm font-bold mb-6 text-center">난이도별 문항 분포</h4>
+                        <div class="flex items-end justify-center h-52 md:h-60 px-2 pb-2 border-b border-[#333]">
+                             <div class="w-full grid grid-cols-5 gap-2 h-full items-end">
+                                <div class="flex flex-col items-center h-full justify-end relative group w-full">
+                                    <span class="absolute -top-6 text-xs text-emerald-400 font-bold opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">4개</span>
+                                    <div class="w-full max-w-[40px] bg-emerald-500/30 rounded-t-sm bar-animate hover:bg-emerald-500/50 transition-colors" style="height: 20%;"></div>
+                                    <span class="text-[10px] text-gray-500 mt-2">하</span>
+                                </div>
+                                <div class="flex flex-col items-center h-full justify-end relative group w-full">
+                                    <span class="absolute -top-6 text-xs text-emerald-400 font-bold opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">2개</span>
+                                    <div class="w-full max-w-[40px] bg-emerald-500/60 rounded-t-sm bar-animate hover:bg-emerald-500/80 transition-colors" style="height: 10%;"></div>
+                                    <span class="text-[10px] text-gray-500 mt-2">중하</span>
+                                </div>
+                                <div class="flex flex-col items-center h-full justify-end relative group w-full">
+                                    <span class="absolute -top-6 text-xs text-yellow-400 font-bold opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">5개</span>
+                                    <div class="w-full max-w-[40px] bg-yellow-500/60 rounded-t-sm bar-animate hover:bg-yellow-500/80 transition-colors" style="height: 25%;"></div>
+                                    <span class="text-[10px] text-gray-500 mt-2">중</span>
+                                </div>
+                                <div class="flex flex-col items-center h-full justify-end relative group w-full">
+                                    <span class="absolute -top-6 text-xs text-orange-400 font-bold opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">3개</span>
+                                    <div class="w-full max-w-[40px] bg-orange-500/60 rounded-t-sm bar-animate hover:bg-orange-500/80 transition-colors" style="height: 15%;"></div>
+                                    <span class="text-[10px] text-gray-500 mt-2">중상</span>
+                                </div>
+                                <div class="flex flex-col items-center h-full justify-end relative group w-full">
+                                    <span class="absolute -top-6 text-xs text-red-400 font-bold opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">8개</span>
+                                    <div class="w-full max-w-[40px] bg-red-600 rounded-t-sm bar-animate hover:bg-red-500 transition-colors" style="height: 60%;"></div>
+                                    <span class="text-[10px] text-red-400 font-bold mt-2">상</span>
+                                </div>
+                             </div>
+                        </div>
+                        <p class="text-center text-[11px] md:text-xs text-gray-500 mt-4">* 고난도(상) 문항 비중이 압도적으로 높음</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. 문항별 세부 분석표 (추가된 섹션) -->
+            <section class="mb-12 md:mb-16">
+                <h2 class="text-2xl font-bold text-white mb-6 border-l-4 border-emerald-500 pl-4">문항별 세부 분석표</h2>
+                <div class="bg-[#1E1E1E] rounded-2xl border border-[#333] overflow-hidden">
+                    <div class="overflow-x-auto custom-scrollbar">
+                        <table class="w-full text-sm text-left whitespace-nowrap">
+                            <thead class="bg-[#2A2A2A] text-gray-300 font-bold">
+                                <tr>
+                                    <th class="px-4 py-3 text-center">번호</th>
+                                    <th class="px-4 py-3 text-center">유형</th>
+                                    <th class="px-4 py-3">핵심 개념 / 출제 의도</th>
+                                    <th class="px-4 py-3 text-center">난이도</th>
+                                    <th class="px-4 py-3 text-center">Bloom</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-[#333] text-gray-300">
+                                <tr class="hover:bg-white/5 transition-colors">
+                                    <td class="px-4 py-3 text-center text-gray-500">1</td>
+                                    <td class="px-4 py-3 text-center">객관식</td>
+                                    <td class="px-4 py-3">이차방정식 진리집합</td>
+                                    <td class="px-4 py-3 text-center"><span class="bg-emerald-900/50 text-emerald-400 px-2 py-1 rounded text-xs font-bold">하 (96%)</span></td>
+                                    <td class="px-4 py-3 text-center">기억</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors">
+                                    <td class="px-4 py-3 text-center text-gray-500">2</td>
+                                    <td class="px-4 py-3 text-center">객관식</td>
+                                    <td class="px-4 py-3">함수 f(x)의 치역</td>
+                                    <td class="px-4 py-3 text-center"><span class="bg-emerald-900/50 text-emerald-400 px-2 py-1 rounded text-xs font-bold">하 (95%)</span></td>
+                                    <td class="px-4 py-3 text-center">이해</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors">
+                                    <td class="px-4 py-3 text-center text-gray-500">3</td>
+                                    <td class="px-4 py-3 text-center">객관식</td>
+                                    <td class="px-4 py-3">무리함수 최솟값</td>
+                                    <td class="px-4 py-3 text-center"><span class="bg-emerald-900/50 text-emerald-400 px-2 py-1 rounded text-xs font-bold">하 (92%)</span></td>
+                                    <td class="px-4 py-3 text-center">이해</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors">
+                                    <td class="px-4 py-3 text-center text-gray-500">4</td>
+                                    <td class="px-4 py-3 text-center">객관식</td>
+                                    <td class="px-4 py-3">합성함수 성질 활용</td>
+                                    <td class="px-4 py-3 text-center"><span class="bg-emerald-900/50 text-emerald-400 px-2 py-1 rounded text-xs font-bold">중하 (88%)</span></td>
+                                    <td class="px-4 py-3 text-center">적용</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors">
+                                    <td class="px-4 py-3 text-center text-gray-500">5</td>
+                                    <td class="px-4 py-3 text-center">객관식</td>
+                                    <td class="px-4 py-3">유리식 부분분수 분해</td>
+                                    <td class="px-4 py-3 text-center"><span class="bg-yellow-900/50 text-yellow-400 px-2 py-1 rounded text-xs font-bold">중 (80%)</span></td>
+                                    <td class="px-4 py-3 text-center">적용</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors">
+                                    <td class="px-4 py-3 text-center text-gray-500">6</td>
+                                    <td class="px-4 py-3 text-center">객관식</td>
+                                    <td class="px-4 py-3">필요충분조건과 진리집합</td>
+                                    <td class="px-4 py-3 text-center"><span class="bg-yellow-900/50 text-yellow-400 px-2 py-1 rounded text-xs font-bold">중 (78%)</span></td>
+                                    <td class="px-4 py-3 text-center">분석</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors">
+                                    <td class="px-4 py-3 text-center text-gray-500">7</td>
+                                    <td class="px-4 py-3 text-center">객관식</td>
+                                    <td class="px-4 py-3">무리함수 그래프 평행이동</td>
+                                    <td class="px-4 py-3 text-center"><span class="bg-yellow-900/50 text-yellow-400 px-2 py-1 rounded text-xs font-bold">중 (75%)</span></td>
+                                    <td class="px-4 py-3 text-center">분석</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors">
+                                    <td class="px-4 py-3 text-center text-gray-500">8</td>
+                                    <td class="px-4 py-3 text-center">객관식</td>
+                                    <td class="px-4 py-3">역함수 존재 조건</td>
+                                    <td class="px-4 py-3 text-center"><span class="bg-yellow-900/50 text-yellow-400 px-2 py-1 rounded text-xs font-bold">중 (72%)</span></td>
+                                    <td class="px-4 py-3 text-center">적용</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors">
+                                    <td class="px-4 py-3 text-center text-gray-500">9</td>
+                                    <td class="px-4 py-3 text-center">객관식</td>
+                                    <td class="px-4 py-3">귀류법을 이용한 증명</td>
+                                    <td class="px-4 py-3 text-center"><span class="bg-orange-900/50 text-orange-400 px-2 py-1 rounded text-xs font-bold">중상 (65%)</span></td>
+                                    <td class="px-4 py-3 text-center">분석</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors">
+                                    <td class="px-4 py-3 text-center text-gray-500">10</td>
+                                    <td class="px-4 py-3 text-center">객관식</td>
+                                    <td class="px-4 py-3">구간별 정의된 함수 합성</td>
+                                    <td class="px-4 py-3 text-center"><span class="bg-orange-900/50 text-orange-400 px-2 py-1 rounded text-xs font-bold">중상 (60%)</span></td>
+                                    <td class="px-4 py-3 text-center">분석</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors bg-red-900/10">
+                                    <td class="px-4 py-3 text-center text-gray-500">11</td>
+                                    <td class="px-4 py-3 text-center">객관식</td>
+                                    <td class="px-4 py-3 font-medium text-red-300">무리함수 일대일대응 조건</td>
+                                    <td class="px-4 py-3 text-center"><span class="bg-red-900/50 text-red-400 px-2 py-1 rounded text-xs font-bold">상 (50%)</span></td>
+                                    <td class="px-4 py-3 text-center">평가</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors">
+                                    <td class="px-4 py-3 text-center text-gray-500">12</td>
+                                    <td class="px-4 py-3 text-center">객관식</td>
+                                    <td class="px-4 py-3">절대부등식 증명/대소</td>
+                                    <td class="px-4 py-3 text-center"><span class="bg-orange-900/50 text-orange-400 px-2 py-1 rounded text-xs font-bold">중상 (55%)</span></td>
+                                    <td class="px-4 py-3 text-center">평가</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors bg-red-900/10">
+                                    <td class="px-4 py-3 text-center text-gray-500">13</td>
+                                    <td class="px-4 py-3 text-center">객관식</td>
+                                    <td class="px-4 py-3 font-medium text-red-300">유리식 산술·기하 평균</td>
+                                    <td class="px-4 py-3 text-center"><span class="bg-red-900/50 text-red-400 px-2 py-1 rounded text-xs font-bold">상 (45%)</span></td>
+                                    <td class="px-4 py-3 text-center">창출</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors bg-red-900/10">
+                                    <td class="px-4 py-3 text-center text-gray-500">14</td>
+                                    <td class="px-4 py-3 text-center">객관식</td>
+                                    <td class="px-4 py-3 font-medium text-red-300">절댓값 포함 부등식</td>
+                                    <td class="px-4 py-3 text-center"><span class="bg-red-900/50 text-red-400 px-2 py-1 rounded text-xs font-bold">상 (40%)</span></td>
+                                    <td class="px-4 py-3 text-center">평가</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors bg-red-900/10">
+                                    <td class="px-4 py-3 text-center text-gray-500">15</td>
+                                    <td class="px-4 py-3 text-center">객관식</td>
+                                    <td class="px-4 py-3 font-medium text-red-300">무리함수와 역함수 교점</td>
+                                    <td class="px-4 py-3 text-center"><span class="bg-red-900/50 text-red-400 px-2 py-1 rounded text-xs font-bold">상 (35%)</span></td>
+                                    <td class="px-4 py-3 text-center">창출</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors bg-red-900/10">
+                                    <td class="px-4 py-3 text-center text-gray-500">16</td>
+                                    <td class="px-4 py-3 text-center">객관식</td>
+                                    <td class="px-4 py-3 font-medium text-red-300">이차부등식 항상 성립</td>
+                                    <td class="px-4 py-3 text-center"><span class="bg-red-900/50 text-red-400 px-2 py-1 rounded text-xs font-bold">상 (30%)</span></td>
+                                    <td class="px-4 py-3 text-center">창출</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors">
+                                    <td class="px-4 py-3 text-center text-gray-500">서1</td>
+                                    <td class="px-4 py-3 text-center">단답형</td>
+                                    <td class="px-4 py-3">합성함수 식 구하기</td>
+                                    <td class="px-4 py-3 text-center"><span class="bg-emerald-900/50 text-emerald-400 px-2 py-1 rounded text-xs font-bold">하 (90%)</span></td>
+                                    <td class="px-4 py-3 text-center">적용</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors">
+                                    <td class="px-4 py-3 text-center text-gray-500">서2</td>
+                                    <td class="px-4 py-3 text-center">단답형</td>
+                                    <td class="px-4 py-3">명제의 역이 참 조건</td>
+                                    <td class="px-4 py-3 text-center"><span class="bg-emerald-900/50 text-emerald-400 px-2 py-1 rounded text-xs font-bold">중하 (85%)</span></td>
+                                    <td class="px-4 py-3 text-center">이해</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors">
+                                    <td class="px-4 py-3 text-center text-gray-500">서3</td>
+                                    <td class="px-4 py-3 text-center">서술형</td>
+                                    <td class="px-4 py-3">함수의 개수 (일대일)</td>
+                                    <td class="px-4 py-3 text-center"><span class="bg-yellow-900/50 text-yellow-400 px-2 py-1 rounded text-xs font-bold">중 (70%)</span></td>
+                                    <td class="px-4 py-3 text-center">분석</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors bg-red-900/10">
+                                    <td class="px-4 py-3 text-center text-gray-500">서4</td>
+                                    <td class="px-4 py-3 text-center">서술형</td>
+                                    <td class="px-4 py-3 font-medium text-red-300">유리함수 그래프 위치</td>
+                                    <td class="px-4 py-3 text-center"><span class="bg-red-900/50 text-red-400 px-2 py-1 rounded text-xs font-bold">상 (40%)</span></td>
+                                    <td class="px-4 py-3 text-center">평가</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors bg-red-900/10">
+                                    <td class="px-4 py-3 text-center text-gray-500">서5</td>
+                                    <td class="px-4 py-3 text-center">서술형</td>
+                                    <td class="px-4 py-3 font-medium text-red-300">유리함수 역함수 성질</td>
+                                    <td class="px-4 py-3 text-center"><span class="bg-red-900/50 text-red-400 px-2 py-1 rounded text-xs font-bold">상 (45%)</span></td>
+                                    <td class="px-4 py-3 text-center">분석</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors bg-red-900/10">
+                                    <td class="px-4 py-3 text-center text-gray-500">서6</td>
+                                    <td class="px-4 py-3 text-center">서술형</td>
+                                    <td class="px-4 py-3 font-medium text-red-300">유리함수 위 점 기하학</td>
+                                    <td class="px-4 py-3 text-center"><span class="bg-red-900/50 text-red-400 px-2 py-1 rounded text-xs font-bold">상 (25%)</span></td>
+                                    <td class="px-4 py-3 text-center">창출</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. 수준별 맞춤 학습 전략 -->
+            <section class="mb-12 md:mb-20">
+                <div class="text-center mb-8 md:mb-10">
+                    <h2 class="text-2xl md:text-3xl font-bold text-white mb-2">수준별 <span class="gradient-text">맞춤 학습 전략</span></h2>
+                    <p class="text-gray-500 text-xs md:text-sm">현재 내 위치에서 한 단계 도약하기 위한 구체적인 솔루션</p>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- 상위권 (1-2등급) -->
+                    <div class="bg-[#1E1E1E] rounded-2xl border border-red-500/30 p-1 shadow-lg relative overflow-hidden group">
+                        <div class="absolute top-0 left-0 w-1 h-full bg-red-500"></div>
+                        <div class="p-5 md:p-8">
+                            <div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 gap-2">
+                                <h3 class="text-lg md:text-2xl font-bold text-white flex items-center gap-3">
+                                    <span class="bg-red-500/10 text-red-400 px-2 py-0.5 md:px-3 md:py-1 rounded-lg text-xs md:text-sm font-extrabold tracking-wider shrink-0">TOP TIER</span>
+                                    1~2등급 전략
+                                </h3>
+                                <span class="text-gray-500 text-xs md:text-sm font-medium">안정적 1등급 확보 및 킬러 완벽 대비</span>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                                <div class="bg-[#121212] p-4 md:p-5 rounded-xl border border-[#333] hover:border-red-500/50 transition-colors">
+                                    <h4 class="text-red-400 font-bold mb-2 text-sm md:text-base">킬러 문항 : '조건 해석'</h4>
+                                    <p class="text-xs md:text-sm text-gray-400 leading-relaxed">
+                                        단순 식 계산이 아닌 <strong>그래프 개형 추론</strong>이 필수입니다. 특히 <span class="text-gray-200">y=x 대칭성</span>을 이용해 교점 좌표를 미지수로 두고 방정식을 세우는 훈련을 집중해야 합니다.
+                                    </p>
+                                </div>
+                                <div class="bg-[#121212] p-4 md:p-5 rounded-xl border border-[#333] hover:border-red-500/50 transition-colors">
+                                    <h4 class="text-red-400 font-bold mb-2 text-sm md:text-base">논리적 엄밀함</h4>
+                                    <p class="text-xs md:text-sm text-gray-400 leading-relaxed">
+                                        필요/충분조건 문제는 <strong>부등식의 영역</strong>으로 변환하여 시각적으로 해결하세요. 경계값 포함 여부(등호 유무)를 체크하는 습관이 1등급을 결정짓습니다.
+                                    </p>
+                                </div>
+                                <div class="bg-[#121212] p-4 md:p-5 rounded-xl border border-[#333] hover:border-red-500/50 transition-colors">
+                                    <h4 class="text-red-400 font-bold mb-2 text-sm md:text-base">모의고사 4점 변형</h4>
+                                    <p class="text-xs md:text-sm text-gray-400 leading-relaxed">
+                                        교육청 모의고사 21, 29, 30번 문항의 변형 출제가 잦습니다. 기출 문제의 숫자만 바꾼 변형이 아닌, <strong>조건이 추가된 변형 문제</strong>를 풀어내야 합니다.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 중위권 (3등급) -->
+                    <div class="bg-[#1E1E1E] rounded-2xl border border-blue-500/30 p-1 shadow-lg relative overflow-hidden group">
+                        <div class="absolute top-0 left-0 w-1 h-full bg-blue-500"></div>
+                        <div class="p-5 md:p-8">
+                            <div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 gap-2">
+                                <h3 class="text-lg md:text-2xl font-bold text-white flex items-center gap-3">
+                                    <span class="bg-blue-500/10 text-blue-400 px-2 py-0.5 md:px-3 md:py-1 rounded-lg text-xs md:text-sm font-extrabold tracking-wider shrink-0">JUMP UP</span>
+                                    3등급 전략
+                                </h3>
+                                <span class="text-gray-500 text-xs md:text-sm font-medium">실수 줄이기와 준킬러 정복</span>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                                <div class="flex gap-4">
+                                    <div class="shrink-0 w-8 h-8 md:w-10 md:h-10 rounded-full bg-blue-900/50 flex items-center justify-center text-blue-400 font-bold text-sm">A</div>
+                                    <div>
+                                        <h4 class="text-white font-bold mb-1 text-sm md:text-base">실수 노트 작성 (오답률 0% 도전)</h4>
+                                        <p class="text-xs md:text-sm text-gray-400 leading-relaxed">
+                                            '아는데 틀렸다'는 핑계입니다. 분모가 0이 되는 조건, 판별식의 범위 등 <strong>함정 조건</strong>을 놓치지 않도록 자신만의 실수 체크리스트를 만드세요.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4">
+                                    <div class="shrink-0 w-8 h-8 md:w-10 md:h-10 rounded-full bg-blue-900/50 flex items-center justify-center text-blue-400 font-bold text-sm">B</div>
+                                    <div>
+                                        <h4 class="text-white font-bold mb-1 text-sm md:text-base">타임 어택 훈련</h4>
+                                        <p class="text-xs md:text-sm text-gray-400 leading-relaxed">
+                                            중난이도 문항까지 <strong>35분 컷</strong>을 목표로 하세요. 남은 시간을 서술형과 객관식 후반부에 온전히 투자해야 등급 상승이 가능합니다.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 하위권 (4-5등급) -->
+                    <div class="bg-[#1E1E1E] rounded-2xl border border-emerald-500/30 p-1 shadow-lg relative overflow-hidden group">
+                        <div class="absolute top-0 left-0 w-1 h-full bg-emerald-500"></div>
+                        <div class="p-5 md:p-8">
+                            <div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 gap-2">
+                                <h3 class="text-lg md:text-2xl font-bold text-white flex items-center gap-3">
+                                    <span class="bg-emerald-500/10 text-emerald-400 px-2 py-0.5 md:px-3 md:py-1 rounded-lg text-xs md:text-sm font-extrabold tracking-wider shrink-0">BASIC</span>
+                                    4~5등급 전략
+                                </h3>
+                                <span class="text-gray-500 text-xs md:text-sm font-medium">개념 확립과 필수 유형 마스터</span>
+                            </div>
+                            <ul class="space-y-4">
+                                <li class="bg-[#121212] p-4 rounded-xl flex items-start gap-3">
+                                    <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <div>
+                                        <strong class="text-emerald-400 block mb-1 text-sm md:text-base">교과서 예제 및 필수 유형제 반복</strong>
+                                        <span class="text-xs md:text-sm text-gray-400">어려운 킬러 문제에 매달리기보다, 교과서와 유형서(쎈 B단계 등)의 대표 문제를 <strong>기계적으로 풀 수 있을 때까지</strong> 반복해야 합니다. 기본 점수만 확보해도 4등급 탈출은 가능합니다.</span>
+                                    </div>
+                                </li>
+                                <li class="bg-[#121212] p-4 rounded-xl flex items-start gap-3">
+                                    <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <div>
+                                        <strong class="text-emerald-400 block mb-1 text-sm md:text-base">정의(Definition) 암기</strong>
+                                        <span class="text-xs md:text-sm text-gray-400">명제의 참/거짓, 역함수의 존재 조건(일대일대응) 등 <strong>개념의 정의</strong>를 정확히 암기하고 말로 설명할 수 있어야 합니다.</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- 푸터 -->
+        <footer class="mt-20 text-center border-t border-[#333] pt-12 pb-10">
+            <p class="text-lg md:text-xl font-bold text-white leading-relaxed">수학이 쉬워지는 순간<br><span class="gradient-text">한호빈 수학</span></p>
+        </footer>
+
+    </div>
+</body>
+</html>
