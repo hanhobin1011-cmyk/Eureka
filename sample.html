@@ -63,6 +63,22 @@
         @keyframes growHeight {
             to { transform: scaleY(1); }
         }
+        /* Line Graph Animation */
+        .line-animate {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: drawLine 2s ease-out forwards;
+        }
+        @keyframes drawLine {
+            to { stroke-dashoffset: 0; }
+        }
+        .point-animate {
+            animation: fadeInPoint 0.5s ease-out forwards;
+            opacity: 0;
+        }
+        @keyframes fadeInPoint {
+            to { opacity: 1; }
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-blue-500 selection:text-white pb-10">
@@ -120,7 +136,7 @@
                 </div>
             </section>
 
-            <!-- 3. Achievement Graph (My vs Avg) - Fixed Visibility -->
+            <!-- 3. Achievement Graph (My vs Avg) -->
             <section class="bg-[#1E1E1E] p-6 rounded-2xl border border-[#333] shadow-lg">
                 <h2 class="text-sm font-bold text-white mb-6 border-l-4 border-blue-500 pl-3">성취도 비교 분석 (%)</h2>
                 
@@ -250,7 +266,79 @@
                 </div>
             </section>
 
-            <!-- 5. Past Score History (Scrollable) -->
+            <!-- 5. Past Score Trend Graph (Added) -->
+            <section class="mb-6">
+                <h2 class="text-sm font-bold text-white mb-3 border-l-4 border-blue-400 pl-3">최근 성적 추이 (점수 변동)</h2>
+                <div class="bg-[#1E1E1E] p-4 rounded-2xl border border-[#333] shadow-lg">
+                    <!-- SVG Chart Container -->
+                    <div class="w-full overflow-hidden">
+                        <svg viewBox="0 0 350 180" class="w-full h-auto">
+                            <!-- Grid Lines -->
+                            <line x1="30" y1="150" x2="330" y2="150" stroke="#333" stroke-width="1" />
+                            <line x1="30" y1="90" x2="330" y2="90" stroke="#333" stroke-width="1" stroke-dasharray="4" />
+                            <line x1="30" y1="30" x2="330" y2="30" stroke="#333" stroke-width="1" stroke-dasharray="4" />
+                            
+                            <!-- Y-Axis Labels -->
+                            <text x="25" y="154" text-anchor="end" font-size="10" fill="#666">0</text>
+                            <text x="25" y="94" text-anchor="end" font-size="10" fill="#666">50</text>
+                            <text x="25" y="34" text-anchor="end" font-size="10" fill="#666">100</text>
+
+                            <!-- Polyline for Trend -->
+                            <!-- Points: 
+                                11.06: 50 -> y=90
+                                11.09: 20 -> y=126 (150 - 20*1.2)
+                                11.13: 50 -> y=90
+                                11.30: 50 -> y=90
+                                12.04: 60 -> y=78 (150 - 60*1.2)
+                                12.07: 60 -> y=78
+                             -->
+                            <polyline fill="none" stroke="#3b82f6" stroke-width="3" 
+                                      points="50,90 100,126 150,90 200,90 250,78 300,78" 
+                                      class="line-animate" />
+
+                            <!-- Data Points & Labels -->
+                            <!-- Point 1 -->
+                            <g class="point-animate" style="animation-delay: 0.2s;">
+                                <circle cx="50" cy="90" r="4" fill="#1E1E1E" stroke="#3b82f6" stroke-width="2" />
+                                <text x="50" y="80" text-anchor="middle" font-size="10" fill="#3b82f6" font-weight="bold">50</text>
+                                <text x="50" y="165" text-anchor="middle" font-size="9" fill="#888">11.06</text>
+                            </g>
+                            <!-- Point 2 -->
+                            <g class="point-animate" style="animation-delay: 0.4s;">
+                                <circle cx="100" cy="126" r="4" fill="#1E1E1E" stroke="#ef4444" stroke-width="2" />
+                                <text x="100" y="116" text-anchor="middle" font-size="10" fill="#ef4444" font-weight="bold">20</text>
+                                <text x="100" y="165" text-anchor="middle" font-size="9" fill="#888">11.09</text>
+                            </g>
+                            <!-- Point 3 -->
+                            <g class="point-animate" style="animation-delay: 0.6s;">
+                                <circle cx="150" cy="90" r="4" fill="#1E1E1E" stroke="#3b82f6" stroke-width="2" />
+                                <text x="150" y="80" text-anchor="middle" font-size="10" fill="#3b82f6" font-weight="bold">50</text>
+                                <text x="150" y="165" text-anchor="middle" font-size="9" fill="#888">11.13</text>
+                            </g>
+                            <!-- Point 4 -->
+                            <g class="point-animate" style="animation-delay: 0.8s;">
+                                <circle cx="200" cy="90" r="4" fill="#1E1E1E" stroke="#3b82f6" stroke-width="2" />
+                                <text x="200" y="80" text-anchor="middle" font-size="10" fill="#3b82f6" font-weight="bold">50</text>
+                                <text x="200" y="165" text-anchor="middle" font-size="9" fill="#888">11.30</text>
+                            </g>
+                            <!-- Point 5 -->
+                            <g class="point-animate" style="animation-delay: 1.0s;">
+                                <circle cx="250" cy="78" r="4" fill="#1E1E1E" stroke="#3b82f6" stroke-width="2" />
+                                <text x="250" y="68" text-anchor="middle" font-size="10" fill="#3b82f6" font-weight="bold">60</text>
+                                <text x="250" y="165" text-anchor="middle" font-size="9" fill="#888">12.04</text>
+                            </g>
+                            <!-- Point 6 -->
+                            <g class="point-animate" style="animation-delay: 1.2s;">
+                                <circle cx="300" cy="78" r="5" fill="#3b82f6" stroke="#fff" stroke-width="2" />
+                                <text x="300" y="65" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">60</text>
+                                <text x="300" y="165" text-anchor="middle" font-size="9" fill="#fff" font-weight="bold">최근</text>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. Past Score History Table -->
             <section>
                 <div class="flex justify-between items-center mb-3 px-1">
                     <h2 class="text-sm font-bold text-white border-l-4 border-purple-500 pl-3">과거 성적 현황 (최근순)</h2>
@@ -360,7 +448,7 @@
 
         <footer class="mt-12 text-center text-gray-600 text-xs pb-6">
             <p class="font-bold text-gray-500 mb-1">시대정신 학원</p>
-            <p>COPYRIGHT © 2025 ALL RIGHTS RESERVED.</p>
+            <p>류용수의 룡룡죽겠지 수학</p>
         </footer>
 
     </div>
