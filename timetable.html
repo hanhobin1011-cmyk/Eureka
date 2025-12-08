@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025 겨울방학 통합 시간표 (반응형)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 폰트 설정 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Noto Sans KR', sans-serif; }
+        
+        /* 테이블 기본 스타일 */
+        .timetable-cell {
+            position: relative; /* 툴팁 위치 기준 */
+            border: 1px solid #e5e7eb;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 0.8rem;
+            padding: 4px;
+            height: 30px; 
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+        
+        /* 마우스 오버 시 시간 표시 효과 */
+        .timetable-cell[data-time]:hover::after {
+            content: attr(data-time); /* data-time 속성의 값을 내용으로 표시 */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85); /* 진한 반투명 검정 배경 */
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1rem;
+            z-index: 20;
+            white-space: pre-line; /* 줄바꿈 허용 */
+            backdrop-filter: blur(2px); /* 배경 흐림 효과 */
+        }
+
+        .time-col {
+            background-color: #f9fafb;
+            color: #6b7280;
+            font-weight: 600;
+            font-size: 0.75rem;
+            width: 70px; 
+        }
+
+        .header-row th {
+            background-color: #1f2937;
+            color: white;
+            padding: 8px;
+            position: sticky;
+            top: 0;
+            z-index: 30; /* 툴팁보다 위에 오도록 */
+        }
+        
+        .header-row th:first-child {
+            width: 70px;
+        }
+
+        /* 과목별 배경색 */
+        .bg-math-yellow { background-color: #fef08a; color: #1f2937; }
+        .bg-math-orange { background-color: #fed7aa; color: #1f2937; }
+        .bg-kor-green { background-color: #bbf7d0; color: #14532d; }
+        .bg-eng-blue { background-color: #bfdbfe; color: #1e3a8a; }
+        .bg-sci-purple { background-color: #e9d5ff; color: #581c87; }
+        .bg-sci-darkblue { background-color: #a5b4fc; color: #312e81; }
+        .bg-soc-gray { background-color: #e5e7eb; color: #374151; }
+        .bg-essay { background-color: #fef9c3; color: #854d0e; }
+
+        /* 탭 스타일 */
+        .tab-active {
+            border-bottom: 2px solid #2563eb;
+            color: #2563eb;
+            font-weight: bold;
+        }
+        .tab-inactive {
+            color: #6b7280;
+        }
+        .tab-inactive:hover {
+            color: #374151;
+            background-color: #f3f4f6;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <div class="max-w-7xl mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold text-center mb-8 text-gray-900">2025 우독학원 겨울방학 고등부 시간표</h1>
+
+        <!-- 탭 네비게이션 -->
+        <div class="flex border-b border-gray-200 mb-6 overflow-x-auto">
+            <button onclick="switchTab('grade1')" id="tab-grade1" class="tab-active flex-1 py-4 px-6 text-center focus:outline-none transition-colors duration-200 whitespace-nowrap">
+                예비고1
+            </button>
+            <button onclick="switchTab('grade2')" id="tab-grade2" class="tab-inactive flex-1 py-4 px-6 text-center focus:outline-none transition-colors duration-200 whitespace-nowrap">
+                예비고2
+            </button>
+            <button onclick="switchTab('grade3')" id="tab-grade3" class="tab-inactive flex-1 py-4 px-6 text-center focus:outline-none transition-colors duration-200 whitespace-nowrap">
+                예비고3
+            </button>
+        </div>
+
+        <!-- 예비고1 시간표 -->
+        <div id="content-grade1" class="schedule-content block overflow-x-auto bg-white rounded-lg shadow">
+            <table class="w-full min-w-[800px] border-collapse table-fixed">
+                <thead>
+                    <tr class="header-row">
+                        <th class="w-[70px]">시간</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th>토</th><th>일</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody-grade1"></tbody>
+            </table>
+        </div>
+
+        <!-- 예비고2 시간표 -->
+        <div id="content-grade2" class="schedule-content hidden overflow-x-auto bg-white rounded-lg shadow">
+            <table class="w-full min-w-[800px] border-collapse table-fixed">
+                <thead>
+                    <tr class="header-row">
+                        <th class="w-[70px]">시간</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th>토</th><th>일</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody-grade2"></tbody>
+            </table>
+        </div>
+
+        <!-- 예비고3 시간표 -->
+        <div id="content-grade3" class="schedule-content hidden overflow-x-auto bg-white rounded-lg shadow">
+            <table class="w-full min-w-[800px] border-collapse table-fixed">
+                <thead>
+                    <tr class="header-row">
+                        <th class="w-[70px]">시간</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th>토</th><th>일</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody-grade3"></tbody>
+            </table>
+        </div>
+        
+        <div class="mt-4 text-sm text-gray-500 text-right">
+            * 수업에 마우스를 올리면 상세 시간이 표시됩니다.
+        </div>
+    </div>
+
+<script>
+    // 시간 포맷 변환 함수 (인덱스 -> "10:30" 형식)
+    function formatTime(index) {
+        const startHour = 10; // 시작 시간 10시
+        const totalMin = index * 30;
+        const h = startHour + Math.floor(totalMin / 60);
+        const m = totalMin % 60;
+        return `${h}:${m === 0 ? '00' : m}`;
+    }
+
+    // 데이터 정의 (이전과 동일)
+    const dataGrade1 = [
+        [0, 0, 6, "수학 정규 E<br>[박원욱T] 공통수학1", "bg-math-yellow"], 
+        [0, 8, 6, "수학 특강<br>[박원욱T] 공통수학2", "bg-math-yellow"], 
+        [1, 0, 6, "수학 정규 G<br>[박원욱T] 공통수학1", "bg-math-yellow"], 
+        [1, 8, 6, "수학 특강<br>[박원욱T] 대수", "bg-math-yellow"], 
+        [1, 14, 4, "영어 예비고1A<br>[김준영T]", "bg-eng-blue"], 
+        [1, 20, 4, "통합과학 예비고1<br>[홍의동T]", "bg-sci-darkblue"], 
+        [2, 0, 6, "수학 정규 E<br>[박원욱T] 공통수학1", "bg-math-yellow"],
+        [2, 8, 6, "수학 특강<br>[박원욱T] 공통수학2", "bg-math-yellow"],
+        [3, 0, 6, "수학 정규 G<br>[박원욱T] 공통수학1", "bg-math-yellow"],
+        [3, 8, 6, "수학 특강<br>[박원욱T] 대수", "bg-math-yellow"],
+        [3, 14, 4, "영어 예비고1A<br>[김준영T]", "bg-eng-blue"], 
+        [3, 20, 6, "국어(선택) 예비고1<br>[강창욱T]", "bg-kor-green"], 
+        [4, 0, 6, "수학 특강<br>[박원욱T] 기하", "bg-math-orange"], 
+        [4, 8, 6, "수학 클리닉<br>[박원욱T] 기하", "bg-math-orange"], 
+        [5, 0, 6, "통합사회 예비고1<br>[김민수T]", "bg-soc-gray"], 
+        [5, 6, 4, "영어 예비고1(클)<br>[김준영T]", "bg-eng-blue"], 
+        [5, 12, 6, "국어(선택) 예비고1<br>[홍혜란T]", "bg-kor-green"], 
+        [6, 0, 6, "국어(선택) 예비고1<br>[강창욱T]", "bg-kor-green"], 
+        [6, 6, 4, "수학 클리닉<br>[박원욱T]", "bg-math-yellow"], 
+        [6, 10, 4, "통합과학 예비고1<br>[홍의동T]", "bg-sci-darkblue"], 
+    ];
+
+    const dataGrade2 = [
+        [0, 0, 6, "수학 특강<br>[한호빈T] 미적분1", "bg-math-yellow"],
+        [0, 8, 6, "수학 클리닉<br>[한호빈T] 미적분1", "bg-math-yellow"],
+        [0, 16, 4, "국어 예비고2<br>[강창욱T] 백석/검단", "bg-kor-green"], 
+        [0, 20, 4, "영어 예비고2<br>[김준영T] 고2영어", "bg-eng-blue"], 
+        [1, 0, 6, "수학 정규<br>[한호빈T] 대수", "bg-math-yellow"],
+        [1, 8, 6, "수학 클리닉<br>[한호빈T] 대수", "bg-math-yellow"],
+        [2, 0, 6, "수학 특강<br>[한호빈T] 미적분1", "bg-math-yellow"],
+        [2, 8, 6, "수학 클리닉<br>[한호빈T] 미적분1", "bg-math-yellow"],
+        [2, 16, 4, "국어 예비고2<br>[강창욱T] 백석/검단", "bg-kor-green"], 
+        [2, 20, 4, "영어 예비고2<br>[김준영T] 고2영어", "bg-eng-blue"], 
+        [3, 0, 6, "수학 정규<br>[한호빈T] 대수", "bg-math-yellow"],
+        [3, 8, 6, "수학 클리닉<br>[한호빈T] 대수", "bg-math-yellow"],
+        [4, 0, 6, "수학 특강<br>[박원욱T] 기하", "bg-math-orange"],
+        [4, 8, 6, "수학 클리닉<br>[박원욱T] 기하", "bg-math-orange"],
+        [5, 6, 6, "국어 예비고2<br>[홍혜란T] 통합", "bg-kor-green"], 
+        [5, 12, 6, "수학 클리닉<br>[한호빈T] 주간 TEST<br>토 1:00~4:00<br>토 4:00~7:00<br>일 1:00~4:00<br>일 4:00~7:00<br>中 택1", "bg-math-yellow"], 
+        [5, 19, 5, "물리1 예비고2<br>[정영태T]", "bg-math-orange"], 
+        [6, 6, 6, "영어 예비고2 클리닉<br>[김준영T]", "bg-eng-blue"], 
+        [6, 14, 5, "화학1 예비고2<br>[홍의동T]", "bg-math-orange"], 
+        [6, 19, 5, "생명1 예비고2<br>[홍의동T]", "bg-math-orange"], 
+    ];
+
+    const dataGrade3 = [
+        [0, 14, 6, "수학 예비고3<br>[백락범T] 수12(공통)", "bg-math-yellow"], 
+        [0, 20, 6, "국어 예비고3<br>[강창욱T] 검단3", "bg-kor-green"], 
+        [1, 18, 6, "국어 예비고3<br>[권태영T]", "bg-eng-blue"], 
+        [2, 16, 4, "수학 예비고3<br>[백락범T] 확통", "bg-math-orange"], 
+        [2, 20, 6, "수학 예비고3<br>[백락범T] 미적1", "bg-math-orange"], 
+        [3, 14, 6, "국어 예비고3<br>[강창욱T] 백석3", "bg-kor-green"], 
+        [3, 20, 6, "영어 예비고3A<br>[이얼T] 수능영어", "bg-sci-darkblue"], 
+        [4, 20, 6, "수학 예비고3<br>[박원욱T] 수12(심화)<br>(월금)", "bg-eng-blue"], 
+        [5, 0, 4, "수학 예비고3<br>[백락범T] 확통", "bg-math-orange"], 
+        [5, 4, 6, "수학 예비고3<br>[백락범T] 미적1", "bg-math-orange"], 
+        [5, 10, 6, "사회문화 예비고3<br>[김민수T]", "bg-eng-blue"], 
+        [5, 20, 6, "수리논술 예비고3<br>[박원욱T]", "bg-essay"], 
+        [6, 0, 6, "인문논술 예비고3<br>[김한창T]", "bg-essay"], 
+        [6, 8, 6, "약술수학 예비고3<br>[한호빈T]", "bg-essay"], 
+    ];
+
+    function renderTable(tbodyId, data) {
+        const tbody = document.getElementById(tbodyId);
+        tbody.innerHTML = '';
+        
+        let grid = Array(26).fill().map(() => Array(7).fill(null));
+
+        data.forEach(item => {
+            const [dayIdx, startIdx, duration, content, bgClass] = item;
+            if (grid[startIdx][dayIdx]) return;
+            
+            // 시간 문자열 계산 (예: 10:00 - 13:00)
+            const startTimeStr = formatTime(startIdx);
+            const endTimeStr = formatTime(startIdx + duration);
+            const timeRangeStr = `${startTimeStr} - ${endTimeStr}`;
+
+            grid[startIdx][dayIdx] = { 
+                rowspan: duration, 
+                content: content,
+                className: bgClass,
+                timeRange: timeRangeStr // 시간 정보 저장
+            };
+            
+            for(let i=1; i<duration; i++) {
+                if(startIdx + i < 26) grid[startIdx + i][dayIdx] = 'occupied';
+            }
+        });
+
+        for (let r = 0; r < 26; r++) {
+            const tr = document.createElement('tr');
+            
+            // 시간 컬럼
+            const tdTime = document.createElement('td');
+            tdTime.className = 'timetable-cell time-col';
+            let startT = formatTime(r);
+            let endT = formatTime(r+1);
+            tdTime.innerText = `${startT}-${endT}`;
+            tr.appendChild(tdTime);
+
+            // 요일 컬럼
+            for (let c = 0; c < 7; c++) {
+                if (grid[r][c] === 'occupied') continue;
+
+                const td = document.createElement('td');
+                td.className = 'timetable-cell';
+                
+                if (grid[r][c]) {
+                    const info = grid[r][c];
+                    td.rowSpan = info.rowspan;
+                    td.innerHTML = `<div class="font-bold text-sm">${info.content}</div>`;
+                    td.className += ` ${info.className} border border-gray-300 cursor-pointer`;
+                    
+                    // data-time 속성에 시간 정보 추가 (CSS에서 사용)
+                    td.setAttribute('data-time', info.timeRange);
+                }
+                tr.appendChild(td);
+            }
+            tbody.appendChild(tr);
+        }
+    }
+
+    function switchTab(grade) {
+        ['grade1', 'grade2', 'grade3'].forEach(g => {
+            document.getElementById(`tab-${g}`).className = "tab-inactive flex-1 py-4 px-6 text-center focus:outline-none transition-colors duration-200 whitespace-nowrap cursor-pointer";
+            document.getElementById(`content-${g}`).classList.add('hidden');
+        });
+        document.getElementById(`tab-${grade}`).className = "tab-active flex-1 py-4 px-6 text-center focus:outline-none transition-colors duration-200 whitespace-nowrap cursor-pointer";
+        document.getElementById(`content-${grade}`).classList.remove('hidden');
+    }
+
+    renderTable('tbody-grade1', dataGrade1);
+    renderTable('tbody-grade2', dataGrade2);
+    renderTable('tbody-grade3', dataGrade3);
+    
+    switchTab('grade1');
+</script>
+</body>
+</html>
