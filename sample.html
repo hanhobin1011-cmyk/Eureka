@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>성적 분석 리포트 | 최우진</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans KR"', 'sans-serif'],
+                    },
+                    colors: {
+                        dark: {
+                            bg: '#121212',
+                            card: '#1E1E1E',
+                            border: '#333333',
+                            tableHeader: '#2A2A2A'
+                        },
+                        brand: {
+                            blue: '#3b82f6',
+                            green: '#10b981',
+                            red: '#ef4444'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #121212;
+            color: #E0E0E0;
+            word-break: keep-all;
+        }
+        /* Custom Scrollbar for tables */
+        .custom-scrollbar {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #2a2a2a;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #4b5563;
+            border-radius: 4px;
+        }
+        /* Graph Animation */
+        .bar-animate {
+            animation: growHeight 1s ease-out forwards;
+            transform-origin: bottom;
+            transform: scaleY(0);
+        }
+        @keyframes growHeight {
+            to { transform: scaleY(1); }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-blue-500 selection:text-white pb-10">
+
+    <div class="max-w-md mx-auto min-h-screen relative">
+        
+        <!-- 1. Header & Student Info -->
+        <header class="bg-[#1E1E1E] p-6 pb-8 rounded-b-3xl shadow-xl mb-6 relative z-10 border-b border-[#333]">
+            <div class="flex justify-between items-start mb-4">
+                <div>
+                    <span class="text-blue-400 font-bold text-xs tracking-wider bg-blue-900/30 px-2 py-1 rounded">2025-12-07 시행</span>
+                    <h1 class="text-2xl font-black text-white mt-2">최우진 <span class="text-lg font-medium text-gray-400">학생</span></h1>
+                    <p class="text-sm text-gray-500">동산고등학교 | 50008</p>
+                </div>
+                <div class="text-right">
+                    <div class="text-xs text-gray-500 mb-1">시험명</div>
+                    <div class="font-bold text-white text-sm">1207 함수의 연속1</div>
+                </div>
+            </div>
+            
+            <!-- Summary Grid -->
+            <div class="grid grid-cols-3 gap-3 mt-4">
+                <div class="bg-[#121212] p-3 rounded-xl text-center border border-[#333]">
+                    <span class="text-xs text-gray-500 block mb-1">내 점수</span>
+                    <span class="text-xl font-black text-blue-400">6<span class="text-xs font-normal text-gray-500">/10</span></span>
+                </div>
+                <div class="bg-[#121212] p-3 rounded-xl text-center border border-[#333]">
+                    <span class="text-xs text-gray-500 block mb-1">석차</span>
+                    <span class="text-xl font-black text-white">10<span class="text-xs font-normal text-gray-500">등</span></span>
+                </div>
+                <div class="bg-[#121212] p-3 rounded-xl text-center border border-[#333]">
+                    <span class="text-xs text-gray-500 block mb-1">등급</span>
+                    <span class="text-xl font-black text-emerald-400">5<span class="text-xs font-normal text-gray-500">등급</span></span>
+                </div>
+            </div>
+        </header>
+
+        <main class="px-4 space-y-6">
+
+            <!-- 2. Score Detail Cards -->
+            <section class="grid grid-cols-2 gap-4">
+                <div class="bg-[#1E1E1E] p-4 rounded-2xl border border-[#333]">
+                    <h3 class="text-xs text-gray-400 font-bold mb-2">전체 평균</h3>
+                    <div class="flex items-end gap-2">
+                        <span class="text-2xl font-bold text-white">5.9</span>
+                        <span class="text-xs text-gray-500 mb-1">점</span>
+                    </div>
+                </div>
+                <div class="bg-[#1E1E1E] p-4 rounded-2xl border border-[#333]">
+                    <h3 class="text-xs text-gray-400 font-bold mb-2">최고점</h3>
+                    <div class="flex items-end gap-2">
+                        <span class="text-2xl font-bold text-white">9</span>
+                        <span class="text-xs text-gray-500 mb-1">점</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Achievement Graph (My vs Avg) - Fixed Visibility -->
+            <section class="bg-[#1E1E1E] p-6 rounded-2xl border border-[#333] shadow-lg">
+                <h2 class="text-sm font-bold text-white mb-6 border-l-4 border-blue-500 pl-3">성취도 비교 분석 (%)</h2>
+                
+                <div class="flex flex-col items-center">
+                    <!-- Graph Area -->
+                    <div class="flex items-end justify-center gap-12 h-40 w-full border-b border-[#333] pb-px relative">
+                        <!-- My Score -->
+                        <div class="w-16 h-full flex items-end justify-center relative group">
+                            <div class="absolute -top-8 text-sm font-bold text-red-400 opacity-0 group-hover:opacity-100 transition-opacity">60%</div>
+                            <div class="w-full bg-red-500 rounded-t-lg shadow-[0_0_15px_rgba(239,68,68,0.3)] bar-animate" style="height: 60%; transform-origin: bottom;"></div>
+                        </div>
+                        <!-- Avg Score -->
+                        <div class="w-16 h-full flex items-end justify-center relative group">
+                            <div class="absolute -top-8 text-sm font-bold text-blue-400 opacity-0 group-hover:opacity-100 transition-opacity">58%</div>
+                            <div class="w-full bg-blue-600 rounded-t-lg shadow-[0_0_15px_rgba(37,99,235,0.3)] bar-animate" style="height: 58%; transform-origin: bottom;"></div>
+                        </div>
+                    </div>
+                    <!-- Labels -->
+                    <div class="flex justify-center gap-12 w-full mt-3">
+                        <div class="w-16 text-center">
+                            <span class="text-xs text-gray-300 font-bold block">내 점수</span>
+                            <span class="text-[10px] text-gray-500 block">60%</span>
+                        </div>
+                        <div class="w-16 text-center">
+                            <span class="text-xs text-gray-400 block">전체 평균</span>
+                            <span class="text-[10px] text-gray-500 block">58%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 pt-4 border-t border-[#333]">
+                    <div class="flex justify-between items-center text-sm">
+                        <span class="text-gray-400">영역별 점수 (함수의 연속1)</span>
+                        <span class="font-bold text-white">6점 <span class="text-gray-600">/ 10</span></span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Question Scoring Table -->
+            <section>
+                <h2 class="text-sm font-bold text-white mb-3 border-l-4 border-emerald-500 pl-3">문항별 채점표</h2>
+                <div class="bg-[#1E1E1E] rounded-2xl border border-[#333] overflow-hidden">
+                    <div class="custom-scrollbar">
+                        <table class="w-full text-xs text-left whitespace-nowrap">
+                            <thead class="bg-[#2A2A2A] text-gray-300">
+                                <tr>
+                                    <th class="px-4 py-3 text-center w-10">번</th>
+                                    <th class="px-4 py-3">유형</th>
+                                    <th class="px-4 py-3 text-center">결과</th>
+                                    <th class="px-4 py-3 text-center">오답률</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-[#333] text-gray-300">
+                                <!-- Q1 -->
+                                <tr class="bg-red-900/10">
+                                    <td class="px-4 py-3 text-center font-bold text-red-400">1</td>
+                                    <td class="px-4 py-3">구간의 뜻</td>
+                                    <td class="px-4 py-3 text-center text-red-500 font-bold">X</td>
+                                    <td class="px-4 py-3 text-center text-gray-500">20%</td>
+                                </tr>
+                                <!-- Q2 -->
+                                <tr class="bg-red-900/10">
+                                    <td class="px-4 py-3 text-center font-bold text-red-400">2</td>
+                                    <td class="px-4 py-3">함수의 연속</td>
+                                    <td class="px-4 py-3 text-center text-red-500 font-bold">X</td>
+                                    <td class="px-4 py-3 text-center text-gray-500">48%</td>
+                                </tr>
+                                <!-- Q3 -->
+                                <tr>
+                                    <td class="px-4 py-3 text-center">3</td>
+                                    <td class="px-4 py-3">함수의 그래프와 연속</td>
+                                    <td class="px-4 py-3 text-center text-emerald-500 font-bold">O</td>
+                                    <td class="px-4 py-3 text-center text-gray-500">52%</td>
+                                </tr>
+                                <!-- Q4 -->
+                                <tr>
+                                    <td class="px-4 py-3 text-center">4</td>
+                                    <td class="px-4 py-3">합성함수의 연속</td>
+                                    <td class="px-4 py-3 text-center text-emerald-500 font-bold">O</td>
+                                    <td class="px-4 py-3 text-center text-gray-500">32%</td>
+                                </tr>
+                                <!-- Q5 -->
+                                <tr>
+                                    <td class="px-4 py-3 text-center">5</td>
+                                    <td class="px-4 py-3">함수가 연속일 조건(1)</td>
+                                    <td class="px-4 py-3 text-center text-emerald-500 font-bold">O</td>
+                                    <td class="px-4 py-3 text-center text-gray-500">24%</td>
+                                </tr>
+                                <!-- Q6 -->
+                                <tr class="bg-red-900/10">
+                                    <td class="px-4 py-3 text-center font-bold text-red-400">6</td>
+                                    <td class="px-4 py-3">함수가 연속일 조건(2)</td>
+                                    <td class="px-4 py-3 text-center text-red-500 font-bold">X</td>
+                                    <td class="px-4 py-3 text-center text-gray-500">44%</td>
+                                </tr>
+                                <!-- Q7 -->
+                                <tr class="bg-red-900/10">
+                                    <td class="px-4 py-3 text-center font-bold text-red-400">7</td>
+                                    <td class="px-4 py-3">(x-a)f(x)형태 연속</td>
+                                    <td class="px-4 py-3 text-center text-red-500 font-bold">X</td>
+                                    <td class="px-4 py-3 text-center text-gray-500">36%</td>
+                                </tr>
+                                <!-- Q8 -->
+                                <tr>
+                                    <td class="px-4 py-3 text-center">8</td>
+                                    <td class="px-4 py-3">연속함수의 성질</td>
+                                    <td class="px-4 py-3 text-center text-emerald-500 font-bold">O</td>
+                                    <td class="px-4 py-3 text-center text-gray-500">72%</td>
+                                </tr>
+                                <!-- Q9 -->
+                                <tr>
+                                    <td class="px-4 py-3 text-center">9</td>
+                                    <td class="px-4 py-3">사잇값 정리(1)</td>
+                                    <td class="px-4 py-3 text-center text-emerald-500 font-bold">O</td>
+                                    <td class="px-4 py-3 text-center text-gray-500">36%</td>
+                                </tr>
+                                <!-- Q10 -->
+                                <tr>
+                                    <td class="px-4 py-3 text-center">10</td>
+                                    <td class="px-4 py-3">사잇값 정리(2)</td>
+                                    <td class="px-4 py-3 text-center text-emerald-500 font-bold">O</td>
+                                    <td class="px-4 py-3 text-center text-gray-500">48%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. Past Score History (Scrollable) -->
+            <section>
+                <div class="flex justify-between items-center mb-3 px-1">
+                    <h2 class="text-sm font-bold text-white border-l-4 border-purple-500 pl-3">과거 성적 현황 (최근순)</h2>
+                    <span class="text-[10px] text-gray-500">좌우로 스크롤하여 확인하세요 →</span>
+                </div>
+                
+                <div class="bg-[#1E1E1E] rounded-2xl border border-[#333] overflow-hidden">
+                    <div class="custom-scrollbar" style="max-height: 400px; overflow-y: auto;">
+                        <table class="w-full text-xs text-left whitespace-nowrap">
+                            <thead class="bg-[#2A2A2A] text-gray-300 sticky top-0 z-10">
+                                <tr>
+                                    <th class="px-4 py-3">시험명</th>
+                                    <th class="px-3 py-3 text-center">점수</th>
+                                    <th class="px-3 py-3 text-center">등급</th>
+                                    <th class="px-3 py-3 text-center">석차</th>
+                                    <th class="px-3 py-3 text-center">평균</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-[#333] text-gray-300">
+                                <!-- Row 26 (Current) -->
+                                <tr class="bg-blue-900/20">
+                                    <td class="px-4 py-3 font-bold text-blue-300">1207 함수의 연속1</td>
+                                    <td class="px-3 py-3 text-center font-bold">60</td>
+                                    <td class="px-3 py-3 text-center text-emerald-400">5</td>
+                                    <td class="px-3 py-3 text-center">10</td>
+                                    <td class="px-3 py-3 text-center text-gray-500">5.9</td>
+                                </tr>
+                                <!-- Row 25 -->
+                                <tr>
+                                    <td class="px-4 py-3">1202 함수의 극한2</td>
+                                    <td class="px-3 py-3 text-center">60</td>
+                                    <td class="px-3 py-3 text-center"></td>
+                                    <td class="px-3 py-3 text-center">17</td>
+                                    <td class="px-3 py-3 text-center text-gray-500">7.1</td>
+                                </tr>
+                                <!-- Row 24 -->
+                                <tr>
+                                    <td class="px-4 py-3">1130 함수의극한1</td>
+                                    <td class="px-3 py-3 text-center">50</td>
+                                    <td class="px-3 py-3 text-center"></td>
+                                    <td class="px-3 py-3 text-center">16</td>
+                                    <td class="px-3 py-3 text-center text-gray-500">6.0</td>
+                                </tr>
+                                <!-- Row 23 -->
+                                <tr>
+                                    <td class="px-4 py-3">1111 수열의뜻~등차</td>
+                                    <td class="px-3 py-3 text-center">50</td>
+                                    <td class="px-3 py-3 text-center"></td>
+                                    <td class="px-3 py-3 text-center">14</td>
+                                    <td class="px-3 py-3 text-center text-gray-500">6.2</td>
+                                </tr>
+                                <!-- Row 22 -->
+                                <tr class="bg-red-900/10">
+                                    <td class="px-4 py-3">1109 삼각형의 넓이</td>
+                                    <td class="px-3 py-3 text-center text-red-400 font-bold">20</td>
+                                    <td class="px-3 py-3 text-center">8</td>
+                                    <td class="px-3 py-3 text-center">21</td>
+                                    <td class="px-3 py-3 text-center text-gray-500">4.9</td>
+                                </tr>
+                                <!-- Row 21 -->
+                                <tr>
+                                    <td class="px-4 py-3">1104 삼각함수의 활용</td>
+                                    <td class="px-3 py-3 text-center">50</td>
+                                    <td class="px-3 py-3 text-center">5</td>
+                                    <td class="px-3 py-3 text-center">8</td>
+                                    <td class="px-3 py-3 text-center text-gray-500">4.7</td>
+                                </tr>
+                                <!-- Row 20 -->
+                                <tr>
+                                    <td class="px-4 py-3">1102 pre Final</td>
+                                    <td class="px-3 py-3 text-center">43</td>
+                                    <td class="px-3 py-3 text-center">6</td>
+                                    <td class="px-3 py-3 text-center">13</td>
+                                    <td class="px-3 py-3 text-center text-gray-500">13.9</td>
+                                </tr>
+                                <!-- Row 19 (High Score) -->
+                                <tr class="bg-emerald-900/10">
+                                    <td class="px-4 py-3">1028 수학적 귀납법</td>
+                                    <td class="px-3 py-3 text-center text-emerald-400 font-bold">80</td>
+                                    <td class="px-3 py-3 text-center">3</td>
+                                    <td class="px-3 py-3 text-center">4</td>
+                                    <td class="px-3 py-3 text-center text-gray-500">6.4</td>
+                                </tr>
+                                <!-- Row 18 -->
+                                <tr>
+                                    <td class="px-4 py-3">1021 여러가지 수열</td>
+                                    <td class="px-3 py-3 text-center">70</td>
+                                    <td class="px-3 py-3 text-center">6</td>
+                                    <td class="px-3 py-3 text-center">15</td>
+                                    <td class="px-3 py-3 text-center text-gray-500">7.7</td>
+                                </tr>
+                                <!-- Row 17 (Low Score) -->
+                                <tr class="bg-red-900/10">
+                                    <td class="px-4 py-3">1026 귀납적 정의</td>
+                                    <td class="px-3 py-3 text-center text-red-400 font-bold">10</td>
+                                    <td class="px-3 py-3 text-center">9</td>
+                                    <td class="px-3 py-3 text-center">26</td>
+                                    <td class="px-3 py-3 text-center text-gray-500">5.2</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="mt-12 text-center text-gray-600 text-xs pb-6">
+            <p class="font-bold text-gray-500 mb-1">시대정신 학원</p>
+            <p>COPYRIGHT © 2025 ALL RIGHTS RESERVED.</p>
+        </footer>
+
+    </div>
+</body>
+</html>
