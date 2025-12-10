@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 윈터스쿨 강의 시간표 | 한호빈</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans KR"', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #121212;
+            color: #E0E0E0;
+            word-break: keep-all;
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #34d399, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 0.5rem;
+            height: 0.5rem;
+            background-color: #3b82f6;
+            border-radius: 50%;
+        }
+        .border-dashed-custom {
+            background-image: linear-gradient(to right, #333 50%, rgba(255,255,255,0) 0%);
+            background-position: bottom;
+            background-size: 10px 1px;
+            background-repeat: repeat-x;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-blue-500 selection:text-white">
+
+    <div class="container mx-auto max-w-4xl px-4 py-12 md:py-20">
+
+        <!-- 헤더 섹션 -->
+        <header class="mb-16 text-center animate-fade-in-up">
+            <div class="inline-block bg-[#1E1E1E] border border-[#333] px-4 py-1.5 rounded-full text-sm font-bold text-emerald-400 mb-4 shadow-lg">
+                2026 Winter School
+            </div>
+            <h1 class="text-3xl md:text-5xl font-black mb-4 tracking-tight text-white">
+                강의 <span class="gradient-text">시간표</span> 및 커리큘럼
+            </h1>
+            <p class="text-gray-400 text-lg">
+                이번 겨울, 수학의 본질을 꿰뚫는 <span class="text-white font-bold">한호빈 수학</span>의 몰입 학습
+            </p>
+        </header>
+
+        <main class="space-y-20">
+            
+            <!-- 1. 우독학원 검단캠퍼스 -->
+            <section class="animate-fade-in-up" style="animation-delay: 0.1s;">
+                <div class="flex items-center gap-4 mb-8 border-b border-[#333] pb-4">
+                    <h2 class="text-2xl md:text-3xl font-bold text-white">우독학원 <span class="text-blue-500">검단캠퍼스</span></h2>
+                    <span class="bg-blue-600 text-white text-xs font-bold px-2.5 py-1 rounded">01/05 개강</span>
+                </div>
+
+                <!-- 주간 일정 카드 그리드 -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <!-- 월, 수 -->
+                    <div class="bg-[#1E1E1E] rounded-2xl border border-[#333] p-6 shadow-lg relative overflow-hidden group hover:border-blue-500/50 transition-colors duration-300">
+                        <div class="absolute top-0 right-0 bg-blue-900/30 px-3 py-1 rounded-bl-lg border-l border-b border-blue-500/20 text-blue-400 text-xs font-bold">월 · 수</div>
+                        <h3 class="text-xl font-bold text-white mb-1 mt-2">미적분 특강</h3>
+                        <p class="text-gray-500 text-sm mb-4">개념 완성 및 실전 적용</p>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between items-center bg-[#121212] p-2 rounded">
+                                <span class="text-gray-400">특강 수업</span>
+                                <span class="text-white font-medium">10:00 ~ 13:00</span>
+                            </div>
+                            <div class="flex justify-between items-center bg-[#121212] p-2 rounded">
+                                <span class="text-gray-400">특강 클리닉</span>
+                                <span class="text-emerald-400 font-medium">14:00 ~ 17:00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 화, 목 -->
+                    <div class="bg-[#1E1E1E] rounded-2xl border border-[#333] p-6 shadow-lg relative overflow-hidden group hover:border-emerald-500/50 transition-colors duration-300">
+                        <div class="absolute top-0 right-0 bg-emerald-900/30 px-3 py-1 rounded-bl-lg border-l border-b border-emerald-500/20 text-emerald-400 text-xs font-bold">화 · 목</div>
+                        <h3 class="text-xl font-bold text-white mb-1 mt-2">대수 정규 강의</h3>
+                        <p class="text-gray-500 text-sm mb-4">수능 기초 및 심화</p>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between items-center bg-[#121212] p-2 rounded">
+                                <span class="text-gray-400">정규 수업</span>
+                                <span class="text-white font-medium">10:00 ~ 13:00</span>
+                            </div>
+                            <div class="flex justify-between items-center bg-[#121212] p-2 rounded">
+                                <span class="text-gray-400">정규 클리닉</span>
+                                <span class="text-emerald-400 font-medium">14:00 ~ 17:00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 토, 일 -->
+                    <div class="bg-[#1E1E1E] rounded-2xl border border-[#333] p-6 shadow-lg relative overflow-hidden group hover:border-purple-500/50 transition-colors duration-300">
+                        <div class="absolute top-0 right-0 bg-purple-900/30 px-3 py-1 rounded-bl-lg border-l border-b border-purple-500/20 text-purple-400 text-xs font-bold">토 · 일</div>
+                        <h3 class="text-xl font-bold text-white mb-1 mt-2">주간 TEST</h3>
+                        <p class="text-gray-500 text-sm mb-4">실전 감각 점검</p>
+                        <div class="bg-[#121212] p-4 rounded-xl text-center border border-[#333]">
+                            <span class="inline-block bg-purple-900/40 text-purple-300 text-xs font-bold px-2 py-1 rounded mb-3">택 1 응시</span>
+                            <div class="flex flex-col gap-2">
+                                <div class="bg-[#1A1A1A] py-2 rounded border border-[#333] text-gray-200 font-medium hover:border-purple-500/30 transition-colors">
+                                    13:00 ~ 16:00
+                                </div>
+                                <div class="text-[10px] text-gray-500 font-bold uppercase tracking-widest relative">
+                                    <span class="bg-[#121212] px-2 relative z-10">OR</span>
+                                    <div class="absolute top-1/2 left-0 w-full h-px bg-[#333] -z-0"></div>
+                                </div>
+                                <div class="bg-[#1A1A1A] py-2 rounded border border-[#333] text-gray-200 font-medium hover:border-purple-500/30 transition-colors">
+                                    16:00 ~ 19:00
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 상세 시간표 및 멘토링 (2단 레이아웃) -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- 상세 시간표 -->
+                    <div class="bg-[#1A1A1A] p-6 rounded-3xl border border-[#333]">
+                        <h3 class="text-lg font-bold text-white mb-6 flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            특강 & 정규 세부 시간표
+                        </h3>
+                        <div class="space-y-0">
+                            <!-- 오전 세션 -->
+                            <div class="relative pl-6 pb-6 border-l border-gray-700">
+                                <div class="absolute -left-1.5 top-0 w-3 h-3 bg-blue-500 rounded-full"></div>
+                                <div class="text-blue-400 text-xs font-bold mb-2">오전 세션</div>
+                                
+                                <div class="flex justify-between items-start mb-3">
+                                    <span class="text-white font-medium w-24 shrink-0">10:00~10:50</span>
+                                    <span class="text-gray-300 text-right">진도 수업</span>
+                                </div>
+                                <div class="flex justify-between items-start mb-3">
+                                    <span class="text-gray-500 w-24 shrink-0">10:50~11:00</span>
+                                    <span class="text-gray-500 text-right text-xs pt-1">휴식</span>
+                                </div>
+                                <div class="flex justify-between items-start mb-3">
+                                    <span class="text-white font-medium w-24 shrink-0">11:00~11:50</span>
+                                    <span class="text-gray-300 text-right">진도 수업</span>
+                                </div>
+                                <div class="flex justify-between items-start mb-3">
+                                    <span class="text-gray-500 w-24 shrink-0">11:50~12:00</span>
+                                    <span class="text-gray-500 text-right text-xs pt-1">휴식</span>
+                                </div>
+                                <div class="flex justify-between items-start">
+                                    <span class="text-white font-medium w-24 shrink-0">12:00~13:00</span>
+                                    <span class="text-gray-300 text-right">대표 유형 문풀</span>
+                                </div>
+                            </div>
+                            
+                            <!-- 점심 시간 -->
+                            <div class="relative pl-6 pb-6 border-l border-gray-700">
+                                <div class="absolute -left-1.5 top-0 w-3 h-3 bg-gray-500 rounded-full"></div>
+                                <div class="flex justify-between items-center bg-[#2A2A2A] p-3 rounded-lg border border-[#444]">
+                                    <span class="text-white font-bold">13:00~14:00</span>
+                                    <span class="text-gray-300">점심시간</span>
+                                </div>
+                            </div>
+
+                            <!-- 오후 세션 -->
+                            <div class="relative pl-6 border-l border-gray-700/0"> <!-- 마지막 선 제거 -->
+                                <div class="absolute -left-1.5 top-0 w-3 h-3 bg-emerald-500 rounded-full"></div>
+                                <div class="text-emerald-400 text-xs font-bold mb-2">오후 클리닉 세션</div>
+
+                                <div class="flex justify-between items-start mb-3">
+                                    <span class="text-white font-medium w-24 shrink-0">14:00~15:30</span>
+                                    <span class="text-gray-300 text-right text-sm">대표 유형 유사 문풀 & 오답</span>
+                                </div>
+                                <div class="flex justify-between items-start mb-3">
+                                    <span class="text-gray-500 w-24 shrink-0">15:30~15:40</span>
+                                    <span class="text-gray-500 text-right text-xs pt-1">휴식</span>
+                                </div>
+                                <div class="flex justify-between items-start mb-3">
+                                    <span class="text-white font-medium w-24 shrink-0">15:40~16:30</span>
+                                    <div class="text-right">
+                                        <div class="text-gray-300 text-sm">Daily TEST & 숙제</div>
+                                        <div class="text-emerald-400 text-xs">+ 자기주도 학습 점검</div>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-start">
+                                    <span class="text-white font-medium w-24 shrink-0">16:30~17:00</span>
+                                    <span class="text-gray-300 text-right">Daily TEST 오답</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 멘토링 프로그램 -->
+                    <div class="bg-gradient-to-br from-[#1E1E1E] to-[#111] p-6 rounded-3xl border border-[#333] flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-bold text-white mb-2 flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                멘토링 프로그램
+                            </h3>
+                            <p class="text-gray-400 text-sm mb-6 pb-4 border-b border-[#333]">
+                                학습 습관 개선을 위한<br><span class="text-white font-bold">자기주도학습 관리 프로그램</span>
+                            </p>
+                            
+                            <ul class="space-y-6">
+                                <li class="flex gap-4">
+                                    <div class="flex-shrink-0 w-12 h-12 bg-blue-900/20 rounded-full flex items-center justify-center border border-blue-500/30 text-blue-400 font-bold text-xs text-center leading-tight">
+                                        01/05<br>01/12
+                                    </div>
+                                    <div>
+                                        <h4 class="text-white font-bold text-sm mb-1">자기주도학습 시간표 작성 및 평가</h4>
+                                        <p class="text-gray-400 text-xs">매주 월요일 진행</p>
+                                        <p class="text-emerald-400 text-xs mt-1 font-bold">Directed by 한호빈T</p>
+                                    </div>
+                                </li>
+                                <li class="flex gap-4">
+                                    <div class="flex-shrink-0 w-12 h-12 bg-emerald-900/20 rounded-full flex items-center justify-center border border-emerald-500/30 text-emerald-400 font-bold">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0z" />
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-white font-bold text-sm mb-1">1:1 전담 관리조교 배정</h4>
+                                        <p class="text-gray-400 text-xs leading-relaxed">
+                                            각 학생별 담당 조교 선정 후<br>
+                                            상담 및 피드백을 통한 밀착 케어
+                                        </p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="mt-8 bg-[#121212] p-4 rounded-xl border border-dashed border-gray-700 text-center">
+                            <span class="text-gray-500 text-xs">"단순한 강의를 넘어, 공부하는 힘을 길러줍니다."</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. 세빛학원 송파캠퍼스 -->
+            <section class="animate-fade-in-up" style="animation-delay: 0.2s;">
+                <div class="flex items-center gap-4 mb-8 border-b border-[#333] pb-4 mt-12">
+                    <h2 class="text-2xl md:text-3xl font-bold text-white">세빛학원 <span class="text-emerald-500">송파캠퍼스</span></h2>
+                    <span class="bg-emerald-600 text-white text-xs font-bold px-2.5 py-1 rounded">01/12 개강</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-6">
+                    <!-- 일정 요약 카드 (왼쪽) -->
+                    <div class="md:col-span-2 bg-[#1E1E1E] rounded-2xl border border-[#333] p-8 shadow-lg flex flex-col justify-center relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 to-blue-500"></div>
+                        <div class="text-center">
+                            <h3 class="text-2xl font-bold text-white mb-2">미적분(수학2) 특강</h3>
+                            <p class="text-emerald-400 font-bold mb-6">수 · 금 Class</p>
+                            
+                            <div class="bg-[#121212] rounded-xl p-4 inline-block w-full border border-[#333]">
+                                <span class="block text-gray-400 text-sm mb-1">특강 & 클리닉</span>
+                                <span class="block text-3xl font-black text-white tracking-tight">15:00 ~ 19:00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 상세 시간표 (오른쪽) -->
+                    <div class="md:col-span-3 bg-[#1A1A1A] p-6 rounded-2xl border border-[#333]">
+                        <h3 class="text-lg font-bold text-white mb-6 pl-2 border-l-4 border-emerald-500">세부 시간표</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-6 group">
+                                <div class="w-24 shrink-0 text-emerald-400 font-bold group-hover:text-emerald-300 transition-colors text-right md:text-left">15:00~15:50</div>
+                                <div class="flex-grow bg-[#252525] p-2.5 rounded text-sm text-gray-300 border border-[#333] group-hover:border-emerald-500/30 transition-colors">진도 수업</div>
+                            </div>
+                            
+                            <div class="flex items-center gap-6">
+                                <div class="w-24 shrink-0 text-gray-600 text-xs text-right md:text-left">15:50~16:00</div>
+                                <div class="text-gray-600 text-xs">휴식</div>
+                            </div>
+
+                            <div class="flex items-center gap-6 group">
+                                <div class="w-24 shrink-0 text-emerald-400 font-bold group-hover:text-emerald-300 transition-colors text-right md:text-left">16:00~16:50</div>
+                                <div class="flex-grow bg-[#252525] p-2.5 rounded text-sm text-gray-300 border border-[#333] group-hover:border-emerald-500/30 transition-colors">진도 수업</div>
+                            </div>
+
+                            <div class="flex items-center gap-6">
+                                <div class="w-24 shrink-0 text-gray-600 text-xs text-right md:text-left">16:50~17:00</div>
+                                <div class="text-gray-600 text-xs">휴식</div>
+                            </div>
+
+                            <div class="flex items-center gap-6 group">
+                                <div class="w-24 shrink-0 text-white font-bold group-hover:text-blue-300 transition-colors text-right md:text-left">17:00~18:20</div>
+                                <div class="flex-grow bg-[#252525] p-2.5 rounded text-sm text-white font-medium border border-[#333] group-hover:border-blue-500/30 transition-colors">대표 유형 문풀</div>
+                            </div>
+
+                            <div class="flex items-center gap-6">
+                                <div class="w-24 shrink-0 text-gray-600 text-xs text-right md:text-left">18:20~18:30</div>
+                                <div class="text-gray-600 text-xs">휴식</div>
+                            </div>
+
+                            <div class="flex items-center gap-6 group">
+                                <div class="w-24 shrink-0 text-white font-bold group-hover:text-red-300 transition-colors text-right md:text-left">18:30~19:00</div>
+                                <div class="flex-grow bg-[#252525] p-2.5 rounded text-sm text-white font-medium border border-[#333] flex justify-between items-center group-hover:border-red-500/30 transition-colors">
+                                    <span>Daily TEST</span>
+                                    <span class="text-xs bg-red-900/40 text-red-300 px-1.5 py-0.5 rounded">Check</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- CTA 및 푸터 -->
+        <footer class="mt-24 text-center border-t border-[#333] pt-12">
+            <h3 class="text-xl font-bold mb-8 text-white">
+                문의사항이 있으신가요?
+            </h3>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mb-10">
+                <a href="thro.html" class="cta-button w-full sm:w-auto bg-[#2A2A2A] border border-[#444] hover:bg-[#333] text-white font-bold py-3.5 px-8 rounded-xl text-lg transition-all">
+                    ← 메인으로 돌아가기
+                </a>
+                <a href="https://open.kakao.com/o/s9qHTzTh" target="_blank" class="cta-button w-full sm:w-auto bg-gradient-to-r from-emerald-500 to-emerald-400 text-white font-bold py-3.5 px-8 rounded-xl text-lg shadow-lg hover:shadow-emerald-500/20 transform hover:-translate-y-1 transition-all">
+                    상담 신청 (Kakao)
+                </a>
+            </div>
+            <div class="text-gray-500 text-sm space-y-1">
+                <p>우독학원 검단 | 032-719-4054</p>
+                <p>세빛학원 송파 | 02-425-1278</p>
+            </div>
+        </footer>
+
+    </div>
+</body>
+</html>
