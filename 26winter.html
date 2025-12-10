@@ -295,38 +295,40 @@
                         <h3 class="text-lg font-bold text-white mb-6 pl-2 border-l-4 border-emerald-500">세부 시간표</h3>
                         
                         <div class="space-y-4">
-                            <div class="flex items-center gap-6 group">
-                                <div class="w-24 shrink-0 text-emerald-400 font-bold group-hover:text-emerald-300 transition-colors text-right md:text-left">15:00~15:50</div>
+                            <!-- 모바일: 세로 배치 / PC: 가로 배치 (flex-col sm:flex-row) -->
+                            <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6 group">
+                                <div class="w-full sm:w-24 shrink-0 text-emerald-400 font-bold group-hover:text-emerald-300 transition-colors text-left sm:text-right">15:00~15:50</div>
                                 <div class="flex-grow bg-[#252525] p-2.5 rounded text-sm text-gray-300 border border-[#333] group-hover:border-emerald-500/30 transition-colors">진도 수업</div>
                             </div>
                             
-                            <div class="flex items-center gap-6">
-                                <div class="w-24 shrink-0 text-gray-600 text-xs text-right md:text-left">15:50~16:00</div>
-                                <div class="text-gray-600 text-xs">휴식</div>
+                            <!-- 휴식 시간 -->
+                            <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-6">
+                                <div class="w-full sm:w-24 shrink-0 text-gray-600 text-xs text-left sm:text-right pl-1 sm:pl-0">15:50~16:00</div>
+                                <div class="text-gray-600 text-xs pl-1 sm:pl-0">휴식</div>
                             </div>
 
-                            <div class="flex items-center gap-6 group">
-                                <div class="w-24 shrink-0 text-emerald-400 font-bold group-hover:text-emerald-300 transition-colors text-right md:text-left">16:00~16:50</div>
+                            <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6 group">
+                                <div class="w-full sm:w-24 shrink-0 text-emerald-400 font-bold group-hover:text-emerald-300 transition-colors text-left sm:text-right">16:00~16:50</div>
                                 <div class="flex-grow bg-[#252525] p-2.5 rounded text-sm text-gray-300 border border-[#333] group-hover:border-emerald-500/30 transition-colors">진도 수업</div>
                             </div>
 
-                            <div class="flex items-center gap-6">
-                                <div class="w-24 shrink-0 text-gray-600 text-xs text-right md:text-left">16:50~17:00</div>
-                                <div class="text-gray-600 text-xs">휴식</div>
+                            <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-6">
+                                <div class="w-full sm:w-24 shrink-0 text-gray-600 text-xs text-left sm:text-right pl-1 sm:pl-0">16:50~17:00</div>
+                                <div class="text-gray-600 text-xs pl-1 sm:pl-0">휴식</div>
                             </div>
 
-                            <div class="flex items-center gap-6 group">
-                                <div class="w-24 shrink-0 text-white font-bold group-hover:text-blue-300 transition-colors text-right md:text-left">17:00~18:20</div>
+                            <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6 group">
+                                <div class="w-full sm:w-24 shrink-0 text-white font-bold group-hover:text-blue-300 transition-colors text-left sm:text-right">17:00~18:20</div>
                                 <div class="flex-grow bg-[#252525] p-2.5 rounded text-sm text-white font-medium border border-[#333] group-hover:border-blue-500/30 transition-colors">대표 유형 문풀</div>
                             </div>
 
-                            <div class="flex items-center gap-6">
-                                <div class="w-24 shrink-0 text-gray-600 text-xs text-right md:text-left">18:20~18:30</div>
-                                <div class="text-gray-600 text-xs">휴식</div>
+                            <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-6">
+                                <div class="w-full sm:w-24 shrink-0 text-gray-600 text-xs text-left sm:text-right pl-1 sm:pl-0">18:20~18:30</div>
+                                <div class="text-gray-600 text-xs pl-1 sm:pl-0">휴식</div>
                             </div>
 
-                            <div class="flex items-center gap-6 group">
-                                <div class="w-24 shrink-0 text-white font-bold group-hover:text-red-300 transition-colors text-right md:text-left">18:30~19:00</div>
+                            <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6 group">
+                                <div class="w-full sm:w-24 shrink-0 text-white font-bold group-hover:text-red-300 transition-colors text-left sm:text-right">18:30~19:00</div>
                                 <div class="flex-grow bg-[#252525] p-2.5 rounded text-sm text-white font-medium border border-[#333] flex justify-between items-center group-hover:border-red-500/30 transition-colors">
                                     <span>Daily TEST</span>
                                     <span class="text-xs bg-red-900/40 text-red-300 px-1.5 py-0.5 rounded">Check</span>
