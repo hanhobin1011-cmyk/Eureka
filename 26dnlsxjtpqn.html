@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 예비고2 윈터스쿨 세부 계획표</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans KR"', 'sans-serif'],
+                    },
+                    colors: {
+                        dark: {
+                            bg: '#121212',
+                            card: '#1E1E1E',
+                            border: '#333333'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #121212;
+            color: #E0E0E0;
+            word-break: keep-all;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #34d399, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        /* 스크롤바 커스텀 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #121212;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-emerald-500 selection:text-white">
+
+    <div class="container mx-auto max-w-3xl px-4 py-8 md:py-16">
+
+        <!-- 헤더 -->
+        <header class="text-center mb-12">
+            <span class="inline-block px-3 py-1 rounded-full border border-emerald-500/30 bg-emerald-900/10 text-emerald-400 text-xs font-bold mb-4">
+                한호빈 수학 & 우독학원
+            </span>
+            <h1 class="text-3xl md:text-4xl font-black text-white mb-2 leading-tight">
+                2026 예비고2 <br class="md:hidden" />
+                <span class="gradient-text">윈터 세부 계획표</span>
+            </h1>
+            <p class="text-gray-400 text-sm md:text-base mt-2">
+                대수 & 미적분 집중 완성 커리큘럼
+            </p>
+        </header>
+
+        <!-- 학습 목표 섹션 -->
+        <section class="mb-12 bg-gradient-to-br from-emerald-900/20 to-blue-900/20 rounded-2xl p-6 border border-emerald-500/30">
+            <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                이번 방학 학습 목표
+            </h2>
+            <ul class="space-y-3">
+                <li class="flex items-start gap-3">
+                    <span class="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-sm font-bold">1</span>
+                    <span class="text-gray-200">대수, 미적분1 <strong class="text-white">개념 & 유형 정복</strong></span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-sm font-bold">2</span>
+                    <span class="text-gray-200">학생 개별 <strong class="text-white">학습 개선 전략</strong> 수립 및 달성</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-sm font-bold">3</span>
+                    <span class="text-gray-200"><strong class="text-white">자기주도학습 시간표</strong> 작성 및 시행</span>
+                </li>
+            </ul>
+        </section>
+
+        <!-- 네비게이션 탭 -->
+        <nav class="flex justify-center gap-2 mb-10 overflow-x-auto pb-2 scrollbar-hide">
+            <a href="#bridge" class="shrink-0 px-4 py-2 bg-[#1E1E1E] border border-[#333] rounded-xl text-sm font-medium text-gray-300 hover:border-emerald-500 hover:text-emerald-400 transition-all">브릿지 코스</a>
+            <a href="#daily-schedule" class="shrink-0 px-4 py-2 bg-[#1E1E1E] border border-[#333] rounded-xl text-sm font-medium text-gray-300 hover:border-blue-500 hover:text-blue-400 transition-all">일일 시간표</a>
+            <a href="#main-term" class="shrink-0 px-4 py-2 bg-[#1E1E1E] border border-[#333] rounded-xl text-sm font-medium text-gray-300 hover:border-blue-500 hover:text-blue-400 transition-all">정규 윈터</a>
+            <a href="#school-info" class="shrink-0 px-4 py-2 bg-[#1E1E1E] border border-[#333] rounded-xl text-sm font-medium text-gray-300 hover:border-purple-500 hover:text-purple-400 transition-all">학교별 일정</a>
+        </nav>
+
+        <main class="space-y-16">
+            
+            <!-- 1. 브릿지 코스 -->
+            <section id="bridge">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-1 h-6 bg-emerald-500 rounded-full"></div>
+                    <h2 class="text-xl font-bold text-white">12월 브릿지 코스</h2>
+                </div>
+                
+                <p class="text-gray-400 text-sm mb-6 leading-relaxed bg-[#1A1A1A] p-4 rounded-xl border border-[#333]">
+                    학생들의 윈터 적응을 위한 학습 과정으로 <span class="text-emerald-400 font-bold">기초개념과 연산학습</span>을 위주로 
+                    학생들이 시스템에 적응할 수 있는 시간을 확보하고자 합니다.
+                </p>
+
+                <div class="bg-dark-card rounded-2xl border border-dark-border overflow-hidden">
+                    <div class="divide-y divide-dark-border">
+                        <!-- 12/23 -->
+                        <div class="p-4 flex items-start gap-4 hover:bg-[#252525] transition-colors">
+                            <div class="w-14 shrink-0 text-center">
+                                <span class="block text-xs text-gray-500">12월</span>
+                                <span class="block text-lg font-bold text-white">23</span>
+                                <span class="block text-xs text-emerald-400">화요일</span>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-emerald-300 mb-1">대수</h3>
+                                <p class="text-gray-300 text-sm">지수와 로그 연산</p>
+                            </div>
+                        </div>
+                        <!-- 12/25 -->
+                        <div class="p-4 flex items-start gap-4 bg-red-900/10">
+                            <div class="w-14 shrink-0 text-center">
+                                <span class="block text-xs text-gray-500">12월</span>
+                                <span class="block text-lg font-bold text-red-400">25</span>
+                                <span class="block text-xs text-red-400">목요일</span>
+                            </div>
+                            <div class="flex items-center h-full pt-2">
+                                <span class="text-red-400 font-bold text-sm">🎄 크리스마스 휴강</span>
+                            </div>
+                        </div>
+                        <!-- 12/30 -->
+                        <div class="p-4 flex items-start gap-4 hover:bg-[#252525] transition-colors">
+                            <div class="w-14 shrink-0 text-center">
+                                <span class="block text-xs text-gray-500">12월</span>
+                                <span class="block text-lg font-bold text-white">30</span>
+                                <span class="block text-xs text-emerald-400">화요일</span>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-emerald-300 mb-1">대수</h3>
+                                <p class="text-gray-300 text-sm">삼각함수 각 변환 연산</p>
+                            </div>
+                        </div>
+                         <!-- 01/01 -->
+                         <div class="p-4 flex items-start gap-4 bg-red-900/10">
+                            <div class="w-14 shrink-0 text-center">
+                                <span class="block text-xs text-gray-500">1월</span>
+                                <span class="block text-lg font-bold text-red-400">01</span>
+                                <span class="block text-xs text-red-400">목요일</span>
+                            </div>
+                            <div class="flex items-center h-full pt-2">
+                                <span class="text-red-400 font-bold text-sm">🌅 신정 휴강</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. 세부 시간표 -->
+            <section id="daily-schedule">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-1 h-6 bg-blue-500 rounded-full"></div>
+                    <h2 class="text-xl font-bold text-white">윈터스쿨 하루 일과표</h2>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- 평일 상세 시간표 -->
+                    <div class="bg-dark-card rounded-2xl border border-dark-border p-6">
+                        <h3 class="text-lg font-bold text-white mb-6 border-b border-[#333] pb-2">평일 정규 일과</h3>
+                        <div class="space-y-0">
+                            <!-- 오전 세션 -->
+                            <div class="relative pl-6 pb-6 border-l border-gray-700">
+                                <div class="absolute -left-1.5 top-0 w-3 h-3 bg-blue-500 rounded-full"></div>
+                                <div class="text-blue-400 text-xs font-bold mb-2">오전 정규 수업</div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <span class="text-white font-medium w-24 shrink-0">10:00~11:50</span>
+                                    <span class="text-gray-300 text-right text-sm">진도 수업 (50분 수업/10분 휴식)</span>
+                                </div>
+                                <div class="flex justify-between items-start">
+                                    <span class="text-white font-medium w-24 shrink-0">12:00~13:00</span>
+                                    <span class="text-gray-300 text-right text-sm">대표 유형 문제풀이</span>
+                                </div>
+                            </div>
+                            
+                            <!-- 점심 시간 -->
+                            <div class="relative pl-6 pb-6 border-l border-gray-700">
+                                <div class="absolute -left-1.5 top-0 w-3 h-3 bg-gray-500 rounded-full"></div>
+                                <div class="flex justify-between items-center bg-[#252525] p-2 rounded border border-[#333]">
+                                    <span class="text-white font-bold text-sm">13:00~14:00</span>
+                                    <span class="text-gray-300 text-sm">점심시간</span>
+                                </div>
+                            </div>
+
+                            <!-- 오후 세션 -->
+                            <div class="relative pl-6 border-l border-gray-700/0">
+                                <div class="absolute -left-1.5 top-0 w-3 h-3 bg-emerald-500 rounded-full"></div>
+                                <div class="text-emerald-400 text-xs font-bold mb-2">오후 클리닉 & 테스트</div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <span class="text-white font-medium w-24 shrink-0">14:00~15:50</span>
+                                    <span class="text-gray-300 text-right text-sm">유사 문제풀이 & 오답 정리</span>
+                                </div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <span class="text-white font-medium w-24 shrink-0">16:00~16:30</span>
+                                    <span class="text-gray-300 text-right text-sm">Daily TEST & 자기주도 점검</span>
+                                </div>
+                                <div class="flex justify-between items-start">
+                                    <span class="text-white font-medium w-24 shrink-0">16:30~17:00</span>
+                                    <span class="text-gray-300 text-right text-sm">Daily TEST 오답 마무리</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 주말 클리닉 -->
+                    <div class="flex flex-col gap-6">
+                        <div class="bg-dark-card rounded-2xl border border-dark-border p-6 flex-grow">
+                            <h3 class="text-lg font-bold text-white mb-4 border-b border-[#333] pb-2 flex justify-between items-center">
+                                주말 클리닉
+                                <span class="bg-purple-900/30 text-purple-400 text-xs px-2 py-1 rounded">토·일</span>
+                            </h3>
+                            <p class="text-gray-400 text-sm mb-6">
+                                <span class="text-purple-400 font-bold">주간 TEST</span> 및 <span class="text-white">부족한 부분에 대한 학습 보완</span>을 목표로 진행합니다.
+                            </p>
+                            
+                            <div class="bg-[#1A1A1A] p-4 rounded-xl border border-[#333] text-center">
+                                <span class="inline-block bg-purple-900/20 text-purple-300 text-xs font-bold px-2 py-1 rounded mb-3">택 1 응시</span>
+                                <div class="flex flex-col gap-2">
+                                    <div class="bg-[#252525] py-3 rounded border border-[#333] text-white font-medium hover:border-purple-500/30 transition-colors">
+                                        13:00 ~ 16:00
+                                    </div>
+                                    <div class="text-[10px] text-gray-500 font-bold uppercase tracking-widest relative my-1">
+                                        <span class="bg-[#1A1A1A] px-2 relative z-10">OR</span>
+                                        <div class="absolute top-1/2 left-0 w-full h-px bg-[#333] -z-0"></div>
+                                    </div>
+                                    <div class="bg-[#252525] py-3 rounded border border-[#333] text-white font-medium hover:border-purple-500/30 transition-colors">
+                                        16:00 ~ 19:00
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. 정규 윈터 스쿨 -->
+            <section id="main-term">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-1 h-6 bg-blue-500 rounded-full"></div>
+                        <h2 class="text-xl font-bold text-white">정규 윈터 커리큘럼</h2>
+                    </div>
+                    <div class="flex gap-2 text-[10px] font-bold">
+                        <span class="px-2 py-1 bg-blue-900/30 text-blue-400 border border-blue-500/30 rounded">월/수: 미적분</span>
+                        <span class="px-2 py-1 bg-emerald-900/30 text-emerald-400 border border-emerald-500/30 rounded">화/목: 대수</span>
+                    </div>
+                </div>
+
+                <!-- 주차별 카드 그리드 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="schedule-grid">
+                    <!-- JS로 데이터 렌더링 됩니다 -->
+                </div>
+            </section>
+
+            <!-- 4. 학교별 일정 -->
+            <section id="school-info">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-1 h-6 bg-purple-500 rounded-full"></div>
+                    <h2 class="text-xl font-bold text-white">학교별 개학 일정 확인</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- 백석고 -->
+                    <div class="bg-dark-card border border-dark-border rounded-xl p-5 relative overflow-hidden group">
+                        <div class="absolute top-0 right-0 w-16 h-16 bg-gray-500/10 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-150"></div>
+                        <h3 class="text-lg font-bold text-white mb-2">백석고등학교</h3>
+                        <p class="text-sm text-gray-400 mb-2">개학 일정: 학교 학사일정 참조</p>
+                        <div class="bg-[#2A2A2A] border border-[#444] rounded p-2">
+                            <p class="text-xs text-gray-300">✅ 특이사항 없음</p>
+                        </div>
+                    </div>
+
+                    <!-- 마전고 -->
+                    <div class="bg-dark-card border border-dark-border rounded-xl p-5 relative overflow-hidden group">
+                        <div class="absolute top-0 right-0 w-16 h-16 bg-purple-500/10 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-150"></div>
+                        <h3 class="text-lg font-bold text-white mb-2">마전고등학교</h3>
+                        <p class="text-sm text-gray-400 mb-2">방학: 1/7(수) <br> 개학: 2/2(월) ~ 2/4(수)</p>
+                        <div class="bg-purple-900/20 border border-purple-500/30 rounded p-2">
+                            <p class="text-xs text-purple-300">⚠️ 1/5~1/7 수업: 18:00~21:00 변경</p>
+                        </div>
+                    </div>
+
+                    <!-- 검단고 -->
+                    <div class="bg-dark-card border border-dark-border rounded-xl p-5 relative overflow-hidden group">
+                         <div class="absolute top-0 right-0 w-16 h-16 bg-blue-500/10 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-150"></div>
+                        <h3 class="text-lg font-bold text-white mb-2">검단고등학교</h3>
+                        <p class="text-sm text-gray-400 mb-2">개학: 2/4(수) ~ 2/5(목)</p>
+                        <div class="bg-blue-900/20 border border-blue-500/30 rounded p-2">
+                            <p class="text-xs text-blue-300">✅ 개학 주간 수업 시간 변경 확인 필수</p>
+                        </div>
+                    </div>
+
+                    <!-- 원당고 -->
+                    <div class="bg-dark-card border border-dark-border rounded-xl p-5 relative overflow-hidden group">
+                         <div class="absolute top-0 right-0 w-16 h-16 bg-emerald-500/10 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-150"></div>
+                        <h3 class="text-lg font-bold text-white mb-2">원당고등학교</h3>
+                        <p class="text-sm text-gray-400 mb-2">개학: 2/2(월) ~ 2/5(목)</p>
+                        <div class="bg-emerald-900/20 border border-emerald-500/30 rounded p-2">
+                            <p class="text-xs text-emerald-300">✅ 개학 주간 수업 시간 변경 확인 필수</p>
+                        </div>
+                    </div>
+
+                    <!-- 아라고 / 이음고 (색상 변경됨: Pink/Rose) -->
+                    <div class="bg-dark-card border border-dark-border rounded-xl p-5 relative overflow-hidden group">
+                         <div class="absolute top-0 right-0 w-16 h-16 bg-rose-500/10 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-150"></div>
+                        <h3 class="text-lg font-bold text-white mb-2">아라고 / 이음고</h3>
+                        <p class="text-sm text-gray-400 mb-2">개학: 2/2(월) ~ 2/4(수)</p>
+                        <div class="bg-rose-900/20 border border-rose-500/30 rounded p-2">
+                            <p class="text-xs text-rose-300">✅ 개학 주간 수업 시간 변경 확인 필수</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="mt-16 pt-8 border-t border-dark-border text-center text-gray-500 text-xs pb-8">
+            <p class="mb-2">© 2026 한호빈 수학 & 우독학원</p>
+            <p>본 일정은 학교 학사일정 변동에 따라 변경될 수 있습니다.</p>
+        </footer>
+
+    </div>
+
+    <!-- 데이터 스크립트 -->
+    <script>
+        // CSV 데이터를 기반으로 한 일정 데이터 배열
+        const scheduleData = [
+            {
+                week: "1주차",
+                dates: [
+                    { date: "01/05 (월)", type: "mi", title: "1강. 함수의 극한" },
+                    { date: "01/06 (화)", type: "dae", title: "1강. 지수" },
+                    { date: "01/07 (수)", type: "mi", title: "2강. 함수의 연속" },
+                    { date: "01/08 (목)", type: "dae", title: "2강. 로그" }
+                ]
+            },
+            {
+                week: "2주차",
+                dates: [
+                    { date: "01/12 (월)", type: "mi", title: "3강. 미분계수와 도함수" },
+                    { date: "01/13 (화)", type: "dae", title: "3강. 지수/로그함수(1)" },
+                    { date: "01/14 (수)", type: "mi", title: "4강. 도함수의 활용(1)" },
+                    { date: "01/15 (목)", type: "dae", title: "4강. 지수/로그함수(2)" }
+                ]
+            },
+            {
+                week: "3주차",
+                dates: [
+                    { date: "01/19 (월)", type: "mi", title: "5강. 도함수의 활용(2)" },
+                    { date: "01/20 (화)", type: "dae", title: "5강. 지수/로그함수의 활용" },
+                    { date: "01/21 (수)", type: "mi", title: "6강. 도함수의 활용(3)" },
+                    { date: "01/22 (목)", type: "dae", title: "6강. 삼각함수" }
+                ]
+            },
+            {
+                week: "4주차",
+                dates: [
+                    { date: "01/26 (월)", type: "mi", title: "7강. 도함수의 활용(4)" },
+                    { date: "01/27 (화)", type: "dae", title: "7강. 삼각함수의 그래프(1)" },
+                    { date: "01/28 (수)", type: "mi", title: "8강. 다항함수 심화" },
+                    { date: "01/29 (목)", type: "dae", title: "8강. 삼각함수의 그래프(2)" }
+                ]
+            },
+            {
+                week: "5주차 (개학 주간)",
+                highlight: true,
+                dates: [
+                    { date: "02/02 (월)", type: "off", title: "개학 휴강 (클리닉 유지)" },
+                    { date: "02/03 (화)", type: "mi", title: "9강. 부정적분", note: "18:00~21:00" },
+                    { date: "02/04 (수)", type: "off", title: "개학 휴강 (클리닉 유지)" },
+                    { date: "02/05 (목)", type: "dae", title: "9강. 삼각함수 활용", note: "18:00~21:00" }
+                ]
+            },
+            {
+                week: "6주차",
+                dates: [
+                    { date: "02/09 (월)", type: "mi", title: "10강. 정적분(1)" },
+                    { date: "02/10 (화)", type: "dae", title: "10강. 등차/등비수열(1)" },
+                    { date: "02/11 (수)", type: "mi", title: "11강. 정적분(2)" },
+                    { date: "02/12 (목)", type: "dae", title: "11강. 등차/등비수열(2)" }
+                ]
+            },
+            {
+                week: "7주차 (설 연휴)",
+                dates: [
+                    { date: "02/16~18", type: "holiday", title: "설 연휴 휴강" },
+                    { date: "02/19 (목)", type: "review", title: "미적분 + 대수 총복습" }
+                ]
+            },
+            {
+                week: "8주차 (종강)",
+                dates: [
+                    { date: "02/23 (월)", type: "mi", title: "12강. 정적분의 활용" },
+                    { date: "02/24 (화)", type: "dae", title: "12강. 수열의 합" },
+                    { date: "02/25 (수)", type: "mi", title: "13강. 전체 복습" },
+                    { date: "02/26 (목)", type: "dae", title: "13강. 수학적 귀납법 (종강)" }
+                ]
+            }
+        ];
+
+        const container = document.getElementById('schedule-grid');
+
+        scheduleData.forEach(week => {
+            const card = document.createElement('div');
+            card.className = `bg-[#1E1E1E] border ${week.highlight ? 'border-yellow-600/50' : 'border-[#333]'} rounded-xl p-5 hover:border-gray-500 transition-colors`;
+            
+            let itemsHtml = '';
+            week.dates.forEach(item => {
+                let badgeClass = "";
+                let badgeText = "";
+                
+                if (item.type === 'mi') {
+                    badgeClass = "bg-blue-900/30 text-blue-400 border-blue-500/30";
+                    badgeText = "미적";
+                } else if (item.type === 'dae') {
+                    badgeClass = "bg-emerald-900/30 text-emerald-400 border-emerald-500/30";
+                    badgeText = "대수";
+                } else if (item.type === 'off') {
+                    badgeClass = "bg-gray-700 text-gray-300 border-gray-500";
+                    badgeText = "휴강";
+                } else if (item.type === 'holiday') {
+                    badgeClass = "bg-red-900/30 text-red-400 border-red-500/30";
+                    badgeText = "연휴";
+                } else {
+                    badgeClass = "bg-purple-900/30 text-purple-400 border-purple-500/30";
+                    badgeText = "복습";
+                }
+
+                itemsHtml += `
+                    <div class="flex items-start justify-between py-2 border-b border-[#333] last:border-0">
+                        <div class="flex flex-col gap-0.5">
+                            <span class="text-xs text-gray-500 font-medium">${item.date}</span>
+                            <span class="text-sm text-gray-200 font-medium">${item.title}</span>
+                            ${item.note ? `<span class="text-[10px] text-yellow-500 font-bold mt-0.5">🕒 ${item.note}</span>` : ''}
+                        </div>
+                        <span class="shrink-0 px-1.5 py-0.5 rounded text-[10px] border ${badgeClass} font-bold ml-2">
+                            ${badgeText}
+                        </span>
+                    </div>
+                `;
+            });
+
+            card.innerHTML = `
+                <h3 class="text-lg font-bold text-white mb-3 flex justify-between items-center">
+                    ${week.week}
+                    ${week.highlight ? '<span class="text-[10px] bg-yellow-600 text-white px-2 py-0.5 rounded-full">시간표 변동 주의</span>' : ''}
+                </h3>
+                <div class="flex flex-col gap-1">
+                    ${itemsHtml}
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    </script>
+</body>
+</html>
