@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEBIT ACADEMY | 2026 Winter Masterplan</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Noto Sans KR -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- React & Babel CDNs -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #020204;
+            color: #f8fafc;
+            margin: 0;
+            overflow-x: hidden;
+        }
+        .noise-overlay {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            z-index: 50;
+        }
+        .brand-text-item {
+            font-style: italic;
+            padding-right: 0.5rem; 
+            display: inline-block;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333; 
+            border-radius: 4px;
+        }
+        
+        /* Animation for Floating Button */
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+            100% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+        }
+        .consult-btn-pulse {
+            animation: pulse-ring 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <div class="noise-overlay"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+        const { Phone, Calendar, ArrowRight, ChevronRight, MapPin, Clock } = lucide;
+
+        // --- Icons Components (Inline SVGs for reliability) ---
+        const IconTarget = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>;
+        const IconZap = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>;
+        const IconSparkles = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L12 3Z"/></svg>;
+        const IconBook = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>;
+        const IconMicroscope = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M6 18h8"/><path d="M3 22h18"/><path d="M14 22a7 7 0 1 0 0-14h-1"/><path d="M9 14h2"/><path d="M9 12a2 2 0 1 0-2 2c.7 0 1.2-.3 1.5-.8L11 8"/></svg>;
+        const IconGlobe = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>;
+        const IconMoon = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>;
+
+        const App = () => {
+            const [grade, setGrade] = useState('high2'); // 'high2' or 'high3'
+            const [isScrolled, setIsScrolled] = useState(false);
+
+            useEffect(() => {
+                const handleScroll = () => setIsScrolled(window.scrollY > 50);
+                window.addEventListener('scroll', handleScroll);
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
+            // 통합 테마 설정
+            const THEME = {
+                SUBJECTS: {
+                    TEST: { color: '#FF4444', bg: 'rgba(255, 68, 68, 0.1)', icon: <IconTarget /> },
+                    KOREAN: { color: '#00AAFF', bg: 'rgba(0, 170, 255, 0.1)', icon: <IconBook /> },
+                    // 예비 고2 수학
+                    MATH_ALG: { color: '#00FF85', bg: 'rgba(0, 255, 133, 0.1)', icon: <IconZap /> },
+                    MATH_CALC: { color: '#FF007A', bg: 'rgba(255, 0, 122, 0.1)', icon: <IconSparkles /> },
+                    // 예비 고3 수학 (색상은 고2와 대응되게 유지)
+                    MATH_1: { color: '#00FF85', bg: 'rgba(0, 255, 133, 0.1)', icon: <IconZap /> },
+                    MATH_2: { color: '#FF007A', bg: 'rgba(255, 0, 122, 0.1)', icon: <IconSparkles /> },
+                    
+                    ENGLISH: { color: '#FFD700', bg: 'rgba(255, 215, 0, 0.1)', icon: <IconGlobe /> },
+                    SOC_SCI: { color: '#00F5FF', bg: 'rgba(0, 245, 255, 0.1)', icon: <IconMicroscope /> },
+                    SELF_STUDY: { color: '#A855F7', bg: 'rgba(168, 85, 247, 0.1)', icon: <IconMoon /> },
+                }
+            };
+
+            // 데이터 정의
+            const DATA = {
+                high2: {
+                    Monday: [
+                        { type: 'morning', time: '10:00 - 13:00', title: '과목별\n주간 TEST', location: '본관', sub: 'TEST', tag: '실전 연습' },
+                        { type: 'afternoon', time: '14:00 - 18:00', title: '영어 [정규 수업]', location: '본관', sub: 'ENGLISH', tag: '수능 기초' },
+                        { type: 'evening', time: '18:00 - 19:00', title: '저녁 자율 학습\n[관리형]', location: 'Study Hall', sub: 'SELF_STUDY', tag: '자기주도' }
+                    ],
+                    Tuesday: [
+                        { type: 'morning', time: '10:00 - 13:00', title: '국어 [정규 수업]', location: '본관', sub: 'KOREAN', tag: '수능 기초' },
+                        { type: 'afternoon', time: '14:00 - 18:00', title: '수학 대수 [정규 수업]', location: '본관', sub: 'MATH_ALG', tag: '개념 완성' },
+                        { type: 'evening', time: '18:00 - 19:00', title: '저녁 자율 학습\n[관리형]', location: 'Study Hall', sub: 'SELF_STUDY', tag: '자기주도' }
+                    ],
+                    Wednesday: [
+                        { type: 'morning', time: '10:00 - 13:00', title: '사회/과학\n개별 수업&클리닉', location: '본관', sub: 'SOC_SCI', tag: '맞춤 지도' },
+                        { type: 'afternoon', time: '14:00 - 18:00', title: '수학 미적분1 [정규 수업]', location: '본관', sub: 'MATH_CALC', tag: '개념 완성' },
+                        { type: 'evening', time: '18:00 - 19:00', title: '저녁 자율 학습\n[관리형]', location: 'Study Hall', sub: 'SELF_STUDY', tag: '자기주도' }
+                    ],
+                    Thursday: [
+                        { type: 'morning', time: '10:00 - 13:00', title: '사회/과학\n개별 수업&클리닉', location: '본관', sub: 'SOC_SCI', tag: '맞춤 지도' },
+                        { type: 'afternoon', time: '14:00 - 18:00', title: '수학 대수 [정규 수업]', location: '본관', sub: 'MATH_ALG', tag: '개념 완성' },
+                        { type: 'evening', time: '18:00 - 19:00', title: '저녁 자율 학습\n[관리형]', location: 'Study Hall', sub: 'SELF_STUDY', tag: '자기주도' }
+                    ],
+                    Friday: [
+                        { type: 'morning', time: '10:00 - 13:00', title: '국어 [정규 수업]', location: '본관', sub: 'KOREAN', tag: '수능 기초' },
+                        { type: 'afternoon', time: '14:00 - 18:00', title: '수학 미적분1 [정규 수업]', location: '본관', sub: 'MATH_CALC', tag: '개념 완성' },
+                        { type: 'evening', time: '18:00 - 19:00', title: '저녁 자율 학습\n[관리형]', location: 'Study Hall', sub: 'SELF_STUDY', tag: '자기주도' }
+                    ],
+                    Saturday: [
+                        { type: 'morning', time: '10:00 - 13:00', title: '사회/과학\n개별 수업&클리닉', location: '본관', sub: 'SOC_SCI', tag: '맞춤 지도' },
+                        { type: 'afternoon', time: '14:00 - 18:00', title: '영어 [정규 수업]', location: '본관', sub: 'ENGLISH', tag: '수능 기초' },
+                        { type: 'evening', time: '18:00 - 19:00', title: '저녁 자율 학습\n[관리형]', location: 'Study Hall', sub: 'SELF_STUDY', tag: '자기주도' }
+                    ],
+                },
+                high3: {
+                    Monday: [
+                        { type: 'morning', time: '10:00 - 13:00', title: '과목별\n주간 TEST', location: '본관', sub: 'TEST', tag: '실전 연습' },
+                        { type: 'afternoon', time: '14:00 - 18:00', title: '영어 [정규 수업]', location: '본관', sub: 'ENGLISH', tag: '수능 기초' },
+                        { type: 'evening', time: '18:00 - 19:00', title: '저녁 자율 학습\n[관리형]', location: 'Study Hall', sub: 'SELF_STUDY', tag: '자기주도' }
+                    ],
+                    Tuesday: [
+                        { type: 'morning', time: '10:00 - 13:00', title: '국어 [정규 수업]', location: '본관', sub: 'KOREAN', tag: '수능 기초' },
+                        { type: 'afternoon', time: '14:00 - 18:00', title: '수학 1 [정규 수업]', location: '본관', sub: 'MATH_1', tag: '개념 완성' },
+                        { type: 'evening', time: '18:00 - 19:00', title: '저녁 자율 학습\n[관리형]', location: 'Study Hall', sub: 'SELF_STUDY', tag: '자기주도' }
+                    ],
+                    Wednesday: [
+                        { type: 'morning', time: '10:00 - 13:00', title: '사회/과학\n개별 수업&클리닉', location: '본관', sub: 'SOC_SCI', tag: '맞춤 지도' },
+                        { type: 'afternoon', time: '14:00 - 18:00', title: '수학 2 [정규 수업]', location: '본관', sub: 'MATH_2', tag: '개념 완성' },
+                        { type: 'evening', time: '18:00 - 19:00', title: '저녁 자율 학습\n[관리형]', location: 'Study Hall', sub: 'SELF_STUDY', tag: '자기주도' }
+                    ],
+                    Thursday: [
+                        { type: 'morning', time: '10:00 - 13:00', title: '사회/과학\n개별 수업&클리닉', location: '본관', sub: 'SOC_SCI', tag: '맞춤 지도' },
+                        { type: 'afternoon', time: '14:00 - 18:00', title: '수학 1 [정규 수업]', location: '본관', sub: 'MATH_1', tag: '개념 완성' },
+                        { type: 'evening', time: '18:00 - 19:00', title: '저녁 자율 학습\n[관리형]', location: 'Study Hall', sub: 'SELF_STUDY', tag: '자기주도' }
+                    ],
+                    Friday: [
+                        { type: 'morning', time: '10:00 - 13:00', title: '국어 [정규 수업]', location: '본관', sub: 'KOREAN', tag: '수능 기초' },
+                        { type: 'afternoon', time: '14:00 - 18:00', title: '수학 2 [정규 수업]', location: '본관', sub: 'MATH_2', tag: '개념 완성' },
+                        { type: 'evening', time: '18:00 - 19:00', title: '저녁 자율 학습\n[관리형]', location: 'Study Hall', sub: 'SELF_STUDY', tag: '자기주도' }
+                    ],
+                    Saturday: [
+                        { type: 'morning', time: '10:00 - 13:00', title: '사회/과학\n개별 수업&클리닉', location: '본관', sub: 'SOC_SCI', tag: '맞춤 지도' },
+                        { type: 'afternoon', time: '14:00 - 18:00', title: '영어 [정규 수업]', location: '본관', sub: 'ENGLISH', tag: '수능 기초' },
+                        { type: 'evening', time: '18:00 - 19:00', title: '저녁 자율 학습\n[관리형]', location: 'Study Hall', sub: 'SELF_STUDY', tag: '자기주도' }
+                    ],
+                }
+            };
+
+            const dayKeys = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            const dayLabels = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+            
+            const currentSchedule = DATA[grade];
+
+            return (
+                <div className="min-h-screen relative p-4 pb-32 md:p-8 lg:p-12 transition-all duration-500">
+                    {/* Background Glows */}
+                    <div className="fixed top-[-10%] right-[-5%] w-[60%] h-[60%] bg-indigo-600/10 blur-[150px] rounded-full -z-10 pointer-events-none"></div>
+                    <div className="fixed bottom-[-10%] left-[-5%] w-[60%] h-[60%] bg-blue-600/10 blur-[150px] rounded-full -z-10 pointer-events-none"></div>
+
+                    {/* Navigation Bar (Sticky) */}
+                    <nav className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${isScrolled ? 'bg-[#020204]/80 backdrop-blur-xl border-b border-white/5 py-4' : 'py-6'}`}>
+                        <div className="max-w-[1400px] mx-auto px-4 md:px-8 flex justify-between items-center">
+                             <div className="flex flex-col">
+                                <span className="text-[10px] font-black tracking-[0.3em] text-blue-400 uppercase hidden md:block">Archive 2026 Winter</span>
+                                <h1 className="text-xl md:text-2xl font-black italic tracking-tighter text-white">
+                                    SEBIT <span className="text-blue-500">ACADEMY</span>
+                                </h1>
+                            </div>
+                            
+                            {/* Grade Toggler */}
+                            <div className="flex bg-white/5 p-1 rounded-full border border-white/10 backdrop-blur-md">
+                                <button 
+                                    onClick={() => setGrade('high2')}
+                                    className={`px-4 md:px-6 py-2 rounded-full text-[11px] md:text-xs font-bold transition-all duration-300 ${grade === 'high2' ? 'bg-white text-black shadow-lg scale-105' : 'text-white/40 hover:text-white'}`}
+                                >
+                                    예비 고2
+                                </button>
+                                <button 
+                                    onClick={() => setGrade('high3')}
+                                    className={`px-4 md:px-6 py-2 rounded-full text-[11px] md:text-xs font-bold transition-all duration-300 ${grade === 'high3' ? 'bg-white text-black shadow-lg scale-105' : 'text-white/40 hover:text-white'}`}
+                                >
+                                    예비 고3
+                                </button>
+                            </div>
+                        </div>
+                    </nav>
+
+                    <div className="max-w-[1400px] mx-auto relative z-10 mt-20 md:mt-24">
+                        {/* Header Content */}
+                        <header className="mb-12 md:mb-16">
+                            <div className="flex flex-col items-center text-center gap-4">
+                                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 mb-2">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse"></span>
+                                    <span className="text-[10px] font-bold text-blue-300 uppercase tracking-widest">2026 Winter Season</span>
+                                </div>
+                                <h2 className="text-4xl md:text-6xl lg:text-7xl font-black text-white tracking-tight leading-[1.1] italic">
+                                    {grade === 'high2' ? 'Pre-High School 2' : 'Pre-High School 3'} <br/>
+                                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">
+                                        Masterplan
+                                    </span>
+                                </h2>
+                                <p className="text-white/40 max-w-lg mx-auto text-xs md:text-sm font-light leading-relaxed">
+                                    세빛학원만의 체계적인 윈터스쿨 커리큘럼으로<br className="md:hidden"/>
+                                    {grade === 'high2' ? '수학의 기초와 심화를 동시에 완성합니다.' : '수능 실전 감각을 극대화합니다.'}
+                                </p>
+                            </div>
+                        </header>
+
+                        {/* Schedule Grid */}
+                        <div className="flex flex-col gap-12">
+                            {/* Day Labels (Desktop Only) */}
+                            <div className="hidden lg:grid grid-cols-6 gap-6 px-4">
+                                {dayLabels.map((label, index) => (
+                                    <div key={label} className="text-center group cursor-default">
+                                        <span className={`text-[12px] font-black tracking-[0.3em] uppercase italic transition-colors duration-300 ${index === 0 ? 'text-blue-400' : 'text-white/20 group-hover:text-white/50'}`}>
+                                            {label}
+                                        </span>
+                                    </div>
+                                ))}
+                            </div>
+
+                            <div className="space-y-16 lg:space-y-12">
+                                <SessionRow title="Morning" subtitle="10:00 - 13:00" dayKeys={dayKeys} data={currentSchedule} type="morning" theme={THEME} dayLabels={dayLabels} />
+                                
+                                {/* Lunch Break */}
+                                <div className="relative py-4">
+                                    <div className="absolute inset-0 flex items-center">
+                                        <div className="w-full border-t border-dashed border-white/10"></div>
+                                    </div>
+                                    <div className="relative flex justify-center">
+                                        <span className="bg-[#020204] px-6 text-[11px] text-white/30 font-mono tracking-widest uppercase border border-white/10 rounded-full py-1.5 flex items-center gap-2">
+                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                                            Lunch Break 13:00 - 14:00
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <SessionRow title="Afternoon" subtitle="14:00 - 18:00" dayKeys={dayKeys} data={currentSchedule} type="afternoon" theme={THEME} dayLabels={dayLabels} />
+                                <SessionRow title="Evening" subtitle="18:00 - 19:00" dayKeys={dayKeys} data={currentSchedule} type="evening" theme={THEME} dayLabels={dayLabels} />
+                            </div>
+                        </div>
+
+                        {/* Footer */}
+                        <footer className="mt-24 pt-10 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-8 opacity-40 hover:opacity-100 transition-all duration-500 pb-20 md:pb-0">
+                            <div className="flex flex-wrap justify-center gap-4 md:gap-6">
+                                {Object.entries(THEME.SUBJECTS).slice(0, 4).map(([key, value]) => (
+                                    <div key={key} className="flex items-center gap-2">
+                                        <div className="w-2 h-2 rounded-sm" style={{ backgroundColor: value.color }}></div>
+                                        <span className="text-[9px] font-bold tracking-widest uppercase text-white/60">{key.replace('MATH_', 'Math ')}</span>
+                                    </div>
+                                ))}
+                            </div>
+                            <div className="text-center md:text-right">
+                                <p className="text-[12px] font-bold text-white tracking-widest uppercase mb-1">Sebit Academy</p>
+                                <p className="text-[10px] font-mono text-white/40">02-425-1278</p>
+                            </div>
+                        </footer>
+                    </div>
+
+                    {/* Floating Consultation Button (FAB) */}
+                    <a 
+                        href="tel:024251278"
+                        className="fixed bottom-6 right-6 z-50 flex items-center gap-3 pl-5 pr-2 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-full shadow-[0_0_30px_rgba(37,99,235,0.3)] transition-all hover:scale-105 active:scale-95 group"
+                    >
+                        <div className="flex flex-col items-start">
+                            <span className="text-[10px] font-bold text-blue-200 uppercase tracking-wider leading-none mb-0.5">상담 문의</span>
+                            <span className="text-sm font-black tracking-widest leading-none">02-425-1278</span>
+                        </div>
+                        <div className="w-10 h-10 rounded-full bg-white text-blue-600 flex items-center justify-center shadow-lg group-hover:rotate-12 transition-transform">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        </div>
+                    </a>
+                </div>
+            );
+        };
+
+        const SessionRow = ({ title, subtitle, dayKeys, data, type, theme, dayLabels }) => (
+            <div className="space-y-6">
+                <div className="flex items-end gap-4 px-2 lg:px-0">
+                    <h2 className="text-2xl md:text-3xl font-black text-white tracking-tight italic uppercase relative z-10">
+                        {title}
+                        <span className="absolute -bottom-1 left-0 w-full h-3 bg-blue-500/20 -z-10 skew-x-[-12deg]"></span>
+                    </h2>
+                    <span className="text-[11px] font-mono text-white/40 mb-1.5 tracking-widest hidden md:inline-block">{subtitle}</span>
+                    <div className="h-px flex-1 bg-gradient-to-r from-white/10 to-transparent mb-2"></div>
+                </div>
+                
+                {/* Mobile: 1 Column, Tablet: 2 Columns, Desktop: 6 Columns */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 lg:gap-6">
+                    {dayKeys.map((day, index) => {
+                        const items = data[day] ? data[day].filter(item => item.type === type) : [];
+                        return (
+                            <div key={`${day}-${type}`} className="flex flex-col">
+                                {/* Mobile Day Header */}
+                                <div className="lg:hidden mb-2 px-1 flex items-center justify-between">
+                                    <span className="text-[10px] font-black tracking-[0.2em] text-blue-400 uppercase italic">
+                                        {dayLabels[index]}
+                                    </span>
+                                    <span className="text-[10px] text-white/20 font-mono">{subtitle}</span>
+                                </div>
+
+                                <div className="h-full min-h-[110px]">
+                                    {items.length > 0 ? (
+                                        <div className="h-full">
+                                            {items.map((item, idx) => {
+                                                const sub = theme.SUBJECTS[item.sub];
+                                                return (
+                                                    <div key={idx} className="h-full group relative overflow-hidden bg-[#111115] hover:bg-[#1a1a20] border border-white/5 hover:border-white/20 rounded-xl p-4 lg:p-4 transition-all duration-300 shadow-lg hover:shadow-2xl">
+                                                        {/* Top Glow Bar */}
+                                                        <div className="absolute top-0 left-0 right-0 h-0.5 opacity-60 group-hover:opacity-100 transition-opacity duration-300" style={{ backgroundColor: sub.color, boxShadow: `0 0 10px ${sub.color}` }}></div>
+                                                        
+                                                        <div className="relative z-10 flex flex-col h-full justify-between gap-3">
+                                                            <div className="flex items-start justify-between">
+                                                                <div className="p-1.5 rounded-lg bg-white/5 text-white/70 group-hover:text-white group-hover:scale-110 transition-all duration-300" style={{ color: sub.color }}>
+                                                                    {sub.icon}
+                                                                </div>
+                                                                <span className="text-[9px] font-black px-2 py-1 rounded text-white/40 border border-white/5 bg-black/20 uppercase tracking-wider">
+                                                                    {item.location}
+                                                                </span>
+                                                            </div>
+                                                            
+                                                            <div>
+                                                                <h3 className="text-[14px] lg:text-[13px] font-bold text-gray-100 leading-snug whitespace-pre-line group-hover:text-white transition-colors">
+                                                                    {item.title}
+                                                                </h3>
+                                                            </div>
+
+                                                            <div className="pt-3 border-t border-white/5 flex items-center justify-between">
+                                                                <span className="text-[10px] font-bold tracking-wide" style={{ color: sub.color }}>
+                                                                    {item.tag}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                    ) : (
+                                        <div className="h-full min-h-[110px] rounded-xl border border-dashed border-white/5 bg-white/[0.01] flex items-center justify-center group/empty">
+                                            <div className="w-1.5 h-1.5 rounded-full bg-white/5 group-hover/empty:bg-white/10 transition-colors"></div>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+            </div>
+        );
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
