@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2022 개정 수학과 교육과정 | Masterplan</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Noto Sans KR -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- React & Babel CDNs -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #020204;
+            color: #f8fafc;
+            margin: 0;
+            overflow-x: hidden;
+        }
+        .noise-overlay {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            z-index: 50;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333; 
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <div class="noise-overlay"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+        
+        // --- Custom Icons Components (Inline SVGs for reliability) ---
+        const IconNew = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>;
+        const IconDel = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/></svg>;
+        const IconMove = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m16 6 4 14"/><path d="M12 6v14"/><path d="M8 8v12"/><path d="M4 4v16"/></svg>;
+        const IconSame = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>;
+
+        const App = () => {
+            const [isScrolled, setIsScrolled] = useState(false);
+
+            useEffect(() => {
+                const handleScroll = () => setIsScrolled(window.scrollY > 50);
+                window.addEventListener('scroll', handleScroll);
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
+            // 테마 설정 (변경 유형별 색상)
+            const THEME = {
+                TYPES: {
+                    ADD: { color: '#00FF85', bg: 'rgba(0, 255, 133, 0.1)', label: '내용 추가', icon: <IconNew /> }, 
+                    DEL: { color: '#FF4444', bg: 'rgba(255, 68, 68, 0.1)', label: '내용 삭제', icon: <IconDel /> }, 
+                    MOVE: { color: '#00AAFF', bg: 'rgba(0, 170, 255, 0.1)', label: '이동/변경', icon: <IconMove /> }, 
+                    SAME: { color: '#94A3B8', bg: 'rgba(148, 163, 184, 0.1)', label: '변화 없음', icon: <IconSame /> }, 
+                }
+            };
+
+            // 데이터 정의
+            const DATA = {
+                common: [
+                    {
+                        subject: "공통수학 1·2",
+                        changes: [
+                            { title: "행렬 재도입", detail: "09개정 삭제 ➡ 22개정 부활", type: "ADD", tag: "핵심 변화" },
+                            { title: "도형의 방정식 이동", detail: "1학기 ➡ 2학기로 이동", type: "MOVE", tag: "시기 변경" },
+                            { title: "외분점 삭제", detail: "내분점만 다룸", type: "DEL", tag: "학습 부담 경감" },
+                            { title: "경우의 수 이동", detail: "1학기 ➡ 2학기로 이동", type: "MOVE", tag: "시기 변경" }
+                        ]
+                    }
+                ],
+                elective: [
+                    {
+                        subject: "대수 (구 수학I)",
+                        changes: [
+                            { title: "내용 변화 없음", detail: "기존 수학I 과목명 변경", type: "SAME", tag: "현행 유지" }
+                        ]
+                    },
+                    {
+                        subject: "미적분 I (구 수학II)",
+                        changes: [
+                            { title: "정적분 정의 변경", detail: "넓이 개념으로 도입", type: "MOVE", tag: "개념 도입 순서" }
+                        ]
+                    },
+                    {
+                        subject: "확률과 통계",
+                        changes: [
+                            { title: "모비율/표본비율 재도입", detail: "15개정 삭제 ➡ 22개정 부활", type: "ADD", tag: "통계 강화" },
+                            { title: "원순열 삭제", detail: "순열 학습 요소 축소", type: "DEL", tag: "부담 경감" }
+                        ]
+                    },
+                    {
+                        subject: "미적분 II (구 미적분)",
+                        changes: [
+                            { title: "내용 변화 없음", detail: "기존 미적분 과목명 변경", type: "SAME", tag: "현행 유지" }
+                        ]
+                    },
+                    {
+                        subject: "기하",
+                        changes: [
+                            { title: "공간벡터 재도입", detail: "15개정 삭제 ➡ 22개정 부활", type: "ADD", tag: "핵심 변화" },
+                            { title: "이차곡선 관계 축소", detail: "직선과 접하는 경우만 다룸", type: "DEL", tag: "범위 축소" },
+                            { title: "외분점 삭제", detail: "공간도형/벡터에서 제외", type: "DEL", tag: "부담 경감" }
+                        ]
+                    }
+                ]
+            };
+
+            return (
+                <div className="min-h-screen relative p-4 pb-32 md:p-8 lg:p-12 transition-all duration-500">
+                    {/* Background Glows */}
+                    <div className="fixed top-[-10%] right-[-5%] w-[60%] h-[60%] bg-indigo-600/10 blur-[150px] rounded-full -z-10 pointer-events-none"></div>
+                    <div className="fixed bottom-[-10%] left-[-5%] w-[60%] h-[60%] bg-blue-600/10 blur-[150px] rounded-full -z-10 pointer-events-none"></div>
+
+                    {/* Navigation Bar (Sticky) */}
+                    <nav className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${isScrolled ? 'bg-[#020204]/80 backdrop-blur-xl border-b border-white/5 py-4' : 'py-6'}`}>
+                        <div className="max-w-[1400px] mx-auto px-4 md:px-8 flex justify-center md:justify-start items-center">
+                             <div className="flex flex-col text-center md:text-left">
+                                <span className="text-[10px] font-black tracking-[0.3em] text-blue-400 uppercase hidden md:block">2022 Revised Curriculum</span>
+                                <h1 className="text-xl md:text-2xl font-black italic tracking-tighter text-white">
+                                    MATH <span className="text-blue-500">CURRICULUM</span>
+                                </h1>
+                            </div>
+                        </div>
+                    </nav>
+
+                    <div className="max-w-[1400px] mx-auto relative z-10 mt-20 md:mt-24">
+                        {/* Header Content */}
+                        <header className="mb-16 md:mb-24">
+                            <div className="flex flex-col items-center text-center gap-4">
+                                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 mb-2">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse"></span>
+                                    <span className="text-[10px] font-bold text-blue-300 uppercase tracking-widest">Update Info</span>
+                                </div>
+                                {/* 제목 크기 및 간격 조정 (잘림 방지) */}
+                                <h2 className="text-3xl md:text-5xl lg:text-7xl font-black text-white tracking-tight leading-normal italic py-2">
+                                    2022 개정 교육과정 <br/>
+                                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 inline-block pb-2">
+                                        고등수학 핵심 변화
+                                    </span>
+                                </h2>
+                                <p className="text-white/40 max-w-lg mx-auto text-xs md:text-sm font-light leading-relaxed">
+                                    행렬의 부활부터 공간벡터 재도입까지.<br className="md:hidden"/>
+                                    새롭게 바뀌는 수학 교육과정의 주요 포인트를 확인하세요.
+                                </p>
+                            </div>
+                        </header>
+
+                        {/* Content Grid */}
+                        <div className="flex flex-col gap-24">
+                            {/* Section 1: 1학년 공통 */}
+                            <div className="relative">
+                                <div className="flex items-center gap-4 mb-8">
+                                    <div className="bg-blue-600 w-1.5 h-8 rounded-full"></div>
+                                    <h3 className="text-2xl md:text-3xl font-black text-white italic tracking-tighter">
+                                        1학년 <span className="text-blue-500 font-light not-italic text-lg md:text-xl ml-2 tracking-normal">| 공통 과목</span>
+                                    </h3>
+                                </div>
+                                <div className="flex flex-col gap-16 pl-0 md:pl-6 border-l border-white/5 md:border-none">
+                                    {DATA.common.map((section, idx) => (
+                                        <SubjectSection 
+                                            key={idx} 
+                                            title={section.subject} 
+                                            changes={section.changes} 
+                                            theme={THEME} 
+                                        />
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Section 2: 2/3학년 선택 */}
+                            <div className="relative">
+                                <div className="flex items-center gap-4 mb-8">
+                                    <div className="bg-purple-600 w-1.5 h-8 rounded-full"></div>
+                                    <h3 className="text-2xl md:text-3xl font-black text-white italic tracking-tighter">
+                                        2·3학년 <span className="text-purple-500 font-light not-italic text-lg md:text-xl ml-2 tracking-normal">| 선택 과목</span>
+                                    </h3>
+                                </div>
+                                <div className="flex flex-col gap-16 pl-0 md:pl-6 border-l border-white/5 md:border-none">
+                                    {DATA.elective.map((section, idx) => (
+                                        <SubjectSection 
+                                            key={idx} 
+                                            title={section.subject} 
+                                            changes={section.changes} 
+                                            theme={THEME} 
+                                        />
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Footer */}
+                        <footer className="mt-32 pt-10 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-8 opacity-40 hover:opacity-100 transition-all duration-500 pb-20 md:pb-0">
+                            <div className="flex flex-wrap justify-center gap-4 md:gap-6">
+                                {Object.entries(THEME.TYPES).map(([key, value]) => (
+                                    <div key={key} className="flex items-center gap-2">
+                                        <div className="w-2 h-2 rounded-sm" style={{ backgroundColor: value.color }}></div>
+                                        <span className="text-[9px] font-bold tracking-widest uppercase text-white/60">{value.label}</span>
+                                    </div>
+                                ))}
+                            </div>
+                            <div className="text-center md:text-right">
+                                <p className="text-[12px] font-bold text-white tracking-widest uppercase mb-1">Education Reform</p>
+                                <p className="text-[10px] font-mono text-white/40">2022 Revised Curriculum Summary</p>
+                            </div>
+                        </footer>
+                    </div>
+                </div>
+            );
+        };
+
+        const SubjectSection = ({ title, changes, theme }) => (
+            <div className="space-y-6">
+                <div className="flex items-end gap-4 px-2 lg:px-0">
+                    <h2 className="text-xl md:text-2xl font-bold text-white/90 tracking-tight relative z-10">
+                        {title}
+                    </h2>
+                    <div className="h-px flex-1 bg-gradient-to-r from-white/10 to-transparent mb-2"></div>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+                    {changes.map((item, idx) => {
+                        const style = theme.TYPES[item.type];
+                        return (
+                            <div key={idx} className="group relative overflow-hidden bg-[#111115] hover:bg-[#1a1a20] border border-white/5 hover:border-white/20 rounded-xl p-5 transition-all duration-300 shadow-lg hover:shadow-2xl hover:-translate-y-1">
+                                {/* Top Glow Bar */}
+                                <div className="absolute top-0 left-0 right-0 h-0.5 opacity-60 group-hover:opacity-100 transition-opacity duration-300" style={{ backgroundColor: style.color, boxShadow: `0 0 10px ${style.color}` }}></div>
+                                
+                                <div className="relative z-10 flex flex-col h-full justify-between gap-4">
+                                    <div className="flex items-start justify-between">
+                                        <div className="p-2 rounded-lg bg-white/5 text-white/70 group-hover:text-white group-hover:scale-110 transition-all duration-300 ring-1 ring-white/5" style={{ color: style.color }}>
+                                            {style.icon}
+                                        </div>
+                                        <span className="text-[9px] font-black px-2 py-1 rounded text-white/40 border border-white/5 bg-black/20 uppercase tracking-wider" style={{ borderColor: `${style.color}30`, color: style.color }}>
+                                            {style.label}
+                                        </span>
+                                    </div>
+                                    
+                                    <div>
+                                        <h3 className="text-lg font-bold text-gray-100 leading-snug group-hover:text-white transition-colors mb-2">
+                                            {item.title}
+                                        </h3>
+                                        <p className="text-xs text-white/50 leading-relaxed font-light">
+                                            {item.detail}
+                                        </p>
+                                    </div>
+
+                                    <div className="pt-3 border-t border-white/5 flex items-center justify-between">
+                                        <span className="text-[10px] font-bold tracking-wide uppercase opacity-70 group-hover:opacity-100 transition-opacity" style={{ color: style.color }}>
+                                            #{item.tag}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+            </div>
+        );
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
