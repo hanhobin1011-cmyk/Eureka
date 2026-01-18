@@ -163,15 +163,18 @@
         // [데이터베이스 설정]
         const base = "https://hanhobin1011-cmyk.github.io/Score/";
 
-        // 학생 데이터 생성 함수
+        // 학생 데이터 생성 함수 (수정됨)
         function createStudent(name, pw, academy) {
+            // 세빛학원('sebit')인 경우 링크 생성 시 이름 뒤에 'S' 추가
+            const urlName = academy === 'sebit' ? name + 'S' : name;
+
             return {
                 name: name,
                 pw: pw,
                 academy: academy,
                 reports: {
-                    "jan_week2": `${base}${name}012.html`,
-                    "jan_week3": `${base}${name}013.html`
+                    "jan_week2": `${base}${urlName}012.html`,
+                    "jan_week3": `${base}${urlName}013.html`
                 }
             };
         }
@@ -196,7 +199,7 @@
             createStudent("장하람", "8285", "udok"),
             createStudent("정지훈", "3078", "udok"),
 
-            // [세빛학원 송파] 신규 학생들
+            // [세빛학원 송파] 신규 학생들 (링크에 S 자동 추가됨)
             createStudent("박건우", "0104", "sebit"),
             createStudent("우상범", "6922", "sebit"),
             createStudent("김서현", "1174", "sebit"),
