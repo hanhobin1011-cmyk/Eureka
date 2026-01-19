@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>한호빈 수학 2월 수업일정</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #050505; /* 더 깊은 검정 */
+            color: #f1f5f9; /* 기본 텍스트를 아주 밝은 회색으로 변경 */
+            margin: 0;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .noise-overlay {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            z-index: 50;
+        }
+        
+        .glass-panel {
+            background: rgba(30, 30, 35, 0.7); /* 배경을 살짝 밝게 해서 대비 확보 */
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15); /* 테두리 더 선명하게 */
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+        }
+        
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(to right, #93c5fd, #d8b4fe); /* 그라디언트 톤 업 */
+        }
+
+        /* Animation */
+        @keyframes slide-up {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-slide-up {
+            animation: slide-up 0.4s ease-out forwards;
+        }
+
+        /* Calendar Grid */
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 1px;
+            background-color: rgba(255, 255, 255, 0.2); /* 그리드 선 더 잘 보이게 */
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+            border-radius: 0.75rem;
+        }
+        .calendar-cell {
+            background-color: #121215; /* 셀 배경색 조정 */
+            min-height: 90px;
+        }
+        @media (max-width: 768px) {
+            .calendar-cell { min-height: 70px; }
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <div class="noise-overlay"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        const CALENDAR_DATA = {
+            '2026-02-01': [
+                { type: 'calc', status: 'normal', title: '미적분 1차시', time: '13:00-16:00', note: '2/2(월) 대체', detail: '속도와 가속도' }
+            ],
+            '2026-02-02': [
+                { type: 'calc', status: 'moved', title: '미적분 변경', time: '', note: '→ 2/1(일) 이동' }
+            ],
+            '2026-02-03': [
+                { type: 'alg', status: 'normal', title: '대수 1차시', time: '18:00-22:00', note: '', detail: '삼각함수 활용(개념+연산)' }
+            ],
+            '2026-02-04': [
+                { type: 'calc', status: 'cancel', title: '미적분 휴강', time: '', note: '' }
+            ],
+            '2026-02-05': [
+                { type: 'alg', status: 'normal', title: '대수 2차시', time: '18:00-22:00', note: '', detail: '삼각함수 활용(유형)' }
+            ],
+            '2026-02-09': [
+                { type: 'calc', status: 'normal', title: '미적분 2차시', time: '10:00-13:00', clinic: '14:00~', detail: '복습' }
+            ],
+            '2026-02-10': [
+                { type: 'alg', status: 'normal', title: '대수 3차시', time: '10:00-13:00', clinic: '14:00~', detail: '복습' }
+            ],
+            '2026-02-11': [
+                { type: 'calc', status: 'normal', title: '미적분 3차시', time: '10:00-13:00', clinic: '14:00~', detail: '복습' }
+            ],
+            '2026-02-12': [
+                { type: 'alg', status: 'normal', title: '대수 4차시', time: '10:00-13:00', clinic: '14:00~', detail: '복습' }
+            ],
+            '2026-02-16': [
+                { type: 'calc', status: 'cancel', title: '미적분 휴강', time: '', note: '' }
+            ],
+            '2026-02-17': [
+                { type: 'alg', status: 'moved', title: '대수 변경', time: '', note: '→ 3/1(일) 이동' }
+            ],
+            '2026-02-18': [
+                { type: 'calc', status: 'moved', title: '미적분 변경', time: '', note: '→ 2/22(일) 이동' }
+            ],
+            '2026-02-19': [
+                { type: 'alg', status: 'normal', title: '대수 5차시', time: '10:00-13:00', clinic: '14:00~', detail: '등차수열' }
+            ],
+            '2026-02-22': [
+                { type: 'calc', status: 'normal', title: '미적분 4차시', time: '13:00-16:00', note: '2/18(수) 대체', detail: '부정적분' }
+            ],
+            '2026-02-23': [
+                { type: 'calc', status: 'normal', title: '미적분 5차시', time: '10:00-13:00', clinic: '14:00~', detail: '정적분' }
+            ],
+            '2026-02-24': [
+                { type: 'alg', status: 'normal', title: '대수 6차시', time: '10:00-13:00', clinic: '14:00~', detail: '등비수열' }
+            ],
+            '2026-02-25': [
+                { type: 'calc', status: 'final', title: '미적분 6차시', time: '10:00-13:00', clinic: '14:00~', detail: '정적분의 활용 / 종강' }
+            ],
+            '2026-02-26': [
+                { type: 'alg', status: 'normal', title: '대수 7차시', time: '10:00-13:00', clinic: '14:00~', detail: '수열의 합' }
+            ],
+            '2026-03-01': [
+                { type: 'alg', status: 'final', title: '대수 8차시', time: '18:00-22:00', note: '2/17(화) 대체', detail: '수학적 귀납법 / 종강' }
+            ]
+        };
+
+        const App = () => {
+            const today = new Date();
+            const todayStr = `2026-02-${String(today.getDate()).padStart(2,'0')}`;
+            const initialDate = CALENDAR_DATA[todayStr] ? todayStr : null;
+            const [selectedDate, setSelectedDate] = useState(initialDate);
+
+            // Calendar Logic (2026 Feb)
+            const daysInMonth = 28;
+            const calendarDays = [];
+            
+            for (let i = 1; i <= daysInMonth; i++) {
+                calendarDays.push({ day: i, dateStr: `2026-02-${String(i).padStart(2, '0')}` });
+            }
+            // Add March 1st
+            calendarDays.push({ day: 1, dateStr: '2026-03-01', isNextMonth: true });
+            // Fill remaining grid
+            for(let i=2; i <= 6; i++) {
+                 calendarDays.push({ day: i, dateStr: `2026-03-${String(i).padStart(2, '0')}`, isNextMonth: true });
+            }
+
+            const getEvents = (dateStr) => CALENDAR_DATA[dateStr] || [];
+
+            return (
+                <div className="min-h-screen relative pb-20">
+                    {/* Background Light Effects */}
+                    <div className="fixed top-0 left-0 w-full h-full overflow-hidden -z-10">
+                         <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-blue-600/15 blur-[100px] rounded-full"></div>
+                         <div className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] bg-purple-600/15 blur-[100px] rounded-full"></div>
+                    </div>
+
+                    {/* Header */}
+                    <header className="pt-10 pb-4 text-center px-4">
+                        <span className="text-[11px] font-black tracking-[0.3em] text-blue-300 uppercase">Woodok Academy</span>
+                        <h1 className="text-3xl md:text-4xl font-black italic tracking-tighter text-white mt-1 mb-2">
+                            한호빈 수학 <span className="gradient-text">2월 수업일정　</span>
+                        </h1>
+                        
+                        <div className="flex justify-center gap-4 mt-4 text-xs font-semibold text-gray-300">
+                            <div className="flex items-center gap-1.5"><div className="w-2.5 h-2.5 rounded-full bg-blue-500 shadow-[0_0_8px_#3b82f6]"></div>미적분</div>
+                            <div className="flex items-center gap-1.5"><div className="w-2.5 h-2.5 rounded-full bg-purple-500 shadow-[0_0_8px_#a855f7]"></div>대수</div>
+                            <div className="flex items-center gap-1.5"><div className="w-2.5 h-2.5 rounded-full border border-gray-400"></div>휴강/변경</div>
+                        </div>
+                    </header>
+
+                    {/* 안내 문구 (요청 사항) */}
+                    <div className="text-center mb-6">
+                        <p className="inline-block px-4 py-1.5 rounded-full bg-white/10 border border-white/10 text-xs md:text-sm text-blue-200 font-medium animate-pulse">
+                            👇 날짜를 클릭하면 상세일정을 보실 수 있습니다.
+                        </p>
+                    </div>
+
+                    {/* Main Content Area */}
+                    <div className="max-w-3xl mx-auto px-4">
+                        {/* Calendar Grid */}
+                        <div className="glass-panel rounded-xl overflow-hidden p-1 shadow-2xl">
+                            {/* Weekday Header */}
+                            <div className="grid grid-cols-7 text-center py-3 border-b border-white/10 bg-white/[0.05]">
+                                {['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'].map((d, i) => (
+                                    <div key={d} className={`text-[11px] font-black tracking-widest ${i === 0 ? 'text-red-400' : 'text-gray-300'}`}>
+                                        {d}
+                                    </div>
+                                ))}
+                            </div>
+
+                            {/* Cells */}
+                            <div className="calendar-grid">
+                                {calendarDays.map((cell, idx) => {
+                                    const events = getEvents(cell.dateStr);
+                                    const isSelected = selectedDate === cell.dateStr;
+                                    const isSun = idx % 7 === 0;
+
+                                    return (
+                                        <div 
+                                            key={idx} 
+                                            onClick={() => events.length > 0 && setSelectedDate(cell.dateStr)}
+                                            className={`calendar-cell p-1.5 flex flex-col relative transition-all duration-200 cursor-pointer hover:bg-white/[0.1] ${cell.isNextMonth ? 'opacity-40 bg-black/40' : ''} ${isSelected ? 'bg-white/[0.15] ring-2 ring-blue-400/50 z-10' : ''}`}
+                                        >
+                                            {/* Date Number */}
+                                            <span className={`text-sm font-bold mb-1 ml-1 ${isSun ? 'text-red-400' : 'text-gray-100'}`}>
+                                                {cell.day}
+                                            </span>
+
+                                            {/* Event Indicators (Chips) */}
+                                            <div className="flex flex-col gap-1 overflow-hidden">
+                                                {events.map((evt, eIdx) => {
+                                                    // 명시성(Visibility)을 위해 배경색을 좀 더 진하게 조정
+                                                    let bgClass = "bg-gray-700 text-gray-300 border border-gray-600"; 
+                                                    let textDeco = evt.status === 'cancel' || evt.status === 'moved' ? "line-through opacity-70" : "";
+                                                    
+                                                    if (evt.status === 'normal' || evt.status === 'final') {
+                                                        if (evt.type === 'calc') bgClass = "bg-[#1e3a8a] text-blue-100 border border-blue-500/50"; // 진한 파랑 배경 + 밝은 텍스트
+                                                        if (evt.type === 'alg') bgClass = "bg-[#581c87] text-purple-100 border border-purple-500/50"; // 진한 보라 배경 + 밝은 텍스트
+                                                    }
+                                                    if (evt.status === 'final') bgClass += " ring-1 ring-red-500";
+
+                                                    return (
+                                                        <div key={eIdx} className={`rounded-[4px] px-1.5 py-0.5 text-[10px] truncate leading-tight ${bgClass}`}>
+                                                            <div className={`font-semibold ${textDeco}`}>
+                                                                {evt.title.split(' ')[0]}
+                                                            </div>
+                                                        </div>
+                                                    );
+                                                })}
+                                            </div>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </div>
+
+                        {/* Detailed View Panel */}
+                        <div className="mt-6 mb-12 min-h-[160px]">
+                             {selectedDate ? (
+                                <div key={selectedDate} className="animate-slide-up glass-panel rounded-xl p-6 border-t border-t-white/20 relative overflow-hidden">
+                                    {/* Selection Glow */}
+                                    <div className={`absolute top-0 left-0 w-1.5 h-full ${getEvents(selectedDate)[0]?.type === 'calc' ? 'bg-blue-500' : 'bg-purple-500'}`}></div>
+                                    
+                                    <h3 className="text-white font-bold text-xl mb-4 flex items-center gap-2">
+                                        {parseInt(selectedDate.split('-')[1])}월 {parseInt(selectedDate.split('-')[2])}일 
+                                        <span className="text-xs font-normal text-gray-300 bg-white/10 px-2 py-0.5 rounded-full border border-white/10">Schedule Detail</span>
+                                    </h3>
+                                    
+                                    <div className="space-y-4">
+                                        {getEvents(selectedDate).map((evt, i) => (
+                                            <div key={i} className="flex gap-4 items-start group">
+                                                <div className="flex-1">
+                                                    <div className="flex items-center gap-2 mb-2">
+                                                        <span className={`text-[11px] font-black px-2.5 py-1 rounded uppercase tracking-wider shadow-sm ${
+                                                            evt.status === 'cancel' || evt.status === 'moved' ? 'bg-gray-700 text-gray-300' : 
+                                                            (evt.type === 'calc' ? 'bg-blue-600 text-white' : 'bg-purple-600 text-white')
+                                                        }`}>
+                                                            {evt.title}
+                                                        </span>
+                                                        {evt.status === 'final' && (
+                                                            <span className="text-[11px] text-red-100 font-bold border border-red-500 bg-red-600 px-2 py-0.5 rounded shadow-sm">종강</span>
+                                                        )}
+                                                        {evt.note && (
+                                                            <span className="text-[11px] text-orange-200 font-bold bg-orange-900/50 px-2 py-0.5 rounded border border-orange-500/50">★ {evt.note}</span>
+                                                        )}
+                                                    </div>
+
+                                                    <h4 className={`text-lg font-bold text-white mb-1.5 ${evt.status === 'cancel' ? 'line-through opacity-50' : ''}`}>
+                                                        {evt.detail}
+                                                    </h4>
+
+                                                    {(evt.time || evt.clinic) && (
+                                                        <div className="flex flex-wrap gap-4 text-sm text-gray-300 mt-2 bg-black/20 p-2 rounded-lg">
+                                                            {evt.time && (
+                                                                <div className="flex items-center gap-2">
+                                                                    <div className="w-1.5 h-1.5 bg-blue-400 rounded-full"></div>
+                                                                    <span className="font-semibold text-gray-400">수업</span>
+                                                                    <span className="text-white font-bold tracking-wide">{evt.time}</span>
+                                                                </div>
+                                                            )}
+                                                            {evt.clinic && (
+                                                                <div className="flex items-center gap-2">
+                                                                    <div className="w-1.5 h-1.5 bg-green-400 rounded-full"></div>
+                                                                    <span className="font-semibold text-gray-400">클리닉</span>
+                                                                    <span className="text-white font-bold tracking-wide">{evt.clinic}</span>
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className="text-center py-10 text-gray-400 border border-dashed border-gray-600 rounded-xl bg-white/[0.02]">
+                                    <p className="text-sm">👆 위 달력에서 날짜를 선택해주세요.</p>
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Footer */}
+                        <footer className="text-center pb-10">
+                            <p className="text-[10px] font-bold text-gray-500 tracking-widest uppercase mb-1">Woodok Academy</p>
+                            <p className="text-[11px] font-medium text-gray-400">Math Instructor Han Ho-Bin</p>
+                        </footer>
+                    </div>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+<script>
+  // 1. 마우스 우클릭 방지
+  document.addEventListener('contextmenu', function(e) {
+    e.preventDefault(); // 우클릭 메뉴가 뜨지 않게 합니다.
+    // alert('보안을 위해 우클릭을 사용할 수 없습니다.'); // 경고창이 필요하면 주석(//)을 지우세요.
+  });
+
+  // 2. 개발자 도구 및 소스 보기 단축키 방지
+  document.addEventListener('keydown', function(e) {
+    // F12 키 방지 (가장 많이 쓰는 개발자 도구 키)
+    if (e.keyCode === 123) {
+      e.preventDefault();
+      e.returnValue = false;
+    }
+
+    // Ctrl+Shift+I (개발자 도구) / Ctrl+Shift+J (콘솔) / Ctrl+Shift+C (요소 검사)
+    if (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) {
+      e.preventDefault();
+      e.returnValue = false;
+    }
+
+    // Ctrl+U (소스 보기)
+    if (e.ctrlKey && e.keyCode === 85) {
+      e.preventDefault();
+      e.returnValue = false;
+    }
+  });
+</script>
+</body>
+</html>
