@@ -65,7 +65,6 @@
 
     <div class="container mx-auto max-w-4xl px-4 py-12 md:py-20">
 
-        <!-- 헤더 섹션 -->
         <header class="mb-16 text-center animate-fade-in-up">
             <div class="inline-block bg-[#1E1E1E] border border-[#333] px-4 py-1.5 rounded-full text-sm font-bold text-emerald-400 mb-4 shadow-lg">
                 2026 Winter School
@@ -80,16 +79,18 @@
 
         <main class="space-y-20">
             
-            <!-- 1. 우독학원 검단캠퍼스 -->
             <section class="animate-fade-in-up" style="animation-delay: 0.1s;">
-                <div class="flex items-center gap-4 mb-8 border-b border-[#333] pb-4">
-                    <h2 class="text-2xl md:text-3xl font-bold text-white">우독학원 <span class="text-blue-500">검단캠퍼스</span></h2>
-                    <span class="bg-blue-600 text-white text-xs font-bold px-2.5 py-1 rounded">01/05 개강</span>
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 border-b border-[#333] pb-4">
+                    <div class="flex items-center gap-4">
+                        <h2 class="text-2xl md:text-3xl font-bold text-white">우독학원 <span class="text-blue-500">검단캠퍼스</span></h2>
+                        <span class="bg-blue-600 text-white text-xs font-bold px-2.5 py-1 rounded">01/05 개강</span>
+                    </div>
+                    <a href="https://hanhobin1011-cmyk.github.io/Eureka/우독2월.html" target="_blank" class="inline-block bg-blue-600/20 border border-blue-500 text-blue-300 hover:bg-blue-600 hover:text-white text-xs font-bold px-3 py-1.5 rounded-full transition-all duration-300">
+                        🔗 2월 시간표 확인하기
+                    </a>
                 </div>
 
-                <!-- 주간 일정 카드 그리드 -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                    <!-- 월, 수 -->
                     <div class="bg-[#1E1E1E] rounded-2xl border border-[#333] p-6 shadow-lg relative overflow-hidden group hover:border-blue-500/50 transition-colors duration-300">
                         <div class="absolute top-0 right-0 bg-blue-900/30 px-3 py-1 rounded-bl-lg border-l border-b border-blue-500/20 text-blue-400 text-xs font-bold">월 · 수</div>
                         <h3 class="text-xl font-bold text-white mb-1 mt-2">미적분 특강</h3>
@@ -106,7 +107,6 @@
                         </div>
                     </div>
 
-                    <!-- 화, 목 -->
                     <div class="bg-[#1E1E1E] rounded-2xl border border-[#333] p-6 shadow-lg relative overflow-hidden group hover:border-emerald-500/50 transition-colors duration-300">
                         <div class="absolute top-0 right-0 bg-emerald-900/30 px-3 py-1 rounded-bl-lg border-l border-b border-emerald-500/20 text-emerald-400 text-xs font-bold">화 · 목</div>
                         <h3 class="text-xl font-bold text-white mb-1 mt-2">대수 정규 강의</h3>
@@ -123,7 +123,6 @@
                         </div>
                     </div>
 
-                    <!-- 토, 일 -->
                     <div class="bg-[#1E1E1E] rounded-2xl border border-[#333] p-6 shadow-lg relative overflow-hidden group hover:border-purple-500/50 transition-colors duration-300">
                         <div class="absolute top-0 right-0 bg-purple-900/30 px-3 py-1 rounded-bl-lg border-l border-b border-purple-500/20 text-purple-400 text-xs font-bold">토 · 일</div>
                         <h3 class="text-xl font-bold text-white mb-1 mt-2">주간 TEST</h3>
@@ -146,9 +145,7 @@
                     </div>
                 </div>
 
-                <!-- 상세 시간표 및 멘토링 (2단 레이아웃) -->
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <!-- 상세 시간표 -->
                     <div class="bg-[#1A1A1A] p-6 rounded-3xl border border-[#333]">
                         <h3 class="text-lg font-bold text-white mb-6 flex items-center gap-2">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -157,7 +154,6 @@
                             특강 & 정규 세부 시간표
                         </h3>
                         <div class="space-y-0">
-                            <!-- 오전 세션 -->
                             <div class="relative pl-6 pb-6 border-l border-gray-700">
                                 <div class="absolute -left-1.5 top-0 w-3 h-3 bg-blue-500 rounded-full"></div>
                                 <div class="text-blue-400 text-xs font-bold mb-2">오전 세션</div>
@@ -184,7 +180,6 @@
                                 </div>
                             </div>
                             
-                            <!-- 점심 시간 -->
                             <div class="relative pl-6 pb-6 border-l border-gray-700">
                                 <div class="absolute -left-1.5 top-0 w-3 h-3 bg-gray-500 rounded-full"></div>
                                 <div class="flex justify-between items-center bg-[#2A2A2A] p-3 rounded-lg border border-[#444]">
@@ -193,9 +188,7 @@
                                 </div>
                             </div>
 
-                            <!-- 오후 세션 -->
-                            <div class="relative pl-6 border-l border-gray-700/0"> <!-- 마지막 선 제거 -->
-                                <div class="absolute -left-1.5 top-0 w-3 h-3 bg-emerald-500 rounded-full"></div>
+                            <div class="relative pl-6 border-l border-gray-700/0"> <div class="absolute -left-1.5 top-0 w-3 h-3 bg-emerald-500 rounded-full"></div>
                                 <div class="text-emerald-400 text-xs font-bold mb-2">오후 클리닉 세션</div>
 
                                 <div class="flex justify-between items-start mb-3">
@@ -221,7 +214,6 @@
                         </div>
                     </div>
 
-                    <!-- 멘토링 프로그램 -->
                     <div class="bg-gradient-to-br from-[#1E1E1E] to-[#111] p-6 rounded-3xl border border-[#333] flex flex-col justify-between">
                         <div>
                             <h3 class="text-lg font-bold text-white mb-2 flex items-center gap-2">
@@ -268,7 +260,6 @@
                 </div>
             </section>
 
-            <!-- 2. 세빛학원 송파캠퍼스 (수정됨) -->
             <section class="animate-fade-in-up" style="animation-delay: 0.2s;">
                 <div class="flex items-center gap-4 mb-8 border-b border-[#333] pb-4 mt-12">
                     <h2 class="text-2xl md:text-3xl font-bold text-white">세빛학원 <span class="text-emerald-500">송파캠퍼스</span></h2>
@@ -276,11 +267,9 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-5 gap-6">
-                    <!-- 일정 요약 카드 (왼쪽) -->
                     <div class="md:col-span-2 bg-[#1E1E1E] rounded-2xl border border-[#333] p-8 shadow-lg flex flex-col justify-center relative overflow-hidden">
                         <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 to-blue-500"></div>
                         <div class="text-center">
-                            <!-- 수정됨: 링크 버튼 추가 -->
                             <a href="https://hanhobin1011-cmyk.github.io/Eureka/sebit.html" target="_blank" class="inline-block bg-blue-600/20 border border-blue-500 text-blue-300 hover:bg-blue-600 hover:text-white text-xs font-bold px-3 py-1.5 rounded-full mb-3 transition-all duration-300">
                                 🔗 26윈터 시간표
                             </a>
@@ -294,12 +283,10 @@
                         </div>
                     </div>
 
-                    <!-- 상세 시간표 (오른쪽 - 수정됨) -->
                     <div class="md:col-span-3 bg-[#1A1A1A] p-6 rounded-2xl border border-[#333]">
                         <h3 class="text-lg font-bold text-white mb-6 pl-2 border-l-4 border-emerald-500">세부 시간표</h3>
                         
                         <div class="space-y-0">
-                            <!-- 매주 월요일 -->
                             <div class="relative pl-6 pb-6 border-l border-gray-700">
                                 <div class="absolute -left-1.5 top-0 w-3 h-3 bg-blue-500 rounded-full"></div>
                                 <div class="text-blue-400 text-xs font-bold mb-2">Every Monday</div>
@@ -311,7 +298,6 @@
                                 <p class="text-gray-400 text-sm">전 주 학습에 대한 성취도 평가</p>
                             </div>
 
-                            <!-- 매주 수요일 -->
                             <div class="relative pl-6 pb-6 border-l border-gray-700">
                                 <div class="absolute -left-1.5 top-0 w-3 h-3 bg-emerald-500 rounded-full"></div>
                                 <div class="text-emerald-400 text-xs font-bold mb-2">Every Wednesday</div>
@@ -330,7 +316,6 @@
                                 </div>
                             </div>
 
-                            <!-- 매주 금요일 -->
                             <div class="relative pl-6 border-l border-gray-700/0">
                                 <div class="absolute -left-1.5 top-0 w-3 h-3 bg-emerald-500 rounded-full"></div>
                                 <div class="text-emerald-400 text-xs font-bold mb-2">Every Friday</div>
@@ -351,7 +336,6 @@
 
         </main>
 
-        <!-- CTA 및 푸터 -->
         <footer class="mt-24 text-center border-t border-[#333] pt-12">
             <h3 class="text-xl font-bold mb-8 text-white">
                 문의사항이 있으신가요?
@@ -401,4 +385,3 @@
 </script>
 </body>
 </html>
-
