@@ -122,11 +122,12 @@
                     <input type="password" id="password" placeholder="학생코드 4자리" maxlength="4" class="input-field w-full px-4 py-3 rounded-xl placeholder-gray-600 font-mono tracking-widest">
                 </div>
 
-                <!-- 4. 보고서 선택 (수정됨: 1월 4주차 추가) -->
+                <!-- 4. 보고서 선택 (수정됨: 1월 5주차 추가) -->
                 <div>
                     <label for="reportType" class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Analysis Report</label>
                     <select id="reportType" class="input-field w-full px-4 py-3 rounded-xl cursor-pointer">
-                        <option value="jan_week4" selected>1월 4주차 주간 분석리포트</option> <!-- 추가됨 -->
+                        <option value="jan_week5" selected>1월 5주차 주간 분석리포트</option> <!-- 추가됨 -->
+                        <option value="jan_week4">1월 4주차 주간 분석리포트</option>
                         <option value="jan_week3">1월 3주차 주간 분석리포트</option>
                         <option value="jan_week2">1월 2주차 주간 분석리포트</option>
                     </select>
@@ -164,7 +165,7 @@
         // [데이터베이스 설정]
         const base = "https://hanhobin1011-cmyk.github.io/Score/";
 
-        // 학생 데이터 생성 함수 (수정됨: 4주차 추가)
+        // 학생 데이터 생성 함수 (수정됨: 5주차 추가)
         function createStudent(name, pw, academy) {
             // 세빛학원('sebit')인 경우 링크 생성 시 이름 뒤에 'S' 추가
             const urlName = academy === 'sebit' ? name + 'S' : name;
@@ -176,7 +177,8 @@
                 reports: {
                     "jan_week2": `${base}${urlName}012.html`,
                     "jan_week3": `${base}${urlName}013.html`,
-                    "jan_week4": `${base}${urlName}014.html` // 추가됨 (파일명 패턴이 014일 경우)
+                    "jan_week4": `${base}${urlName}014.html`,
+                    "jan_week5": `${base}${urlName}015.html` // 추가됨 (파일명 패턴이 015일 경우)
                 }
             };
         }
@@ -200,11 +202,15 @@
             createStudent("민채이", "9102", "udok"),
             createStudent("장하람", "8285", "udok"),
             createStudent("정지훈", "3078", "udok"),
+            // 신규 추가 (우독학원)
+            createStudent("전유빈", "6081", "udok"),
+            createStudent("이동하", "1339", "udok"),
+            createStudent("윤서찬", "2743", "udok"),
 
-            // [세빛학원 송파] 신규 학생들 (링크에 S 자동 추가됨)
+            // [세빛학원 송파] 학생들 (링크에 S 자동 추가됨)
             createStudent("박건우", "0104", "sebit"),
             createStudent("우상범", "6922", "sebit"),
-            createStudent("김서현", "1173", "sebit"),
+            createStudent("김서현", "1174", "sebit"),
             createStudent("김지호", "2523", "sebit"), // 세빛 김지호
             createStudent("황예린", "1463", "sebit"),
             createStudent("여지호", "0031", "sebit"),
