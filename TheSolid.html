@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>한호빈 [더 솔리드] 중등반 개강 안내</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans KR"', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #121212;
+            color: #E0E0E0;
+            word-break: keep-all;
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #34d399, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-gold {
+            background: linear-gradient(to right, #fbbf24, #d97706);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.3);
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+        .timeline-line {
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #3b82f6, #10b981, #fbbf24);
+        }
+        /* Custom scrollbar for better look in dark mode */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #121212; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555; 
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-blue-500 selection:text-white">
+
+    <div class="container mx-auto max-w-4xl px-4 py-12 md:py-20">
+
+        <!-- 1. 헤더 섹션 -->
+        <header class="mb-20 text-center animate-fade-in-up">
+            <div class="inline-block bg-[#1E1E1E] border border-blue-500/30 px-4 py-1.5 rounded-full text-sm font-bold text-blue-400 mb-6 animate-pulse-slow">
+                중1 시작부터 고3까지 완벽 로드맵
+            </div>
+            <h1 class="text-4xl md:text-6xl font-black mb-6 tracking-tight">
+                한호빈 <span class="gradient-text">[더 솔리드]</span> 중등반
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 font-bold mb-8 italic">
+                "속도보다 중요한 것은 <span class="text-white">밀도</span>입니다."
+            </p>
+            
+            <!-- 개강 일정 박스 -->
+            <div class="bg-[#1E1E1E]/80 backdrop-blur border border-[#333] rounded-2xl p-6 md:p-8 max-w-xl mx-auto shadow-2xl relative overflow-hidden group">
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-400 to-blue-600"></div>
+                <div class="text-center">
+                    <span class="block text-emerald-400 font-bold text-sm mb-2">Grand Opening</span>
+                    <div class="text-3xl font-bold text-white mb-2">2026년 3월 2일 (월)</div>
+                    <div class="text-xl text-blue-400 font-bold">오후 4시 개강</div>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <!-- 강사 프로필 (간략 유지) -->
+            <section class="mb-24 animate-fade-in-up" style="animation-delay: 0.1s;">
+                 <div class="flex flex-col md:flex-row gap-8 items-center bg-[#1E1E1E] rounded-2xl p-6 border border-[#333]">
+                    <img src="https://hanhobin1011-cmyk.github.io/Eureka/profile.jpg" alt="한호빈 강사" class="w-32 h-32 rounded-full border-2 border-blue-500 object-cover object-top">
+                    <div class="text-center md:text-left">
+                        <h3 class="text-2xl font-bold text-white mb-2">수학강사 <span class="text-blue-400">한호빈</span></h3>
+                        <p class="text-gray-400 text-sm mb-4">우독학원 수학과 대표강사 | 비상교육 검수위원 | 이투스 검토위원</p>
+                        <p class="text-gray-300 font-medium">"<span class="text-white font-bold">The Solid</span> 반에서 수학의 시작과 끝을 책임지겠습니다."</p>
+                    </div>
+                 </div>
+            </section>
+
+            <!-- 2. 반 운영 개요 -->
+            <section class="mb-24 animate-fade-in-up" style="animation-delay: 0.2s;">
+                <h2 class="text-2xl md:text-3xl font-bold text-white mb-10 flex items-center gap-3">
+                    <span class="w-2 h-8 bg-blue-500 rounded-full"></span>
+                    반 운영 개요
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Basic Info -->
+                    <div class="bg-[#1E1E1E] p-6 rounded-xl border border-[#333] hover:border-blue-500 transition-colors">
+                        <h3 class="text-blue-400 font-bold mb-4 flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            수업 및 클리닉
+                        </h3>
+                        <ul class="space-y-4 text-gray-300">
+                            <li class="flex items-start gap-3">
+                                <span class="bg-blue-500/20 text-blue-300 text-xs font-bold px-2 py-0.5 rounded mt-0.5">정규</span>
+                                <span>주 2회, 회당 3시간 수업</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="bg-emerald-500/20 text-emerald-300 text-xs font-bold px-2 py-0.5 rounded mt-0.5">클리닉</span>
+                                <span>주 1회(주말) <span class="text-white font-bold">필수 참석</span><br><span class="text-sm text-gray-500">주간 테스트 및 오답 정리</span></span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Targets -->
+                    <div class="bg-[#1E1E1E] p-6 rounded-xl border border-[#333] hover:border-emerald-500 transition-colors">
+                        <h3 class="text-emerald-400 font-bold mb-4 flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            목표 및 내신
+                        </h3>
+                        <ul class="space-y-4 text-gray-300">
+                            <li class="flex items-start gap-3">
+                                <span class="bg-purple-500/20 text-purple-300 text-xs font-bold px-2 py-0.5 rounded mt-0.5">진도</span>
+                                <span>해당 학기 <span class="text-white font-bold">극심화</span>(블랙라벨 등)<br>+ 다음 학기 개념/유형 완성(쎈 B↑)</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="bg-yellow-500/20 text-yellow-300 text-xs font-bold px-2 py-0.5 rounded mt-0.5">내신</span>
+                                <span>정규 수업 중단 없음<br><span class="text-sm text-gray-500">내신 기간 3주 별도 특강(주1회) 분리 진행</span></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. 수업 구성 -->
+            <section class="mb-24">
+                <h2 class="text-2xl md:text-3xl font-bold text-white mb-10 flex items-center gap-3">
+                    <span class="w-2 h-8 bg-emerald-500 rounded-full"></span>
+                    수업 구성
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- 정규 수업 타임라인 -->
+                    <div class="bg-[#1E1E1E] rounded-2xl border border-[#333] p-8 card-hover relative overflow-hidden">
+                        <div class="absolute top-0 right-0 p-4 opacity-5">
+                            <svg class="w-32 h-32 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2v2zm1-5c-1.11 0-2 .89-2 2h-2c0-2.21 1.79-4 4-4s4 1.79 4 4c0 2.21-1.79 4-4 4v2h2c1.11 0 2-.89 2-2 0-2.21-1.79-4-4-4z"/></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                            <span class="bg-blue-600 px-3 py-1 rounded text-sm">정규 수업</span>
+                        </h3>
+                        
+                        <div class="relative pl-6 border-l-2 border-blue-500/30 space-y-8">
+                            <div class="relative">
+                                <span class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-[#121212] border-2 border-blue-500"></span>
+                                <div class="text-blue-400 font-mono font-bold text-lg">4:00 ~ 5:20</div>
+                                <div class="text-white font-bold text-lg">개념 강의 및 유형 설명</div>
+                                <p class="text-gray-400 text-sm mt-1">체계적인 개념 정립과 핵심 유형 분석</p>
+                            </div>
+                            <div class="relative">
+                                <span class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-[#121212] border-2 border-gray-600"></span>
+                                <div class="text-gray-500 font-mono font-bold">5:20 ~ 5:30</div>
+                                <div class="text-gray-400">Refresh Time (휴식)</div>
+                            </div>
+                            <div class="relative">
+                                <span class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-[#121212] border-2 border-emerald-500"></span>
+                                <div class="text-emerald-400 font-mono font-bold text-lg">5:30 ~ 7:00</div>
+                                <div class="text-white font-bold text-lg">유형 문제 풀이 & 개별 첨삭</div>
+                                <p class="text-gray-400 text-sm mt-1">1:1 밀착 관리를 통한 약점 보완</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 주말 클리닉 -->
+                    <div class="bg-[#1E1E1E] rounded-2xl border border-[#333] p-8 card-hover flex flex-col justify-center">
+                        <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                            <span class="bg-emerald-600 px-3 py-1 rounded text-sm">주말 클리닉</span>
+                        </h3>
+                        <div class="space-y-6">
+                            <div class="bg-[#121212] p-5 rounded-xl border border-[#333]">
+                                <div class="text-emerald-400 font-bold text-lg mb-2">TEST 1.</div>
+                                <div class="text-white font-bold text-xl mb-1">이번 주 학습 성취도</div>
+                                <div class="text-gray-400 text-sm">해당 주차에 배운 내용을 완벽하게 소화했는지 점검합니다.</div>
+                            </div>
+                            <div class="bg-[#121212] p-5 rounded-xl border border-[#333]">
+                                <div class="text-blue-400 font-bold text-lg mb-2">TEST 2.</div>
+                                <div class="text-white font-bold text-xl mb-1">누적 테스트</div>
+                                <div class="text-gray-400 text-sm">이전 학습 내용에 대한 망각을 방지하고 장기 기억으로 전환합니다.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. 학생 관리 시스템 -->
+            <section class="mb-24">
+                <h2 class="text-2xl md:text-3xl font-bold text-white mb-10 flex items-center gap-3">
+                    <span class="w-2 h-8 bg-purple-500 rounded-full"></span>
+                    The Solid 학생 관리
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- 위클리 리포트 -->
+                    <div class="bg-[#1E1E1E] p-6 rounded-xl border border-[#333] text-center hover:bg-[#252525] transition-colors">
+                        <div class="w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center mx-auto mb-4 text-blue-400">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">위클리 리포트</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            매주 클리닉 결과, 과제 수행도,<br>수업 태도를 <span class="text-blue-400 font-bold">데이터화하여 발송</span>
+                        </p>
+                    </div>
+                    <!-- 오답 노트 -->
+                    <div class="bg-[#1E1E1E] p-6 rounded-xl border border-[#333] text-center hover:bg-[#252525] transition-colors">
+                        <div class="w-16 h-16 bg-emerald-500/10 rounded-full flex items-center justify-center mx-auto mb-4 text-emerald-400">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">개별 오답 노트</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            현행 심화 과정의 틀린 문제는<br><span class="text-emerald-400 font-bold">나만의 오답 교재</span>로 제작 관리
+                        </p>
+                    </div>
+                    <!-- 과제 관리 -->
+                    <div class="bg-[#1E1E1E] p-6 rounded-xl border border-[#333] text-center hover:bg-[#252525] transition-colors">
+                        <div class="w-16 h-16 bg-purple-500/10 rounded-full flex items-center justify-center mx-auto mb-4 text-purple-400">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">강력한 과제 관리</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            올바른 학습 습관 형성을 위한<br><span class="text-purple-400 font-bold">매일 검사하는 숙제 관리</span> 지향
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. 연간 커리큘럼 (타임라인) -->
+            <section class="mb-24">
+                <h2 class="text-2xl md:text-3xl font-bold text-white mb-10 flex items-center gap-3">
+                    <span class="w-2 h-8 bg-gradient-to-b from-blue-500 to-emerald-500 rounded-full"></span>
+                    연간 마스터 플랜 (2026 ~ 2031)
+                </h2>
+
+                <div class="relative pl-6 md:pl-8 space-y-12">
+                    <!-- 타임라인 라인 -->
+                    <div class="absolute left-2 md:left-3 top-2 bottom-6 w-0.5 bg-[#333]"></div>
+
+                    <!-- 2026년 중1 -->
+                    <div class="relative pl-8 group">
+                        <div class="absolute -left-[5px] top-1.5 w-3 h-3 md:-left-[3px] bg-blue-500 rounded-full ring-4 ring-[#121212]"></div>
+                        <h3 class="text-2xl font-black text-blue-500 mb-4">2026년 <span class="text-white text-lg font-normal ml-2">중1 과정</span></h3>
+                        
+                        <div class="bg-[#1E1E1E] rounded-xl border border-[#333] overflow-hidden">
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 divide-y md:divide-y-0 md:divide-x divide-[#333]">
+                                <div class="p-4">
+                                    <div class="text-blue-400 font-bold text-sm mb-1">3~4월</div>
+                                    <div class="text-white font-bold">1-1 개념+연산</div>
+                                    <div class="text-xs text-gray-500 mt-1">집중 학습</div>
+                                </div>
+                                <div class="p-4">
+                                    <div class="text-blue-400 font-bold text-sm mb-1">5~6월</div>
+                                    <div class="text-white font-bold">1-1 유형</div>
+                                    <div class="text-xs text-gray-500 mt-1">집중 학습</div>
+                                </div>
+                                <div class="p-4 bg-blue-500/5">
+                                    <div class="text-blue-400 font-bold text-sm mb-1">7~8월</div>
+                                    <div class="text-white font-bold">1-1 심화</div>
+                                    <div class="text-gray-300 text-sm">+ 1-2 개념/연산</div>
+                                </div>
+                                <div class="p-4">
+                                    <div class="text-blue-400 font-bold text-sm mb-1">9~10월</div>
+                                    <div class="text-white font-bold">1-2 유형</div>
+                                    <div class="text-xs text-gray-500 mt-1">집중 학습</div>
+                                </div>
+                                <div class="p-4 bg-blue-500/5">
+                                    <div class="text-blue-400 font-bold text-sm mb-1">11~12월</div>
+                                    <div class="text-white font-bold">1-2 심화</div>
+                                    <div class="text-gray-300 text-sm">+ 2-1 개념/연산</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2027년 중2 -->
+                    <div class="relative pl-8 group">
+                        <div class="absolute -left-[5px] top-1.5 w-3 h-3 md:-left-[3px] bg-emerald-500 rounded-full ring-4 ring-[#121212]"></div>
+                        <h3 class="text-2xl font-black text-emerald-500 mb-4">2027년 <span class="text-white text-lg font-normal ml-2">중2 과정</span></h3>
+                        
+                        <div class="bg-[#1E1E1E] rounded-xl border border-[#333] overflow-hidden">
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-[#333]">
+                                <div class="p-4 bg-emerald-500/5">
+                                    <div class="text-emerald-400 font-bold text-sm mb-1">1~2월</div>
+                                    <div class="text-white font-bold">2-1 유형</div>
+                                    <div class="text-gray-300 text-sm">+ 2-2 개념/연산 (특강)</div>
+                                </div>
+                                <div class="p-4">
+                                    <div class="text-emerald-400 font-bold text-sm mb-1">3~6월</div>
+                                    <div class="text-white font-bold">2-1 심화</div>
+                                    <div class="text-gray-300 text-sm">+ 2-2 유형</div>
+                                </div>
+                                <div class="p-4 bg-emerald-500/5">
+                                    <div class="text-emerald-400 font-bold text-sm mb-1">7~8월</div>
+                                    <div class="text-white font-bold">2-2 심화</div>
+                                    <div class="text-gray-300 text-sm">+ 3-1 개념/연산 (특강)</div>
+                                </div>
+                                <div class="p-4">
+                                    <div class="text-emerald-400 font-bold text-sm mb-1">9~12월</div>
+                                    <div class="text-white font-bold">3-1 유형</div>
+                                    <div class="text-gray-300 text-sm">+ 3-2 개념/연산</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2028년 중3 -->
+                    <div class="relative pl-8 group">
+                        <div class="absolute -left-[5px] top-1.5 w-3 h-3 md:-left-[3px] bg-purple-500 rounded-full ring-4 ring-[#121212]"></div>
+                        <h3 class="text-2xl font-black text-purple-500 mb-4">2028년 <span class="text-white text-lg font-normal ml-2">중3 과정 (고등 선행 본격화)</span></h3>
+                        
+                        <div class="bg-[#1E1E1E] rounded-xl border border-[#333] overflow-hidden">
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-[#333]">
+                                <div class="p-4 bg-purple-500/5">
+                                    <div class="text-purple-400 font-bold text-sm mb-1">1~2월</div>
+                                    <div class="text-white font-bold">3-1 심화</div>
+                                    <div class="text-gray-300 text-sm">+ 3-2 유형 (특강)</div>
+                                </div>
+                                <div class="p-4">
+                                    <div class="text-purple-400 font-bold text-sm mb-1">3~6월</div>
+                                    <div class="text-white font-bold">3-2 심화</div>
+                                    <div class="text-gray-300 text-sm">+ <span class="text-yellow-400">공통수학1 개념/연산</span></div>
+                                </div>
+                                <div class="p-4 bg-purple-500/5">
+                                    <div class="text-purple-400 font-bold text-sm mb-1">7~8월</div>
+                                    <div class="text-white font-bold text-yellow-400">공통수학1 유형</div>
+                                    <div class="text-gray-300 text-sm">(방학 특강 포함)</div>
+                                </div>
+                                <div class="p-4">
+                                    <div class="text-purple-400 font-bold text-sm mb-1">9~12월</div>
+                                    <div class="text-white font-bold text-yellow-400">공통수학2 개념/연산</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2029년 고1 -->
+                    <div class="relative pl-8 group">
+                        <div class="absolute -left-[5px] top-1.5 w-3 h-3 md:-left-[3px] bg-yellow-500 rounded-full ring-4 ring-[#121212]"></div>
+                        <h3 class="text-2xl font-black text-yellow-500 mb-4">2029년 <span class="text-white text-lg font-normal ml-2">고1 과정</span></h3>
+                        
+                        <div class="bg-[#1E1E1E] rounded-xl border border-[#333] overflow-hidden">
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-[#333]">
+                                <div class="p-4 bg-yellow-500/5">
+                                    <div class="text-yellow-500 font-bold text-sm mb-1">1~2월</div>
+                                    <div class="text-white font-bold">공수1 심화</div>
+                                    <div class="text-gray-300 text-sm">+ 공수2 유형 (특강)</div>
+                                </div>
+                                <div class="p-4">
+                                    <div class="text-yellow-500 font-bold text-sm mb-1">3~6월</div>
+                                    <div class="text-white font-bold text-red-400">공통수학1 내신대비</div>
+                                </div>
+                                <div class="p-4 bg-yellow-500/5">
+                                    <div class="text-yellow-500 font-bold text-sm mb-1">7~8월</div>
+                                    <div class="text-white font-bold">공수2 심화</div>
+                                    <div class="text-gray-300 text-sm">+ 대수 기초 (특강)</div>
+                                </div>
+                                <div class="p-4">
+                                    <div class="text-yellow-500 font-bold text-sm mb-1">9~12월</div>
+                                    <div class="text-white font-bold text-red-400">공통수학2 내신대비</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                     <!-- 2030년 고2 -->
+                     <div class="relative pl-8 group">
+                        <div class="absolute -left-[5px] top-1.5 w-3 h-3 md:-left-[3px] bg-red-500 rounded-full ring-4 ring-[#121212]"></div>
+                        <h3 class="text-2xl font-black text-red-500 mb-4">2030년 <span class="text-white text-lg font-normal ml-2">고2 과정</span></h3>
+                        
+                        <div class="bg-[#1E1E1E] rounded-xl border border-[#333] overflow-hidden">
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-[#333]">
+                                <div class="p-4 bg-red-500/5">
+                                    <div class="text-red-500 font-bold text-sm mb-1">1~2월</div>
+                                    <div class="text-white font-bold">대수 유형</div>
+                                    <div class="text-gray-300 text-sm">+ 미적분1 기초 (특강)</div>
+                                </div>
+                                <div class="p-4">
+                                    <div class="text-red-500 font-bold text-sm mb-1">3~6월</div>
+                                    <div class="text-white font-bold text-red-400">대수 내신대비</div>
+                                </div>
+                                <div class="p-4 bg-red-500/5">
+                                    <div class="text-red-500 font-bold text-sm mb-1">7~8월</div>
+                                    <div class="text-white font-bold">미적분1 유형</div>
+                                    <div class="text-gray-300 text-sm">(방학 특강 포함)</div>
+                                </div>
+                                <div class="p-4">
+                                    <div class="text-red-500 font-bold text-sm mb-1">9~12월</div>
+                                    <div class="text-white font-bold text-red-400">미적분1 내신대비</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2031년 고3 -->
+                    <div class="relative pl-8 group">
+                        <div class="absolute -left-[5px] top-1.5 w-3 h-3 md:-left-[3px] bg-white rounded-full ring-4 ring-[#121212]"></div>
+                        <h3 class="text-2xl font-black text-white mb-4">2031년 <span class="text-gray-400 text-lg font-normal ml-2">고3 FINAL</span></h3>
+                        
+                        <div class="bg-[#1E1E1E] rounded-xl border border-[#333] overflow-hidden">
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-[#333]">
+                                <div class="p-4 bg-gray-800/30">
+                                    <div class="text-gray-400 font-bold text-sm mb-1">1~2월</div>
+                                    <div class="text-white font-bold">확통 개념/연산</div>
+                                    <div class="text-gray-300 text-sm">+ 공통 심화</div>
+                                </div>
+                                <div class="p-4">
+                                    <div class="text-gray-400 font-bold text-sm mb-1">3~6월</div>
+                                    <div class="text-white font-bold">확률과 통계 내신대비</div>
+                                </div>
+                                <div class="p-4 bg-gray-800/30">
+                                    <div class="text-gray-400 font-bold text-sm mb-1">7~8월</div>
+                                    <div class="text-white font-bold gradient-gold">평가원 기출 분석</div>
+                                </div>
+                                <div class="p-4">
+                                    <div class="text-gray-400 font-bold text-sm mb-1">9~10월</div>
+                                    <div class="text-white font-bold">심화 유형 + 시대인재</div>
+                                    <div class="text-gray-300 text-sm">파이널 정리</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- 푸터 / 상담 버튼 -->
+        <footer class="mt-20 border-t border-[#333] pt-12 pb-12 text-center">
+            <h3 class="text-2xl font-bold text-white mb-8">지금 바로 시작하세요.</h3>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                 <a href="https://open.kakao.com/o/s9qHTzTh" target="_blank" class="bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-bold py-4 px-10 rounded-xl shadow-lg shadow-blue-900/20 transform hover:-translate-y-1 transition-all flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 5.92 2 10.75c0 2.86 1.58 5.4 4.05 7.04l-1.07 3.93 3.97-1.95c1.6.45 3.3.45 4.9 0l3.97 1.95-1.07-3.93C19.42 16.15 21 13.61 21 10.75 21 5.92 16.52 2 12 2z"/></svg>
+                    상담 신청하기
+                </a>
+            </div>
+            <p class="text-gray-600 text-sm mt-8">
+                &copy; 2026 수학강사 한호빈. All rights reserved.<br>
+                우독학원 검단 | 세빛학원 송파
+            </p>
+        </footer>
+
+    </div>
+<script>
+  // 1. 마우스 우클릭 방지
+  document.addEventListener('contextmenu', function(e) {
+    e.preventDefault(); // 우클릭 메뉴가 뜨지 않게 합니다.
+    // alert('보안을 위해 우클릭을 사용할 수 없습니다.'); // 경고창이 필요하면 주석(//)을 지우세요.
+  });
+
+  // 2. 개발자 도구 및 소스 보기 단축키 방지
+  document.addEventListener('keydown', function(e) {
+    // F12 키 방지 (가장 많이 쓰는 개발자 도구 키)
+    if (e.keyCode === 123) {
+      e.preventDefault();
+      e.returnValue = false;
+    }
+
+    // Ctrl+Shift+I (개발자 도구) / Ctrl+Shift+J (콘솔) / Ctrl+Shift+C (요소 검사)
+    if (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) {
+      e.preventDefault();
+      e.returnValue = false;
+    }
+
+    // Ctrl+U (소스 보기)
+    if (e.ctrlKey && e.keyCode === 85) {
+      e.preventDefault();
+      e.returnValue = false;
+    }
+  });
+</script>
+</body>
+</html>
