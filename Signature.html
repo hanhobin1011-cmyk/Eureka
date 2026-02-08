@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>한호빈 [Signature] 고2 수직/상승반 개강 안내</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans KR"', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #121212;
+            color: #E0E0E0;
+            word-break: keep-all;
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #34d399, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-gold {
+            background: linear-gradient(to right, #fbbf24, #d97706);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-vertical {
+            background: linear-gradient(to right, #60a5fa, #3b82f6); /* Blue for Vertical */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-rising {
+            background: linear-gradient(to right, #f87171, #ef4444); /* Red for Rising */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.3);
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+        .rising-card-hover:hover {
+             box-shadow: 0 10px 30px -10px rgba(239, 68, 68, 0.3);
+             border-color: rgba(239, 68, 68, 0.5);
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #121212; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #555; }
+    </style>
+</head>
+<body class="antialiased selection:bg-blue-500 selection:text-white">
+
+    <div class="container mx-auto max-w-4xl px-4 py-12 md:py-20">
+
+        <!-- 1. 헤더 섹션 -->
+        <header class="mb-20 text-center animate-fade-in-up">
+            <div class="inline-block bg-[#1E1E1E] border border-yellow-500/30 px-4 py-1.5 rounded-full text-sm font-bold text-yellow-400 mb-6 animate-pulse-slow">
+                고2 내신과 수능의 결정적 시기
+            </div>
+            <h1 class="text-4xl md:text-6xl font-black mb-6 tracking-tight">
+                한호빈 <span class="gradient-gold">[Signature]</span> 고2 정규반
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 font-bold mb-8 italic">
+                "<span class="gradient-vertical">깊이</span>를 더하는 수직반, <span class="gradient-rising">실력</span>을 높이는 상승반"
+            </p>
+            
+            <!-- 개강 일정 박스 -->
+            <div class="bg-[#1E1E1E]/80 backdrop-blur border border-[#333] rounded-2xl p-6 md:p-8 max-w-xl mx-auto shadow-2xl relative overflow-hidden group">
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 via-yellow-500 to-red-500"></div>
+                <div class="text-center">
+                    <span class="block text-yellow-400 font-bold text-sm mb-2">Grand Opening</span>
+                    <div class="text-3xl font-bold text-white mb-2">2026년 3월 3일 (화)</div>
+                    <div class="text-xl text-gray-300 font-bold">오후 6시 대개강</div>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <!-- 강사 프로필 -->
+            <section class="mb-20 animate-fade-in-up" style="animation-delay: 0.1s;">
+                 <div class="flex flex-col md:flex-row gap-8 items-center bg-[#1E1E1E] rounded-2xl p-6 border border-[#333]">
+                    <img src="https://hanhobin1011-cmyk.github.io/Eureka/profile.jpg" alt="한호빈 강사" class="w-28 h-28 rounded-full border-2 border-yellow-500 object-cover object-top">
+                    <div class="text-center md:text-left">
+                        <h3 class="text-2xl font-bold text-white mb-2">수학강사 <span class="text-yellow-400">한호빈</span></h3>
+                        <p class="text-gray-400 text-sm mb-3">우독학원 수학과 대표강사 | 비상교육 검수위원 | 이투스 검토위원</p>
+                        <p class="text-gray-300 font-medium">"고2 수학은 <span class="text-white font-bold">Signature</span> 클래스에서 완성됩니다."</p>
+                    </div>
+                 </div>
+            </section>
+
+            <!-- 2. 클래스 소개 (수직반 vs 상승반) -->
+            <section class="mb-24 animate-fade-in-up" style="animation-delay: 0.2s;">
+                <h2 class="text-2xl md:text-3xl font-bold text-white mb-10 flex items-center gap-3">
+                    <span class="w-2 h-8 bg-white rounded-full"></span>
+                    Signature Class Line-up
+                </h2>
+
+                <div class="grid grid-cols-1 gap-12">
+                    
+                    <!-- 2-1. 수직반 (Vertical Class) -->
+                    <div class="bg-[#1E1E1E] rounded-2xl border border-blue-900/50 p-8 card-hover relative overflow-hidden">
+                        <div class="absolute top-0 right-0 p-4 opacity-5 pointer-events-none">
+                            <svg class="w-40 h-40 text-blue-500" fill="currentColor" viewBox="0 0 24 24"><path d="M7 14l5-5 5 5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
+                        </div>
+                        
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 border-b border-gray-700 pb-6">
+                            <div>
+                                <span class="bg-blue-600/20 text-blue-400 px-3 py-1 rounded text-sm font-bold mb-2 inline-block">최상위권 심화 학습</span>
+                                <h3 class="text-3xl font-black text-white"><span class="gradient-vertical">수직반</span> (Vertical Class)</h3>
+                                <p class="text-gray-400 mt-2">내신 1등급을 넘어 최상위권을 위한 심화 학습반</p>
+                            </div>
+                            <div class="mt-4 md:mt-0 text-right">
+                                <div class="text-sm text-gray-400">대상</div>
+                                <div class="text-blue-400 font-bold text-lg">교과서 개념을 넘어선 심화 학습 희망자</div>
+                            </div>
+                        </div>
+
+                        <!-- 수직반 시간표 -->
+                        <div class="bg-[#121212] rounded-xl p-6 border border-blue-500/20 mb-6">
+                            <h4 class="text-blue-400 font-bold mb-4 flex items-center gap-2">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                Time Table (선 수업 → 후 클리닉)
+                            </h4>
+                            <div class="space-y-4">
+                                <div class="flex flex-col md:flex-row gap-4 items-center">
+                                    <div class="w-full md:w-32 text-center bg-blue-600 rounded py-2 text-white font-bold text-sm">화 / 목</div>
+                                    <div class="flex-1 w-full flex items-center gap-3">
+                                        <div class="flex-1 bg-gray-800 rounded px-4 py-2 text-center border border-gray-700">
+                                            <div class="text-xs text-blue-400 font-bold mb-1">18:00 ~ 20:00</div>
+                                            <div class="text-white font-bold">정규 수업</div>
+                                            <div class="text-xs text-gray-500">심화 개념 & 강의</div>
+                                        </div>
+                                        <div class="text-gray-500">▶</div>
+                                        <div class="flex-1 bg-gray-800 rounded px-4 py-2 text-center border border-gray-700">
+                                            <div class="text-xs text-blue-400 font-bold mb-1">20:00 ~ 22:00</div>
+                                            <div class="text-white font-bold">정규 클리닉</div>
+                                            <div class="text-xs text-gray-500">당일 복습 & 과제</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="text-sm text-gray-400 text-center md:text-left pl-0 md:pl-36">
+                                    * 그날 배운 심화 개념을 당일 완벽히 익히는 것을 목표로 합니다.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- 수직반 주말 클리닉 -->
+                        <div class="flex items-start gap-3 text-gray-300 text-sm">
+                            <span class="bg-gray-700 text-gray-300 px-2 py-0.5 rounded text-xs font-bold mt-0.5 flex-shrink-0">주말 필수</span>
+                            <span>일요일 13:00 ~ 16:00 (토요일 변경 가능) / TEST 1(주간 성취도) & TEST 2(누적 성취도)</span>
+                        </div>
+                    </div>
+
+                    <!-- 2-2. 상승반 (Rising Class) -->
+                    <div class="bg-[#1E1E1E] rounded-2xl border border-red-900/50 p-8 card-hover rising-card-hover relative overflow-hidden">
+                        <div class="absolute top-0 right-0 p-4 opacity-5 pointer-events-none">
+                            <svg class="w-40 h-40 text-red-500" fill="currentColor" viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>
+                        </div>
+                        
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 border-b border-gray-700 pb-6">
+                            <div>
+                                <span class="bg-red-600/20 text-red-400 px-3 py-1 rounded text-sm font-bold mb-2 inline-block">1등급 목표 유형 훈련</span>
+                                <h3 class="text-3xl font-black text-white"><span class="gradient-rising">상승반</span> (Rising Class)</h3>
+                                <p class="text-gray-400 mt-2">내신 1등급 도약을 위한 철저한 유형 학습 훈련반</p>
+                            </div>
+                            <div class="mt-4 md:mt-0 text-right">
+                                <div class="text-sm text-gray-400">대상</div>
+                                <div class="text-red-400 font-bold text-lg">교과서 심화 개념 및 빈출 유형 마스터</div>
+                            </div>
+                        </div>
+
+                        <!-- 상승반 시간표 -->
+                        <div class="bg-[#121212] rounded-xl p-6 border border-red-500/20 mb-6">
+                            <h4 class="text-red-400 font-bold mb-4 flex items-center gap-2">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                Time Table (선 클리닉 → 후 수업)
+                            </h4>
+                            <div class="space-y-4">
+                                <div class="flex flex-col md:flex-row gap-4 items-center">
+                                    <div class="w-full md:w-32 text-center bg-red-600 rounded py-2 text-white font-bold text-sm">화 / 목</div>
+                                    <div class="flex-1 w-full flex items-center gap-3">
+                                        <div class="flex-1 bg-gray-800 rounded px-4 py-2 text-center border border-gray-700">
+                                            <div class="text-xs text-red-400 font-bold mb-1">18:00 ~ 20:00</div>
+                                            <div class="text-white font-bold">정규 클리닉</div>
+                                            <div class="text-xs text-gray-500">과제 점검 & 미흡 보완</div>
+                                        </div>
+                                        <div class="text-gray-500">▶</div>
+                                        <div class="flex-1 bg-gray-800 rounded px-4 py-2 text-center border border-gray-700">
+                                            <div class="text-xs text-red-400 font-bold mb-1">20:00 ~ 22:00</div>
+                                            <div class="text-white font-bold">정규 수업</div>
+                                            <div class="text-xs text-gray-500">진도 학습 & 유형 정리</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="text-sm text-gray-400 text-center md:text-left pl-0 md:pl-36">
+                                    * 지난 과정의 미흡한 점을 먼저 보완한 후, 다음 진도를 학습합니다.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- 상승반 주말 클리닉 -->
+                        <div class="flex items-start gap-3 text-gray-300 text-sm">
+                            <span class="bg-gray-700 text-gray-300 px-2 py-0.5 rounded text-xs font-bold mt-0.5 flex-shrink-0">주말 필수</span>
+                            <span>일요일 13:00 ~ 16:00 (토요일 변경 가능) / TEST 1(주간 성취도) & TEST 2(누적 성취도)</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. 시그니처 학생 관리 시스템 -->
+            <section class="mb-24">
+                <h2 class="text-2xl md:text-3xl font-bold text-white mb-10 flex items-center gap-3">
+                    <span class="w-2 h-8 bg-gradient-to-b from-yellow-400 to-orange-500 rounded-full"></span>
+                    Signature Management
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- 위클리 리포트 -->
+                    <div class="bg-[#1E1E1E] p-6 rounded-xl border border-[#333] text-center hover:bg-[#252525] transition-colors flex flex-col h-full">
+                        <div class="w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center mx-auto mb-4 text-blue-400">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">위클리 리포트</h3>
+                        <p class="text-gray-400 text-sm mb-6 flex-grow">
+                            매주 수업 태도, 과제 수행도, 클리닉 결과를 데이터화하여 웹에서 확인 가능
+                        </p>
+                        <a href="https://hanhobin1011-cmyk.github.io/Eureka/WeeklyReport.html" target="_blank" class="block w-full bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold py-3 rounded-lg transition-colors">
+                            리포트 조회하기 >
+                        </a>
+                    </div>
+
+                    <!-- 오답 노트 -->
+                    <div class="bg-[#1E1E1E] p-6 rounded-xl border border-[#333] text-center hover:bg-[#252525] transition-colors flex flex-col h-full">
+                        <div class="w-16 h-16 bg-yellow-500/10 rounded-full flex items-center justify-center mx-auto mb-4 text-yellow-400">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Signature 오답 노트</h3>
+                        <p class="text-gray-400 text-sm mb-6 flex-grow">
+                            자주 틀리는 유형과 심화 개념이 사용된 문제를 엄선하여 <span class="text-yellow-400 font-bold">나만의 오답 교재</span>로 제작
+                        </p>
+                        <div class="w-full bg-[#121212] text-gray-500 text-sm font-bold py-3 rounded-lg border border-[#333]">
+                            개별 맞춤 제작
+                        </div>
+                    </div>
+
+                    <!-- 과제 관리 -->
+                    <div class="bg-[#1E1E1E] p-6 rounded-xl border border-[#333] text-center hover:bg-[#252525] transition-colors flex flex-col h-full">
+                        <div class="w-16 h-16 bg-red-500/10 rounded-full flex items-center justify-center mx-auto mb-4 text-red-400">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">매일 하는 과제</h3>
+                        <p class="text-gray-400 text-sm mb-6 flex-grow">
+                            학습 습관 형성을 위한 <br><span class="text-red-400 font-bold">'매일 숙제하자'</span> 콘텐츠 제공 및 일일 점검
+                        </p>
+                        <div class="w-full bg-[#121212] text-gray-500 text-sm font-bold py-3 rounded-lg border border-[#333]">
+                            상시 관리 진행
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- 푸터 / 상담 버튼 -->
+        <footer class="mt-20 border-t border-[#333] pt-12 pb-12 text-center">
+            <h3 class="text-2xl font-bold text-white mb-8">변화를 원한다면, 지금 시작하세요.</h3>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                 <a href="https://open.kakao.com/o/s9qHTzTh" target="_blank" class="bg-gradient-to-r from-yellow-600 to-yellow-500 hover:from-yellow-500 hover:to-yellow-400 text-white font-bold py-4 px-10 rounded-xl shadow-lg shadow-yellow-900/20 transform hover:-translate-y-1 transition-all flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 5.92 2 10.75c0 2.86 1.58 5.4 4.05 7.04l-1.07 3.93 3.97-1.95c1.6.45 3.3.45 4.9 0l3.97 1.95-1.07-3.93C19.42 16.15 21 13.61 21 10.75 21 5.92 16.52 2 12 2z"/></svg>
+                    상담 신청하기
+                </a>
+            </div>
+            <p class="text-gray-600 text-sm mt-8">
+                &copy; 2026 수학강사 한호빈. All rights reserved.<br>
+                우독학원 검단 | 세빛학원 송파
+            </p>
+        </footer>
+
+    </div>
+    <script>
+        // 1. 마우스 우클릭 방지
+        document.addEventListener('contextmenu', function(e) {
+          e.preventDefault(); 
+        });
+      
+        // 2. 개발자 도구 및 소스 보기 단축키 방지
+        document.addEventListener('keydown', function(e) {
+          if (e.keyCode === 123) { // F12
+            e.preventDefault();
+            e.returnValue = false;
+          }
+          if (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) {
+            e.preventDefault();
+            e.returnValue = false;
+          }
+          if (e.ctrlKey && e.keyCode === 85) { // Ctrl+U
+            e.preventDefault();
+            e.returnValue = false;
+          }
+        });
+      </script>
+</body>
+</html>
