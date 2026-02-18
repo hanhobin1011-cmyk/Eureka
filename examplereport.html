@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AA 학생 1월 3주차 주간 리포트</title>
+    <!-- Google Fonts: Noto Sans KR, Roboto Mono -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* [테마 설정] */
+        :root {
+            --bg-color: #020204;
+            --card-bg: #111115;
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+            
+            /* 과목별 포인트 컬러 */
+            --accent-blue: #3b82f6;   /* 대수 */
+            --accent-violet: #8b5cf6; /* 미적분 */
+            --accent-rose: #f43f5e;   /* 담금질 */
+            --accent-green: #10b981;  /* 계획 */
+            --accent-gold: #fbbf24;   /* 로그 */
+
+            /* 신호등 상태 컬러 */
+            --status-blue: #3b82f6;   /* 우수 */
+            --status-orange: #f97316; /* 보통 */
+            --status-red: #ef4444;    /* 위험 */
+            --status-black: #0f172a;  /* 심각/미응시 */
+            
+            --timeline-line: rgba(255, 255, 255, 0.1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            padding-bottom: 60px;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* 배경 노이즈 효과 */
+        .noise-overlay {
+            position: fixed; inset: 0; pointer-events: none; opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            z-index: -1;
+        }
+
+        /* [헤더] */
+        header {
+            position: sticky;
+            top: 0;
+            background: rgba(2, 2, 4, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            z-index: 100;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .brand { font-size: 16px; font-weight: 900; letter-spacing: -0.5px; color: white; font-style: italic; }
+        .brand span { color: var(--accent-blue); }
+        .sub-brand { font-size: 10px; color: var(--text-sub); display: block; letter-spacing: 2px; margin-bottom: 2px; font-weight: 700; }
+        .user-avatar {
+            width: 32px; height: 32px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 13px; color: white;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+        }
+
+        /* [메인] */
+        main { max-width: 500px; margin: 0 auto; padding: 20px; opacity: 0; animation: slideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+
+        /* [프로필] */
+        .profile-sec { margin-top: 10px; margin-bottom: 25px; }
+        .student-name { font-size: 28px; font-weight: 900; line-height: 1.2; color: white; display: flex; align-items: center; gap: 8px; letter-spacing: -0.02em; }
+        .school-badge { font-size: 12px; font-weight: 700; color: #fff; background: rgba(255,255,255,0.1); padding: 4px 8px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1); }
+        .date-info { font-size: 13px; color: var(--text-sub); margin-top: 6px; display: flex; align-items: center; gap: 6px; font-weight: 300; }
+        .date-badge { background: rgba(59, 130, 246, 0.1); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.2); padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 700; }
+
+        /* [신호등 상태창] */
+        .status-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 30px; }
+        .status-item {
+            background: var(--card-bg); border-radius: 16px; padding: 15px 10px;
+            display: flex; flex-direction: column; align-items: center; gap: 8px;
+            border: 1px solid rgba(255,255,255,0.05); text-align: center;
+            transition: transform 0.2s;
+        }
+        .status-item:active { transform: scale(0.98); }
+        
+        .status-icon-wrap {
+            width: 32px; height: 32px; border-radius: 10px; display: flex; align-items: center; justify-content: center;
+            margin-bottom: 2px;
+        }
+        .status-icon-wrap svg { width: 18px; height: 18px; stroke-width: 2.5; }
+
+        /* 과목별 아이콘 컬러 강제 적용 */
+        .subj-algebra .status-icon-wrap { background: rgba(59, 130, 246, 0.15); color: #3b82f6; box-shadow: 0 0 15px rgba(59, 130, 246, 0.15); }
+        .subj-calculus .status-icon-wrap { background: rgba(139, 92, 246, 0.15); color: #8b5cf6; box-shadow: 0 0 15px rgba(139, 92, 246, 0.15); }
+        .subj-mock .status-icon-wrap { background: rgba(244, 63, 94, 0.15); color: #f43f5e; box-shadow: 0 0 15px rgba(244, 63, 94, 0.15); }
+
+        .traffic-dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 4px; }
+        .dot-blue { background: var(--status-blue); box-shadow: 0 0 8px var(--status-blue); }
+        .dot-orange { background: var(--status-orange); box-shadow: 0 0 8px var(--status-orange); }
+        .dot-red { background: var(--status-red); box-shadow: 0 0 8px var(--status-red); }
+        .dot-black { background: #94a3b8; border: 2px solid #fff; box-shadow: 0 0 8px #fff; }
+
+        .status-subject { font-size: 12px; color: var(--text-sub); font-weight: 600; }
+        .status-label { font-size: 11px; color: white; font-weight: 800; letter-spacing: -0.3px; }
+
+        /* [카드 공통] */
+        .card {
+            background: var(--card-bg); border-radius: 20px; padding: 24px; margin-bottom: 24px;
+            border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+            position: relative; overflow: hidden;
+        }
+        .card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        }
+
+        .card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+        .card-icon-box { 
+            width: 32px; height: 32px; border-radius: 10px; 
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(255,255,255,0.05); color: white;
+        }
+        .card-icon-box svg { width: 18px; height: 18px; stroke-width: 2.5; }
+        .card-title { font-size: 16px; font-weight: 800; color: #f1f5f9; letter-spacing: -0.02em; }
+
+        /* [타임라인 - 업그레이드 버전] */
+        .timeline { padding-left: 6px; }
+        .timeline-item { position: relative; padding-left: 24px; margin-bottom: 24px; border-left: 2px solid var(--timeline-line); }
+        .timeline-item:last-child { margin-bottom: 0; border-left-color: transparent; }
+        
+        .timeline-dot { 
+            position: absolute; left: -6px; top: 18px; width: 10px; height: 10px; border-radius: 50%; 
+            background: var(--bg-color); border: 2px solid var(--text-sub);
+            transition: all 0.3s;
+            z-index: 2;
+        }
+
+        /* 학습 내역 카드 스타일 강화 */
+        .log-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 14px;
+            transition: 0.2s;
+        }
+        .log-card:hover { background: rgba(255,255,255,0.04); }
+        
+        .log-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .log-date { font-size: 12px; font-weight: 800; letter-spacing: 0.5px; color: #94a3b8; display: flex; align-items: center; gap: 6px; }
+        .log-subj-badge { font-size: 10px; padding: 2px 6px; border-radius: 4px; font-weight: 700; background: rgba(255,255,255,0.1); color: #fff; }
+        
+        .log-title { font-size: 15px; color: white; font-weight: 700; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+        .log-desc { font-size: 13px; color: #cbd5e1; line-height: 1.5; font-weight: 300; margin-bottom: 10px; word-break: keep-all; }
+        
+        .log-meta { 
+            display: flex; flex-wrap: wrap; gap: 8px; border-top: 1px solid rgba(255,255,255,0.05); 
+            padding-top: 10px; margin-top: 6px;
+        }
+        .meta-tag { 
+            font-size: 11px; padding: 4px 8px; border-radius: 6px; 
+            background: rgba(0,0,0,0.3); font-weight: 500; display: flex; align-items: center; gap: 4px;
+        }
+        
+        /* 클리닉 코드 스타일 */
+        .clinic-tag { font-size: 11px; padding: 4px 10px; border-radius: 6px; font-weight: 700; display: flex; align-items: center; gap: 4px; }
+        .clinic-1 { background: rgba(139, 92, 246, 0.15); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.3); } /* 완료 */
+        .clinic-2 { background: rgba(59, 130, 246, 0.15); color: #93c5fd; border: 1px solid rgba(59, 130, 246, 0.3); } /* 양호 */
+        .clinic-3 { background: rgba(251, 191, 36, 0.15); color: #fcd34d; border: 1px solid rgba(251, 191, 36, 0.3); } /* 주의 */
+        .clinic-4 { background: rgba(249, 115, 22, 0.15); color: #fdba74; border: 1px solid rgba(249, 115, 22, 0.3); } /* 경고 */
+        .clinic-5 { background: rgba(244, 63, 94, 0.15); color: #fda4af; border: 1px solid rgba(244, 63, 94, 0.3); } /* 위험 */
+        .clinic-6 { background: rgba(148, 163, 184, 0.15); color: #cbd5e1; border: 1px solid rgba(148, 163, 184, 0.3); } /* 미참여 */
+
+        /* 일일 테스트 배지 스타일 */
+        .test-tag { font-size: 11px; padding: 4px 10px; border-radius: 6px; font-weight: 700; display: flex; align-items: center; gap: 4px; font-family: 'Roboto Mono', monospace; }
+        .test-high { background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3); } /* 8점 이상 */
+        .test-mid { background: rgba(251, 146, 60, 0.15); color: #fb923c; border: 1px solid rgba(251, 146, 60, 0.3); } /* 6점 이상 */
+        .test-low { background: rgba(244, 63, 94, 0.15); color: #fb7185; border: 1px solid rgba(244, 63, 94, 0.3); } /* 5점 이하 */
+        .test-none { background: rgba(148, 163, 184, 0.15); color: #94a3b8; border: 1px solid rgba(148, 163, 184, 0.3); } /* 미응시 */
+
+        .hw-done { color: #4ade80; border: 1px solid rgba(74,222,128,0.2); }
+        .hw-mid { color: #fb923c; border: 1px solid rgba(251,146,60,0.2); }
+        .hw-none { color: #f87171; border: 1px solid rgba(248,113,113,0.2); }
+        
+        .daily-test-score { font-family: 'Roboto Mono', monospace; font-weight: 700; color: #fbbf24; }
+
+        /* [그래프] */
+        .chart-wrap { height: 220px; display: flex; justify-content: center; align-items: flex-end; padding-bottom: 10px; }
+
+        /* [시험 상세] */
+        .test-card { border-left: 3px solid transparent; background: #15151a; }
+        .test-card.blue { border-color: var(--accent-blue); }
+        .test-card.violet { border-color: var(--accent-violet); }
+        .test-card.rose { border-color: var(--accent-rose); }
+        .test-card.orange { border-color: var(--status-orange); } 
+        .test-card.red { border-color: var(--status-red); }
+        .test-card.black { border-color: #334155; }
+
+        .test-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+        .test-info-group { display: flex; flex-direction: column; gap: 2px; }
+        .test-name { font-size: 15px; font-weight: 800; color: white; display: flex; align-items: center; gap: 6px; }
+        .test-sub { font-size: 11px; color: #64748b; font-weight: 500; }
+        .test-rank { 
+            font-size: 11px; color: #94a3b8; background: rgba(255,255,255,0.05); 
+            padding: 4px 8px; border-radius: 6px; display: inline-block; margin-top: 4px; 
+            font-family: 'Roboto Mono', monospace;
+        }
+        .test-score { font-size: 26px; font-weight: 900; font-family: 'Roboto Mono', monospace; letter-spacing: -1px; }
+        
+        .blue .test-score { color: #60a5fa; text-shadow: 0 0 20px rgba(59, 130, 246, 0.2); }
+        .violet .test-score { color: #a78bfa; text-shadow: 0 0 20px rgba(139, 92, 246, 0.2); }
+        .rose .test-score { color: #fb7185; text-shadow: 0 0 20px rgba(244, 63, 94, 0.2); }
+        .orange .test-score { color: #fb923c; }
+        .red .test-score { color: #f87171; }
+        .black .test-score { color: #94a3b8; }
+
+        .tag-box { display: flex; flex-wrap: wrap; gap: 6px; }
+        .tag { font-size: 11px; padding: 4px 10px; border-radius: 6px; background: rgba(255,255,255,0.03); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.08); }
+        .warning-tag { color: #f87171; border-color: rgba(248, 113, 113, 0.3); background: rgba(248, 113, 113, 0.1); font-weight: 700; display: flex; align-items: center; gap: 4px; }
+        .check-tag { color: #fb923c; border-color: rgba(251, 146, 60, 0.3); background: rgba(251, 146, 60, 0.1); font-weight: 600; display: flex; align-items: center; gap: 4px; }
+        .review-tag { color: #a78bfa; border-color: rgba(167, 139, 250, 0.3); background: rgba(167, 139, 250, 0.1); font-weight: 600; display: flex; align-items: center; gap: 4px; }
+        
+        /* 버튼 스타일 수정 */
+        .detail-btn { 
+            padding: 6px 14px; 
+            background: rgba(255,255,255,0.03); 
+            border: 1px solid rgba(255,255,255,0.08); 
+            border-radius: 8px; 
+            color: #94a3b8; 
+            font-size: 11px; 
+            font-weight: 600; 
+            cursor: pointer; 
+            transition: 0.2s; 
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 6px; 
+        }
+        .detail-btn:hover { background: rgba(255,255,255,0.08); color: white; }
+        .detail-btn svg { width: 12px; height: 12px; }
+
+        /* [다음주 계획] */
+        .plan-list { display: flex; flex-direction: column; gap: 10px; }
+        .plan-item { 
+            background: rgba(255,255,255,0.02); border-radius: 12px; padding: 14px; 
+            border-left: 3px solid #6b7280; display: flex; flex-direction: column; gap: 4px;
+        }
+        .plan-header { display: flex; align-items: center; gap: 8px; }
+        .plan-subj { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
+        .plan-title { font-size: 13px; font-weight: 700; color: white; }
+        .plan-desc { font-size: 12px; color: #94a3b8; margin-top: 2px; }
+
+        /* [코멘트] */
+        .comment-box { background: rgba(139, 92, 246, 0.05); border: 1px solid rgba(139, 92, 246, 0.1); border-radius: 16px; padding: 20px; font-size: 14px; line-height: 1.7; color: #e2e8f0; white-space: pre-line; }
+        .comment-box strong { color: #a78bfa; font-weight: 700; }
+
+        /* [모달] */
+        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); z-index: 1000; align-items: center; justify-content: center; padding: 20px; opacity: 0; transition: opacity 0.3s; }
+        .modal-overlay.active { display: flex; opacity: 1; }
+        .modal-content { background: #15151a; width: 100%; max-width: 500px; max-height: 80vh; border-radius: 24px; overflow: hidden; display: flex; flex-direction: column; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); transform: translateY(20px); transition: transform 0.3s; }
+        .modal-overlay.active .modal-content { transform: translateY(0); }
+        .modal-header { padding: 20px 24px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center; background: #1a1b20; }
+        .modal-title { font-size: 16px; font-weight: 800; color: white; }
+        .close-btn { background: none; border: none; color: #64748b; font-size: 24px; cursor: pointer; padding: 4px; transition: color 0.2s; }
+        .close-btn:hover { color: white; }
+        .modal-body { padding: 0; overflow-y: auto; }
+        
+        .detail-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        .detail-table th { background: rgba(255,255,255,0.02); color: #64748b; font-weight: 700; text-align: left; padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,0.05); position: sticky; top: 0; backdrop-filter: blur(10px); z-index: 10; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .detail-table td { padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,0.03); color: #cbd5e1; }
+        .q-num { font-weight: 700; color: #fff; font-family: 'Roboto Mono', monospace; }
+        .q-badge { padding: 3px 8px; border-radius: 4px; font-size: 10px; font-weight: 800; }
+        .diff-high { color: #f87171; background: rgba(248, 113, 113, 0.1); }
+        .diff-mid { color: #fb923c; background: rgba(251, 146, 60, 0.1); }
+        .diff-low { color: #60a5fa; background: rgba(96, 165, 250, 0.1); }
+        .res-o { color: #3b82f6; font-weight: 800; }
+        .res-x { color: #ef4444; font-weight: 800; }
+        .res-check { color: #fb923c; font-weight: 800; }
+        .res-review { color: #a78bfa; font-weight: 800; }
+
+        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        
+        footer { text-align: center; font-size: 11px; color: #475569; margin-top: 50px; font-weight: 500; letter-spacing: 0.5px; }
+    </style>
+</head>
+<body>
+    <div class="noise-overlay"></div>
+
+    <header>
+        <div>
+            <span class="sub-brand">WEEKLY REPORT</span>
+            <div class="brand">한호빈 수학 <span>& 우독학원</span></div>
+        </div>
+        <div class="user-avatar" id="avatar">A</div>
+    </header>
+
+    <main>
+        <!-- 프로필 -->
+        <section class="profile-sec">
+            <h1 class="student-name" id="studentName"></h1>
+            <div class="date-info">
+                <span class="date-badge">1월 3주차</span>
+                <span>학습 성취도 및 주간 내역</span>
+            </div>
+        </section>
+
+        <!-- 신호등 상태창 -->
+        <div class="status-grid" id="statusGrid"></div>
+
+        <!-- 1. 주간 수업 로그 (업그레이드: 상세 내역) -->
+        <section class="card">
+            <div class="card-header">
+                <div class="card-icon-box" style="color:var(--accent-gold); background:rgba(251, 191, 36, 0.1);">
+                    <!-- Calendar Icon -->
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                </div>
+                <div class="card-title">Weekly Class Log</div>
+            </div>
+            <div class="timeline" id="logContainer">
+                <!-- 자바스크립트로 로그 로드됨 -->
+            </div>
+        </section>
+
+        <!-- 2. 성취 그래프 -->
+        <section class="card">
+            <div class="card-header">
+                <div class="card-icon-box" style="color:var(--accent-rose); background:rgba(244, 63, 94, 0.1);">
+                    <!-- Chart Icon -->
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                </div>
+                <div class="card-title">성취도 그래프</div>
+            </div>
+            <div class="chart-wrap">
+                <canvas id="barCanvas" width="300" height="200"></canvas>
+            </div>
+        </section>
+
+        <!-- 3. 시험 상세 -->
+        <div id="testContainer"></div>
+
+        <!-- 4. 다음 주 계획 -->
+        <section class="card">
+            <div class="card-header">
+                <div class="card-icon-box" style="color:var(--accent-green); background:rgba(16, 185, 129, 0.1);">
+                    <!-- MapPin Icon -->
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                </div>
+                <div class="card-title">Next Week Plan</div>
+            </div>
+            <div class="plan-list" id="planContainer"></div>
+        </section>
+
+        <!-- 5. 강사 코멘트 -->
+        <section class="card" style="border-left: 3px solid var(--accent-violet);">
+            <div class="card-header">
+                <div class="card-icon-box" style="color:var(--accent-violet); background:rgba(139, 92, 246, 0.1);">
+                    <!-- Message Icon -->
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                </div>
+                <div class="card-title">Teacher's Comment</div>
+            </div>
+            <div class="comment-box" id="commentBox"></div>
+        </section>
+
+        <footer>© Han Hobin Math & Udok Academy</footer>
+    </main>
+
+    <!-- 모달창 -->
+    <div class="modal-overlay" id="detailModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">분석 상세</h3>
+                <button class="close-btn" onclick="closeModal()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================================
+        // [1. 학생 데이터 (AA - 1월 3주차 샘플)]
+        // ============================================================
+        const studentData = {
+            name: "AA",   // [수정] 익명화 처리
+            school: "M고", // [수정] 익명화 처리
+            // [!] 1월 3주차 학습 로그 (CSV 데이터 및 요청 사항 반영)
+            logs: [
+                { 
+                    date: "01/12(월)", subject: "미적분", type: "calculus",
+                    title: "함수의 연속과 미분가능성", 
+                    desc: "교재 16문제 정도가 미완료된 상태로 귀가하였습니다. 문제 풀이 속도를 조금 더 올릴 필요가 있습니다.",
+                    clinic: 3, // 교재 미흡
+                    test: null // 미응시
+                },
+                { 
+                    date: "01/13(화)", subject: "대수", type: "algebra",
+                    title: "지수함수의 뜻과 그래프", 
+                    desc: "특이사항 없이 성실하게 학습을 완료하였으며 테스트 결과도 8점으로 양호합니다.",
+                    clinic: 1, // 완료
+                    test: "8/10" // 실제 데이터 (O:8)
+                },
+                { 
+                    date: "01/14(수)", subject: "미적분", type: "calculus",
+                    title: "미분계수와 도함수", 
+                    desc: "교재 학습을 성실하게 수행하였으나 테스트는 응시하지 못했습니다. 책 마무리에 집중했습니다.",
+                    clinic: 2, // 책 완료, 테스트 미응시
+                    test: null // 미응시
+                },
+                { 
+                    date: "01/15(목)", subject: "대수", type: "algebra",
+                    title: "로그함수의 뜻과 그래프", 
+                    desc: "추가로 기하 학습까지 진행하며 열정을 보였습니다. 테스트 결과도 10점으로 우수합니다.",
+                    clinic: 1, 
+                    test: "10/10" // 실제 데이터 (O:10)
+                }
+            ],
+            // [!] 성취도 데이터 (CSV 기반 - Corrected)
+            // Algebra: 93.3 (Excellent), Calculus: 80.0 (Normal), Mock: 80.0 (Excellent)
+            scores: {
+                algebra:  { score: 93.3, totalQ: 15, wrong: 1 }, // 93.3점 (오답 1개: 4(C))
+                calculus: { score: 80.0, totalQ: 15, wrong: 3 }, // 80.0점 (오답 3개: 7(D), 11(D), 12(D)) - Corrected from CSV scan
+                mock:     { score: 80.0, totalQ: 10, wrong: 2 }  // 80.0점 (오답 2개: 6(D), 7(D))
+            },
+            ranks: {
+                algebra:  { rank: 2, total: 15 },
+                calculus: { rank: 3, total: 15 }, // Adjusted rank
+                mock:     { rank: 1, total: 9 } 
+            },
+            // [!] 오답 상세 (CSV 기반 매핑 - Corrected)
+            incorrects: {
+                algebra:  { 4: 'C' }, 
+                calculus: { 7: 'D', 11: 'D', 12: 'D' }, // Corrected wrongs
+                mock:     { 6: 'D', 7: 'D' } 
+            },
+            // [!] 다음주 계획
+            plans: [
+                { subj: "대수", title: "지수함수와 로그함수의 활용", desc: "방부등식과 실생활 활용", color: "#3b82f6" },
+                { subj: "미적분", title: "도함수의 활용", desc: "접선의 방정식과 평균값 정리, 함수의 극대와 극소", color: "#8b5cf6" },
+                { subj: "담금질", title: "고1 심화: 방정식과 부등식", desc: "실전 문제 풀이를 통한 심화 개념 다지기", color: "#f43f5e" }
+            ],
+            // [!] 코멘트 (이름 수정됨)
+            comment: `1월 3주차 AA 학생은 대수 과목에서 93.3점(2등)을 기록하며 최상위권의 실력을 증명했습니다. 특히 주중 학습에서 기하 과목까지 추가로 학습하는 등 자기주도적인 학습 태도가 매우 돋보입니다.
+
+            미적분에서는 80점(3등)으로 준수한 성적을 거두었으나, 오답 3문항(7, 11, 12번)이 모두 D유형(질문 후 해결)인 점은 심화 유형에 대한 적응력이 조금 더 필요함을 시사합니다.
+
+            담금질 평가에서도 80점으로 1등을 차지하며 고1 심화 과정에 대한 탄탄한 기본기를 보여주었습니다. 현재의 성실함에 심화 문제 해결 능력을 더한다면 더할 나위 없는 완벽한 성취를 이룰 수 있을 것입니다.`
+        };
+
+        // ============================================================
+        // [2. 시험 메타 데이터 (유지)]
+        // ============================================================
+        const testMeta = {
+            algebra: { 
+                title: "대수 TEST", sub: "지수함수와 로그함수의 뜻과 그래프", 
+                icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 4 6 4 10 12 6 20 18 20"></polyline></svg>`
+            },
+            calculus: { 
+                title: "미적분 TEST", sub: "함수의 연속, 미분계수와 도함수", 
+                icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12c-2-2.67-4-4-6-4a4 4 0 1 0 0 8c2 0 4-1.33 6-4Zm0 0c2 2.67 4 4 6 4a4 4 0 1 0 0-8c-2 0-4 1.33-6 4Z"></path></svg>`
+            },
+            mock: { 
+                title: "담금질 6회", sub: "고1 심화: 방정식과 부등식", 
+                icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg>`
+            }
+        };
+
+        const detailData = {
+            algebra: [
+                {q:1, diff:"중", concept:"지수법칙 묶음/약분"},
+                {q:2, diff:"하", concept:"거듭제곱근 대소비교"},
+                {q:3, diff:"중", concept:"소인수분해와 지수"},
+                {q:4, diff:"중", concept:"합차공식/거듭제곱근"},
+                {q:5, diff:"중", concept:"곱셈공식 변형"},
+                {q:6, diff:"상", concept:"지수 등식 변형"},
+                {q:7, diff:"하", concept:"로그 정의/변환"},
+                {q:8, diff:"상", concept:"로그 성질과 이차식"},
+                {q:9, diff:"상", concept:"밑변환과 근계수"},
+                {q:10, diff:"중", concept:"밑변환 문자 표현"},
+                {q:11, diff:"상", concept:"로그 성질 심화"},
+                {q:12, diff:"상", concept:"지수/로그 혼합"},
+                {q:13, diff:"중", concept:"정수/소수 부분"},
+                {q:14, diff:"상", concept:"로그 자연수 조건"},
+                {q:15, diff:"하", concept:"상용로그표"}
+            ],
+            calculus: [
+                {q:1, diff:"하", concept:"함수의 극한(그래프)"},
+                {q:2, diff:"중하", concept:"극한값의 존재와 연속성"},
+                {q:3, diff:"중", concept:"함수의 연속(미정계수)"},
+                {q:4, diff:"중", concept:"연속함수의 성질"},
+                {q:5, diff:"중", concept:"사이값 정리"},
+                {q:6, diff:"중하", concept:"평균변화율과 미분계수"},
+                {q:7, diff:"상", concept:"관계식이 주어진 함수"},
+                {q:8, diff:"중", concept:"미분계수의 정의"},
+                {q:9, diff:"중", concept:"불연속과 미분가능성"},
+                {q:10, diff:"중", concept:"미분가능성 조건"},
+                {q:11, diff:"중", concept:"곱의 미분법"},
+                {q:12, diff:"중", concept:"미분계수의 활용"},
+                {q:13, diff:"상", concept:"다항함수의 결정"},
+                {q:14, diff:"중", concept:"미분계수의 변형"},
+                {q:15, diff:"상", concept:"나머지 정리와 미분"}
+            ],
+            mock: [
+                {q:1, diff:"하", concept:"연립부등식 해"},
+                {q:2, diff:"하", concept:"유리함수 그래프"},
+                {q:3, diff:"중", concept:"두 직선의 교점"},
+                {q:4, diff:"하", concept:"삼차방정식 허근"},
+                {q:5, diff:"중", concept:"집합 연산(드모르간)"},
+                {q:6, diff:"중", concept:"역함수 존재 조건"},
+                {q:7, diff:"중", concept:"원과 직선/현의 길이"},
+                {q:8, diff:"상", concept:"무리함수와 닮음비"},
+                {q:9, diff:"상", concept:"이차방정식 켤레근"},
+                {q:10, diff:"상", concept:"도형 내 사각형 닮음"}
+            ]
+        };
+
+        // ============================================================
+        // [로직 구현]
+        // ============================================================
+        
+        function getClinicBadge(code) {
+            let label = "";
+            let className = `clinic-${code}`;
+            let icon = "";
+
+            if (code === 1) { 
+                label = "수업/교재/테스트 완료"; 
+                icon = `<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>`;
+            }
+            else if (code === 2) { 
+                label = "수업/교재 완료 (테스트 미응시)"; 
+                icon = `<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>`;
+            }
+            else if (code === 3) { 
+                label = "수업 완료 (교재 미흡)"; 
+                icon = `<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>`;
+            }
+            else if (code === 4) { 
+                label = "수업만 완료 (교재/테스트 미완)"; 
+                icon = `<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="15"></line><line x1="15" y1="9" x2="9" y2="15"></line></svg>`;
+            }
+            else if (code === 5) { 
+                label = "수업자료/교재 미흡"; 
+                icon = `<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>`;
+            }
+            else if (code === 6) { 
+                label = "결석/조퇴 (미참여)"; 
+                icon = `<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
+            }
+
+            return `<span class="clinic-tag ${className}">${icon}${label}</span>`;
+        }
+
+        // [NEW] 일일 테스트 배지 생성 함수
+        function getDailyTestBadge(scoreStr) {
+            if (!scoreStr) {
+                // 미응시
+                return `<span class="test-tag test-none">Daily TEST: 미응시</span>`;
+            }
+            
+            // "9/10" 같은 문자열에서 앞 숫자 파싱
+            const score = parseInt(scoreStr.split('/')[0], 10);
+            
+            if (isNaN(score)) return `<span class="test-tag test-none">Daily TEST: ${scoreStr}</span>`;
+
+            if (score >= 8) {
+                return `<span class="test-tag test-high">Daily TEST: 우수 (${scoreStr})</span>`;
+            } else if (score >= 6) {
+                return `<span class="test-tag test-mid">Daily TEST: 보통 (${scoreStr})</span>`;
+            } else {
+                return `<span class="test-tag test-low">Daily TEST: 복습 필요 (${scoreStr})</span>`;
+            }
+        }
+
+        function getMockStatus(score) {
+            // 미응시(0점)인 경우 별도 처리
+            if (score === 0) return { color: "dot-black", label: "미응시", styleClass: "st-black", textClass: "black" };
+
+            if (score >= 80) return { color: "dot-blue", label: "우수", styleClass: "st-blue", textClass: "blue" };
+            if (score >= 60) return { color: "dot-orange", label: "보통", styleClass: "st-orange", textClass: "orange" };
+            if (score >= 40) return { color: "dot-red", label: "위험", styleClass: "st-rose", textClass: "red" };
+            return { color: "dot-black", label: "심각", styleClass: "st-black", textClass: "black" };
+        }
+        function getNormalStatus(score) {
+            // 미응시(0점)인 경우 별도 처리
+            if (score === 0) return { color: "dot-black", label: "미응시", styleClass: "st-black", textClass: "black" };
+
+            if (score >= 85) return { color: "dot-blue", label: "우수", styleClass: "st-blue", textClass: "blue" };
+            if (score >= 70) return { color: "dot-orange", label: "보통", styleClass: "st-orange", textClass: "orange" };
+            if (score >= 55) return { color: "dot-red", label: "위험", styleClass: "st-rose", textClass: "red" };
+            return { color: "dot-black", label: "심각", styleClass: "st-black", textClass: "black" };
+        }
+
+        // 초기화
+        document.getElementById('studentName').innerHTML = `${studentData.name}<span class="school-badge">${studentData.school}</span>`;
+        document.getElementById('avatar').textContent = studentData.name[0];
+        document.getElementById('commentBox').innerHTML = studentData.comment.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+        // 상태창 생성
+        const statusGrid = document.getElementById('statusGrid');
+        
+        const algStat = getNormalStatus(studentData.scores.algebra.score);
+        const calcStat = getNormalStatus(studentData.scores.calculus.score);
+        const mockStat = getMockStatus(studentData.scores.mock.score);
+
+        const icons = {
+            algebra: testMeta.algebra.icon,
+            calculus: testMeta.calculus.icon,
+            mock: testMeta.mock.icon
+        };
+
+        statusGrid.innerHTML = `
+            <div class="status-item subj-algebra">
+                <div class="status-icon-wrap">${icons.algebra}</div>
+                <span class="status-subject">대수</span>
+                <div class="traffic-dot ${algStat.color}"></div>
+                <span class="status-label">${algStat.label}</span>
+            </div>
+            <div class="status-item subj-calculus">
+                <div class="status-icon-wrap">${icons.calculus}</div>
+                <span class="status-subject">미적분</span>
+                <div class="traffic-dot ${calcStat.color}"></div>
+                <span class="status-label">${calcStat.label}</span>
+            </div>
+            <div class="status-item subj-mock">
+                <div class="status-icon-wrap">${icons.mock}</div>
+                <span class="status-subject">담금질</span>
+                <div class="traffic-dot ${mockStat.color}"></div>
+                <span class="status-label">${mockStat.label}</span>
+            </div>
+        `;
+
+        // [변경] 로그 생성 로직 업그레이드
+        document.getElementById('logContainer').innerHTML = studentData.logs.map(log => {
+            const accentColor = log.type === 'calculus' ? 'var(--accent-violet)' : 'var(--accent-blue)';
+            
+            // 클리닉 배지
+            let clinicBadge = getClinicBadge(log.clinic);
+            
+            // [NEW] 일일 테스트 배지
+            let dailyTestBadge = getDailyTestBadge(log.test);
+
+            return `
+            <div class="timeline-item">
+                <div class="timeline-dot" style="background:${accentColor}; border-color:${accentColor}"></div>
+                <div class="log-card">
+                    <div class="log-header">
+                        <div class="log-date">
+                            ${log.date}
+                            <span class="log-subj-badge" style="background:${log.type === 'calculus' ? 'rgba(139, 92, 246, 0.2)' : 'rgba(59, 130, 246, 0.2)'};">
+                                ${log.subject}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="log-title">${log.title}</div>
+                    <div class="log-desc">${log.desc}</div>
+                    <div class="log-meta">
+                        ${clinicBadge}
+                        ${dailyTestBadge}
+                    </div>
+                </div>
+            </div>`;
+        }).join('');
+
+        // 시험 카드 생성
+        const testContainer = document.getElementById('testContainer');
+        ['algebra', 'calculus', 'mock'].forEach(key => {
+            const data = studentData.scores[key];
+            const meta = testMeta[key];
+            const rank = studentData.ranks[key];
+            const wrongs = studentData.incorrects[key]; 
+            
+            let colorClass;
+            if (key === 'mock') colorClass = mockStat.textClass;
+            else if (key === 'algebra') colorClass = algStat.textClass;
+            else colorClass = calcStat.textClass;
+
+            let iconColor = 'var(--accent-blue)';
+            let iconBg = 'rgba(59, 130, 246, 0.1)';
+            if(key === 'calculus') { iconColor = 'var(--accent-violet)'; iconBg = 'rgba(139, 92, 246, 0.1)'; }
+            if(key === 'mock') { iconColor = 'var(--accent-rose)'; iconBg = 'rgba(244, 63, 94, 0.1)'; }
+
+            let tags = Object.entries(wrongs).map(([qNum, status]) => {
+                let tagClass = 'warning-tag';
+                let text = `Q${qNum}`;
+                
+                if (status === 'C') { tagClass = 'check-tag'; text += ' (스스로 고침)'; }
+                else if (status === 'D') { tagClass = 'review-tag'; text += ' (복습 필요)'; }
+                else if (status === 'X') { tagClass = 'warning-tag'; text += ' (재학습)'; }
+                else if (status === 'T') { text += ' (시간 부족)'; }
+                
+                return `<span class="tag ${tagClass}">${text}</span>`;
+            }).join('');
+
+            // 미응시인 경우 태그 처리
+            if (data.score === 0) {
+                tags = '<span class="tag" style="color:#94a3b8; border-color:rgba(148, 163, 184, 0.3)">미응시</span>';
+            } else if (!tags) {
+                tags = '<span class="tag" style="color:#4ade80; border-color:rgba(74,222,128,0.3)">오답 없음</span>';
+            }
+
+            const html = `
+            <section class="card test-card ${colorClass}">
+                <div class="test-top">
+                    <div class="test-info-group">
+                        <div class="test-name">
+                            <div class="card-icon-box" style="width:24px; height:24px; background:${iconBg}; color:${iconColor}; margin-right:4px;">
+                                ${meta.icon}
+                            </div>
+                            ${meta.title}
+                        </div>
+                        <span class="test-sub">${meta.sub}</span>
+                        <span class="test-rank">${rank.rank}등 / ${rank.total}명</span>
+                    </div>
+                    <div style="display:flex; flex-direction:column; align-items:flex-end; gap:6px;">
+                        <div class="test-score">${data.score}<span style="font-size:12px; font-weight:600; color:#64748b; margin-left:2px;">점</span></div>
+                        ${(data.score === 0) ? '' : `<button class="detail-btn" onclick="openModal('${key}')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                            상세 분석
+                        </button>`}
+                    </div>
+                </div>
+                <div style="border-top:1px solid rgba(255,255,255,0.05); padding-top:12px;">
+                    <div class="tag-box">${tags}</div>
+                </div>
+            </section>`;
+            testContainer.insertAdjacentHTML('beforeend', html);
+        });
+
+        // 계획
+        document.getElementById('planContainer').innerHTML = studentData.plans.map(p => `
+            <div class="plan-item" style="border-left-color: ${p.color}">
+                <div class="plan-header">
+                    <div class="plan-subj" style="color:${p.color}">${p.subj}</div>
+                </div>
+                <div class="plan-title">${p.title}</div>
+                <div class="plan-desc">${p.desc}</div>
+            </div>
+        `).join('');
+
+        // 차트
+        function drawChart() {
+            const canvas = document.getElementById('barCanvas');
+            const ctx = canvas.getContext('2d');
+            const w = canvas.width;
+            const h = canvas.height;
+            const pad = { b: 30, t: 20, l: 10, r: 10 };
+
+            const chartData = [
+                { label: '대수', val: studentData.scores.algebra.score || 0, color: '#3b82f6' },
+                { label: '미적분', val: studentData.scores.calculus.score || 0, color: '#8b5cf6' },
+                { label: '담금질', val: studentData.scores.mock.score || 0, color: '#f43f5e' }
+            ];
+
+            const barW = 50;
+            const gap = (w - pad.l - pad.r - barW * 3) / 4;
+
+            ctx.beginPath();
+            ctx.moveTo(pad.l, h - pad.b);
+            ctx.lineTo(w - pad.r, h - pad.b);
+            ctx.strokeStyle = '#334155';
+            ctx.stroke();
+
+            chartData.forEach((d, i) => {
+                const x = pad.l + gap + i * (barW + gap);
+                const barH = (d.val / 100) * (h - pad.b - pad.t);
+                const y = h - pad.b - barH;
+
+                ctx.fillStyle = d.color;
+                ctx.beginPath();
+                ctx.roundRect(x, y, barW, barH, [6, 6, 0, 0]);
+                ctx.fill();
+                
+                ctx.shadowColor = d.color;
+                ctx.shadowBlur = 10;
+                ctx.fill();
+                ctx.shadowBlur = 0; 
+
+                ctx.fillStyle = '#fff';
+                ctx.font = 'bold 14px "Roboto Mono", sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText(d.val, x + barW/2, y - 8);
+
+                ctx.fillStyle = '#94a3b8';
+                ctx.font = 'bold 12px "Noto Sans KR", sans-serif';
+                ctx.fillText(d.label, x + barW/2, h - 8);
+            });
+        }
+        window.onload = drawChart;
+
+        // [모달]
+        const modal = document.getElementById('detailModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalBody = document.getElementById('modalBody');
+
+        function openModal(key) {
+            const meta = testMeta[key];
+            const details = detailData[key];
+            const incorrects = studentData.incorrects[key];
+            
+            modalTitle.innerHTML = `<span style="color:${key==='algebra'?'var(--accent-blue)':(key==='calculus'?'var(--accent-violet)':'var(--accent-rose)')}">${meta.title}</span> 상세 분석`;
+            
+            let html = `<table class="detail-table"><thead><tr><th style="width:40px;">No.</th><th>핵심 개념</th><th>난이도</th><th style="width:60px;">결과</th></tr></thead><tbody>`;
+            
+            details.forEach(item => {
+                const status = incorrects[item.q]; 
+                let resHtml = `<span class="res-o">O</span>`;
+                
+                if (status === 'C') resHtml = `<span class="res-check">C</span>`; 
+                else if (status === 'D') resHtml = `<span class="res-review">D</span>`; 
+                else if (status === 'X') resHtml = `<span class="res-x">X</span>`;
+                else if (status === 'T') resHtml = `<span class="res-time">T</span>`;
+
+                let diffClass = '';
+                if(item.diff === '하') diffClass = 'diff-low';
+                else if(item.diff === '중') diffClass = 'diff-mid';
+                else diffClass = 'diff-high';
+
+                html += `<tr><td class="q-num">${item.q}</td><td>${item.concept}</td><td><span class="q-badge ${diffClass}">${item.diff}</span></td><td>${resHtml}</td></tr>`;
+            });
+            html += `</tbody></table>`;
+            modalBody.innerHTML = html;
+            modal.classList.add('active');
+        }
+        function closeModal() { modal.classList.remove('active'); }
+        modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
+
+    </script>
+<script>
+  // 1. 마우스 우클릭 방지
+  document.addEventListener('contextmenu', function(e) {
+    e.preventDefault(); // 우클릭 메뉴가 뜨지 않게 합니다.
+    // alert('보안을 위해 우클릭을 사용할 수 없습니다.'); // 경고창이 필요하면 주석(//)을 지우세요.
+  });
+
+  // 2. 개발자 도구 및 소스 보기 단축키 방지
+  document.addEventListener('keydown', function(e) {
+    // F12 키 방지 (가장 많이 쓰는 개발자 도구 키)
+    if (e.keyCode === 123) {
+      e.preventDefault();
+      e.returnValue = false;
+    }
+
+    // Ctrl+Shift+I (개발자 도구) / Ctrl+Shift+J (콘솔) / Ctrl+Shift+C (요소 검사)
+    if (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) {
+      e.preventDefault();
+      e.returnValue = false;
+    }
+
+    // Ctrl+U (소스 보기)
+    if (e.ctrlKey && e.keyCode === 85) {
+      e.preventDefault();
+      e.returnValue = false;
+    }
+  });
+</script>
+</body>
+</html>
