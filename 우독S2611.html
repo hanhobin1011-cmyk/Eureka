@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>한호빈 [Signature] 3~4월 수업계획</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans KR"', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.6s ease-out forwards',
+                        'pulse-border': 'pulseBorder 2s infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(15px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        pulseBorder: {
+                            '0%, 100%': { borderColor: 'rgba(239, 68, 68, 0.3)' },
+                            '50%': { borderColor: 'rgba(239, 68, 68, 1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #121212;
+            color: #E0E0E0;
+            word-break: keep-all;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #34d399, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-gold {
+            background: linear-gradient(to right, #fbbf24, #d97706);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-vertical {
+            background: linear-gradient(to right, #60a5fa, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-rising {
+            background: linear-gradient(to right, #f87171, #ef4444);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #121212; }
+        ::-webkit-scrollbar-thumb { background: #444; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #666; }
+
+        /* Accordion transition */
+        .accordion-content {
+            transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+
+        /* Tab active states */
+        .tab-btn { transition: all 0.3s ease; }
+        .tab-btn.active-v {
+            background-color: rgba(37, 99, 235, 0.15);
+            border-color: #3b82f6;
+            color: #60a5fa;
+            box-shadow: 0 4px 20px -5px rgba(59, 130, 246, 0.4);
+        }
+        .tab-btn.active-r {
+            background-color: rgba(239, 68, 68, 0.15);
+            border-color: #ef4444;
+            color: #f87171;
+            box-shadow: 0 4px 20px -5px rgba(239, 68, 68, 0.4);
+        }
+
+        /* Highlight 4/7 rows */
+        .highlight-row {
+            background: linear-gradient(90deg, rgba(234, 179, 8, 0.1) 0%, transparent 100%);
+            border-left: 3px solid #eab308;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-blue-500 selection:text-white pb-20">
+
+    <div class="container mx-auto max-w-3xl px-4 py-8 md:py-16">
+
+        <!-- 1. 헤더 섹션 -->
+        <header class="mb-10 text-center animate-fade-in-up">
+            <div class="inline-block bg-[#1E1E1E] border border-blue-500/30 px-4 py-1.5 rounded-full text-sm font-bold text-blue-400 mb-4">
+                1학기 중간고사 대비
+            </div>
+            <h1 class="text-3xl md:text-5xl font-black mb-4 tracking-tight text-white">
+                3~4월 <span class="gradient-gold">수업계획 및 시간표</span>
+            </h1>
+            <p class="text-gray-400 font-medium text-sm md:text-base">
+                고2 SIGNATURE 수직반(V-Class) & 상승반(R-Class)
+            </p>
+        </header>
+
+        <!-- 3. 반 선택 탭 -->
+        <div class="flex gap-2 mb-8 animate-fade-in-up" style="animation-delay: 0.1s;">
+            <button onclick="switchTab('v-class')" id="btn-v-class" class="tab-btn active-v flex-1 py-4 rounded-xl border border-gray-700 bg-[#1E1E1E] text-gray-400 font-bold text-center relative overflow-hidden group">
+                <div class="text-sm font-normal mb-1 opacity-80">고2 SIGNATURE</div>
+                <div class="text-xl">수직반 (V-Class)</div>
+            </button>
+            <button onclick="switchTab('r-class')" id="btn-r-class" class="tab-btn flex-1 py-4 rounded-xl border border-gray-700 bg-[#1E1E1E] text-gray-400 font-bold text-center relative overflow-hidden group">
+                <div class="text-sm font-normal mb-1 opacity-80">고2 SIGNATURE</div>
+                <div class="text-xl">상승반 (R-Class)</div>
+            </button>
+        </div>
+
+        <main class="animate-fade-in-up" style="animation-delay: 0.2s;">
+            <!-- ==========================================
+                 수직반 (V-Class) 콘텐츠
+                 ========================================== -->
+            <div id="v-class-content" class="block">
+                
+                <!-- 기본 정보 요약 카드 -->
+                <div class="bg-[#1E1E1E] rounded-2xl border border-[#333] p-5 md:p-6 mb-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- 시간 -->
+                        <div>
+                            <h4 class="text-blue-400 font-bold text-sm mb-3 flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                정규 및 클리닉 시간
+                            </h4>
+                            <div class="space-y-2 text-sm text-gray-300">
+                                <div class="flex justify-between bg-[#121212] p-2 rounded border border-gray-800">
+                                    <span class="font-bold text-white">화, 목</span>
+                                    <span class="text-right">18:00~20:00 (정규 수업)<br>20:00~22:00 (정규 클리닉)</span>
+                                </div>
+                                <div class="flex justify-between bg-[#121212] p-2 rounded border border-gray-800">
+                                    <span class="font-bold text-white">일요일</span>
+                                    <span class="text-right">13:00~16:00 (주말 클리닉)<br><span class="text-xs text-gray-500">*시간 변경 가능</span></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 교재 -->
+                        <div>
+                            <h4 class="text-blue-400 font-bold text-sm mb-3 flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                                교재 목록
+                            </h4>
+                            <ul class="space-y-2 text-sm">
+                                <li class="flex items-start gap-2"><span class="text-blue-400 font-bold w-1/3 flex-shrink-0 text-xs mt-0.5">EUREKA ADVANCE</span> <span class="text-gray-400">한호빈T 자체 심화유형서</span></li>
+                                <li class="flex items-start gap-2"><span class="text-green-400 font-bold w-1/3 flex-shrink-0 text-xs mt-0.5">GRIP PATTERN</span> <span class="text-gray-400">데이터 기반 유형서</span></li>
+                                <li class="flex items-start gap-2"><span class="text-yellow-400 font-bold w-1/3 flex-shrink-0 text-xs mt-0.5">EUREKA ARCHIVE</span> <span class="text-gray-400">한호빈T 자체 실전기출서 (6회)</span></li>
+                                <li class="flex items-start gap-2"><span class="text-purple-400 font-bold w-1/3 flex-shrink-0 text-xs mt-0.5">EUREKA SYNC</span> <span class="text-gray-400">한호빈T 자체 학교별 맞춤 내신대비집</span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 기간별 목표 -->
+                    <div class="mt-6 pt-5 border-t border-gray-800">
+                        <div class="mb-4">
+                            <div class="inline-block bg-blue-900/30 text-blue-300 text-xs font-bold px-2 py-1 rounded mb-1">STEP 1. 3/3(화) ~ 4/5(일)</div>
+                            <div class="text-sm text-gray-300">
+                                <span class="text-white font-medium">EUREKA ADVANCE(수업) + GRIP PATTERN(과제&클리닉)</span><br>
+                                <span class="text-gray-400 mt-1 block">학습 목표: 심화 개념과 심화 유형을 통해 고점을 높이고, 유형서 과제를 통해 저점을 높이겠습니다.</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="inline-block bg-yellow-900/30 text-yellow-300 text-xs font-bold px-2 py-1 rounded mb-1">STEP 2. 4/7(화) ~ 4/26(일)</div>
+                            <div class="text-sm text-gray-300">
+                                <span class="text-white font-medium">EUREKA ARCHIVE(수업) + EUREKA SYNC(과제&클리닉)</span><br>
+                                <span class="text-gray-400 mt-1 block">학습 목표: 실전 기출 점검을 통해 학생별 취약점을 파악하고 극복합니다. 학교별 맞춤 교재를 통해 출제율이 높은 문제를 선별하여 내신대비를 마무리합니다.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3월 시간표 아코디언 -->
+                <div class="mb-4 bg-[#1E1E1E] rounded-xl border border-[#333] overflow-hidden">
+                    <button onclick="toggleAccordion('v-mar-schedule', 'v-mar-icon')" class="w-full px-6 py-4 flex justify-between items-center focus:outline-none hover:bg-[#252525] transition-colors">
+                        <span class="text-lg font-bold text-white flex items-center gap-2">
+                            <span class="w-1.5 h-6 bg-blue-500 rounded-full inline-block"></span>
+                            3월 시간표 세부내역
+                        </span>
+                        <svg id="v-mar-icon" class="w-5 h-5 text-gray-400 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div id="v-mar-schedule" class="accordion-content bg-[#121212]">
+                        <div class="p-4 space-y-0 text-sm">
+                            <!-- 일정 리스트 생성 -->
+                            <script>
+                                const vMarData = [
+                                    { d: "3/3(화)", t: "수업: EUREKA ADVANCE 20문제<br>클리닉: GRIP PATTERN 질답 & 오답노트 작성" },
+                                    { d: "3/5(목)", t: "수업: EUREKA ADVANCE 20문제<br>클리닉: GRIP PATTERN 질답 & 오답노트 작성" },
+                                    { d: "3/7~8", sub: "주말", t: "주간 TEST 및 질의응답", wk: true },
+                                    { d: "3/10(화)", t: "수업: EUREKA ADVANCE 20문제<br>클리닉: GRIP PATTERN 질답 & 오답노트 작성" },
+                                    { d: "3/12(목)", t: "수업: EUREKA ADVANCE 20문제<br>클리닉: GRIP PATTERN 질답 & 오답노트 작성" },
+                                    { d: "3/14~15", sub: "주말", t: "주간 TEST 및 질의응답", wk: true },
+                                    { d: "3/17(화)", t: "수업: EUREKA ADVANCE 20문제<br>클리닉: GRIP PATTERN 질답 & 오답노트 작성" },
+                                    { d: "3/19(목)", t: "수업: EUREKA ADVANCE 20문제<br>클리닉: GRIP PATTERN 질답 & 오답노트 작성" },
+                                    { d: "3/21~22", sub: "주말", t: "주간 TEST 및 질의응답", wk: true },
+                                    { d: "3/24(화)", t: "수업: EUREKA ADVANCE 20문제<br>클리닉: GRIP PATTERN 질답 & 오답노트 작성" },
+                                    { d: "3/26(목)", t: "수업: EUREKA ADVANCE 20문제<br>클리닉: GRIP PATTERN 질답 & 오답노트 작성" },
+                                    { d: "3/28~29", sub: "주말", t: "주간 TEST 및 질의응답", wk: true },
+                                    { d: "3/31(화)", t: "수업: EUREKA ADVANCE 20문제<br>클리닉: GRIP PATTERN 질답 & 오답노트 작성" }
+                                ];
+                                vMarData.forEach(item => {
+                                    document.write(`
+                                    <div class="flex items-start gap-4 p-3 border-b border-gray-800 ${item.wk ? 'bg-[#181818]' : ''}">
+                                        <div class="w-16 flex-shrink-0 ${item.wk ? 'text-gray-400' : 'text-blue-400'} font-bold text-xs md:text-sm">
+                                            ${item.d}${item.sub ? `<br><span class="text-[10px] text-gray-500 font-normal">${item.sub}</span>` : ''}
+                                        </div>
+                                        <div class="text-gray-300 flex-1 leading-relaxed ${item.wk ? 'flex items-center text-gray-400' : ''}">
+                                            ${item.t}
+                                        </div>
+                                    </div>
+                                    `);
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4월 시간표 아코디언 -->
+                <div class="bg-[#1E1E1E] rounded-xl border border-[#333] overflow-hidden">
+                    <button onclick="toggleAccordion('v-apr-schedule', 'v-apr-icon')" class="w-full px-6 py-4 flex justify-between items-center focus:outline-none hover:bg-[#252525] transition-colors">
+                        <span class="text-lg font-bold text-white flex items-center gap-2">
+                            <span class="w-1.5 h-6 bg-blue-500 rounded-full inline-block"></span>
+                            4월 시간표 세부내역
+                        </span>
+                        <svg id="v-apr-icon" class="w-5 h-5 text-gray-400 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div id="v-apr-schedule" class="accordion-content bg-[#121212]">
+                        <div class="p-4 space-y-0 text-sm">
+                             <script>
+                                const vAprData = [
+                                    { d: "4/2(목)", t: "수업: EUREKA ADVANCE 20문제<br>클리닉: GRIP PATTERN 질답 & 오답노트 작성" },
+                                    { d: "4/4~5", sub: "주말", t: "주간 TEST 및 질의응답", wk: true },
+                                    { d: "4/7(화)", t: "<span class='text-yellow-400 font-bold'>[통합운영]</span> 수업: EUREKA ARCHIVE 1회<br>클리닉: EUREKA SYNC 질답 & 오답노트 작성", hl: true },
+                                    { d: "4/9(목)", t: "<span class='text-yellow-400 font-bold'>[통합운영]</span> 수업: EUREKA ARCHIVE 2회<br>클리닉: EUREKA SYNC 질답 & 오답노트 작성", hl: true },
+                                    { d: "4/11~12", sub: "주말", t: "학생별 약점 극복 클리닉", wk: true },
+                                    { d: "4/14(화)", t: "<span class='text-yellow-400 font-bold'>[통합운영]</span> 수업: EUREKA ARCHIVE 3회<br>클리닉: EUREKA SYNC 질답 & 오답노트 작성", hl: true },
+                                    { d: "4/16(목)", t: "<span class='text-yellow-400 font-bold'>[통합운영]</span> 수업: EUREKA ARCHIVE 4회<br>클리닉: EUREKA SYNC 질답 & 오답노트 작성", hl: true },
+                                    { d: "4/18~19", sub: "주말", t: "학생별 약점 극복 클리닉", wk: true },
+                                    { d: "4/21(화)", t: "<span class='text-yellow-400 font-bold'>[통합운영]</span> 수업: EUREKA ARCHIVE 5회<br>클리닉: EUREKA SYNC 질답 & 오답노트 작성", hl: true },
+                                    { d: "4/23(목)", t: "<span class='text-yellow-400 font-bold'>[통합운영]</span> 수업: EUREKA ARCHIVE 6회<br>클리닉: EUREKA SYNC 질답 & 오답노트 작성", hl: true },
+                                    { d: "4/25~26", sub: "주말", t: "학생별 약점 극복 클리닉", wk: true },
+                                    { d: "4/28(화)", t: "직전보강 및 중간고사 대비 마무리", f: true },
+                                    { d: "4/30(목)", t: "직전보강 및 중간고사 대비 마무리", f: true },
+                                    { d: "5/2~3", sub: "주말", t: "직전보강 및 중간고사 대비 마무리", wk: true, f: true }
+                                ];
+                                vAprData.forEach(item => {
+                                    document.write(`
+                                    <div class="flex items-start gap-4 p-3 border-b border-gray-800 ${item.wk ? 'bg-[#181818]' : ''} ${item.hl ? 'highlight-row' : ''}">
+                                        <div class="w-16 flex-shrink-0 ${item.wk ? 'text-gray-400' : (item.f ? 'text-red-400' : 'text-blue-400')} font-bold text-xs md:text-sm">
+                                            ${item.d}${item.sub ? `<br><span class="text-[10px] text-gray-500 font-normal">${item.sub}</span>` : ''}
+                                        </div>
+                                        <div class="text-gray-300 flex-1 leading-relaxed ${item.wk ? 'flex items-center text-gray-400' : ''} ${item.f ? 'font-bold text-white' : ''}">
+                                            ${item.t}
+                                        </div>
+                                    </div>
+                                    `);
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==========================================
+                 상승반 (R-Class) 콘텐츠
+                 ========================================== -->
+            <div id="r-class-content" class="hidden">
+                
+                <!-- 기본 정보 요약 카드 -->
+                <div class="bg-[#1E1E1E] rounded-2xl border border-[#333] p-5 md:p-6 mb-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- 시간 -->
+                        <div>
+                            <h4 class="text-red-400 font-bold text-sm mb-3 flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                정규 및 클리닉 시간
+                            </h4>
+                            <div class="space-y-2 text-sm text-gray-300">
+                                <div class="flex justify-between bg-[#121212] p-2 rounded border border-gray-800">
+                                    <span class="font-bold text-white">화, 목</span>
+                                    <span class="text-right">18:00~20:00 (정규 클리닉)<br>20:00~22:00 (정규 수업)</span>
+                                </div>
+                                <div class="flex justify-between bg-[#121212] p-2 rounded border border-gray-800">
+                                    <span class="font-bold text-white">일요일</span>
+                                    <span class="text-right">13:00~16:00 (주말 클리닉)<br><span class="text-xs text-gray-500">*시간 변경 가능</span></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 교재 -->
+                        <div>
+                            <h4 class="text-red-400 font-bold text-sm mb-3 flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                                교재 목록
+                            </h4>
+                            <ul class="space-y-2 text-sm">
+                                <li class="flex items-start gap-2"><span class="text-red-400 font-bold w-1/3 flex-shrink-0 text-xs mt-0.5">GRIP INCEPTION</span> <span class="text-gray-400">데이터 기반 개념서</span></li>
+                                <li class="flex items-start gap-2"><span class="text-green-400 font-bold w-1/3 flex-shrink-0 text-xs mt-0.5">GRIP PATTERN</span> <span class="text-gray-400">데이터 기반 유형서</span></li>
+                                <li class="flex items-start gap-2"><span class="text-yellow-400 font-bold w-1/3 flex-shrink-0 text-xs mt-0.5">EUREKA ARCHIVE</span> <span class="text-gray-400">한호빈T 자체 실전기출서 (6회)</span></li>
+                                <li class="flex items-start gap-2"><span class="text-purple-400 font-bold w-1/3 flex-shrink-0 text-xs mt-0.5">EUREKA SYNC</span> <span class="text-gray-400">한호빈T 자체 학교별 맞춤 내신대비집</span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 기간별 목표 -->
+                    <div class="mt-6 pt-5 border-t border-gray-800">
+                        <div class="mb-4">
+                            <div class="inline-block bg-red-900/30 text-red-300 text-xs font-bold px-2 py-1 rounded mb-1">STEP 1. 3/3(화) ~ 4/5(일)</div>
+                            <div class="text-sm text-gray-300">
+                                <span class="text-white font-medium">GRIP INCEPTION(클리닉) + GRIP PATTERN(수업&과제)</span><br>
+                                <span class="text-gray-400 mt-1 block">학습 목표: 개념 복습을 통해 흔들리는 개념을 잡고, 유형서 학습을 통해 문제 풀이에 익숙하도록 만듭니다.</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="inline-block bg-yellow-900/30 text-yellow-300 text-xs font-bold px-2 py-1 rounded mb-1">STEP 2. 4/7(화) ~ 4/26(일)</div>
+                            <div class="text-sm text-gray-300">
+                                <span class="text-white font-medium">EUREKA ARCHIVE(수업) + EUREKA SYNC(과제&클리닉)</span><br>
+                                <span class="text-gray-400 mt-1 block">학습 목표: 실전 기출 점검을 통해 학생별 취약점을 파악하고 극복합니다. 학교별 맞춤 교재를 통해 출제율이 높은 문제를 선별하여 내신대비를 마무리합니다.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3월 시간표 아코디언 (상승반) -->
+                <div class="mb-4 bg-[#1E1E1E] rounded-xl border border-[#333] overflow-hidden">
+                    <button onclick="toggleAccordion('r-mar-schedule', 'r-mar-icon')" class="w-full px-6 py-4 flex justify-between items-center focus:outline-none hover:bg-[#252525] transition-colors">
+                        <span class="text-lg font-bold text-white flex items-center gap-2">
+                            <span class="w-1.5 h-6 bg-red-500 rounded-full inline-block"></span>
+                            3월 시간표 세부내역
+                        </span>
+                        <svg id="r-mar-icon" class="w-5 h-5 text-gray-400 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div id="r-mar-schedule" class="accordion-content bg-[#121212]">
+                        <div class="p-4 space-y-0 text-sm">
+                            <script>
+                                const rMarData = [
+                                    { d: "3/3(화)", t: "클리닉: GRIP INCEPTION 개념 복습 & 질답<br>수업: GRIP PATTERN 유형서 학습" },
+                                    { d: "3/5(목)", t: "클리닉: GRIP INCEPTION 개념 복습 & 질답<br>수업: GRIP PATTERN 유형서 학습" },
+                                    { d: "3/7~8", sub: "주말", t: "주간 TEST 및 질의응답", wk: true },
+                                    { d: "3/10(화)", t: "클리닉: GRIP INCEPTION 개념 복습 & 질답<br>수업: GRIP PATTERN 유형서 학습" },
+                                    { d: "3/12(목)", t: "클리닉: GRIP INCEPTION 개념 복습 & 질답<br>수업: GRIP PATTERN 유형서 학습" },
+                                    { d: "3/14~15", sub: "주말", t: "주간 TEST 및 질의응답", wk: true },
+                                    { d: "3/17(화)", t: "클리닉: GRIP INCEPTION 개념 복습 & 질답<br>수업: GRIP PATTERN 유형서 학습" },
+                                    { d: "3/19(목)", t: "클리닉: GRIP INCEPTION 개념 복습 & 질답<br>수업: GRIP PATTERN 유형서 학습" },
+                                    { d: "3/21~22", sub: "주말", t: "주간 TEST 및 질의응답", wk: true },
+                                    { d: "3/24(화)", t: "클리닉: GRIP INCEPTION 개념 복습 & 질답<br>수업: GRIP PATTERN 유형서 학습" },
+                                    { d: "3/26(목)", t: "클리닉: GRIP INCEPTION 개념 복습 & 질답<br>수업: GRIP PATTERN 유형서 학습" },
+                                    { d: "3/28~29", sub: "주말", t: "주간 TEST 및 질의응답", wk: true },
+                                    { d: "3/31(화)", t: "클리닉: GRIP INCEPTION 개념 복습 & 질답<br>수업: GRIP PATTERN 유형서 학습" }
+                                ];
+                                rMarData.forEach(item => {
+                                    document.write(`
+                                    <div class="flex items-start gap-4 p-3 border-b border-gray-800 ${item.wk ? 'bg-[#181818]' : ''}">
+                                        <div class="w-16 flex-shrink-0 ${item.wk ? 'text-gray-400' : 'text-red-400'} font-bold text-xs md:text-sm">
+                                            ${item.d}${item.sub ? `<br><span class="text-[10px] text-gray-500 font-normal">${item.sub}</span>` : ''}
+                                        </div>
+                                        <div class="text-gray-300 flex-1 leading-relaxed ${item.wk ? 'flex items-center text-gray-400' : ''}">
+                                            ${item.t}
+                                        </div>
+                                    </div>
+                                    `);
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4월 시간표 아코디언 (상승반 - 수직반과 동일부분 존재) -->
+                <div class="bg-[#1E1E1E] rounded-xl border border-[#333] overflow-hidden">
+                    <button onclick="toggleAccordion('r-apr-schedule', 'r-apr-icon')" class="w-full px-6 py-4 flex justify-between items-center focus:outline-none hover:bg-[#252525] transition-colors">
+                        <span class="text-lg font-bold text-white flex items-center gap-2">
+                            <span class="w-1.5 h-6 bg-red-500 rounded-full inline-block"></span>
+                            4월 시간표 세부내역
+                        </span>
+                        <svg id="r-apr-icon" class="w-5 h-5 text-gray-400 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div id="r-apr-schedule" class="accordion-content bg-[#121212]">
+                        <div class="p-4 space-y-0 text-sm">
+                             <script>
+                                const rAprData = [
+                                    { d: "4/2(목)", t: "클리닉: GRIP INCEPTION 개념 복습 & 질답<br>수업: GRIP PATTERN 유형서 학습" },
+                                    { d: "4/4~5", sub: "주말", t: "주간 TEST 및 질의응답", wk: true },
+                                    { d: "4/7(화)", t: "<span class='text-yellow-400 font-bold'>[통합운영]</span> 수업: EUREKA ARCHIVE 1회<br>클리닉: EUREKA SYNC 질답 & 오답노트 작성", hl: true },
+                                    { d: "4/9(목)", t: "<span class='text-yellow-400 font-bold'>[통합운영]</span> 수업: EUREKA ARCHIVE 2회<br>클리닉: EUREKA SYNC 질답 & 오답노트 작성", hl: true },
+                                    { d: "4/11~12", sub: "주말", t: "학생별 약점 극복 클리닉", wk: true },
+                                    { d: "4/14(화)", t: "<span class='text-yellow-400 font-bold'>[통합운영]</span> 수업: EUREKA ARCHIVE 3회<br>클리닉: EUREKA SYNC 질답 & 오답노트 작성", hl: true },
+                                    { d: "4/16(목)", t: "<span class='text-yellow-400 font-bold'>[통합운영]</span> 수업: EUREKA ARCHIVE 4회<br>클리닉: EUREKA SYNC 질답 & 오답노트 작성", hl: true },
+                                    { d: "4/18~19", sub: "주말", t: "학생별 약점 극복 클리닉", wk: true },
+                                    { d: "4/21(화)", t: "<span class='text-yellow-400 font-bold'>[통합운영]</span> 수업: EUREKA ARCHIVE 5회<br>클리닉: EUREKA SYNC 질답 & 오답노트 작성", hl: true },
+                                    { d: "4/23(목)", t: "<span class='text-yellow-400 font-bold'>[통합운영]</span> 수업: EUREKA ARCHIVE 6회<br>클리닉: EUREKA SYNC 질답 & 오답노트 작성", hl: true },
+                                    { d: "4/25~26", sub: "주말", t: "학생별 약점 극복 클리닉", wk: true },
+                                    { d: "4/28(화)", t: "직전보강 및 중간고사 대비 마무리", f: true },
+                                    { d: "4/30(목)", t: "직전보강 및 중간고사 대비 마무리", f: true },
+                                    { d: "5/2~3", sub: "주말", t: "직전보강 및 중간고사 대비 마무리", wk: true, f: true }
+                                ];
+                                rAprData.forEach(item => {
+                                    document.write(`
+                                    <div class="flex items-start gap-4 p-3 border-b border-gray-800 ${item.wk ? 'bg-[#181818]' : ''} ${item.hl ? 'highlight-row' : ''}">
+                                        <div class="w-16 flex-shrink-0 ${item.wk ? 'text-gray-400' : (item.f ? 'text-red-400' : 'text-red-400')} font-bold text-xs md:text-sm">
+                                            ${item.d}${item.sub ? `<br><span class="text-[10px] text-gray-500 font-normal">${item.sub}</span>` : ''}
+                                        </div>
+                                        <div class="text-gray-300 flex-1 leading-relaxed ${item.wk ? 'flex items-center text-gray-400' : ''} ${item.f ? 'font-bold text-white' : ''}">
+                                            ${item.t}
+                                        </div>
+                                    </div>
+                                    `);
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <!-- 중요 공지 (통합 운영 안내) - 하단 배치 -->
+        <section class="mt-12 mb-8 animate-fade-in-up" style="animation-delay: 0.3s;">
+            <div class="bg-gradient-to-r from-red-900/40 to-orange-900/40 border border-red-500/50 rounded-2xl p-5 md:p-6 shadow-lg relative overflow-hidden animate-pulse-border">
+                <div class="absolute -right-10 -top-10 opacity-10">
+                    <svg class="w-40 h-40 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L1 21h22L12 2zm0 3.99L19.53 19H4.47L12 5.99zM11 16h2v2h-2zm0-6h2v4h-2z"/></svg>
+                </div>
+                <div class="relative z-10">
+                    <div class="flex items-center gap-2 text-yellow-400 font-bold mb-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                        필독 주의사항
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">4/7(화) 이후 <span class="text-red-400">수직반/상승반 통합</span> 운영</h3>
+                    <ul class="text-sm text-gray-300 space-y-1 list-disc list-inside">
+                        <li>실전 기출문제 학습 이후 <span class="font-bold text-white">학생별 맞춤 클리닉 운영</span>을 위해 합반하여 운영합니다.</li>
+                        <li>통합 정규 수업 시간: <span class="font-bold text-yellow-400">18:00 ~ 22:00</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        // 탭 전환 스크립트
+        function switchTab(tabId) {
+            // 버튼 스타일 초기화
+            document.getElementById('btn-v-class').classList.remove('active-v');
+            document.getElementById('btn-r-class').classList.remove('active-r');
+            
+            // 콘텐츠 숨김
+            document.getElementById('v-class-content').classList.add('hidden');
+            document.getElementById('r-class-content').classList.add('hidden');
+            
+            // 선택된 탭 활성화
+            if(tabId === 'v-class') {
+                document.getElementById('btn-v-class').classList.add('active-v');
+                document.getElementById('v-class-content').classList.remove('hidden');
+            } else {
+                document.getElementById('btn-r-class').classList.add('active-r');
+                document.getElementById('r-class-content').classList.remove('hidden');
+            }
+        }
+
+        // 아코디언(접기/펼치기) 스크립트
+        function toggleAccordion(contentId, iconId) {
+            const content = document.getElementById(contentId);
+            const icon = document.getElementById(iconId);
+            
+            if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+                // 닫기
+                content.style.maxHeight = '0px';
+                content.style.opacity = '0';
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                // 열기 (스크롤 높이만큼 max-height 설정)
+                content.style.maxHeight = content.scrollHeight + "px";
+                content.style.opacity = '1';
+                icon.style.transform = 'rotate(180deg)';
+                
+                // 열릴 때 다른 아코디언을 자동으로 닫고 싶다면 여기에 로직 추가 가능
+            }
+        }
+
+        // 초기 화면 세팅 (3월 시간표 자동으로 열어두기)
+        window.onload = function() {
+            setTimeout(() => {
+                toggleAccordion('v-mar-schedule', 'v-mar-icon');
+                toggleAccordion('r-mar-schedule', 'r-mar-icon');
+            }, 300);
+        };
+    </script>
+<script>
+  // 1. 마우스 우클릭 방지
+  document.addEventListener('contextmenu', function(e) {
+    e.preventDefault(); // 우클릭 메뉴가 뜨지 않게 합니다.
+    // alert('보안을 위해 우클릭을 사용할 수 없습니다.'); // 경고창이 필요하면 주석(//)을 지우세요.
+  });
+
+  // 2. 개발자 도구 및 소스 보기 단축키 방지
+  document.addEventListener('keydown', function(e) {
+    // F12 키 방지 (가장 많이 쓰는 개발자 도구 키)
+    if (e.keyCode === 123) {
+      e.preventDefault();
+      e.returnValue = false;
+    }
+
+    // Ctrl+Shift+I (개발자 도구) / Ctrl+Shift+J (콘솔) / Ctrl+Shift+C (요소 검사)
+    if (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) {
+      e.preventDefault();
+      e.returnValue = false;
+    }
+
+    // Ctrl+U (소스 보기)
+    if (e.ctrlKey && e.keyCode === 85) {
+      e.preventDefault();
+      e.returnValue = false;
+    }
+  });
+</script>
+</body>
+</html>
