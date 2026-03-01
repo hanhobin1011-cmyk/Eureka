@@ -4,6 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>한호빈 [Signature] 5주 완성 숙제 플래너</title>
+
+    <!-- ====== PWA 설정을 위한 태그 (어플 설치 기능) ====== -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#121212">
+    <link rel="apple-touch-icon" href="icon-192x192.png">
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(registration => {
+                        console.log('ServiceWorker registration successful');
+                    })
+                    .catch(err => {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+            });
+        }
+    </script>
+    <!-- ======================================== -->
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -207,7 +227,7 @@
                         <svg class="mx-auto h-7 w-7 text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                         <span class="text-sm font-bold text-gray-300">카메라 촬영 또는 앨범 선택 <span class="text-purple-400">(여러 장 가능)</span></span>
                     </div>
-                    <!-- multiple 속성 추가됨 -->
+                    <!-- multiple 속성 -->
                     <input type="file" id="modalPhotoInput" accept="image/*" multiple class="hidden" onchange="handlePhotoSelection(event)">
                     
                     <!-- 미리보기 썸네일 다중 지원 UI -->
@@ -250,7 +270,7 @@
                 <!-- 로딩 오버레이 (숨김) -->
                 <div id="loadingOverlay" class="absolute inset-0 bg-[#1E1E1E]/90 backdrop-blur-sm z-10 hidden flex-col items-center justify-center rounded-xl">
                     <svg class="animate-spin -ml-1 mr-3 h-6 w-6 text-yellow-500 mb-2" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-                    <span class="text-xs font-bold text-yellow-500">스프레드시트에 전송 중...</span>
+                    <span class="text-xs font-bold text-yellow-500">데이터 처리 중...</span>
                 </div>
 
                 <button onclick="submitDataAndCopy()" class="w-full bg-[#FEE500] hover:bg-[#E5CF00] text-[#191919] font-bold py-3.5 rounded-xl transition-colors flex justify-center items-center gap-2 shadow-lg group">
@@ -739,7 +759,7 @@
                 document.body.appendChild(textArea);
                 textArea.focus();
                 textArea.select();
-                document.execCommand('copy'); // 구형 API지만 iFrame 등 제한된 환경에서 가장 확실히 동작함
+                document.execCommand('copy'); // 구형 API지만 제한된 환경에서 가장 확실히 동작함
                 textArea.remove();
             } catch (err) {
                 console.error("클립보드 복사 실패:", err);
@@ -817,33 +837,33 @@
             document.getElementById('customAlertModal').classList.add('hidden');
         }
     </script>
-<script>
-  // 1. 마우스 우클릭 방지
-  document.addEventListener('contextmenu', function(e) {
-    e.preventDefault(); // 우클릭 메뉴가 뜨지 않게 합니다.
-    // alert('보안을 위해 우클릭을 사용할 수 없습니다.'); // 경고창이 필요하면 주석(//)을 지우세요.
-  });
+    <script>
+      // 1. 마우스 우클릭 방지
+      document.addEventListener('contextmenu', function(e) {
+        e.preventDefault(); // 우클릭 메뉴가 뜨지 않게 합니다.
+        // alert('보안을 위해 우클릭을 사용할 수 없습니다.'); // 경고창이 필요하면 주석(//)을 지우세요.
+      });
 
-  // 2. 개발자 도구 및 소스 보기 단축키 방지
-  document.addEventListener('keydown', function(e) {
-    // F12 키 방지 (가장 많이 쓰는 개발자 도구 키)
-    if (e.keyCode === 123) {
-      e.preventDefault();
-      e.returnValue = false;
-    }
+      // 2. 개발자 도구 및 소스 보기 단축키 방지
+      document.addEventListener('keydown', function(e) {
+        // F12 키 방지 (가장 많이 쓰는 개발자 도구 키)
+        if (e.keyCode === 123) {
+          e.preventDefault();
+          e.returnValue = false;
+        }
 
-    // Ctrl+Shift+I (개발자 도구) / Ctrl+Shift+J (콘솔) / Ctrl+Shift+C (요소 검사)
-    if (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) {
-      e.preventDefault();
-      e.returnValue = false;
-    }
+        // Ctrl+Shift+I (개발자 도구) / Ctrl+Shift+J (콘솔) / Ctrl+Shift+C (요소 검사)
+        if (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) {
+          e.preventDefault();
+          e.returnValue = false;
+        }
 
-    // Ctrl+U (소스 보기)
-    if (e.ctrlKey && e.keyCode === 85) {
-      e.preventDefault();
-      e.returnValue = false;
-    }
-  });
-</script>
+        // Ctrl+U (소스 보기)
+        if (e.ctrlKey && e.keyCode === 85) {
+          e.preventDefault();
+          e.returnValue = false;
+        }
+      });
+    </script>
 </body>
 </html>
