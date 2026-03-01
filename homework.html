@@ -228,7 +228,7 @@
         const taskStore = {};
 
         // 현재 열려있는 모달의 정보
-        let currentTask = { id: '', date: '', range: '', className: '', checkClass: '' };
+        let currentTask = { id: '', date: '', range: '', className: '', checkClass: '', weekNum: 0, dayNum: 0 };
         let currentSelectedQs = new Set(); // 선택된 질문 문항 번호를 담는 Set 객체
 
         // --- 데이터 구조 설계 (계산된 문항 분배) ---
@@ -338,7 +338,7 @@
 
                     // label 대신 div 버튼으로 변경, 직접 모달 오픈
                     html += `
-                        <div onclick="openTaskModal('${uniqueId}', '${dateStr}', '${item.range}', '${classNameStr}', '${checkClass}')" 
+                        <div onclick="openTaskModal('${uniqueId}', '${dateStr}', '${item.range}', '${classNameStr}', '${checkClass}', ${week + 1}, ${day + 1})" 
                              class="flex justify-between items-center p-3 hover:bg-[#252525] rounded-xl cursor-pointer transition-all group active:scale-[0.98]">
                             <div class="flex items-center gap-3">
                                 <span class="w-9 h-9 rounded-full ${themeClass} bg-opacity-10 flex items-center justify-center font-bold text-sm border border-transparent group-hover:border-current transition-colors">
@@ -416,8 +416,8 @@
             }
         });
 
-        function openTaskModal(id, date, range, className, checkClass) {
-            currentTask = { id, date, range, className, checkClass };
+        function openTaskModal(id, date, range, className, checkClass, weekNum, dayNum) {
+            currentTask = { id, date, range, className, checkClass, weekNum, dayNum };
             const data = taskStore[id];
 
             // UI 채우기
@@ -558,9 +558,9 @@
             const memo = document.getElementById('modalMemoInput').value.trim();
             const stateIcon = isDone ? "⭕ 완료" : "❌ 미완료";
 
-            // 전송용 텍스트 조립
+            // 전송용 텍스트 조립 (주차 및 D-day 정보 추가)
             let copyText = `[Signature ${currentTask.className} 숙제 인증]\n` +
-                           `📅 날짜: ${currentTask.date}\n` +
+                           `📅 일자: ${currentTask.weekNum}주차 D${currentTask.dayNum} (${currentTask.date})\n` +
                            `📚 범위: ${currentTask.range}\n` +
                            `✅ 상태: ${stateIcon}\n` +
                            `❓ 질문문항: ${qsText}\n`;
