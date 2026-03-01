@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>한호빈 [Signature] 5주 완성 숙제 플래너</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans KR"', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.5s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #121212;
+            color: #E0E0E0;
+            word-break: keep-all;
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #fbbf24, #d97706);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-vertical {
+            background: linear-gradient(to right, #60a5fa, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-rising {
+            background: linear-gradient(to right, #f87171, #ef4444);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #121212; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #555; }
+
+        /* 체크박스 인터랙션 */
+        .check-btn { transition: all 0.2s; }
+        .check-btn.checked-v {
+            background-color: #3b82f6; border-color: #3b82f6; color: white;
+        }
+        .check-btn.checked-r {
+            background-color: #ef4444; border-color: #ef4444; color: white;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-yellow-500 selection:text-white pb-20">
+
+    <div class="container mx-auto max-w-5xl px-4 py-10 md:py-16">
+
+        <!-- 헤더 -->
+        <header class="text-center mb-12 animate-fade-in-up">
+            <div class="inline-block bg-[#1E1E1E] border border-gray-700 px-4 py-1.5 rounded-full text-sm font-bold text-gray-300 mb-4">
+                GRIP PATTERN 대수 (3/3 ~ 4/5)
+            </div>
+            <h1 class="text-3xl md:text-5xl font-black mb-4 tracking-tight">
+                Signature <span class="gradient-text">매일 숙제 점검표</span>
+            </h1>
+            <p class="text-gray-400 font-medium">매일 새벽 1시 마감, 타협 없는 관리 시스템</p>
+        </header>
+
+        <!-- 탭 버튼 -->
+        <div class="flex justify-center mb-10 animate-fade-in-up" style="animation-delay: 0.1s;">
+            <div class="bg-[#1E1E1E] p-1 rounded-2xl border border-[#333] inline-flex">
+                <button id="tab-vertical" onclick="switchTab('vertical')" class="px-8 py-3 rounded-xl font-bold text-lg transition-all text-white bg-blue-600/20 border border-blue-500/50 shadow-[0_0_15px_rgba(59,130,246,0.2)]">
+                    <span class="gradient-vertical">수직반</span> (B+C단계)
+                </button>
+                <button id="tab-rising" onclick="switchTab('rising')" class="px-8 py-3 rounded-xl font-bold text-lg transition-all text-gray-500 hover:text-gray-300">
+                    <span class="text-gray-400">상승반</span> (B단계)
+                </button>
+            </div>
+        </div>
+
+        <!-- ==================== 수직반 콘텐츠 ==================== -->
+        <div id="content-vertical" class="animate-fade-in-up" style="animation-delay: 0.2s;">
+            <!-- 요약 정보 -->
+            <div class="bg-gradient-to-r from-blue-900/20 to-[#121212] border border-blue-900/50 rounded-2xl p-6 mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-1"><span class="text-blue-400">수직반</span> 학습 목표</h2>
+                    <p class="text-gray-400 text-sm">B단계 + C단계 완벽 마스터 (A단계는 자가 학습)</p>
+                </div>
+                <div class="flex gap-6 text-center">
+                    <div>
+                        <div class="text-gray-400 text-xs mb-1">총 문항 수</div>
+                        <div class="text-xl font-black text-blue-400">545제</div>
+                    </div>
+                    <div class="w-px bg-gray-700"></div>
+                    <div>
+                        <div class="text-gray-400 text-xs mb-1">1일 권장량</div>
+                        <div class="text-xl font-black text-white">14~27제 <span class="text-xs text-gray-400 font-normal tracking-normal">(난이도 차등)</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 주차별 리스트 (수직반) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="vertical-schedule-container">
+                <!-- 자바스크립트로 렌더링 됨 -->
+            </div>
+        </div>
+
+        <!-- ==================== 상승반 콘텐츠 ==================== -->
+        <div id="content-rising" class="hidden animate-fade-in-up">
+            <!-- 요약 정보 -->
+            <div class="bg-gradient-to-r from-red-900/20 to-[#121212] border border-red-900/50 rounded-2xl p-6 mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-1"><span class="text-red-400">상승반</span> 학습 목표</h2>
+                    <p class="text-gray-400 text-sm">유형 정복 B단계 집중 훈련 (A단계는 자가 학습)</p>
+                </div>
+                <div class="flex gap-6 text-center">
+                    <div>
+                        <div class="text-gray-400 text-xs mb-1">총 문항 수</div>
+                        <div class="text-xl font-black text-red-400">457제</div>
+                    </div>
+                    <div class="w-px bg-gray-700"></div>
+                    <div>
+                        <div class="text-gray-400 text-xs mb-1">1일 권장량</div>
+                        <div class="text-xl font-black text-white">약 18제</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 주차별 리스트 (상승반) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="rising-schedule-container">
+                <!-- 자바스크립트로 렌더링 됨 -->
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ===== 숙제 인증 및 질문 작성 모달 ===== -->
+    <div id="taskModal" class="fixed inset-0 bg-black/80 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm" onclick="if(event.target === this) closeTaskModal()">
+        <div class="bg-[#1E1E1E] border border-gray-700 rounded-2xl max-w-sm w-full p-6 shadow-2xl animate-fade-in-up">
+            <!-- 모달 헤더 -->
+            <div class="flex justify-between items-start mb-5 border-b border-gray-700 pb-4">
+                <div>
+                    <div id="modalClassBadge" class="text-xs font-bold px-2 py-1 rounded inline-block mb-2 bg-blue-500/20 text-blue-400">수직반</div>
+                    <h3 id="modalDateTitle" class="text-xl font-bold text-white">3/3(화) 숙제</h3>
+                    <p id="modalRangeDesc" class="text-sm text-gray-400 mt-1 font-medium">01.지수 B 9~35</p>
+                </div>
+                <button onclick="closeTaskModal()" class="text-gray-400 hover:text-white transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            
+            <div class="space-y-4 mb-6">
+                <!-- 완료 여부 토글 -->
+                <div class="flex items-center justify-between bg-[#121212] p-3 rounded-lg border border-gray-800">
+                    <span class="text-gray-300 font-bold text-sm">진행 상태</span>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                      <input type="checkbox" id="modalStatusCheck" class="sr-only peer">
+                      <div id="modalToggleBg" class="w-11 h-6 bg-gray-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-500"></div>
+                      <span id="modalStatusText" class="ml-3 text-sm font-bold text-gray-400">미완료</span>
+                    </label>
+                </div>
+
+                <!-- 질문할 문항 선택 (동적 버튼 그리드) -->
+                <div>
+                    <label class="block text-gray-300 font-bold text-sm mb-2 flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="bg-yellow-500/20 text-yellow-500 p-1 rounded">❓</span>
+                            질문 문항 체크 <span class="text-xs text-gray-500 font-normal">(터치하여 선택)</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-xs font-medium">
+                            <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span> B단계</span>
+                            <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-red-500"></span> C단계</span>
+                        </div>
+                    </label>
+                    <div id="modalQsContainer" class="flex flex-wrap gap-2 max-h-48 overflow-y-auto p-3 bg-[#121212] border border-gray-700 rounded-lg">
+                        <!-- 자바스크립트로 문항 버튼이 자동 생성됨 -->
+                    </div>
+                </div>
+
+                <!-- 추가 메모 -->
+                <div>
+                    <label class="block text-gray-300 font-bold text-sm mb-2 flex items-center gap-2">
+                        <span class="bg-green-500/20 text-green-500 p-1 rounded">📝</span>
+                        추가 코멘트
+                    </label>
+                    <textarea id="modalMemoInput" rows="2" placeholder="어려웠던 점이나 강사님께 남길 말" class="w-full bg-[#121212] border border-gray-700 text-white text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block p-3 placeholder-gray-600 resize-none transition-colors"></textarea>
+                </div>
+            </div>
+
+            <!-- 액션 버튼 -->
+            <div class="flex flex-col gap-3">
+                <button onclick="sendKakaoAuth()" class="w-full bg-[#FEE500] hover:bg-[#E5CF00] text-[#191919] font-bold py-3.5 rounded-xl transition-colors flex justify-center items-center gap-2 shadow-lg group">
+                    <svg viewBox="0 0 24 24" class="w-5 h-5 fill-current transform group-hover:scale-110 transition-transform"><path d="M12 3c-5.523 0-10 3.538-10 7.9 0 2.834 1.83 5.326 4.606 6.711-.315 1.128-1.144 3.931-1.173 4.048-.035.138.05.27.182.26.103-.008 3.32-.472 4.632-2.14 1.127.305 2.336.471 3.753.471 5.523 0 10-3.538 10-7.9C22 6.538 17.523 3 12 3z"/></svg>
+                    내용 복사 및 카톡 인증하기
+                </button>
+                <button onclick="saveAndCloseTaskModal()" class="w-full bg-gray-800 hover:bg-gray-700 text-gray-300 font-bold py-3.5 rounded-xl transition-colors border border-gray-700">
+                    저장하고 닫기
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 푸터 -->
+    <footer class="mt-12 text-center pb-8">
+        <p class="text-gray-600 text-sm">
+            항목을 클릭하여 질문할 문항을 메모하고 카톡으로 인증하세요.<br>
+            &copy; 2026 수학강사 한호빈.
+        </p>
+    </footer>
+
+    <script>
+        // 학생들의 입력 데이터를 저장할 객체
+        const taskStore = {};
+
+        // 현재 열려있는 모달의 정보
+        let currentTask = { id: '', date: '', range: '', className: '', checkClass: '' };
+        let currentSelectedQs = new Set(); // 선택된 질문 문항 번호를 담는 Set 객체
+
+        // --- 데이터 구조 설계 (계산된 문항 분배) ---
+        
+        // 날짜 배열 (3월 3일 ~ 4월 5일, 주 5일)
+        const dates = [
+            "3/3(화)", "3/4(수)", "3/5(목)", "3/6(금)", "3/7(토)",
+            "3/10(화)", "3/11(수)", "3/12(목)", "3/13(금)", "3/14(토)",
+            "3/17(화)", "3/18(수)", "3/19(목)", "3/20(금)", "3/21(토)",
+            "3/24(화)", "3/25(수)", "3/26(목)", "3/27(금)", "3/28(토)",
+            "3/31(화)", "4/1(수)", "4/2(목)", "4/3(금)", "4/4(토)"
+        ];
+
+        // 수직반 스케줄 (C단계 난이도 고려, B단계 위주는 24~27제, C단계 포함은 14~18제)
+        const verticalData = [
+            // 1주차
+            { range: "01.지수 B 9~35", count: 27 },
+            { range: "01.지수 B 36~62", count: 27 },
+            { range: "01.지수 B 63~71, C 72~78", count: 16 },
+            { range: "01.지수 C 79~85, 02.로그 B 94~100", count: 14 },
+            { range: "02.로그 B 101~126", count: 26 },
+            // 2주차
+            { range: "02.로그 B 127~152", count: 26 },
+            { range: "02.로그 C 153~166", count: 14 },
+            { range: "03.지수함수 B 182~207", count: 26 },
+            { range: "03.지수함수 B 208~233", count: 26 },
+            { range: "03.지수함수 B 234~259", count: 26 },
+            // 3주차
+            { range: "03.지수함수 B 260~270, C 271~275", count: 16 },
+            { range: "03.지수함수 C 276~286, 04.로그함수 B 303~307", count: 16 },
+            { range: "04.로그함수 B 308~331", count: 24 },
+            { range: "04.로그함수 B 332~355", count: 24 },
+            { range: "04.로그함수 B 356~379", count: 24 },
+            // 4주차
+            { range: "04.로그함수 B 380~401", count: 22 },
+            { range: "04.로그함수 C 402~417", count: 16 },
+            { range: "05.삼각함수 B 434~459", count: 26 },
+            { range: "05.삼각함수 B 460~485", count: 26 },
+            { range: "05.삼각함수 B 486~500, C 501~503", count: 18 },
+            // 5주차
+            { range: "05.삼각함수 C 504~513, 06.삼각그래프 B 530~535", count: 16 },
+            { range: "06.삼각그래프 B 536~561", count: 26 },
+            { range: "06.삼각그래프 B 562~587", count: 26 },
+            { range: "06.삼각그래프 B 588~609", count: 22 },
+            { range: "06.삼각그래프 C 610~624", count: 15 }
+        ];
+
+        // 상승반 스케줄 (B단계, 약 18제)
+        const risingData = [
+            // 1주차
+            { range: "01.지수 B 9~26", count: 18 },
+            { range: "01.지수 B 27~44", count: 18 },
+            { range: "01.지수 B 45~62", count: 18 },
+            { range: "01.지수 B 63~71, 02.로그 B 94~102", count: 18 },
+            { range: "02.로그 B 103~120", count: 18 },
+            // 2주차
+            { range: "02.로그 B 121~138", count: 18 },
+            { range: "02.로그 B 139~152, 03.지수함수 B 182~185", count: 18 },
+            { range: "03.지수함수 B 186~203", count: 18 },
+            { range: "03.지수함수 B 204~221", count: 18 },
+            { range: "03.지수함수 B 222~239", count: 18 },
+            // 3주차
+            { range: "03.지수함수 B 240~257", count: 18 },
+            { range: "03.지수함수 B 258~270, 04.로그함수 B 303~307", count: 18 },
+            { range: "04.로그함수 B 308~327", count: 20 },
+            { range: "04.로그함수 B 328~347", count: 20 },
+            { range: "04.로그함수 B 348~367", count: 20 },
+            // 4주차
+            { range: "04.로그함수 B 368~387", count: 20 },
+            { range: "04.로그함수 B 388~401, 05.삼각함수 B 434~437", count: 18 },
+            { range: "05.삼각함수 B 438~455", count: 18 },
+            { range: "05.삼각함수 B 456~473", count: 18 },
+            { range: "05.삼각함수 B 474~491", count: 18 },
+            // 5주차
+            { range: "05.삼각함수 B 492~500, 06.삼각그래프 B 530~538", count: 18 },
+            { range: "06.삼각그래프 B 539~558", count: 20 },
+            { range: "06.삼각그래프 B 559~578", count: 20 },
+            { range: "06.삼각그래프 B 579~598", count: 20 },
+            { range: "06.삼각그래프 B 599~609", count: 11 }
+        ];
+
+        // HTML 렌더링 함수
+        function renderSchedule(data, containerId, themeClass, textThemeClass, checkClass) {
+            const container = document.getElementById(containerId);
+            let html = '';
+
+            for (let week = 0; week < 5; week++) {
+                html += `
+                <div class="bg-[#1E1E1E] rounded-2xl border border-gray-800 p-5 shadow-lg">
+                    <h3 class="text-xl font-bold mb-4 ${textThemeClass} border-b border-gray-800 pb-3">
+                        ${week + 1}주차 플래너
+                    </h3>
+                    <div class="space-y-1">
+                `;
+
+                for (let day = 0; day < 5; day++) {
+                    const index = week * 5 + day;
+                    const item = data[index];
+                    const dateStr = dates[index];
+                    const uniqueId = `${containerId}-w${week}-d${day}`;
+                    const classNameStr = themeClass.includes('blue') ? '수직반' : '상승반';
+
+                    // 데이터 스토어 초기화 (qs를 배열 형식으로 변경)
+                    if (!taskStore[uniqueId]) {
+                        taskStore[uniqueId] = { isDone: false, qs: [], memo: '' };
+                    }
+
+                    // label 대신 div 버튼으로 변경, 직접 모달 오픈
+                    html += `
+                        <div onclick="openTaskModal('${uniqueId}', '${dateStr}', '${item.range}', '${classNameStr}', '${checkClass}')" 
+                             class="flex justify-between items-center p-3 hover:bg-[#252525] rounded-xl cursor-pointer transition-all group active:scale-[0.98]">
+                            <div class="flex items-center gap-3">
+                                <span class="w-9 h-9 rounded-full ${themeClass} bg-opacity-10 flex items-center justify-center font-bold text-sm border border-transparent group-hover:border-current transition-colors">
+                                    D${day + 1}
+                                </span>
+                                <div>
+                                    <div class="text-xs text-gray-500 font-medium mb-0.5">${dateStr}</div>
+                                    <div class="text-gray-200 font-medium text-sm md:text-base">${item.range}</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <span class="text-xs font-bold text-gray-500 bg-[#121212] px-2 py-1 rounded hidden md:inline-block">${item.count}제</span>
+                                
+                                <!-- 체크박스 UI 렌더링 (모달에서 제어됨) -->
+                                <div class="relative flex items-center justify-center">
+                                    <div id="ui-box-${uniqueId}" class="w-6 h-6 border-2 border-gray-600 rounded check-btn flex items-center justify-center bg-transparent">
+                                        <svg id="ui-svg-${uniqueId}" class="w-4 h-4 opacity-0 text-white transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                html += `</div></div>`;
+            }
+            container.innerHTML = html;
+        }
+
+        // 초기 렌더링
+        renderSchedule(verticalData, 'vertical-schedule-container', 'text-blue-400 bg-blue-500', 'text-white', 'checked-v');
+        renderSchedule(risingData, 'rising-schedule-container', 'text-red-400 bg-red-500', 'text-white', 'checked-r');
+
+        // 탭 전환 로직
+        function switchTab(tab) {
+            const btnV = document.getElementById('tab-vertical');
+            const btnR = document.getElementById('tab-rising');
+            const contV = document.getElementById('content-vertical');
+            const contR = document.getElementById('content-rising');
+
+            if (tab === 'vertical') {
+                btnV.className = "px-8 py-3 rounded-xl font-bold text-lg transition-all text-white bg-blue-600/20 border border-blue-500/50 shadow-[0_0_15px_rgba(59,130,246,0.2)]";
+                btnV.innerHTML = '<span class="gradient-vertical">수직반</span> (B+C단계)';
+                
+                btnR.className = "px-8 py-3 rounded-xl font-bold text-lg transition-all text-gray-500 hover:text-gray-300 border border-transparent";
+                btnR.innerHTML = '<span class="text-gray-400">상승반</span> (B단계)';
+
+                contV.classList.remove('hidden');
+                contR.classList.add('hidden');
+            } else {
+                btnR.className = "px-8 py-3 rounded-xl font-bold text-lg transition-all text-white bg-red-600/20 border border-red-500/50 shadow-[0_0_15px_rgba(239,68,68,0.2)]";
+                btnR.innerHTML = '<span class="gradient-rising">상승반</span> (B단계)';
+                
+                btnV.className = "px-8 py-3 rounded-xl font-bold text-lg transition-all text-gray-500 hover:text-gray-300 border border-transparent";
+                btnV.innerHTML = '<span class="text-gray-400">수직반</span> (B+C단계)';
+
+                contR.classList.remove('hidden');
+                contV.classList.add('hidden');
+            }
+        }
+
+        // --- 모달 및 카카오톡 인증 관련 스크립트 ---
+        
+        const modalToggleCheck = document.getElementById('modalStatusCheck');
+        const modalStatusText = document.getElementById('modalStatusText');
+
+        // 모달 내 토글 상태 텍스트 변경 이벤트
+        modalToggleCheck.addEventListener('change', function() {
+            if (this.checked) {
+                modalStatusText.textContent = '완료 (인증대기)';
+                modalStatusText.classList.replace('text-gray-400', currentTask.className === '수직반' ? 'text-blue-400' : 'text-red-400');
+            } else {
+                modalStatusText.textContent = '미완료';
+                modalStatusText.className = 'ml-3 text-sm font-bold text-gray-400';
+            }
+        });
+
+        function openTaskModal(id, date, range, className, checkClass) {
+            currentTask = { id, date, range, className, checkClass };
+            const data = taskStore[id];
+
+            // UI 채우기
+            document.getElementById('modalDateTitle').textContent = `${date} 숙제`;
+            document.getElementById('modalRangeDesc').textContent = range;
+            
+            const badge = document.getElementById('modalClassBadge');
+            badge.textContent = className;
+            if(className === '수직반') {
+                badge.className = "text-xs font-bold px-2 py-1 rounded inline-block mb-2 bg-blue-500/20 text-blue-400";
+                document.getElementById('modalToggleBg').classList.replace('peer-checked:bg-red-500', 'peer-checked:bg-blue-500');
+            } else {
+                badge.className = "text-xs font-bold px-2 py-1 rounded inline-block mb-2 bg-red-500/20 text-red-400";
+                document.getElementById('modalToggleBg').classList.replace('peer-checked:bg-blue-500', 'peer-checked:bg-red-500');
+            }
+
+            // 기존 입력 데이터 세팅
+            modalToggleCheck.checked = data.isDone;
+            modalToggleCheck.dispatchEvent(new Event('change')); // 텍스트 강제 업데이트
+            
+            // 저장된 배열을 Set으로 변환하여 버튼 렌더링 준비
+            currentSelectedQs = new Set(data.qs);
+            generateQuestionButtons(range); // 현재 숙제 범위에 맞춰 문항 버튼 렌더링
+            
+            document.getElementById('modalMemoInput').value = data.memo;
+
+            // 모달 열기
+            document.getElementById('taskModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // 범위 텍스트(예: "01.지수 B 9~35")를 분석하여 동적으로 번호 버튼 생성
+        function generateQuestionButtons(rangeStr) {
+            const container = document.getElementById('modalQsContainer');
+            container.innerHTML = '';
+            
+            // B 또는 C와 그 뒤의 숫자 범위를 추출하는 정규식
+            const regex = /(B|C)\s*(\d+)~(\d+)/g;
+            let match;
+            
+            while ((match = regex.exec(rangeStr)) !== null) {
+                const level = match[1]; // 'B' 또는 'C'
+                const start = parseInt(match[2], 10);
+                const end = parseInt(match[3], 10);
+
+                for (let i = start; i <= end; i++) {
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.textContent = i;
+                    btn.dataset.level = level;
+                    
+                    // 현재 문항이 이전에 선택되었는지 확인
+                    const isSelected = currentSelectedQs.has(i.toString());
+                    toggleBtnStyle(btn, isSelected);
+
+                    // 버튼 클릭 이벤트 (선택/해제)
+                    btn.onclick = () => {
+                        const currentlySelected = currentSelectedQs.has(i.toString());
+                        if (currentlySelected) {
+                            currentSelectedQs.delete(i.toString());
+                            toggleBtnStyle(btn, false);
+                        } else {
+                            currentSelectedQs.add(i.toString());
+                            toggleBtnStyle(btn, true);
+                        }
+                    };
+                    
+                    container.appendChild(btn);
+                }
+            }
+            
+            // 만약 추출에 실패하여 버튼이 없을 경우 예외처리
+            if (container.children.length === 0) {
+                container.innerHTML = '<span class="text-gray-500 text-sm">문항 번호를 불러올 수 없습니다.</span>';
+            }
+        }
+
+        // 문항 버튼의 상태(B/C단계 및 선택여부)에 따른 스타일 변경
+        function toggleBtnStyle(btn, isSelected) {
+            const level = btn.dataset.level;
+            if (isSelected) {
+                // 선택되었을 때 (색상이 채워짐 + 약간 커짐)
+                if (level === 'B') {
+                    btn.className = 'w-[42px] h-[42px] rounded-lg text-sm font-bold flex items-center justify-center transition-all border-2 border-blue-500 bg-blue-500 text-white shadow-[0_0_10px_rgba(59,130,246,0.5)] scale-105';
+                } else {
+                    btn.className = 'w-[42px] h-[42px] rounded-lg text-sm font-bold flex items-center justify-center transition-all border-2 border-red-500 bg-red-500 text-white shadow-[0_0_10px_rgba(239,68,68,0.5)] scale-105';
+                }
+            } else {
+                // 기본 상태
+                if (level === 'B') {
+                    btn.className = 'w-[42px] h-[42px] rounded-lg text-sm font-bold flex items-center justify-center transition-all border border-blue-900/50 text-blue-400 bg-blue-900/10 hover:bg-blue-800/30';
+                } else {
+                    btn.className = 'w-[42px] h-[42px] rounded-lg text-sm font-bold flex items-center justify-center transition-all border border-red-900/50 text-red-400 bg-red-900/10 hover:bg-red-800/30';
+                }
+            }
+        }
+
+        function closeTaskModal() {
+            document.getElementById('taskModal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        // 저장 로직 (모달 입력 데이터를 객체에 저장하고 리스트 UI의 체크박스를 동기화)
+        function saveAndCloseTaskModal() {
+            const isDone = modalToggleCheck.checked;
+            
+            // 데이터 업데이트 (Set을 배열로 변환하고 숫자 오름차순 정렬)
+            taskStore[currentTask.id] = {
+                isDone: isDone,
+                qs: Array.from(currentSelectedQs).sort((a, b) => parseInt(a) - parseInt(b)),
+                memo: document.getElementById('modalMemoInput').value.trim()
+            };
+
+            // 리스트 UI 업데이트
+            const box = document.getElementById(`ui-box-${currentTask.id}`);
+            const svg = document.getElementById(`ui-svg-${currentTask.id}`);
+            
+            if (isDone) {
+                box.classList.add(currentTask.checkClass);
+                box.classList.add('border-transparent');
+                svg.classList.replace('opacity-0', 'opacity-100');
+            } else {
+                box.classList.remove(currentTask.checkClass);
+                box.classList.remove('border-transparent');
+                svg.classList.replace('opacity-100', 'opacity-0');
+            }
+
+            closeTaskModal();
+        }
+
+        // 카카오톡 전송 포맷팅 및 클립보드 복사
+        function sendKakaoAuth() {
+            const isDone = modalToggleCheck.checked;
+            // 배열화된 질문 문항 번호를 쉼표로 연결
+            const qsArr = Array.from(currentSelectedQs).sort((a, b) => parseInt(a) - parseInt(b));
+            const qsText = qsArr.length > 0 ? qsArr.join(', ') : '없음';
+            
+            const memo = document.getElementById('modalMemoInput').value.trim();
+            const stateIcon = isDone ? "⭕ 완료" : "❌ 미완료";
+
+            // 전송용 텍스트 조립
+            let copyText = `[Signature ${currentTask.className} 숙제 인증]\n` +
+                           `📅 날짜: ${currentTask.date}\n` +
+                           `📚 범위: ${currentTask.range}\n` +
+                           `✅ 상태: ${stateIcon}\n` +
+                           `❓ 질문문항: ${qsText}\n`;
+            
+            if (memo) copyText += `📝 코멘트: ${memo}\n`;
+
+            // 복사 로직 (보안 및 권한 이슈 방지를 위한 Fallback 포함)
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(copyText).then(() => {
+                    executeKakaoRedirect();
+                });
+            } else {
+                const textArea = document.createElement("textarea");
+                textArea.value = copyText;
+                textArea.style.position = "fixed";
+                textArea.style.left = "-999999px";
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    executeKakaoRedirect();
+                } catch (error) {
+                    alert("복사에 실패했습니다. 브라우저 설정을 확인해주세요.");
+                } finally {
+                    textArea.remove();
+                }
+            }
+        }
+
+        function executeKakaoRedirect() {
+            alert("숙제 인증 내용이 복사되었습니다!\n\n채팅방이 열리면 대화창을 길게 누르거나 우클릭하여 [붙여넣기]를 해주세요.");
+            // 데이터 저장 후 닫기
+            saveAndCloseTaskModal();
+            // 한호빈 강사 카카오톡 오픈채팅방 링크 (원본 html 참고)
+            window.open("https://open.kakao.com/o/s9qHTzTh", "_blank");
+        }
+    </script>
+<script>
+  // 1. 마우스 우클릭 방지
+  document.addEventListener('contextmenu', function(e) {
+    e.preventDefault(); // 우클릭 메뉴가 뜨지 않게 합니다.
+    // alert('보안을 위해 우클릭을 사용할 수 없습니다.'); // 경고창이 필요하면 주석(//)을 지우세요.
+  });
+
+  // 2. 개발자 도구 및 소스 보기 단축키 방지
+  document.addEventListener('keydown', function(e) {
+    // F12 키 방지 (가장 많이 쓰는 개발자 도구 키)
+    if (e.keyCode === 123) {
+      e.preventDefault();
+      e.returnValue = false;
+    }
+
+    // Ctrl+Shift+I (개발자 도구) / Ctrl+Shift+J (콘솔) / Ctrl+Shift+C (요소 검사)
+    if (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) {
+      e.preventDefault();
+      e.returnValue = false;
+    }
+
+    // Ctrl+U (소스 보기)
+    if (e.ctrlKey && e.keyCode === 85) {
+      e.preventDefault();
+      e.returnValue = false;
+    }
+  });
+</script>
+</body>
+</html>
