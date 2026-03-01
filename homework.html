@@ -151,9 +151,9 @@
 
     <!-- ===== 숙제 인증 및 질문 작성 모달 ===== -->
     <div id="taskModal" class="fixed inset-0 bg-black/80 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm" onclick="if(event.target === this) closeTaskModal()">
-        <div class="bg-[#1E1E1E] border border-gray-700 rounded-2xl max-w-sm w-full p-6 shadow-2xl animate-fade-in-up">
+        <div class="bg-[#1E1E1E] border border-gray-700 rounded-2xl max-w-sm w-full p-6 shadow-2xl animate-fade-in-up flex flex-col max-h-[90vh]">
             <!-- 모달 헤더 -->
-            <div class="flex justify-between items-start mb-5 border-b border-gray-700 pb-4">
+            <div class="flex justify-between items-start mb-4 border-b border-gray-700 pb-4 flex-shrink-0">
                 <div>
                     <div id="modalClassBadge" class="text-xs font-bold px-2 py-1 rounded inline-block mb-2 bg-blue-500/20 text-blue-400">수직반</div>
                     <h3 id="modalDateTitle" class="text-xl font-bold text-white">3/3(화) 숙제</h3>
@@ -164,7 +164,8 @@
                 </button>
             </div>
             
-            <div class="space-y-4 mb-6">
+            <!-- 스크롤 가능 영역 -->
+            <div class="space-y-4 mb-5 overflow-y-auto flex-grow pr-1">
                 <!-- 완료 여부 토글 -->
                 <div class="flex items-center justify-between bg-[#121212] p-3 rounded-lg border border-gray-800">
                     <span class="text-gray-300 font-bold text-sm">진행 상태</span>
@@ -192,6 +193,40 @@
                     </div>
                 </div>
 
+                <!-- 인증 사진 업로드 (준비용) -->
+                <div>
+                    <label class="block text-gray-300 font-bold text-sm mb-2 flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="bg-purple-500/20 text-purple-500 p-1 rounded">📸</span>
+                            인증 사진 준비 <span class="text-xs text-gray-500 font-normal">(전송 시 직접 첨부 필요)</span>
+                        </div>
+                    </label>
+                    
+                    <!-- 업로드 버튼 -->
+                    <div id="photoUploadBtn" onclick="document.getElementById('modalPhotoInput').click()" class="border-2 border-dashed border-gray-600 rounded-xl p-4 text-center cursor-pointer hover:bg-gray-800 transition-colors">
+                        <svg class="mx-auto h-7 w-7 text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        <span class="text-sm font-bold text-gray-300">카메라 촬영 또는 앨범 선택 <span class="text-purple-400">(여러 장 가능)</span></span>
+                    </div>
+                    <!-- multiple 속성 추가됨 -->
+                    <input type="file" id="modalPhotoInput" accept="image/*" multiple class="hidden" onchange="handlePhotoSelection(event)">
+                    
+                    <!-- 미리보기 썸네일 다중 지원 UI -->
+                    <div id="photoPreviewContainer" class="hidden mt-2 p-3 bg-[#121212] border border-gray-700 rounded-lg">
+                        <div id="photoGrid" class="flex gap-2 overflow-x-auto pb-2">
+                            <!-- JS로 이미지 삽입 -->
+                        </div>
+                        <div class="flex justify-between items-center mt-2 border-t border-gray-800 pt-2">
+                            <div id="photoCountText" class="text-green-400 text-xs font-bold flex items-center gap-1">
+                                <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                                0장의 사진 준비 완료!
+                            </div>
+                            <button onclick="removePhoto()" class="text-gray-400 hover:text-red-400 text-xs font-bold transition-colors">
+                                🗑️ 다시 선택
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- 추가 메모 -->
                 <div>
                     <label class="block text-gray-300 font-bold text-sm mb-2 flex items-center gap-2">
@@ -200,18 +235,56 @@
                     </label>
                     <textarea id="modalMemoInput" rows="2" placeholder="어려웠던 점이나 강사님께 남길 말" class="w-full bg-[#121212] border border-gray-700 text-white text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block p-3 placeholder-gray-600 resize-none transition-colors"></textarea>
                 </div>
+
+                <!-- 학생 이름 입력 (스프레드시트 연동용) -->
+                <div class="pt-2 border-t border-gray-800">
+                    <label class="block text-gray-300 font-bold text-sm mb-2">
+                        🧑‍🎓 학생 이름 <span class="text-red-500">*</span>
+                    </label>
+                    <input type="text" id="modalStudentName" placeholder="예: 홍길동" class="w-full bg-[#121212] border border-gray-700 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-3 placeholder-gray-600 transition-colors">
+                </div>
             </div>
 
             <!-- 액션 버튼 -->
-            <div class="flex flex-col gap-3">
-                <button onclick="sendKakaoAuth()" class="w-full bg-[#FEE500] hover:bg-[#E5CF00] text-[#191919] font-bold py-3.5 rounded-xl transition-colors flex justify-center items-center gap-2 shadow-lg group">
+            <div class="flex flex-col gap-3 flex-shrink-0 pt-2 relative">
+                <!-- 로딩 오버레이 (숨김) -->
+                <div id="loadingOverlay" class="absolute inset-0 bg-[#1E1E1E]/90 backdrop-blur-sm z-10 hidden flex-col items-center justify-center rounded-xl">
+                    <svg class="animate-spin -ml-1 mr-3 h-6 w-6 text-yellow-500 mb-2" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                    <span class="text-xs font-bold text-yellow-500">스프레드시트에 전송 중...</span>
+                </div>
+
+                <button onclick="submitDataAndCopy()" class="w-full bg-[#FEE500] hover:bg-[#E5CF00] text-[#191919] font-bold py-3.5 rounded-xl transition-colors flex justify-center items-center gap-2 shadow-lg group">
                     <svg viewBox="0 0 24 24" class="w-5 h-5 fill-current transform group-hover:scale-110 transition-transform"><path d="M12 3c-5.523 0-10 3.538-10 7.9 0 2.834 1.83 5.326 4.606 6.711-.315 1.128-1.144 3.931-1.173 4.048-.035.138.05.27.182.26.103-.008 3.32-.472 4.632-2.14 1.127.305 2.336.471 3.753.471 5.523 0 10-3.538 10-7.9C22 6.538 17.523 3 12 3z"/></svg>
-                    내용 복사 및 카톡 인증하기
+                    제출 및 카톡 인증하기
                 </button>
                 <button onclick="saveAndCloseTaskModal()" class="w-full bg-gray-800 hover:bg-gray-700 text-gray-300 font-bold py-3.5 rounded-xl transition-colors border border-gray-700">
-                    저장하고 닫기
+                    임시 저장하고 닫기
                 </button>
             </div>
+        </div>
+    </div>
+
+    <!-- ===== 커스텀 알림 모달 (브라우저 alert 대체용 - 팝업 차단 방지) ===== -->
+    <div id="customAlertModal" class="fixed inset-0 bg-black/90 z-[60] hidden flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-[#1E1E1E] border border-gray-700 rounded-2xl max-w-sm w-full p-6 text-center shadow-2xl animate-fade-in-up max-h-[90vh] overflow-y-auto">
+            <div class="w-16 h-16 bg-green-500/10 text-green-500 rounded-full flex items-center justify-center mx-auto mb-4 border border-green-500/20">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">내용 복사 완료!</h3>
+            <p class="text-gray-400 text-sm mb-5 leading-relaxed">
+                카카오톡 채팅방이 열리면 대화창을 길게 눌러 <strong>[붙여넣기]</strong>를 해주세요.
+            </p>
+            <div class="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3 mb-6">
+                <p id="customAlertWarning" class="text-yellow-500 text-xs font-bold leading-relaxed">
+                    <!-- JS에서 문구 삽입 -->
+                </p>
+            </div>
+            <button onclick="finalKakaoRedirect()" class="w-full bg-[#FEE500] hover:bg-[#E5CF00] text-[#191919] font-bold py-3.5 rounded-xl transition-colors shadow-lg">
+                카카오톡 바로 열기
+            </button>
+            <button onclick="closeCustomAlert()" class="w-full mt-3 text-gray-500 hover:text-gray-300 text-sm font-bold py-2 transition-colors">
+                취소 (닫기)
+            </button>
         </div>
     </div>
 
@@ -224,12 +297,18 @@
     </footer>
 
     <script>
+        // ==========================================
+        // ⚠️ 구글 앱스 스크립트 웹앱 URL 세팅 완료
+        // ==========================================
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyBO-fZw-58tAfn_TvfIhDzpku5cPs1gpSDwpRJaexycgVW1AsZEJVhg5bpN_yRhwv1/exec"; 
+
         // 학생들의 입력 데이터를 저장할 객체
         const taskStore = {};
 
         // 현재 열려있는 모달의 정보
         let currentTask = { id: '', date: '', range: '', className: '', checkClass: '', weekNum: 0, dayNum: 0 };
         let currentSelectedQs = new Set(); // 선택된 질문 문항 번호를 담는 Set 객체
+        let selectedPhotos = []; // 다중 사진 저장을 위한 배열
 
         // --- 데이터 구조 설계 (계산된 문항 분배) ---
         
@@ -438,11 +517,18 @@
             modalToggleCheck.checked = data.isDone;
             modalToggleCheck.dispatchEvent(new Event('change')); // 텍스트 강제 업데이트
             
+            // 사진 UI 초기화
+            removePhoto();
+
             // 저장된 배열을 Set으로 변환하여 버튼 렌더링 준비
             currentSelectedQs = new Set(data.qs);
             generateQuestionButtons(range); // 현재 숙제 범위에 맞춰 문항 버튼 렌더링
             
             document.getElementById('modalMemoInput').value = data.memo;
+            
+            // 로컬 스토리지에 저장된 이름이 있다면 불러오기 (학생 편의성)
+            const savedName = localStorage.getItem('signatureStudentName');
+            if (savedName) document.getElementById('modalStudentName').value = savedName;
 
             // 모달 열기
             document.getElementById('taskModal').classList.remove('hidden');
@@ -493,6 +579,74 @@
             if (container.children.length === 0) {
                 container.innerHTML = '<span class="text-gray-500 text-sm">문항 번호를 불러올 수 없습니다.</span>';
             }
+        }
+
+        // --- 사진 처리 로직 ---
+        function handlePhotoSelection(event) {
+            const files = Array.from(event.target.files);
+            if (files.length > 0) {
+                selectedPhotos = files; // 새 파일들로 덮어쓰기
+                
+                const grid = document.getElementById('photoGrid');
+                grid.innerHTML = ''; // 초기화
+                
+                selectedPhotos.forEach(file => {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.className = 'w-20 h-20 object-cover rounded-lg border border-gray-600 flex-shrink-0';
+                        grid.appendChild(img);
+                    }
+                    reader.readAsDataURL(file);
+                });
+
+                document.getElementById('photoCountText').innerHTML = `<span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> ${selectedPhotos.length}장의 사진 준비 완료!`;
+                
+                document.getElementById('photoUploadBtn').classList.add('hidden');
+                document.getElementById('photoPreviewContainer').classList.remove('hidden');
+            }
+        }
+
+        function removePhoto() {
+            document.getElementById('modalPhotoInput').value = '';
+            selectedPhotos = [];
+            document.getElementById('photoGrid').innerHTML = '';
+            document.getElementById('photoPreviewContainer').classList.add('hidden');
+            document.getElementById('photoUploadBtn').classList.remove('hidden');
+        }
+
+        // 이미지 압축 및 Base64 변환 함수 (모바일 업로드 속도 최적화)
+        function resizeAndEncodeImage(file, maxWidth = 1024) {
+            return new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        const canvas = document.createElement('canvas');
+                        let width = img.width;
+                        let height = img.height;
+
+                        if (width > maxWidth) {
+                            height = Math.round((height * maxWidth) / width);
+                            width = maxWidth;
+                        }
+                        canvas.width = width;
+                        canvas.height = height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, width, height);
+                        
+                        // JPEG 포맷으로 품질 70% 압축
+                        const dataUrl = canvas.toDataURL('image/jpeg', 0.7);
+                        resolve({
+                            data: dataUrl,
+                            mimeType: 'image/jpeg'
+                        });
+                    };
+                    img.src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            });
         }
 
         // 문항 버튼의 상태(B/C단계 및 선택여부)에 따른 스타일 변경
@@ -548,54 +702,119 @@
             closeTaskModal();
         }
 
-        // 카카오톡 전송 포맷팅 및 클립보드 복사
-        function sendKakaoAuth() {
+        // 구글 시트 전송 및 카카오톡 복사 통합 로직
+        async function submitDataAndCopy() {
+            const studentName = document.getElementById('modalStudentName').value.trim();
+            if (!studentName) {
+                alert("학생 이름을 입력해주세요!");
+                document.getElementById('modalStudentName').focus();
+                return;
+            }
+            
+            // 이름 기억하기
+            localStorage.setItem('signatureStudentName', studentName);
+
             const isDone = modalToggleCheck.checked;
-            // 배열화된 질문 문항 번호를 쉼표로 연결
             const qsArr = Array.from(currentSelectedQs).sort((a, b) => parseInt(a) - parseInt(b));
             const qsText = qsArr.length > 0 ? qsArr.join(', ') : '없음';
-            
             const memo = document.getElementById('modalMemoInput').value.trim();
+            const stateText = isDone ? "완료" : "미완료";
             const stateIcon = isDone ? "⭕ 완료" : "❌ 미완료";
 
-            // 전송용 텍스트 조립 (주차 및 D-day 정보 추가)
+            // 1. 카카오톡용 텍스트 조립
             let copyText = `[Signature ${currentTask.className} 숙제 인증]\n` +
+                           `🧑‍🎓 이름: ${studentName}\n` +
                            `📅 일자: ${currentTask.weekNum}주차 D${currentTask.dayNum} (${currentTask.date})\n` +
                            `📚 범위: ${currentTask.range}\n` +
                            `✅ 상태: ${stateIcon}\n` +
                            `❓ 질문문항: ${qsText}\n`;
-            
             if (memo) copyText += `📝 코멘트: ${memo}\n`;
 
-            // 복사 로직 (보안 및 권한 이슈 방지를 위한 Fallback 포함)
-            if (navigator.clipboard && window.isSecureContext) {
-                navigator.clipboard.writeText(copyText).then(() => {
-                    executeKakaoRedirect();
-                });
-            } else {
+            // ★ 해결 핵심: 시간 지연(await)이 발생하기 전에, 버튼을 누르자마자 즉시 클립보드에 복사합니다. (권한 에러 방지)
+            try {
                 const textArea = document.createElement("textarea");
                 textArea.value = copyText;
                 textArea.style.position = "fixed";
-                textArea.style.left = "-999999px";
+                textArea.style.left = "-999999px"; // 화면 밖으로 숨김
                 document.body.appendChild(textArea);
+                textArea.focus();
                 textArea.select();
-                try {
-                    document.execCommand('copy');
-                    executeKakaoRedirect();
-                } catch (error) {
-                    alert("복사에 실패했습니다. 브라우저 설정을 확인해주세요.");
-                } finally {
-                    textArea.remove();
+                document.execCommand('copy'); // 구형 API지만 iFrame 등 제한된 환경에서 가장 확실히 동작함
+                textArea.remove();
+            } catch (err) {
+                console.error("클립보드 복사 실패:", err);
+            }
+
+            // 2. 로딩 UI 표시 (클립보드 복사 완료 후 화면 전환)
+            document.getElementById('loadingOverlay').classList.remove('hidden');
+
+            // 3. 구글 시트 및 드라이브로 데이터/사진 전송
+            try {
+                // 이미지 압축 처리 (비동기)
+                const base64Images = [];
+                if (selectedPhotos.length > 0) {
+                    for (let file of selectedPhotos) {
+                        const encoded = await resizeAndEncodeImage(file);
+                        base64Images.push(encoded);
+                    }
                 }
+
+                // 구글 스프레드시트로 전송할 데이터 페이로드
+                const payload = {
+                    name: studentName,
+                    className: currentTask.className,
+                    date: `${currentTask.weekNum}주차 D${currentTask.dayNum} (${currentTask.date})`,
+                    range: currentTask.range,
+                    status: stateText,
+                    questions: qsText,
+                    memo: memo,
+                    images: base64Images
+                };
+
+                // 구글 앱스 스크립트로 POST 요청 (no-cors 적용)
+                if (GOOGLE_SCRIPT_URL.startsWith("https://script.google.com/")) {
+                    await fetch(GOOGLE_SCRIPT_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: {
+                            'Content-Type': 'text/plain;charset=utf-8',
+                        },
+                        body: JSON.stringify(payload)
+                    });
+                }
+            } catch (error) {
+                // 구글 서버 전송 중 오류가 나더라도 카톡 제출은 막히지 않도록 조치
+                console.error("스프레드시트 전송 오류:", error);
+            } finally {
+                // 4. 로딩 UI 숨김 및 안내 팝업 오픈
+                document.getElementById('loadingOverlay').classList.add('hidden');
+                executeKakaoRedirect();
             }
         }
 
         function executeKakaoRedirect() {
-            alert("숙제 인증 내용이 복사되었습니다!\n\n채팅방이 열리면 대화창을 길게 누르거나 우클릭하여 [붙여넣기]를 해주세요.");
-            // 데이터 저장 후 닫기
+            const hasPhoto = selectedPhotos.length > 0;
+            const warningText = document.getElementById('customAlertWarning');
+            
+            if (hasPhoto) {
+                warningText.innerHTML = `📸 잊지 마세요!<br>채팅방에서 방금 준비한 <strong>[${selectedPhotos.length}장의 숙제 사진]</strong>을 직접 첨부하여 함께 전송해야 합니다.`;
+            } else {
+                warningText.innerHTML = `⚠️ 주의!<br>숙제 사진도 함께 첨부하여 전송하는 것을 잊지 마세요.`;
+            }
+
+            // 브라우저 alert() 대신 커스텀 모달 띄우기 (팝업 차단 방지)
+            document.getElementById('customAlertModal').classList.remove('hidden');
+        }
+
+        function finalKakaoRedirect() {
+            document.getElementById('customAlertModal').classList.add('hidden');
             saveAndCloseTaskModal();
-            // 한호빈 강사 카카오톡 오픈채팅방 링크 (원본 html 참고)
+            // 한호빈 강사 카카오톡 오픈채팅방 링크
             window.open("https://open.kakao.com/o/s9qHTzTh", "_blank");
+        }
+        
+        function closeCustomAlert() {
+            document.getElementById('customAlertModal').classList.add('hidden');
         }
     </script>
 <script>
