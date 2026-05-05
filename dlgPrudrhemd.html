@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>한호빈 수학 - 고1 1학기 기말고사 대비반 안내</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans KR"', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #121212;
+            color: #E0E0E0;
+            word-break: keep-all;
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #34d399, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-gold {
+            background: linear-gradient(to right, #fbbf24, #d97706);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-blue {
+            background: linear-gradient(to right, #60a5fa, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.3);
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #121212; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #555; }
+
+        img { -webkit-user-drag: none; }
+    </style>
+</head>
+<body class="antialiased selection:bg-blue-500 selection:text-white">
+
+    <div class="container mx-auto max-w-5xl px-4 py-12 md:py-20">
+
+        <!-- 1. 헤더 섹션 -->
+        <header class="mb-20 text-center animate-fade-in-up">
+            <div class="inline-block bg-[#1E1E1E] border border-yellow-500/30 px-4 py-1.5 rounded-full text-sm font-bold text-yellow-400 mb-6 animate-pulse-slow">
+                이혜경고등수학학원 고1 기말고사 완벽 대비
+            </div>
+            <h1 class="text-4xl md:text-6xl font-black mb-6 tracking-tight">
+                한호빈 <span class="gradient-gold">고1 1학기 기말 대비반</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 font-bold mb-8 italic">
+                "<span class="gradient-blue">완벽한 개념</span>부터 <span class="gradient-gold">실전 내신 대비</span>까지"
+            </p>
+            
+            <!-- 개강 일정 박스 -->
+            <div class="bg-[#1E1E1E]/80 backdrop-blur border border-[#333] rounded-2xl p-6 md:p-8 max-w-xl mx-auto shadow-2xl relative overflow-hidden group">
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 via-yellow-500 to-red-500"></div>
+                <div class="text-center">
+                    <span class="block text-yellow-400 font-bold text-sm mb-2">기말고사 대비반 대개강</span>
+                    <div class="text-3xl font-bold text-white mb-2">5월 4일 (월)</div>
+                    <div class="text-lg text-gray-400 font-medium mt-4">
+                        행렬부터 이차부등식, 학교별 내신까지 완벽 정복
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <!-- 2. 수업 시스템 안내 -->
+            <section class="mb-24 animate-fade-in-up" style="animation-delay: 0.1s;">
+                <h2 class="text-2xl md:text-3xl font-bold text-white mb-10 flex items-center gap-3">
+                    <span class="w-2 h-8 bg-white rounded-full"></span>
+                    기말 대비반 학습 시스템
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    
+                    <!-- 2-1. 정규 수업 -->
+                    <div class="bg-[#1E1E1E] rounded-2xl border border-blue-900/50 p-8 card-hover relative overflow-hidden flex flex-col h-full">
+                        <div class="absolute top-0 right-0 p-4 opacity-10 pointer-events-none">
+                            <svg class="w-24 h-24 text-blue-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>
+                        </div>
+                        
+                        <div class="mb-6 border-b border-gray-700 pb-6">
+                            <span class="bg-blue-600/20 text-blue-400 px-3 py-1 rounded text-sm font-bold mb-2 inline-block">Step 1. 개념 및 유형 완성</span>
+                            <h3 class="text-2xl font-black text-white mt-1"><span class="gradient-blue">정규 수업</span></h3>
+                        </div>
+
+                        <div class="space-y-4 flex-grow">
+                            <div>
+                                <h4 class="text-white font-bold mb-2 flex items-center gap-2">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> 월, 수
+                                </h4>
+                                <div class="bg-gray-800/50 rounded-lg p-3 text-sm text-gray-300">
+                                    <span class="font-bold text-white text-lg">오후 6:00 ~ 8:00</span>
+                                </div>
+                                <p class="mt-3 text-sm text-red-400 font-medium">* 지각하면 수업에 지장이 있습니다.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2-2. Daily Test -->
+                    <div class="bg-[#1E1E1E] rounded-2xl border border-yellow-900/50 p-8 card-hover relative overflow-hidden flex flex-col h-full hover:border-yellow-500/50 hover:shadow-[0_10px_30px_-10px_rgba(251,191,36,0.3)]">
+                        <div class="absolute top-0 right-0 p-4 opacity-10 pointer-events-none">
+                            <svg class="w-24 h-24 text-yellow-500" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 9h-2V7h-2v5H6v-2h2V7c0-1.1.9-2 2-2h2v7zm4-4h-2v7h-2V8h2V6h2v2z"/></svg>
+                        </div>
+                        
+                        <div class="mb-6 border-b border-gray-700 pb-6">
+                            <span class="bg-yellow-600/20 text-yellow-400 px-3 py-1 rounded text-sm font-bold mb-2 inline-block">Step 2. 성취도 확인</span>
+                            <h3 class="text-2xl font-black text-white mt-1"><span class="gradient-gold">Daily Test</span></h3>
+                        </div>
+
+                        <div class="space-y-4 flex-grow">
+                            <div>
+                                <h4 class="text-white font-bold mb-2 flex items-center gap-2">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-yellow-500"></span> 월, 수
+                                </h4>
+                                <div class="bg-gray-800/50 rounded-lg p-3 text-sm text-gray-300">
+                                    <span class="font-bold text-white text-lg">오후 8:00 ~ 9:00</span>
+                                </div>
+                                <p class="mt-3 text-sm text-gray-400 font-medium">당일 수업 내용에 대한 점검<br>또는 추가학습 진행</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2-3. 클리닉 -->
+                    <div class="bg-[#1E1E1E] rounded-2xl border border-red-900/50 p-8 card-hover relative overflow-hidden flex flex-col h-full hover:border-red-500/50 hover:shadow-[0_10px_30px_-10px_rgba(239,68,68,0.3)]">
+                        <div class="absolute top-0 right-0 p-4 opacity-10 pointer-events-none">
+                            <svg class="w-24 h-24 text-red-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 5.92 2 10.75c0 2.86 1.58 5.4 4.05 7.04l-1.07 3.93 3.97-1.95c1.6.45 3.3.45 4.9 0l3.97 1.95-1.07-3.93C19.42 16.15 21 13.61 21 10.75 21 5.92 16.52 2 12 2z"/></svg>
+                        </div>
+                        
+                        <div class="mb-6 border-b border-gray-700 pb-6">
+                            <span class="bg-red-600/20 text-red-400 px-3 py-1 rounded text-sm font-bold mb-2 inline-block">Step 3. 약점 극복</span>
+                            <h3 class="text-2xl font-black text-white mt-1 text-red-400">클리닉</h3>
+                        </div>
+
+                        <div class="space-y-4 flex-grow">
+                            <div>
+                                <h4 class="text-white font-bold mb-2 flex items-center gap-2">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-red-500"></span> 금
+                                </h4>
+                                <div class="bg-gray-800/50 rounded-lg p-3 text-sm text-gray-300">
+                                    <span class="font-bold text-white text-base">오후 4:00 ~ 10:00 중 2시간</span>
+                                    <p class="mt-1 text-xs text-yellow-500">* 선생님과 시간 조율</p>
+                                </div>
+                                <p class="mt-3 text-sm text-gray-400 font-medium">부족한 학습 채우기<br>또는 심화 학습</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- 3. 상세 커리큘럼 일정 -->
+            <section class="mb-24 animate-fade-in-up" style="animation-delay: 0.2s;">
+                <h2 class="text-2xl md:text-3xl font-bold text-white mb-8 flex items-center gap-3">
+                    <span class="w-2 h-8 bg-gradient-to-b from-yellow-400 to-orange-500 rounded-full"></span>
+                    5~6월 기말고사 대비 상세 일정
+                </h2>
+
+                <div class="bg-[#1E1E1E] rounded-2xl border border-[#333] overflow-hidden shadow-xl">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse min-w-[600px]">
+                            <thead class="bg-[#252525] text-gray-300 border-b border-[#444]">
+                                <tr>
+                                    <th class="p-4 py-5 font-bold w-1/4 text-center">일자</th>
+                                    <th class="p-4 py-5 font-bold w-1/6 text-center">요일</th>
+                                    <th class="p-4 py-5 font-bold w-7/12 pl-8">진도 및 학습 내용</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-[#333] text-sm md:text-base">
+                                
+                                <!-- 1주차 -->
+                                <tr class="hover:bg-[#252525] transition-colors">
+                                    <td class="p-4 text-center text-white font-bold">5/4</td>
+                                    <td class="p-4 text-center text-blue-400 font-bold">월</td>
+                                    <td class="p-4 text-gray-300 pl-8">행렬의 뜻과 연산(1)</td>
+                                </tr>
+                                <tr class="hover:bg-[#252525] transition-colors">
+                                    <td class="p-4 text-center text-white font-bold">5/6</td>
+                                    <td class="p-4 text-center text-blue-400 font-bold">수</td>
+                                    <td class="p-4 text-gray-300 pl-8">행렬의 연산(2)</td>
+                                </tr>
+                                <tr class="bg-gray-800/30 hover:bg-[#252525] transition-colors">
+                                    <td class="p-4 text-center text-white font-bold">5/8</td>
+                                    <td class="p-4 text-center text-red-400 font-bold">금</td>
+                                    <td class="p-4 text-red-300 pl-8 font-medium">개별 클리닉 수업</td>
+                                </tr>
+
+                                <!-- 2주차 -->
+                                <tr class="border-t-2 border-[#444] hover:bg-[#252525] transition-colors">
+                                    <td class="p-4 text-center text-white font-bold">5/11</td>
+                                    <td class="p-4 text-center text-blue-400 font-bold">월</td>
+                                    <td class="p-4 text-gray-300 pl-8">합의 법칙과 곱의 법칙, 순열</td>
+                                </tr>
+                                <tr class="hover:bg-[#252525] transition-colors">
+                                    <td class="p-4 text-center text-white font-bold">5/13</td>
+                                    <td class="p-4 text-center text-blue-400 font-bold">수</td>
+                                    <td class="p-4 text-gray-300 pl-8">조합</td>
+                                </tr>
+                                <tr class="bg-gray-800/30 hover:bg-[#252525] transition-colors">
+                                    <td class="p-4 text-center text-white font-bold">5/15</td>
+                                    <td class="p-4 text-center text-red-400 font-bold">금</td>
+                                    <td class="p-4 text-red-300 pl-8 font-medium">개별 클리닉 수업</td>
+                                </tr>
+
+                                <!-- 3주차 -->
+                                <tr class="border-t-2 border-[#444] hover:bg-[#252525] transition-colors">
+                                    <td class="p-4 text-center text-white font-bold">5/18</td>
+                                    <td class="p-4 text-center text-blue-400 font-bold">월</td>
+                                    <td class="p-4 text-gray-300 pl-8">삼차방정식과 사차방정식의 풀이 1</td>
+                                </tr>
+                                <tr class="hover:bg-[#252525] transition-colors">
+                                    <td class="p-4 text-center text-white font-bold">5/20</td>
+                                    <td class="p-4 text-center text-blue-400 font-bold">수</td>
+                                    <td class="p-4 text-gray-300 pl-8">삼차방정식과 사차방정식의 풀이 2</td>
+                                </tr>
+                                <tr class="bg-gray-800/30 hover:bg-[#252525] transition-colors">
+                                    <td class="p-4 text-center text-white font-bold">5/22</td>
+                                    <td class="p-4 text-center text-red-400 font-bold">금</td>
+                                    <td class="p-4 text-red-300 pl-8 font-medium">개별 클리닉 수업</td>
+                                </tr>
+
+                                <!-- 4주차 -->
+                                <tr class="border-t-2 border-[#444] hover:bg-[#252525] transition-colors">
+                                    <td class="p-4 text-center text-white font-bold">5/25</td>
+                                    <td class="p-4 text-center text-blue-400 font-bold">월</td>
+                                    <td class="p-4 text-gray-300 pl-8">연립이차방정식 + 연립일차부등식(1)</td>
+                                </tr>
+                                <tr class="hover:bg-[#252525] transition-colors">
+                                    <td class="p-4 text-center text-white font-bold">5/27</td>
+                                    <td class="p-4 text-center text-blue-400 font-bold">수</td>
+                                    <td class="p-4 text-gray-300 pl-8">연립일차부등식(2) + 절댓값을 포함한 부등식</td>
+                                </tr>
+                                <tr class="bg-gray-800/30 hover:bg-[#252525] transition-colors">
+                                    <td class="p-4 text-center text-white font-bold">5/29</td>
+                                    <td class="p-4 text-center text-red-400 font-bold">금</td>
+                                    <td class="p-4 text-red-300 pl-8 font-medium">개별 클리닉 수업</td>
+                                </tr>
+
+                                <!-- 5주차 -->
+                                <tr class="border-t-2 border-[#444] hover:bg-[#252525] transition-colors">
+                                    <td class="p-4 text-center text-white font-bold">6/1</td>
+                                    <td class="p-4 text-center text-blue-400 font-bold">월</td>
+                                    <td class="p-4 text-gray-300 pl-8">이차부등식과 연립이차부등식(1)</td>
+                                </tr>
+                                <tr class="hover:bg-[#252525] transition-colors">
+                                    <td class="p-4 text-center text-white font-bold">6/3</td>
+                                    <td class="p-4 text-center text-blue-400 font-bold">수</td>
+                                    <td class="p-4 text-gray-300 pl-8">이차부등식과 연립이차부등식(2)</td>
+                                </tr>
+                                <tr class="bg-gray-800/30 hover:bg-[#252525] transition-colors">
+                                    <td class="p-4 text-center text-white font-bold">6/5</td>
+                                    <td class="p-4 text-center text-red-400 font-bold">금</td>
+                                    <td class="p-4 text-red-300 pl-8 font-medium">개별 클리닉 수업</td>
+                                </tr>
+
+                                <!-- 내신대비 기간 -->
+                                <tr class="bg-gradient-to-r from-blue-900/20 via-blue-800/10 to-transparent border-t-2 border-[#444]">
+                                    <td class="p-4 text-center text-white font-bold">6/8 ~ 6/12</td>
+                                    <td class="p-4 text-center text-gray-400 font-bold">월, 수, 금</td>
+                                    <td class="p-4 text-blue-300 font-bold pl-8">학교별 내신대비 본격 훈련</td>
+                                </tr>
+                                <tr class="bg-gradient-to-r from-blue-900/20 via-blue-800/10 to-transparent border-t border-[#444]">
+                                    <td class="p-4 text-center text-white font-bold">6/15 ~ 6/19</td>
+                                    <td class="p-4 text-center text-gray-400 font-bold">월, 수, 금</td>
+                                    <td class="p-4 text-blue-300 font-bold pl-8">학교별 내신대비 실전 모의고사</td>
+                                </tr>
+                                <tr class="bg-gradient-to-r from-blue-900/20 via-blue-800/10 to-transparent border-t border-[#444]">
+                                    <td class="p-4 text-center text-white font-bold">6/22 ~ 6/26</td>
+                                    <td class="p-4 text-center text-gray-400 font-bold">월, 수, 금</td>
+                                    <td class="p-4 text-blue-300 font-bold pl-8">학교별 내신대비 최종 점검</td>
+                                </tr>
+
+                                <!-- 시험 기간 -->
+                                <tr class="bg-gradient-to-r from-yellow-900/30 via-yellow-600/20 to-yellow-900/30">
+                                    <td class="p-5 text-center border-t border-yellow-500/30"><span class="font-bold text-yellow-400 text-lg">6/29 (월) ~ </span></td>
+                                    <td colspan="2" class="p-5 text-center border-t border-yellow-500/30">
+                                        <span class="text-xl font-black text-white tracking-widest drop-shadow-md">학교별 기말고사 시험 주간</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- 푸터 -->
+        <footer class="mt-20 border-t border-[#333] pt-12 pb-12 text-center">
+            <h3 class="text-2xl font-bold text-white mb-8">기말고사 1등급을 향한 완벽한 준비, 이혜경고등수학학원에서 시작합니다.</h3>
+            
+            <p class="text-gray-600 text-sm mt-8">
+                &copy; 2026 수학강사 한호빈. All rights reserved.<br>
+                이혜경고등수학학원 | 학원 문의 및 상담 예약은 학원으로 연락 부탁드립니다.
+            </p>
+        </footer>
+
+    </div>
+
+    <script>
+        // 마우스 우클릭 및 개발자 도구 방지 스크립트
+        document.addEventListener('contextmenu', function(e) {
+          e.preventDefault(); 
+        });
+      
+        document.addEventListener('keydown', function(e) {
+          if (e.keyCode === 123) { // F12
+            e.preventDefault();
+            e.returnValue = false;
+          }
+          if (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) {
+            e.preventDefault();
+            e.returnValue = false;
+          }
+          if (e.ctrlKey && e.keyCode === 85) { // Ctrl+U
+            e.preventDefault();
+            e.returnValue = false;
+          }
+        });
+    </script>
+</body>
+</html>
