@@ -1,52 +1,62 @@
 <title>수학 문항 변형 외주 안내</title>
 <style>
 /* ─────────────────────────────────────────────── 토큰 (밝은 판이 기본) */
+/*  답안지 —  모눈 종이 위에 채점펜.
+    붉은색(--mark)은 채점펜의 자리에만 쓴다: 절 번호 · 표 머리 · 금지 칸 ·
+    경고. 구조(사슬 막대 · 칩 · 상자)는 짙은 잉크(--accent)로 간다.
+    열한 개 절 내내 붉으면 계약 안내가 아니라 채점된 답안지로 읽힌다.       */
 :root{
   --paper:#ffffff;
-  --ground:#eceff3;
-  --ink:#1a1f27;
-  --ink-2:#3d4753;
-  --muted:#66717e;
-  --rule:#ccd4dd;
-  --rule-soft:#e2e7ed;
-  --accent:#23446e;
-  --accent-soft:#e7edf5;
-  --mark:#a8342a;
-  --mark-soft:#f6e9e7;
+  --grid:#e8eef2;
+  --cell:rgba(255,255,255,.82);
+  --ground:#e6eaee;
+  --ink:#14181d;
+  --ink-2:#333b44;
+  --muted:#5a6570;
+  --rule:#c5ced7;
+  --rule-soft:#dfe6ec;
+  --accent:#1f2b3a;
+  --accent-soft:#edf1f4;
+  --mark:#b23a2e;
+  --mark-soft:#f9ece9;
   --good:#2f6152;
   --good-soft:#e6efeb;
-  --shadow:0 1px 2px rgba(26,31,39,.06), 0 12px 34px rgba(26,31,39,.07);
+  --shadow:0 1px 2px rgba(20,24,29,.07), 0 12px 34px rgba(20,24,29,.09);
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
-    --paper:#171b21;
-    --ground:#0f1216;
+    --paper:#161a20;
+    --grid:#212831;
+    --cell:rgba(22,26,32,.82);
+    --ground:#0e1115;
     --ink:#e6eaef;
     --ink-2:#c2cad4;
     --muted:#8d97a3;
-    --rule:#333c47;
-    --rule-soft:#242b34;
-    --accent:#8fb2dd;
-    --accent-soft:#1d2836;
-    --mark:#e0897e;
-    --mark-soft:#2e2020;
+    --rule:#39424e;
+    --rule-soft:#262e38;
+    --accent:#b7c6d6;
+    --accent-soft:#1e252e;
+    --mark:#e18a7d;
+    --mark-soft:#2f201d;
     --good:#8fc4b1;
     --good-soft:#1a2622;
     --shadow:0 1px 2px rgba(0,0,0,.4), 0 12px 34px rgba(0,0,0,.35);
   }
 }
 :root[data-theme="dark"]{
-  --paper:#171b21;
-  --ground:#0f1216;
+  --paper:#161a20;
+  --grid:#212831;
+  --cell:rgba(22,26,32,.82);
+  --ground:#0e1115;
   --ink:#e6eaef;
   --ink-2:#c2cad4;
   --muted:#8d97a3;
-  --rule:#333c47;
-  --rule-soft:#242b34;
-  --accent:#8fb2dd;
-  --accent-soft:#1d2836;
-  --mark:#e0897e;
-  --mark-soft:#2e2020;
+  --rule:#39424e;
+  --rule-soft:#262e38;
+  --accent:#b7c6d6;
+  --accent-soft:#1e252e;
+  --mark:#e18a7d;
+  --mark-soft:#2f201d;
   --good:#8fc4b1;
   --good-soft:#1a2622;
   --shadow:0 1px 2px rgba(0,0,0,.4), 0 12px 34px rgba(0,0,0,.35);
@@ -65,8 +75,12 @@ body{
   word-break:keep-all;
 }
 
+/* 모눈은 4mm 격자를 화면 22px 로 앉힌 것이다. 종이가 곧 답안지다. */
 .sheet{
-  background:var(--paper);
+  background:
+    linear-gradient(to right,var(--grid) 1px,transparent 1px) 0 0/22px 22px,
+    linear-gradient(to bottom,var(--grid) 1px,transparent 1px) 0 0/22px 22px,
+    var(--paper);
   max-width:860px;
   margin:0 auto;
   padding:56px 60px 64px;
@@ -74,21 +88,17 @@ body{
 }
 
 /* ─────────────────────────────────────────────── 표제 */
-.masthead{border-bottom:2px solid var(--ink);padding-bottom:22px;}
+.masthead{border-bottom:3px solid var(--ink);padding-bottom:22px;}
 .eyebrow{
   font-family:'Consolas','D2Coding',ui-monospace,monospace;
-  font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--accent);margin:0 0 14px;
+  font-size:11.5px;letter-spacing:.19em;text-transform:uppercase;
+  color:var(--mark);font-weight:700;margin:0 0 14px;
 }
 h1{
-  font-family:'Nanum Myeongjo','Batang',serif;
-  font-size:37px;line-height:1.25;font-weight:700;
-  letter-spacing:-.01em;margin:0;text-wrap:balance;
+  font-size:38px;line-height:1.2;font-weight:800;
+  letter-spacing:-.035em;margin:0;text-wrap:balance;
 }
-.subtitle{
-  font-family:'Nanum Myeongjo','Batang',serif;
-  font-size:17px;color:var(--muted);margin:10px 0 0;
-}
+.subtitle{font-size:15.5px;color:var(--muted);margin:11px 0 0;}
 .lede{margin:24px 0 0;font-size:15.5px;color:var(--ink-2);max-width:60ch;}
 
 /* ─────────────────────────────────────────────── 요약 스트립 */
@@ -111,15 +121,18 @@ h1{
 /* ─────────────────────────────────────────────── 절 */
 section{margin-top:52px;}
 h2{
-  font-size:21px;font-weight:700;margin:0 0 6px;
-  letter-spacing:-.022em;
-  padding-bottom:9px;border-bottom:1px solid var(--ink);
-  display:flex;align-items:baseline;gap:14px;text-wrap:balance;
+  font-size:21px;font-weight:800;margin:0 0 6px;
+  letter-spacing:-.03em;
+  padding-bottom:9px;border-bottom:2px solid var(--ink);
+  display:flex;align-items:center;gap:12px;text-wrap:balance;
 }
+/* 절 번호는 채점란처럼 붉은 네모 안에 앉힌다 — 열한 개를 훑을 때 눈이 걸린다 */
 h2 .no{
   font-family:'Consolas','D2Coding',ui-monospace,monospace;
-  font-size:14px;color:var(--accent);font-weight:400;
-  flex:0 0 auto;
+  font-size:12px;font-weight:700;color:var(--mark);
+  border:1.5px solid var(--mark);background:var(--paper);
+  width:26px;height:26px;flex:0 0 auto;
+  display:grid;place-items:center;line-height:1;
 }
 h3{
   font-size:15.5px;font-weight:700;margin:30px 0 8px;
@@ -148,11 +161,12 @@ table{border-collapse:collapse;width:100%;font-size:13.7px;}
 th,td{
   border-bottom:1px solid var(--rule-soft);
   padding:9px 10px;text-align:left;vertical-align:top;
+  background:var(--cell);
 }
 thead th{
-  border-bottom:1.5px solid var(--ink);
-  font-size:11.5px;letter-spacing:.08em;color:var(--muted);
-  font-weight:600;white-space:nowrap;
+  border-bottom:1.5px solid var(--mark);
+  font-size:11.5px;letter-spacing:.09em;color:var(--mark);
+  font-weight:700;white-space:nowrap;
 }
 tbody tr:last-child td{border-bottom:1px solid var(--rule);}
 td.g{white-space:nowrap;}
@@ -209,7 +223,7 @@ td.g{white-space:nowrap;}
   justify-content:flex-end;padding-right:7px;
 }
 .matrix .cell{
-  border:1px solid var(--rule-soft);min-height:34px;
+  border:1px solid var(--rule-soft);min-height:34px;background:var(--cell);
   display:flex;align-items:center;justify-content:center;
   color:var(--muted);text-align:center;line-height:1.25;
   padding:2px;
@@ -222,12 +236,13 @@ td.g{white-space:nowrap;}
 /* ─────────────────────────────────────────────── 지역 칩 */
 .regions{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 4px;}
 .regions span{
-  border:1px solid var(--accent);background:var(--accent-soft);
-  color:var(--accent);font-weight:700;font-size:13px;
+  border:1.5px solid var(--ink);background:var(--paper);
+  color:var(--ink);font-weight:700;font-size:13px;
   padding:4px 12px;white-space:nowrap;
 }
 .rule-3km{
   border:1px solid var(--rule);border-left:3px solid var(--accent);
+  background:var(--cell);
   padding:12px 16px;margin:14px 0 4px;font-size:14px;
 }
 .rule-3km b{display:block;font-size:13px;color:var(--muted);margin-bottom:3px;font-weight:600;}
@@ -255,7 +270,7 @@ td.g{white-space:nowrap;}
 .steps li:last-child{border-bottom:1px solid var(--rule);}
 .steps .n{
   font-family:'Consolas','D2Coding',ui-monospace,monospace;
-  font-size:12.5px;color:var(--accent);font-weight:700;padding-top:2px;
+  font-size:12.5px;color:var(--mark);font-weight:700;padding-top:2px;
 }
 .steps b{display:block;font-size:14.5px;}
 .steps span{color:var(--ink-2);font-size:13.5px;}
@@ -263,7 +278,7 @@ td.g{white-space:nowrap;}
 
 /* ─────────────────────────────────────────────── 주문 조합 카드 */
 .combos{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:18px 0;}
-.combo{border:1px solid var(--rule);padding:14px 16px;}
+.combo{border:1px solid var(--rule);background:var(--cell);padding:14px 16px;}
 .combo h4{
   margin:0 0 4px;font-size:14px;font-weight:700;
   display:flex;justify-content:space-between;align-items:baseline;gap:10px;
@@ -291,7 +306,7 @@ td.g{white-space:nowrap;}
 .faq dd{margin:5px 0 0;color:var(--ink-2);font-size:14px;max-width:64ch;}
 
 /* ─────────────────────────────────────────────── 접수 */
-.contact{border:1.5px solid var(--ink);padding:20px 24px;margin-top:20px;}
+.contact{border:2px solid var(--ink);background:var(--cell);padding:20px 24px;margin-top:20px;}
 .contact dl{display:grid;grid-template-columns:88px 1fr;gap:9px 16px;margin:0;}
 .contact dt{font-size:12.5px;color:var(--muted);font-weight:600;padding-top:3px;}
 .contact dd{margin:0;}
@@ -318,17 +333,26 @@ footer{
 @media print{
   :root,:root[data-theme="dark"],:root:not([data-theme="light"]){
     --paper:#ffffff;--ground:#ffffff;--ink:#000000;--ink-2:#1f242b;
-    --muted:#525c68;--rule:#9aa4b0;--rule-soft:#c9d0d8;
-    --accent:#1d3a60;--accent-soft:#eef2f7;
-    --mark:#8f2c22;--mark-soft:#f7ecea;
+    --muted:#4e5862;--rule:#9aa4b0;--rule-soft:#c9d0d8;
+    --grid:#eff3f6;--cell:rgba(255,255,255,.92);
+    --accent:#16202c;--accent-soft:#eef2f5;
+    --mark:#93291f;--mark-soft:#f8eeec;
     --good:#255144;--good-soft:#eaf1ee;
     --shadow:none;
   }
   @page{size:A4;margin:16mm 15mm;}
   body{padding:0;font-size:10.2pt;line-height:1.62;background:#fff;}
-  .sheet{max-width:none;padding:0;box-shadow:none;background:#fff;}
-  h1{font-size:24pt;}
-  .subtitle{font-size:11.5pt;}
+  /* 모눈을 뺀 판을 원하시면 아래 background 를 #fff 한 줄로 바꾸면 됩니다 */
+  .sheet{
+    max-width:none;padding:0;box-shadow:none;
+    background:
+      linear-gradient(to right,var(--grid) 1px,transparent 1px) 0 0/4mm 4mm,
+      linear-gradient(to bottom,var(--grid) 1px,transparent 1px) 0 0/4mm 4mm,
+      #fff;
+  }
+  h1{font-size:25pt;}
+  .subtitle{font-size:11pt;}
+  h2 .no{width:20pt;height:20pt;font-size:8.5pt;}
   h2{font-size:13.2pt;margin-top:0;}
   h3{font-size:11pt;}
   section{margin-top:22pt;break-inside:auto;}
@@ -348,7 +372,7 @@ footer{
   <header class="masthead">
     <p class="eyebrow">MATH ITEM VARIANT SERVICE · 2026</p>
     <h1>수학 문항 변형 외주 안내</h1>
-    <p class="subtitle">2026학년도 2학기 중간고사 대비 · <strong>프로토타입 회차</strong> · 피드백 조건 시범 단가</p>
+    <p class="subtitle">2026학년도 2학기 중간고사 대비 · <strong>파일럿 운영</strong> · 피드백 조건 시범 단가</p>
     <p class="lede">
       선생님이 쓰시는 문항(PDF 또는 HWPX)을 받아, <strong>같은 자리를 묻되 다른
       문제</strong>를 설계해 HWPX 한글 파일로 돌려 드립니다. 숫자만 바꾼 것을
@@ -717,7 +741,7 @@ footer{
 
     <p class="note">
       이번 회차 단가는 <strong>피드백을 주시는 것을 조건으로</strong> 낮게 잡은
-      프로토타입 단가입니다. 다음 두 절이 그 내용입니다.
+      파일럿 단가입니다. 다음 두 절이 그 내용입니다.
     </p>
   </section>
 
@@ -778,7 +802,7 @@ footer{
 
   <!-- ───────────────────────────────────────── 8 -->
   <section>
-    <h2><span class="no">08</span>이번 회차는 프로토타입입니다</h2>
+    <h2><span class="no">08</span>이번 회차는 파일럿 운영입니다</h2>
 
     <p>
       감추지 않고 적습니다. 이 서비스는 아직 정규 운영이 아니라
@@ -788,7 +812,7 @@ footer{
 
     <div class="callout warn">
       <p>
-        <strong>이 절의 규약은 프로토타입 기간의 것입니다 — 정식 운영으로 넘어가기
+        <strong>이 절의 규약은 파일럿 기간의 것입니다 — 정식 운영으로 넘어가기
         전까지 바뀔 수 있습니다.</strong> 지역을 끊는 단위도, 정원도, 자리 규약도
         해 보면서 고칩니다. 바뀌면 <strong>참여하고 계신 분들께 먼저 알려 드립니다.</strong>
       </p>
@@ -889,7 +913,7 @@ footer{
 
     <p>
       <strong>정식 운영 단가는 아직 정하지 않았습니다.</strong> 정해지면
-      프로토타입 회차에 참여하신 분들께 먼저 알려 드립니다.
+      파일럿 운영에 참여하신 분들께 먼저 알려 드립니다.
     </p>
 
     <p class="note">
@@ -987,7 +1011,7 @@ footer{
 
   <footer>
     <span>수학 문항 변형 외주 안내 · 2026학년도 2학기 중간고사 대비</span>
-    <span>프로토타입 회차 · 피드백 조건 시범 단가</span>
+    <span>파일럿 운영 · 피드백 조건 시범 단가</span>
   </footer>
 
 </div>
