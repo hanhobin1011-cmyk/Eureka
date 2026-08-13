@@ -1,0 +1,905 @@
+<title>수학 문항 변형 외주 안내</title>
+<style>
+/* ─────────────────────────────────────────────── 토큰 (밝은 판이 기본) */
+:root{
+  --paper:#ffffff;
+  --ground:#eceff3;
+  --ink:#1a1f27;
+  --ink-2:#3d4753;
+  --muted:#66717e;
+  --rule:#ccd4dd;
+  --rule-soft:#e2e7ed;
+  --accent:#23446e;
+  --accent-soft:#e7edf5;
+  --mark:#a8342a;
+  --mark-soft:#f6e9e7;
+  --good:#2f6152;
+  --good-soft:#e6efeb;
+  --shadow:0 1px 2px rgba(26,31,39,.06), 0 12px 34px rgba(26,31,39,.07);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#171b21;
+    --ground:#0f1216;
+    --ink:#e6eaef;
+    --ink-2:#c2cad4;
+    --muted:#8d97a3;
+    --rule:#333c47;
+    --rule-soft:#242b34;
+    --accent:#8fb2dd;
+    --accent-soft:#1d2836;
+    --mark:#e0897e;
+    --mark-soft:#2e2020;
+    --good:#8fc4b1;
+    --good-soft:#1a2622;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 12px 34px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#171b21;
+  --ground:#0f1216;
+  --ink:#e6eaef;
+  --ink-2:#c2cad4;
+  --muted:#8d97a3;
+  --rule:#333c47;
+  --rule-soft:#242b34;
+  --accent:#8fb2dd;
+  --accent-soft:#1d2836;
+  --mark:#e0897e;
+  --mark-soft:#2e2020;
+  --good:#8fc4b1;
+  --good-soft:#1a2622;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 12px 34px rgba(0,0,0,.35);
+}
+
+*{box-sizing:border-box;}
+
+body{
+  background:var(--ground);
+  color:var(--ink);
+  font-family:'Pretendard','Malgun Gothic','맑은 고딕',system-ui,sans-serif;
+  font-size:15px;
+  line-height:1.75;
+  margin:0;
+  padding:32px 16px 64px;
+  word-break:keep-all;
+}
+
+.sheet{
+  background:var(--paper);
+  max-width:860px;
+  margin:0 auto;
+  padding:56px 60px 64px;
+  box-shadow:var(--shadow);
+}
+
+/* ─────────────────────────────────────────────── 표제 */
+.masthead{border-bottom:2px solid var(--ink);padding-bottom:22px;}
+.eyebrow{
+  font-family:'Consolas','D2Coding',ui-monospace,monospace;
+  font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--accent);margin:0 0 14px;
+}
+h1{
+  font-family:'Nanum Myeongjo','Batang',serif;
+  font-size:37px;line-height:1.25;font-weight:700;
+  letter-spacing:-.01em;margin:0;text-wrap:balance;
+}
+.subtitle{
+  font-family:'Nanum Myeongjo','Batang',serif;
+  font-size:17px;color:var(--muted);margin:10px 0 0;
+}
+.lede{margin:24px 0 0;font-size:15.5px;color:var(--ink-2);max-width:60ch;}
+
+/* ─────────────────────────────────────────────── 요약 스트립 */
+.summary{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:var(--rule);
+  border:1px solid var(--rule);margin:30px 0 8px;
+}
+.summary div{background:var(--paper);padding:14px 16px;}
+.summary dt{
+  font-size:11px;letter-spacing:.11em;color:var(--muted);
+  margin:0 0 5px;font-weight:600;
+}
+.summary dd{
+  margin:0;font-size:19px;font-weight:700;letter-spacing:-.01em;
+  font-variant-numeric:tabular-nums;
+}
+.summary dd small{font-size:12.5px;font-weight:500;color:var(--muted);display:block;letter-spacing:0;}
+
+/* ─────────────────────────────────────────────── 절 */
+section{margin-top:52px;}
+h2{
+  font-size:21px;font-weight:700;margin:0 0 6px;
+  letter-spacing:-.022em;
+  padding-bottom:9px;border-bottom:1px solid var(--ink);
+  display:flex;align-items:baseline;gap:14px;text-wrap:balance;
+}
+h2 .no{
+  font-family:'Consolas','D2Coding',ui-monospace,monospace;
+  font-size:14px;color:var(--accent);font-weight:400;
+  flex:0 0 auto;
+}
+h3{
+  font-size:15.5px;font-weight:700;margin:30px 0 8px;
+  color:var(--ink);letter-spacing:-.01em;
+}
+h3:first-of-type{margin-top:22px;}
+p{margin:12px 0;max-width:64ch;}
+.note{color:var(--muted);font-size:13.5px;max-width:66ch;}
+strong{font-weight:700;}
+code,.code{
+  font-family:'Consolas','D2Coding',ui-monospace,monospace;
+  font-size:.9em;letter-spacing:.01em;
+}
+.v{
+  font-family:'Consolas','D2Coding',ui-monospace,monospace;
+  font-weight:700;color:var(--accent);
+}
+
+ul,ol{max-width:64ch;padding-left:1.15em;margin:12px 0;}
+li{margin:6px 0;}
+li::marker{color:var(--muted);}
+
+/* ─────────────────────────────────────────────── 표 */
+.tablewrap{overflow-x:auto;margin:16px 0;}
+table{border-collapse:collapse;width:100%;font-size:13.7px;}
+th,td{
+  border-bottom:1px solid var(--rule-soft);
+  padding:9px 10px;text-align:left;vertical-align:top;
+}
+thead th{
+  border-bottom:1.5px solid var(--ink);
+  font-size:11.5px;letter-spacing:.08em;color:var(--muted);
+  font-weight:600;white-space:nowrap;
+}
+tbody tr:last-child td{border-bottom:1px solid var(--rule);}
+td.g{white-space:nowrap;}
+.num{font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap;}
+
+/* ─────────────────────────────────────────────── 사슬 도해 */
+.chain{margin:20px 0 6px;font-size:12.5px;}
+.chain-grid{
+  display:grid;grid-template-columns:74px repeat(6,1fr);
+  gap:4px;align-items:stretch;
+}
+.chain-head{
+  background:var(--accent-soft);border:1px solid var(--rule);
+  padding:7px 6px;text-align:center;line-height:1.35;
+}
+.chain-head b{
+  display:block;font-family:'Consolas','D2Coding',ui-monospace,monospace;
+  font-size:12px;color:var(--accent);
+}
+.chain-head span{font-size:10.5px;color:var(--muted);}
+.chain-zone{
+  display:grid;grid-template-columns:74px repeat(6,1fr);gap:4px;
+  margin-top:5px;font-size:10.5px;color:var(--muted);text-align:center;
+}
+.chain-zone i{font-style:normal;border-top:1px solid var(--rule);padding-top:3px;}
+.chain-row{
+  display:grid;grid-template-columns:74px repeat(6,1fr);
+  gap:4px;margin-top:5px;align-items:center;
+}
+.chain-lab{
+  font-family:'Consolas','D2Coding',ui-monospace,monospace;
+  font-size:12px;font-weight:700;color:var(--accent);text-align:right;
+  padding-right:4px;
+}
+.bar{
+  background:var(--accent);color:var(--paper);
+  padding:5px 8px;font-size:11.5px;text-align:center;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.bar.none{
+  background:transparent;color:var(--muted);
+  border:1px dashed var(--rule);
+}
+
+/* ─────────────────────────────────────────────── T×E 격자 */
+.matrix{
+  display:grid;grid-template-columns:56px repeat(6,1fr);
+  gap:3px;margin:18px 0 8px;font-size:11.5px;
+  font-family:'Consolas','D2Coding',ui-monospace,monospace;
+}
+.matrix .hd{color:var(--muted);text-align:center;padding:6px 0 0;}
+.matrix .rw{
+  color:var(--muted);display:flex;align-items:center;
+  justify-content:flex-end;padding-right:7px;
+}
+.matrix .cell{
+  border:1px solid var(--rule-soft);min-height:34px;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--muted);text-align:center;line-height:1.25;
+  padding:2px;
+}
+.matrix .bad{background:var(--mark-soft);border-color:var(--mark);color:var(--mark);font-weight:700;}
+.matrix .gd{background:var(--good-soft);border-color:var(--good);color:var(--good);font-weight:700;}
+.legend{display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:10px;}
+.legend span{display:flex;align-items:center;gap:7px;}
+.swatch{width:13px;height:13px;border:1px solid var(--rule);flex:0 0 auto;}
+.swatch.bad{background:var(--mark-soft);border-color:var(--mark);}
+.swatch.gd{background:var(--good-soft);border-color:var(--good);}
+
+/* ─────────────────────────────────────────────── 인용·강조 상자 */
+.callout{
+  border-left:3px solid var(--accent);background:var(--accent-soft);
+  padding:14px 18px;margin:18px 0;font-size:14px;
+}
+.callout p{margin:6px 0;max-width:62ch;}
+.callout p:first-child{margin-top:0;}
+.callout p:last-child{margin-bottom:0;}
+.callout.warn{border-left-color:var(--mark);background:var(--mark-soft);}
+
+/* ─────────────────────────────────────────────── 절차 */
+.steps{list-style:none;padding:0;margin:18px 0;max-width:none;}
+.steps li{
+  display:grid;grid-template-columns:30px 1fr;gap:14px;
+  padding:11px 0;border-top:1px solid var(--rule-soft);margin:0;
+}
+.steps li:first-child{border-top:1px solid var(--rule);}
+.steps li:last-child{border-bottom:1px solid var(--rule);}
+.steps .n{
+  font-family:'Consolas','D2Coding',ui-monospace,monospace;
+  font-size:12.5px;color:var(--accent);font-weight:700;padding-top:2px;
+}
+.steps b{display:block;font-size:14.5px;}
+.steps span{color:var(--ink-2);font-size:13.5px;}
+.steps em{font-style:normal;color:var(--mark);font-weight:700;}
+
+/* ─────────────────────────────────────────────── 주문 조합 카드 */
+.combos{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:18px 0;}
+.combo{border:1px solid var(--rule);padding:14px 16px;}
+.combo h4{
+  margin:0 0 4px;font-size:14px;font-weight:700;
+  display:flex;justify-content:space-between;align-items:baseline;gap:10px;
+}
+.combo h4 em{
+  font-style:normal;font-family:'Consolas','D2Coding',ui-monospace,monospace;
+  font-size:12.5px;color:var(--accent);font-weight:700;white-space:nowrap;
+}
+.combo p{margin:0;font-size:12.8px;color:var(--muted);max-width:none;}
+
+/* ─────────────────────────────────────────────── 피드백 서식 */
+.formtable td{height:32px;}
+.formtable .fill{color:var(--muted);font-size:12px;}
+
+/* ─────────────────────────────────────────────── 채워 넣을 곳 */
+.blank{
+  display:inline-block;min-width:150px;
+  border-bottom:1px dotted var(--muted);color:var(--muted);
+  font-size:13.5px;
+}
+
+/* ─────────────────────────────────────────────── FAQ */
+.faq{margin:16px 0;}
+.faq dt{font-weight:700;margin-top:16px;font-size:14.5px;}
+.faq dd{margin:5px 0 0;color:var(--ink-2);font-size:14px;max-width:64ch;}
+
+/* ─────────────────────────────────────────────── 접수 */
+.contact{border:1.5px solid var(--ink);padding:20px 24px;margin-top:20px;}
+.contact dl{display:grid;grid-template-columns:88px 1fr;gap:9px 16px;margin:0;}
+.contact dt{font-size:12.5px;color:var(--muted);font-weight:600;padding-top:3px;}
+.contact dd{margin:0;}
+.contact dd.tel{
+  font-size:20px;font-weight:700;letter-spacing:.01em;
+  font-variant-numeric:tabular-nums;line-height:1.3;
+}
+
+footer{
+  margin-top:56px;padding-top:16px;border-top:1px solid var(--rule);
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  font-size:11.5px;color:var(--muted);
+}
+
+@media (max-width:720px){
+  .sheet{padding:34px 22px 44px;}
+  h1{font-size:28px;}
+  .summary{grid-template-columns:repeat(2,1fr);}
+  .combos{grid-template-columns:1fr;}
+  .chain-grid,.chain-row,.chain-zone{grid-template-columns:60px repeat(6,1fr);}
+}
+
+/* ─────────────────────────────────────────────── 인쇄 (A4 · 마지막에 둔다) */
+@media print{
+  :root,:root[data-theme="dark"],:root:not([data-theme="light"]){
+    --paper:#ffffff;--ground:#ffffff;--ink:#000000;--ink-2:#1f242b;
+    --muted:#525c68;--rule:#9aa4b0;--rule-soft:#c9d0d8;
+    --accent:#1d3a60;--accent-soft:#eef2f7;
+    --mark:#8f2c22;--mark-soft:#f7ecea;
+    --good:#255144;--good-soft:#eaf1ee;
+    --shadow:none;
+  }
+  @page{size:A4;margin:16mm 15mm;}
+  body{padding:0;font-size:10.2pt;line-height:1.62;background:#fff;}
+  .sheet{max-width:none;padding:0;box-shadow:none;background:#fff;}
+  h1{font-size:24pt;}
+  .subtitle{font-size:11.5pt;}
+  h2{font-size:13.2pt;margin-top:0;}
+  h3{font-size:11pt;}
+  section{margin-top:22pt;break-inside:auto;}
+  h2,h3{break-after:avoid;break-inside:avoid;}
+  table,.chain,.matrix,.callout,.combo,.contact,.steps li{break-inside:avoid;}
+  thead{display:table-header-group;}
+  .summary{margin:16pt 0 0;}
+  .summary dd{font-size:14pt;}
+  p,li,td,th{orphans:2;widows:2;}
+  .pagebreak{break-before:page;}
+  footer{margin-top:24pt;}
+}
+</style>
+
+<div class="sheet">
+
+  <header class="masthead">
+    <p class="eyebrow">MATH ITEM VARIANT SERVICE · 2026</p>
+    <h1>수학 문항 변형 외주 안내</h1>
+    <p class="subtitle">2026학년도 2학기 중간고사 대비 · <strong>프로토타입 회차</strong> · 피드백 조건 시범 단가</p>
+    <p class="lede">
+      선생님이 쓰시는 문항(PDF 또는 HWPX)을 받아, <strong>같은 자리를 묻되 다른
+      문제</strong>를 설계해 HWPX 한글 파일로 돌려 드립니다. 숫자만 바꾼 것을
+      변형이라고 부르지 않습니다. 변형의 강도를 여섯 등급으로 나누고, 등급마다
+      <strong>원문 풀이의 어느 단계를 깨는지</strong>를 정해 두고 만듭니다.
+    </p>
+  </header>
+
+  <dl class="summary">
+    <div><dt>원본</dt><dd>200문항<small>선생님이 주시는 것</small></dd></div>
+    <div><dt>변형</dt><dd>600문항<small>원본 1문항당 3변형</small></dd></div>
+    <div><dt>비용</dt><dd>100,000원<small>200문항 기준</small></dd></div>
+    <div><dt>산출물</dt><dd>HWPX<small>문항 + 해설 통합본</small></dd></div>
+  </dl>
+
+  <!-- ───────────────────────────────────────── 1 -->
+  <section>
+    <h2><span class="no">01</span>무엇을 만들어 드리나</h2>
+
+    <p>
+      원본 1문항마다 <strong>변형 3문항</strong>을 만듭니다. 문항마다 해설이 붙고,
+      그림이 필요하면 본문 그림과 해설 그림을 따로 그립니다. 전체를 한글(HWPX)
+      통합본 한 벌로 조판해 드립니다.
+    </p>
+
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th>드리는 것</th><th>내용</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="g">변형 문항</td>
+            <td>원본 1문항당 3문항. 선지형은 선지까지 새로 설계합니다(오답 선지는 학생이 실제로 저지르는 오류에서 뽑습니다).</td>
+          </tr>
+          <tr>
+            <td class="g">해설</td>
+            <td>문항마다 풀이. 경우를 나누는 문항은 나눈 경우를 빠짐없이 적습니다.</td>
+          </tr>
+          <tr>
+            <td class="g">그림</td>
+            <td>본문 그림과 해설 그림을 각각 새로 그립니다. 해설 그림은 본문 그림의 복사본이 아니라 <em>풀이가 도입한 보조선·교점까지</em> 들어간 그림입니다.</td>
+          </tr>
+          <tr>
+            <td class="g">등급 표시</td>
+            <td>문항마다 어떤 등급(<span class="v">V0~V5</span>)으로 만들었는지, 목표 난이도 좌표가 무엇이었는지 표로 함께 드립니다. 피드백은 이 표를 보고 주시면 됩니다.</td>
+          </tr>
+          <tr>
+            <td class="g">파일 형식</td>
+            <td>HWPX(한글). 수식은 한글 수식 개체라 <strong>선생님이 직접 열어 고치실 수 있습니다.</strong> 필요하시면 원본판(원문만 모은 것)도 같은 형식으로 함께 드립니다.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ───────────────────────────────────────── 2 -->
+  <section>
+    <h2><span class="no">02</span>변형 강도 — 풀이 사슬의 어디를 깨는가</h2>
+
+    <p>
+      먼저 원문의 풀이를 단계로 분해합니다. 아래는 그 사슬입니다.
+      <strong>뒤쪽을 건드리면 계산만 달라지고, 앞쪽을 깨야 문제가 달라집니다.</strong>
+      등급은 “무엇을 바꿨나”가 아니라 “어디를 깼나”로 정합니다.
+    </p>
+
+    <div class="chain">
+      <div class="chain-grid">
+        <div></div>
+        <div class="chain-head"><b>C1</b><span>재료 복원</span></div>
+        <div class="chain-head"><b>C2</b><span>재료 복원</span></div>
+        <div class="chain-head"><b>C3</b><span>무엇을 묻나</span></div>
+        <div class="chain-head"><b>C4</b><span>주 계산</span></div>
+        <div class="chain-head"><b>C5</b><span>넣을 값</span></div>
+        <div class="chain-head"><b>C6</b><span>대입·정리</span></div>
+      </div>
+      <div class="chain-zone">
+        <i></i>
+        <i style="grid-column:span 2">앞쪽 — 무엇을 어떤 도구로 복원하는가</i>
+        <i style="grid-column:span 2">중간 — 무엇을 묻는가</i>
+        <i style="grid-column:span 2">뒤쪽 — 어떤 값을 넣는가</i>
+      </div>
+
+      <div class="chain-row">
+        <div class="chain-lab">V0</div>
+        <div class="bar none" style="grid-column:2 / span 6">깨지 않는다 — 수치만 교체</div>
+      </div>
+      <div class="chain-row">
+        <div class="chain-lab">V1</div>
+        <div class="bar" style="grid-column:6 / span 2">계수 재설계</div>
+      </div>
+      <div class="chain-row">
+        <div class="chain-lab">V2</div>
+        <div class="bar" style="grid-column:4 / span 2">발문 전환</div>
+      </div>
+      <div class="chain-row">
+        <div class="chain-lab">V3</div>
+        <div class="bar" style="grid-column:3 / span 1">조건 간접화</div>
+      </div>
+      <div class="chain-row">
+        <div class="chain-lab">V4</div>
+        <div class="bar" style="grid-column:2 / span 2">도구 교체</div>
+      </div>
+      <div class="chain-row">
+        <div class="chain-lab">V5</div>
+        <div class="bar" style="grid-column:2 / span 6">구조 재구성 — 소재 자체를 바꾼다</div>
+      </div>
+    </div>
+
+    <h3>등급표</h3>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th>등급</th><th>이름</th><th>깨는 지점</th><th>학생이 새로 해야 하는 일</th><th>용도</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="g"><span class="v">V0</span></td><td class="g">쌍둥이</td><td class="g">없음 (수치만)</td><td>없음. 같은 문제를 한 번 더</td><td class="g">반복 숙달</td></tr>
+          <tr><td class="g"><span class="v">V1</span></td><td class="g">계수 재설계</td><td class="g">C5~C6</td><td>발상은 같고 산술이 무거워짐</td><td class="g">계산 숙련</td></tr>
+          <tr><td class="g"><span class="v">V2</span></td><td class="g">발문 전환</td><td class="g">C3~C4</td><td>같은 재료로 <strong>다른 대상</strong>을 구함</td><td class="g">개념 연결</td></tr>
+          <tr><td class="g"><span class="v">V3</span></td><td class="g">조건 간접화</td><td class="g">C2</td><td>조건 해석이 한 단계 늘어남</td><td class="g">조건 해석력</td></tr>
+          <tr><td class="g"><span class="v">V4</span></td><td class="g">도구 교체</td><td class="g">C1~C2</td><td><strong>다른 수학 도구로</strong> 같은 것을 복원</td><td class="g">유연성</td></tr>
+          <tr><td class="g"><span class="v">V5</span></td><td class="g">구조 재구성</td><td class="g">소재 자체</td><td>구조를 처음부터 새로 파악</td><td class="g">실전 대응</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>등급은 말이 아니라 수치로 판정합니다</h3>
+    <p>
+      “많이 바꿨으니 V4” 같은 자평을 쓰지 않습니다. 만들고 나서 세 가지를 재고,
+      문턱을 못 넘으면 등급 이름을 내리거나 문항을 다시 설계합니다.
+    </p>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th>지표</th><th>뜻</th><th>V2</th><th>V3</th><th>V4</th><th>V5</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="g">재사용률</td><td>원문 풀이 단계 중 그대로 쓸 수 있는 비율</td><td class="num">≤ 0.85</td><td class="num">—</td><td class="num">≤ 0.70</td><td class="num">≤ 0.50</td></tr>
+          <tr><td class="g">추가 복원 단계</td><td>학생이 새로 복원해야 하는 대상 수</td><td class="num">0~1</td><td class="num">≥ 1</td><td class="num">—</td><td class="num">—</td></tr>
+          <tr><td class="g">새 도구</td><td>원문에 없던 수학 도구 개수</td><td class="num">0</td><td class="num">0</td><td class="num">≥ 1</td><td class="num">≥ 1</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">
+      숫자만 바꾼 문항은 <span class="v">V0</span>라고 정직하게 부릅니다. 상위 등급으로 포장하지 않습니다.
+      그리고 <span class="v">V0</span>를 뺀 모든 변형은 <strong>원문보다 발상이 쉬워지면 다시 설계합니다.</strong>
+    </p>
+  </section>
+
+  <!-- ───────────────────────────────────────── 3 -->
+  <section>
+    <h2><span class="no">03</span>난이도 좌표 — 어디에 도착시킬 것인가</h2>
+
+    <p>
+      <strong>V는 수단이고, 난이도는 도착지입니다.</strong> 같은 <span class="v">V4</span>라도
+      어디에 떨어지는지는 다릅니다. 그래서 난이도를 한 축이 아니라 두 축으로 잡습니다.
+    </p>
+
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>축</th><th>무엇을 재나</th><th>눈금</th><th>어떻게 매기나</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="g"><strong>T</strong> 발상</td>
+            <td>무엇을 알아채야 하는가</td>
+            <td class="g">T1 ~ T5</td>
+            <td>쓰는 도구의 교육과정 수준으로 매깁니다. 중학~고1 도구는 T1~T2, 해당 단원의 표준 도구는 T3, 단원 안의 심화(대칭 치환·중근 인수분해)는 T4, 다른 단원과 결합하거나 낯선 표현이면 T5. <strong>개수를 더하지 않고 가장 높은 도구 하나로 정합니다</strong> — 쉬운 도구 셋보다 어려운 도구 하나가 더 어렵습니다.</td>
+          </tr>
+          <tr>
+            <td class="g"><strong>E</strong> 연산</td>
+            <td>얼마나 계산해야 하는가</td>
+            <td class="g">E1 ~ E6</td>
+            <td>경우 나눔 수·배제할 해의 수·미지수 개수·수식 길이로 잽니다. 눈금은 시중 문제집 해설 <strong>1,859개</strong>의 분위수로 만들었습니다. E6은 그중 상위 5.3%에 해당하는 무게입니다.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>만들지 않는 칸이 정해져 있습니다</h3>
+    <p>
+      두 축을 격자로 놓으면 <strong>나쁜 조합이 이름으로 드러납니다.</strong>
+      발상은 낮은데 계산만 무거운 오른쪽 아래는 학생에게 노동만 시키는 자리입니다.
+      변형을 만들다 계산량이 늘면 이 칸으로 미끄러지기 쉬워서, 아예 금지 칸으로 두고
+      들어가면 생성이 멈추게 해 두었습니다.
+    </p>
+
+    <div class="matrix" role="img" aria-label="T축 1~5와 E축 1~6의 격자. T1E4·T1E5·T1E6·T2E5·T2E6·T3E5·T3E6은 만들지 않는 칸이고 T4E1·T4E2·T5E1은 가장 좋은 칸이다.">
+      <div class="rw">T5</div>
+      <div class="cell gd">발상의<br>비약</div><div class="cell"></div><div class="cell"></div>
+      <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+
+      <div class="rw">T4</div>
+      <div class="cell gd">기하적<br>직관</div><div class="cell gd">우아한<br>킬러</div><div class="cell"></div>
+      <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+
+      <div class="rw">T3</div>
+      <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+      <div class="cell"></div><div class="cell bad">연산 늪</div><div class="cell bad">연산 늪</div>
+
+      <div class="rw">T2</div>
+      <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+      <div class="cell"></div><div class="cell bad">인내심<br>테스트</div><div class="cell bad">인내심<br>테스트</div>
+
+      <div class="rw">T1</div>
+      <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+      <div class="cell bad">단순 노동</div><div class="cell bad">노가다</div><div class="cell bad">노가다</div>
+
+      <div class="hd"></div>
+      <div class="hd">E1</div><div class="hd">E2</div><div class="hd">E3</div>
+      <div class="hd">E4</div><div class="hd">E5</div><div class="hd">E6</div>
+    </div>
+    <div class="legend">
+      <span><i class="swatch bad"></i>만들지 않는 칸 — 발상 없이 계산만 요구</span>
+      <span><i class="swatch gd"></i>가장 값진 칸 — 발상은 깊고 계산은 짧음</span>
+    </div>
+
+    <div class="callout">
+      <p>
+        <strong>연산을 낮추는 변형도 좋은 변형입니다.</strong> 발상만 남기고 계산을
+        걷어낸 문항(위 격자의 <span class="v">T4E2</span>)은 시험지에서 가장 값진
+        자리입니다. “원본보다 쉬워지면 안 된다”를 <em>발상</em>에만 걸고
+        <em>연산</em>에는 걸지 않는 이유입니다.
+      </p>
+    </div>
+
+    <p class="note">
+      <span class="v">V0</span>(쌍둥이)는 발상도 연산도 원문과 같은 칸이어야 합니다.
+      “같은 걸 한 번 더”가 “같은 건데 더 지겨운”이 되면 쌍둥이가 아니기 때문입니다.
+      값의 개수를 늘려 계산만 한 칸 올라간 사례가 실제로 있었고, 그 뒤로 자로 재서
+      막고 있습니다.
+    </p>
+  </section>
+
+  <!-- ───────────────────────────────────────── 4 -->
+  <section>
+    <h2><span class="no">04</span>어떻게 주문하시나</h2>
+
+    <p>
+      원본 1문항당 <strong>3변형</strong>이고, 그 3개를 <span class="v">V0~V5</span> 중에서
+      고르시면 됩니다. 고르는 방식은 세 가지입니다.
+    </p>
+
+    <ul>
+      <li><strong>한 등급으로 3개</strong> — 예: <span class="v">V1</span>·<span class="v">V1</span>·<span class="v">V1</span>. 같은 유형을 반복해 숙달시킬 때.</li>
+      <li><strong>등급을 섞어서 3개</strong> — 예: <span class="v">V1</span>·<span class="v">V3</span>·<span class="v">V5</span>. 한 문항을 난이도 계단으로 쓸 때.</li>
+      <li><strong>문항별로 따로</strong> — 문항 번호마다 다르게 지정하셔도 됩니다. 목록으로 주시면 그대로 따릅니다.</li>
+    </ul>
+
+    <h3>정하기 어려우시면 — 목적별 추천</h3>
+    <div class="combos">
+      <div class="combo">
+        <h4>반복 숙달 <em>V0 · V1 · V1</em></h4>
+        <p>같은 방법을 손에 붙이는 용도. 내신 기본 문항, 하위권 보충 자료에 맞습니다.</p>
+      </div>
+      <div class="combo">
+        <h4>표준 내신 <em>V1 · V2 · V3</em></h4>
+        <p>계산·개념 연결·조건 해석을 한 세트로. 가장 무난한 조합입니다.</p>
+      </div>
+      <div class="combo">
+        <h4>실전 대비 <em>V1 · V3 · V4</em></h4>
+        <p>같은 것을 다른 도구로도 복원하게 만듭니다. 상위권 대비에 맞습니다.</p>
+      </div>
+      <div class="combo">
+        <h4>고난도 <em>V3 · V4 · V5</em></h4>
+        <p>준킬러·킬러 자리를 채울 때. 원본과 소재까지 달라집니다.</p>
+      </div>
+    </div>
+
+    <h3>같이 알려 주시면 좋은 것</h3>
+    <ul>
+      <li>과목·학년·출제 범위(단원)</li>
+      <li>대상 학생 층 — 상·중·하 어디를 겨냥한 자료인지</li>
+      <li>객관식/주관식 여부, 배점 체계가 있으면 그것도</li>
+      <li>피해야 할 소재나 도구(진도를 아직 안 나간 단원 등)</li>
+    </ul>
+  </section>
+
+  <!-- ───────────────────────────────────────── 5 -->
+  <section>
+    <h2><span class="no">05</span>진행 절차</h2>
+
+    <ol class="steps">
+      <li>
+        <span class="n">1</span>
+        <div>
+          <b>접수 · 순번 안내</b>
+          <span>원본 파일과 주문 내용을 받고, 착수 가능 시점을 먼저 알려 드립니다. 이 단계에서 합의하고 시작합니다.</span>
+        </div>
+      </li>
+      <li>
+        <span class="n">2</span>
+        <div>
+          <b>원문 판독</b>
+          <span>문항을 한 문항씩 옮겨 적습니다. PDF는 여기서 <strong>정답을 보지 않고 직접 풀어</strong> 선생님 정답과 대조합니다 — 부등호 하나가 어긋난 판독이 여기서 드러납니다.</span>
+        </div>
+      </li>
+      <li>
+        <span class="n">3</span>
+        <div>
+          <b>원본판 먼저 조판 → <em>선생님 1차 확인</em></b>
+          <span>변형에 손대기 전에 <strong>원문만 모은 파일</strong>을 먼저 만들어 보내 드립니다. 서식·수식·그림에 대한 지적을 여기서 받습니다. 이 단계를 건너뛰면 같은 지적을 세 배 큰 지면에서 반복하게 됩니다.</span>
+        </div>
+      </li>
+      <li>
+        <span class="n">4</span>
+        <div>
+          <b>변형 설계 · 생성</b>
+          <span>등급별 절차대로 만들고, 만들면서 난이도 좌표를 함께 적습니다.</span>
+        </div>
+      </li>
+      <li>
+        <span class="n">5</span>
+        <div>
+          <b>기계 검산</b>
+          <span>문항마다 검산 코드를 따로 짜서 돌립니다. 미적분은 기호 계산, 확률과 통계는 정의대로 전수 열거, 기하는 좌표 존재성과 퇴화 검사 — <strong>식이 맞아도 그런 점이 실제로 없을 수 있기</strong> 때문입니다. 정답·유일성이 통과해야 다음으로 갑니다.</span>
+        </div>
+      </li>
+      <li>
+        <span class="n">6</span>
+        <div>
+          <b>통합본 조판 · 납품</b>
+          <span>HWPX 한 벌로 묶어 드립니다. 조판 규칙 30여 항을 자동으로 검사한 뒤 내보냅니다.</span>
+        </div>
+      </li>
+      <li>
+        <span class="n">7</span>
+        <div>
+          <b><em>피드백 회신</em> → 다음 회차에 반영</b>
+          <span>이번 회차는 <strong>완성본을 드리는 것으로 납품이 끝납니다.</strong> 주신 피드백은 이 파일을 고치는 데가 아니라 <strong>다음 회차(기말고사) 자료의 품질을 올리는 데</strong> 씁니다.</span>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ───────────────────────────────────────── 6 -->
+  <section>
+    <h2><span class="no">06</span>비용과 순번</h2>
+
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>항목</th><th>내용</th></tr></thead>
+        <tbody>
+          <tr><td class="g">기준 단가</td><td><strong>원본 200문항 = 100,000원</strong> (변형 600문항 · 해설 · HWPX 통합본 포함). 원본 1문항당 500원 꼴입니다.</td></tr>
+          <tr><td class="g">과금 기준</td><td>변형 개수가 아니라 <strong>원본 문항 수</strong>로 셉니다. 수량이 200문항과 다르면 접수 때 협의합니다.</td></tr>
+          <tr><td class="g">추가 작업</td><td>작업 여력이 남는 선에서 추가로 받습니다. 접수 때 가능 여부를 알려 드립니다.</td></tr>
+          <tr><td class="g">납품 범위</td><td><strong>완성본 1회 납품으로 끝납니다.</strong> 이번 회차에는 피드백 반영 수정판이 없습니다 — 주신 피드백은 다음 회차 자료에 들어갑니다(7·8절).</td></tr>
+          <tr><td class="g">결제</td><td>접수 확정 시 안내드립니다.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout warn">
+      <p>
+        <strong>순번이 다음 주로 밀릴 수 있습니다.</strong> 이 작업은 대형 언어모델
+        기반 파이프라인으로 하고, <strong>주 단위 사용 한도</strong>가 있습니다.
+        접수 순서대로 처리하되 그 주 한도에 걸리면 다음 주로 이월됩니다.
+      </p>
+      <p>
+        그래서 <strong>착수 전에 순번과 예상 완료 시점을 먼저 알려 드리고, 합의한 뒤에
+        시작합니다.</strong> 시험 일정이 급하시면 접수 때 말씀해 주십시오 — 순번을
+        당길 수 있는지 먼저 보고 답을 드립니다. 조용히 늦어지는 일이 없게 하는 것이
+        이 안내의 목적입니다.
+      </p>
+    </div>
+
+    <p class="note">
+      이번 회차 단가는 <strong>피드백을 주시는 것을 조건으로</strong> 낮게 잡은
+      프로토타입 단가입니다. 다음 두 절이 그 내용입니다.
+    </p>
+  </section>
+
+  <!-- ───────────────────────────────────────── 7 -->
+  <section>
+    <h2><span class="no">07</span>피드백 — 이번 회차의 조건</h2>
+
+    <p>
+      기계가 잡을 수 있는 것(정답·유일성·조판 규칙)은 이미 자동으로 봅니다.
+      <strong>기계가 못 보는 것은 “이 문항이 우리 학생에게 맞는가”입니다.</strong>
+      그 판단을 주시는 것이 이번 단가의 대가입니다.
+    </p>
+
+    <h3>무엇을 여쭙나</h3>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>구분</th><th>여쭙는 것</th><th>답의 형태</th></tr></thead>
+        <tbody>
+          <tr><td class="g">난이도</td><td>목표한 난이도에 실제로 도착했는가. 학생이 풀 때 어디서 막힐 것 같은가</td><td>1(너무 쉽다) ~ 5(너무 어렵다) + 한 줄</td></tr>
+          <tr><td class="g">변형 강도</td><td>원본과의 거리가 적절한가. 원본과 너무 같지는 않은가, 너무 멀지는 않은가</td><td>1(원본과 같다) ~ 5(딴 문제다) + 한 줄</td></tr>
+          <tr><td class="g">교육과정</td><td>진도·범위에 맞는가. 아직 안 나간 도구를 쓰지는 않았는가</td><td>맞다 / 안 맞다 + 어느 부분인지</td></tr>
+          <tr><td class="g">수학적 오류</td><td>답이 틀렸거나, 조건이 모순이거나, 답이 여러 개인 곳</td><td>문항 번호 + 무엇이 틀렸는지</td></tr>
+          <tr><td class="g">서식</td><td>수식 줄바꿈·선지 간격·그림 크기·상자·글꼴 등 보기에 불편한 곳</td><td>문항 번호 + 어디가 어떻게</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>주시는 방법</h3>
+    <p>
+      아래 표 형태가 가장 좋지만, <strong>편하신 방법이면 무엇이든 좋습니다</strong> —
+      받으신 한글 파일에 직접 메모를 달아 주셔도 되고, 메시지로 문항 번호와 함께
+      한 줄씩 주셔도 됩니다. 형식보다 <strong>어느 문항의 무엇이 걸렸는지</strong>가 중요합니다.
+    </p>
+
+    <div class="tablewrap">
+      <table class="formtable">
+        <thead>
+          <tr><th style="width:76px">문항</th><th style="width:92px">구분</th><th style="width:64px">점수</th><th>지적 · 제안</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="fill">12-V3</td><td class="fill">난이도</td><td class="fill">4</td><td class="fill">조건 해석은 좋은데 마지막 계산이 우리 반 기준으로 무겁다</td></tr>
+          <tr><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="note">
+      주신 피드백은 <strong>모아서 보관하고, 하나씩 판단해 반영 방향을 정합니다.</strong>
+      반영한 것과 반영하지 않은 것을 이유와 함께 회신 드립니다. 지적은 문항 하나를
+      고치는 데가 아니라 <strong>문항을 만드는 규칙 자체를 고치는 데 씁니다</strong> —
+      파일만 고치면 다음 회차에 같은 문제가 다시 나오기 때문입니다.
+      <strong>이번 중간고사 피드백은 기말고사 자료에 들어갑니다.</strong>
+    </p>
+  </section>
+
+  <!-- ───────────────────────────────────────── 8 -->
+  <section>
+    <h2><span class="no">08</span>이번 회차는 프로토타입입니다</h2>
+
+    <p>
+      감추지 않고 적습니다. 이 서비스는 아직 정규 운영이 아니라
+      <strong>실제 의뢰를 받아 만들면서 만드는 방식 자체를 다듬는 단계</strong>입니다.
+      단가를 낮게 잡은 이유이자, 피드백을 조건으로 거는 이유입니다.
+    </p>
+
+    <div class="callout">
+      <p>
+        <strong>목표는 회차마다 좋아지는 것입니다.</strong> 이번 중간고사에서 받은
+        지적이 기말고사 자료를 만드는 규칙에 들어가고, 기말고사에서 받은 지적이
+        그다음 회차에 들어갑니다. <strong>같은 지적을 두 번 받지 않는 것</strong>이
+        저희가 스스로에게 거는 기준입니다.
+      </p>
+    </div>
+
+    <h3>정규 운영으로 넘어가면</h3>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>항목</th><th>정해 둔 것</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="g">지역당 인원</td>
+            <td><strong>1명</strong>. 한 지역에는 한 분만 받습니다.</td>
+          </tr>
+          <tr>
+            <td class="g">지역 Lock</td>
+            <td>한 지역에 자리가 차면 <strong>그 지역은 닫힙니다.</strong> 기간이 지나 자동으로 풀리는 방식이 아니라, <strong>이미 계신 분이 추천하지 않는 한 열리지 않습니다.</strong> <em>지금 참여하시면 그 지역의 첫 자리이고, 그 자리를 여는 권한도 함께 가지십니다.</em></td>
+          </tr>
+          <tr>
+            <td class="g">전체 정원</td>
+            <td>지역 Lock 을 다 채우더라도 <strong>총 20명 내외</strong>에서 멈춥니다. 주 단위 처리 한도(6절) 위에서 품질을 지킬 수 있는 선이 그 정도입니다.</td>
+          </tr>
+          <tr>
+            <td class="g">정규 단가</td>
+            <td><strong>아직 정하지 않았습니다.</strong> 정해지면 프로토타입 회차에 참여하신 분들께 먼저 알려 드립니다.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="note">
+      인원을 막는 이유는 두 가지입니다. 같은 지역에서 같은 원본의 변형이 여러 곳으로
+      돌면 그 자료의 값이 사라지고, 주 단위 처리 한도 위에서는 인원을 늘리는 만큼
+      모두의 순번이 길어지기 때문입니다.
+    </p>
+  </section>
+
+  <!-- ───────────────────────────────────────── 9 -->
+  <section>
+    <h2><span class="no">09</span>원본 파일을 주실 때</h2>
+
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>형식</th><th>받습니다</th><th>참고</th></tr></thead>
+        <tbody>
+          <tr><td class="g">HWPX / HWP</td><td>가장 좋습니다</td><td>수식과 그림이 그대로 넘어와 판독 오류가 거의 없습니다.</td></tr>
+          <tr><td class="g">PDF (텍스트)</td><td>좋습니다</td><td>수식이 이미지로 들어간 PDF도 괜찮습니다.</td></tr>
+          <tr><td class="g">PDF (스캔·촬영)</td><td>받습니다</td><td>지수·첨자·부등호가 뭉개지지 않을 정도의 해상도만 되면 됩니다. 흐린 부분은 따로 여쭙습니다.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ul>
+      <li><strong>정답·해설이 있으면 별도 파일로</strong> 주십시오. 판독한 결과를 검증하는 데만 씁니다(문항 파일 안에 섞여 있어도 괜찮습니다).</li>
+      <li>문항 번호가 명확하면 좋습니다. 번호가 없으면 저희가 붙이고 대조표를 함께 드립니다.</li>
+      <li>그림이 있는 문항은 그림도 함께 보이게 주십시오. 새로 그려 드립니다.</li>
+    </ul>
+
+    <h3>원본의 취급</h3>
+    <div class="callout">
+      <p>
+        주신 원본은 <strong>이 작업 외의 용도로 쓰지 않고, 외부에 공개하거나
+        재배포하지 않습니다.</strong> 저희 쪽 저장소에도 원본은 올리지 않습니다 —
+        비공개 저장소라도 올리지 않는 것을 규칙으로 두고, 그 규칙을 자동으로
+        검사합니다.
+      </p>
+      <p>
+        만들어 드린 변형 문항의 사용 권한은 <strong>선생님께 있습니다.</strong> 수업·시험·
+        교재 어디에 쓰셔도 됩니다. 저희 쪽은 <strong>품질 개선을 위한 내부 기록과
+        저희 자체 수업</strong>에만 씁니다 — 다른 곳에 팔거나 넘기지 않습니다.
+      </p>
+    </div>
+  </section>
+
+  <!-- ───────────────────────────────────────── 10 -->
+  <section>
+    <h2><span class="no">10</span>자주 묻는 것</h2>
+
+    <dl class="faq">
+      <dt>변형이 원본보다 쉬워지지는 않나요?</dt>
+      <dd><span class="v">V0</span>(쌍둥이)를 뺀 모든 등급은 <strong>발상 난이도를 원문 아래로 내리지 않습니다.</strong> 다만 계산량은 의도적으로 줄일 수 있습니다 — 발상은 깊고 계산은 짧은 문항이 시험지에서 가장 좋은 자리라서 그렇습니다.</dd>
+
+      <dt>정답이 틀리는 일은 없나요?</dt>
+      <dd>문항마다 검산 코드를 따로 짜서 돌립니다. 그래도 완전하지는 않아 오류 지적을 피드백 항목에 넣어 두었습니다. <strong>명백한 오류(정답 오류·조건 모순)는 알려 주시면 그 문항만 바로잡아 다시 보내 드립니다</strong> — 이것은 수정판과 별개입니다.</dd>
+
+      <dt>피드백을 드리면 이번 파일이 고쳐지나요?</dt>
+      <dd>아닙니다. 이번 회차는 완성본 납품으로 끝나고, 주신 피드백은 <strong>다음 회차(기말고사) 자료의 품질을 올리는 데</strong> 씁니다. 8절에 적어 두었습니다.</dd>
+
+      <dt>한글 파일에서 제가 직접 고칠 수 있나요?</dt>
+      <dd>됩니다. 수식은 이미지가 아니라 한글 수식 개체이고, 그림도 한글 안에서 크기 조절이 됩니다. 숫자 하나 바꾸시는 정도는 파일에서 바로 하시면 됩니다.</dd>
+
+      <dt>그림이 들어간 문항도 되나요?</dt>
+      <dd>됩니다. 본문 그림과 해설 그림을 따로 그립니다. 해설 그림에는 풀이가 도입한 보조선·교점이 들어가고, 그림 안 글자 크기는 본문 수식 크기에 맞춥니다.</dd>
+
+      <dt>200문항보다 적거나 많으면요?</dt>
+      <dd>접수 때 협의합니다. 문항 수에 따라 작업 기간과 순번이 달라져서, 수량을 먼저 보고 일정을 함께 정하는 편이 정확합니다.</dd>
+
+      <dt>변형 등급을 제가 잘 모르겠는데요.</dt>
+      <dd>원본 파일과 “상위권 대비” 같은 목적만 주셔도 됩니다. 4절의 추천 조합 중 하나를 제안 드리고, 확인받은 뒤 시작합니다.</dd>
+    </dl>
+  </section>
+
+  <!-- ───────────────────────────────────────── 접수 -->
+  <section>
+    <h2><span class="no">11</span>접수</h2>
+    <p>
+      아래 번호로 <strong>이름 · 지역 · 연락처</strong> 세 가지를 먼저 보내 주십시오.
+      지역을 여쭙는 것은 8절의 지역 Lock 때문입니다 — 그 지역이 아직 열려 있는지
+      확인한 뒤, 순번과 예상 완료 시점을 회신 드립니다.
+    </p>
+
+    <div class="contact">
+      <dl>
+        <dt>담당</dt><dd><strong>한호빈</strong></dd>
+        <dt>연락처</dt><dd class="tel">010-3184-5478</dd>
+        <dt>먼저 주실 것</dt><dd><strong>이름 · 지역 · 연락처</strong></dd>
+        <dt>이어서</dt><dd>원본 파일 · 과목/학년/출제 범위 · 원하시는 변형 등급 조합 · 필요 시점</dd>
+      </dl>
+    </div>
+  </section>
+
+  <footer>
+    <span>수학 문항 변형 외주 안내 · 2026학년도 2학기 중간고사 대비</span>
+    <span>프로토타입 회차 · 피드백 조건 시범 단가</span>
+  </footer>
+
+</div>
